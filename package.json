@@ -1,6 +1,7 @@
 {
   "name": "lobe-tts",
   "version": "0.0.1",
+  "private": true,
   "homepage": "https://github.com/lobehub/lobe-tts",
   "bugs": {
     "url": "https://github.com/lobehub/lobe-tts/issues/new/choose"
@@ -12,13 +13,23 @@
   "license": "MIT",
   "author": "LobeHub <i@lobehub.com>",
   "sideEffects": false,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "father build",
+    "ci": "npm run lint && npm run type-check",
+    "dev": "father dev",
+    "doctor": "father doctor",
     "lint": "eslint \"{src,tests}/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:md": "remark . --quiet --frail --output",
-    "lint:style": "stylelint \"{src,tests}/**/*.{js,jsx,ts,tsx}\" --fix",
     "prepare": "husky install",
+    "prepublishOnly": "npm run build",
     "prettier": "prettier -c --write \"**/**\"",
     "release": "semantic-release",
+    "start": "vercel dev",
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
@@ -38,6 +49,11 @@
       "eslint --fix"
     ]
   },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
     "query-string": "^8",
     "ssml-document": "^1",
@@ -52,12 +68,14 @@
     "@vercel/node": "^3.0.7",
     "commitlint": "^18",
     "eslint": "^8",
+    "father": "4.3.1",
     "husky": "^8",
     "lint-staged": "^15",
     "prettier": "^3",
     "remark-cli": "^11",
     "semantic-release": "^21",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vercel": "^28.20.0"
   },
   "publishConfig": {
     "access": "public",

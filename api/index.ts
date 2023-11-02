@@ -2,7 +2,7 @@ import qs from 'query-string';
 
 import cors from '../src/cors';
 import { SsmlOptions } from '../src/genSSML';
-import { postMicrosoftSpeech } from '../src/postMicrosoftSpeech';
+import { postMicrosoftSpeech } from '../src/index';
 
 export const config = {
   runtime: 'edge',
