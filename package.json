@@ -1,0 +1,65 @@
+{
+  "name": "lobe-tts",
+  "version": "0.0.1",
+  "homepage": "https://github.com/lobehub/lobe-tts",
+  "bugs": {
+    "url": "https://github.com/lobehub/lobe-tts/issues/new/choose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobehub/lobe-tts.git"
+  },
+  "license": "MIT",
+  "author": "LobeHub <i@lobehub.com>",
+  "sideEffects": false,
+  "scripts": {
+    "lint": "eslint \"{src,tests}/**/*.{js,jsx,ts,tsx}\" --fix",
+    "lint:md": "remark . --quiet --frail --output",
+    "lint:style": "stylelint \"{src,tests}/**/*.{js,jsx,ts,tsx}\" --fix",
+    "prepare": "husky install",
+    "prettier": "prettier -c --write \"**/**\"",
+    "release": "semantic-release",
+    "type-check": "tsc --noEmit"
+  },
+  "lint-staged": {
+    "*.md": [
+      "remark --quiet --output --",
+      "prettier --write --no-error-on-unmatched-pattern"
+    ],
+    "*.json": [
+      "prettier --write --no-error-on-unmatched-pattern"
+    ],
+    "*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{ts,tsx}": [
+      "prettier --parser=typescript --write",
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "query-string": "^8",
+    "ssml-document": "^1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18",
+    "@lobehub/lint": "latest",
+    "@types/node": "^20",
+    "@types/query-string": "^6",
+    "@types/uuid": "^9",
+    "@vercel/node": "^3.0.7",
+    "commitlint": "^18",
+    "eslint": "^8",
+    "husky": "^8",
+    "lint-staged": "^15",
+    "prettier": "^3",
+    "remark-cli": "^11",
+    "semantic-release": "^21",
+    "typescript": "^5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}
