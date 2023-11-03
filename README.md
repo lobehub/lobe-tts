@@ -24,6 +24,22 @@ TTS API
 
 </div>
 
+## 🛳 Self Hosting
+
+If you want to deploy this service by yourself, you can follow the steps below.
+
+### Deploy to Vercel
+
+Click button below to deploy your private plugins' gateway.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flobehub%2Flobe-tts&project-name=lobe-tts&repository-name=lobe-tts)
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
 ## ⌨️ Local Development
 
 You can use Github Codespaces for online development:
