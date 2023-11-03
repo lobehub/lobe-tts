@@ -56,7 +56,6 @@
   ],
   "dependencies": {
     "query-string": "^8",
-    "ssml-document": "^1",
     "uuid": "^9"
   },
   "devDependencies": {
