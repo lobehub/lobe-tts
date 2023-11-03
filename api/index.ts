@@ -12,6 +12,8 @@ export default async (req: Request) => {
   const { text, ...options }: SsmlOptions & { text: string } = qs.parseUrl(req.url).query as any;
 
   const res = await fetch(...postMicrosoftSpeech(text, options));
+
+  const newResponse = new Response(res.body, res);
   
-  return cors(req, res.clone());
+  return cors(req, newResponse);
 };
