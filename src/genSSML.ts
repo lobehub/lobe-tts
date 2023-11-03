@@ -1,5 +1,3 @@
-import { Document, ServiceProvider } from 'ssml-document';
-
 export type StyleName =
   | 'affectionate'
   | 'angry'
@@ -21,9 +19,17 @@ export interface SsmlOptions {
 }
 
 export const genSSML = (text: string, options: SsmlOptions) => {
-  let ssml = new Document().voice(options.name);
-  if (options.style) ssml.expressAs({ style: options.style });
-  if (options.pitch || options.rate) ssml.prosody({ pitch: options.pitch, rate: options.rate });
-  const result = ssml.say(text).render({ provider: ServiceProvider.Microsoft });
-  return `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="https://www.w3.org/2001/mstts" xml:lang="en-US">${result}</speak>`;
+  const { name, style, rate, pitch } = options;
+  const ssml = [
+    '<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">',
+    `<voice name="${name}">`,
+    style && `<mstts:express-as style="${style}">`,
+    rate && pitch && `<prosody rate="${rate * 100}%" pitch="${pitch * 100}%">`,
+    text,
+    rate && pitch && `</prosody>`,
+    style && `</mstts:express-as>`,
+    `</voice>`,
+    '</speak>',
+  ];
+  return ssml.filter(Boolean).join('');
 };
