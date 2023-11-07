@@ -1,7 +1,8 @@
 {
-  "name": "lobe-tts",
+  "name": "@lobehub/tts",
   "version": "1.0.0",
   "private": true,
+  "description": "A high-quality & reliable TTS React Hooks library",
   "homepage": "https://github.com/lobehub/lobe-tts",
   "bugs": {
     "url": "https://github.com/lobehub/lobe-tts/issues/new/choose"
@@ -22,13 +23,18 @@
     "build": "father build",
     "ci": "npm run lint && npm run type-check",
     "dev": "father dev",
+    "docs:build": "dumi build",
+    "docs:build-analyze": "ANALYZE=1 dumi build",
+    "docs:dev": "dumi dev",
     "doctor": "father doctor",
+    "postinstall": "npm run setup",
     "lint": "eslint \"{src,tests}/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:md": "remark . --quiet --frail --output",
     "prepare": "husky install",
     "prepublishOnly": "npm run build",
     "prettier": "prettier -c --write \"**/**\"",
     "release": "semantic-release",
+    "setup": "dumi setup",
     "start": "vercel dev",
     "type-check": "tsc --noEmit"
   },
@@ -55,26 +61,46 @@
     "not ie <= 10"
   ],
   "dependencies": {
+    "lodash-es": "^4",
+    "microsoft-cognitiveservices-speech-sdk": "^1",
     "query-string": "^8",
+    "ssml-document": "^1",
+    "swr": "^2",
     "uuid": "^9"
   },
   "devDependencies": {
     "@commitlint/cli": "^18",
     "@lobehub/lint": "latest",
+    "@lobehub/ui": "latest",
+    "@types/lodash-es": "^4",
     "@types/node": "^20",
     "@types/query-string": "^6",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "@types/uuid": "^9",
-    "@vercel/node": "^3.0.7",
+    "@vercel/node": "^3",
     "commitlint": "^18",
+    "dumi": "^2",
+    "dumi-theme-lobehub": "latest",
     "eslint": "^8",
-    "father": "4.3.1",
+    "father": "4",
     "husky": "^8",
     "lint-staged": "^15",
+    "lucide-react": "latest",
     "prettier": "^3",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-layout-kit": "^1",
+    "remark": "^14",
     "remark-cli": "^11",
     "semantic-release": "^21",
     "typescript": "^5",
-    "vercel": "^28.20.0"
+    "vercel": "^28"
+  },
+  "peerDependencies": {
+    "antd": ">=5",
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "publishConfig": {
     "access": "public",

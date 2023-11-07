@@ -1,6 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "declaration": true,
+    "downlevelIteration": true,
     "target": "ESNext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -13,11 +15,14 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@@/*": [".dumi/tmp/*"],
+      "@/*": ["./src/*"],
+      "@lobehub/tts": ["src"],
+      "@lobehub/tts/*": ["src/*"]
     },
     "plugins": [
       {
@@ -25,11 +30,5 @@
       }
     ]
   },
-  "exclude": ["node_modules"],
-  "include": ["api", "**/*.ts", "**/*.d.ts", "**/*.tsx"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  }
+  "include": ["src", "docs", ".dumirc.ts", "api", "**/*.ts", "**/*.d.ts", "**/*.tsx"]
 }

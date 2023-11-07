@@ -6,7 +6,7 @@
 
 <h1>Lobe TTS</h1>
 
-TTS API
+A high-quality & reliable TTS React Hooks library
 
 [![][github-release-shield]][github-release-link]
 [![][github-releasedate-shield]][github-releasedate-link]
