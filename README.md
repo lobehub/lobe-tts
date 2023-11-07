@@ -8,7 +8,7 @@
 
 A high-quality & reliable TTS React Hooks library
 
-[![][github-release-shield]][github-release-link]
+[![][npm-release-shield]][npm-release-link]
 [![][github-releasedate-shield]][github-releasedate-link]
 [![][github-action-test-shield]][github-action-test-link]
 [![][github-action-release-shield]][github-action-release-link]<br/>
@@ -21,6 +21,53 @@ A high-quality & reliable TTS React Hooks library
 [Changelog](./CHANGELOG.md) · [Report Bug][github-issues-link] · [Request Feature][github-issues-link]
 
 ![](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+
+</div>
+
+<details>
+<summary><kbd>Table of contents</kbd></summary>
+
+#### TOC
+
+- [📦 Installation](#-installation)
+  - [Compile with Next.js](#compile-with-nextjs)
+- [🛳 Self Hosting](#-self-hosting)
+  - [Deploy to Vercel](#deploy-to-vercel)
+- [⌨️ Local Development](#️-local-development)
+- [🤝 Contributing](#-contributing)
+- [🔗 More Products](#-more-products)
+
+####
+
+</details>
+
+## 📦 Installation
+
+> **Important**\
+> This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+
+To install `@lobehub/tts`, run the following command:
+
+[![][bun-shield]][bun-link]
+
+```bash
+$ bun add @lobehub/tts
+```
+
+### Compile with Next.js
+
+> **Note**\
+> By work correct with Next.js SSR, add `transpilePackages: ['@lobehub/tts']` to `next.config.js`. For example:
+
+```js
+const nextConfig = {
+  transpilePackages: ['@lobehub/tts'],
+};
+```
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
 
 </div>
 
@@ -47,8 +94,6 @@ You can use Github Codespaces for online development:
 [![][github-codespace-shield]][github-codespace-link]
 
 Or clone it for local development:
-
-[![][bun-shield]][bun-link]
 
 ```bash
 $ git clone https://github.com/lobehub/lobe-tts.git
@@ -114,12 +159,12 @@ This project is [MIT](./LICENSE) licensed.
 [github-issues-shield]: https://img.shields.io/github/issues/lobehub/lobe-tts?color=ff80eb&labelColor=black&style=flat-square
 [github-license-link]: https://github.com/lobehub/lobe-tts/blob/main/LICENSE
 [github-license-shield]: https://img.shields.io/github/license/lobehub/lobe-tts?color=white&labelColor=black&style=flat-square
-[github-release-link]: https://github.com/lobehub/lobe-tts/releases
-[github-release-shield]: https://img.shields.io/github/v/release/lobehub/lobe-tts?color=369eff&labelColor=black&logo=github&style=flat-square
 [github-releasedate-link]: https://github.com/lobehub/lobe-tts/releases
 [github-releasedate-shield]: https://img.shields.io/github/release-date/lobehub/lobe-tts?labelColor=black&style=flat-square
 [github-stars-link]: https://github.com/lobehub/lobe-tts/network/stargazers
 [github-stars-shield]: https://img.shields.io/github/stars/lobehub/lobe-tts?color=ffcb47&labelColor=black&style=flat-square
+[npm-release-link]: https://www.npmjs.com/package/@lobehub/tts
+[npm-release-shield]: https://img.shields.io/npm/v/@lobehub/tts?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [pr-welcome-link]: https://github.com/lobehub/lobe-tts/pulls
 [pr-welcome-shield]: https://img.shields.io/badge/%F0%9F%A4%AF%20PR%20WELCOME-%E2%86%92-ffcb47?labelColor=black&style=for-the-badge
 [profile-link]: https://github.com/lobehub

@@ -1,8 +1,8 @@
 import qs from 'query-string';
 
-import cors from './cors';
-import { SsmlOptions } from './genSSML';
-import { postMicrosoftSpeech } from './postMicrosoftSpeech';
+import cors from '../lib/cors';
+import { SsmlOptions } from '../lib/genSSML';
+import { postMicrosoftSpeech } from '../lib/postMicrosoftSpeech';
 
 export const config = {
   runtime: 'edge',
