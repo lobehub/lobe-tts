@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import {
-  type MicrosoftSpeechOptions,
-  fetchMicrosoftSpeech,
-} from '../services/fetchMicrosoftSpeech';
+import { type OpenaiTtsOptions, fetchOpenaiTTS } from '../services/fetchOpenaiTTS';
 
-export const useMicrosoftSpeech = (defaultText: string, options: MicrosoftSpeechOptions) => {
+export const useOpenaiTTS = (defaultText: string, options: OpenaiTtsOptions) => {
   const [data, setDate] = useState<AudioBufferSourceNode>();
   const [text, setText] = useState<string>(defaultText);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
@@ -14,7 +11,7 @@ export const useMicrosoftSpeech = (defaultText: string, options: MicrosoftSpeech
 
   const { isLoading } = useSWR(
     shouldFetch ? [options.name, text].join('-') : null,
-    () => fetchMicrosoftSpeech(text, options),
+    () => fetchOpenaiTTS(text, options),
     {
       onError: () => setShouldFetch(false),
       onSuccess: (audioBufferSource) => {

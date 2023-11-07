@@ -1,8 +1,8 @@
 import qs from 'query-string';
 
 import cors from '../lib/cors';
+import { fetchMicrosoftSpeech } from '../lib/fetchMicrosoftSpeech';
 import { SsmlOptions } from '../lib/genSSML';
-import { postMicrosoftSpeech } from '../lib/postMicrosoftSpeech';
 
 export const config = {
   runtime: 'edge',
@@ -11,7 +11,7 @@ export const config = {
 export default async (req: Request) => {
   const { text, ...options }: SsmlOptions & { text: string } = qs.parseUrl(req.url).query as any;
 
-  const res = await fetch(...postMicrosoftSpeech(text, options));
+  const res = await fetchMicrosoftSpeech(text, options);
 
   const newResponse = new Response(res.body, res);
 

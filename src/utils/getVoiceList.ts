@@ -2,6 +2,7 @@ import { flatten } from 'lodash-es';
 
 import azureVoiceList from '../data/azureVoiceListLite.json';
 import edgeVoiceList from '../data/edgeVoiceList.json';
+import openaiVoiceList from '../data/openaiVoiceList.json';
 import speechSynthesVoiceListFallback from '../data/speechSynthesVoiceList.json';
 
 interface Voice {
@@ -71,3 +72,5 @@ export const getEdgeVoiceList = (locale?: string): VoiceOptions => {
 
   return options;
 };
+
+export const getOpenaiVoiceList = () => openaiVoiceList;

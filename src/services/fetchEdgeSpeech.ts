@@ -8,7 +8,7 @@ import { getHeadersAndData } from '../utils/getHeadersAndData';
 const API = 'wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1';
 const TOKEN = '6A5AA1D4EAFF4E9FB37E23D68491D6F4';
 
-export const postEdgeSpeech = async (text: string, options: SsmlOptions) => {
+export const fetchEdgeSpeech = async (text: string, options: SsmlOptions) => {
   const connectId = uuidv4().replaceAll('-', '');
   const date = new Date().toString();
   const audioContext = new AudioContext();

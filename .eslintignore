@@ -24,7 +24,6 @@ __test__
 # production
 dist
 es
-lib
 logs
 
 # misc

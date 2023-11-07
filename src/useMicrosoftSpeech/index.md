@@ -11,4 +11,4 @@ title: useMicrosoftSpeech
 
 > ex: <https://lobe-tts-preview.vercel.app/api/index>
 
-<code src="./demos/MicrosoftSpeech.tsx" nopadding></code>
+<code src="./demos/index.tsx" nopadding></code>

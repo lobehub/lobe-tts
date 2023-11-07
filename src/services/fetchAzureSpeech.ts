@@ -8,6 +8,8 @@ import {
   SpeechSynthesizer,
 } from 'microsoft-cognitiveservices-speech-sdk';
 
+import { AZURE_SPEECH_KEY, AZURE_SPEECH_REGION } from '@/const/api';
+
 import { type SsmlOptions, genSSML } from '../utils/genSSML';
 
 export interface AzureSpeechOptions extends SsmlOptions {
@@ -18,12 +20,12 @@ export interface AzureSpeechOptions extends SsmlOptions {
 }
 
 // 纯文本生成语音
-export const postAzureSpeech = async (
+export const fetchAzureSpeech = async (
   text: string,
   { api, ...options }: AzureSpeechOptions,
 ): Promise<AudioBufferSourceNode> => {
-  const key = api.key || process.env.AZURE_SPEECH_KEY || '';
-  const region = api.key || process.env.AZURE_SPEECH_REGION || '';
+  const key = api.key || AZURE_SPEECH_KEY;
+  const region = api.key || AZURE_SPEECH_REGION;
   const speechConfig = SpeechConfig.fromSubscription(key, region);
   speechConfig.setProperty(PropertyId.SpeechServiceResponse_RequestSentenceBoundary, 'true');
   speechConfig.speechSynthesisOutputFormat = SpeechSynthesisOutputFormat.Webm24Khz16BitMonoOpus;

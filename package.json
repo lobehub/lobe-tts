@@ -27,7 +27,7 @@
     "docs:dev": "dumi dev",
     "doctor": "father doctor",
     "postinstall": "npm run setup",
-    "lint": "eslint \"{src,tests}/**/*.{js,jsx,ts,tsx}\" --fix",
+    "lint": "eslint \"{src,api,lib}/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:md": "remark . --quiet --frail --output",
     "prepare": "husky install",
     "prepublishOnly": "npm run build",
@@ -65,6 +65,7 @@
     "query-string": "^8",
     "ssml-document": "^1",
     "swr": "^2",
+    "url-join": "^5.0.0",
     "uuid": "^9"
   },
   "devDependencies": {

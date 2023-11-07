@@ -5,7 +5,7 @@ import { type SsmlOptions, genSSML } from './genSSML';
 const API =
   'https://southeastasia.api.speech.microsoft.com/accfreetrial/texttospeech/acc/v3.0-beta1/vcg/speak';
 
-export const postMicrosoftSpeech = (text: string, options: SsmlOptions): [any, any] => {
+export const fetchMicrosoftSpeech = async (text: string, options: SsmlOptions) => {
   const data = JSON.stringify({
     offsetInPlainText: 0,
     properties: {
@@ -15,7 +15,7 @@ export const postMicrosoftSpeech = (text: string, options: SsmlOptions): [any, a
     ttsAudioFormat: 'audio-24khz-160kbitrate-mono-mp3',
   });
 
-  const DEFAULT_HEADERS = {
+  const DEFAULT_HEADERS = new Headers({
     'accept': '*/*',
     'accept-language': 'zh-CN,zh;q=0.9',
     'authority': 'southeastasia.api.speech.microsoft.com',
@@ -30,15 +30,13 @@ export const postMicrosoftSpeech = (text: string, options: SsmlOptions): [any, a
     'sec-fetch-site': 'same-site',
     'user-agent':
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
-  };
+  });
 
-  return [
-    API,
-    {
-      body: data,
-      headers: DEFAULT_HEADERS,
-      method: 'POST',
-      responseType: 'arraybuffer',
-    },
-  ];
+  return await fetch(API, {
+    body: data,
+    headers: DEFAULT_HEADERS,
+    method: 'POST',
+    // @ts-ignore
+    responseType: 'arraybuffer',
+  });
 };

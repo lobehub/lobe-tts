@@ -6,7 +6,7 @@ title: useSpeechRecognition
 
 ## hooks
 
-<code src="./demos/SpeechRecognition.tsx" nopadding></code>
+<code src="./demos/index.tsx" nopadding></code>
 
 ## usePersistedSpeechRecognition
 

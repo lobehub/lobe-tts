@@ -1,11 +1,11 @@
 ---
 nav: Components
 group: TTS
-title: useAzureSpeech
+title: useOpenaiTTS
 ---
 
 ## hooks
 
-- ENV: `AZURE_SPEECH_KEY` `AZURE_SPEECH_REGION`
+- ENV: `OPENAI_API_KEY` `OPENAI_PROXY_URL`
 
 <code src="./demos/index.tsx" nopadding></code>

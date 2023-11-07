@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import { postEdgeSpeech } from '../services/postEdgeSpeech';
+import { fetchEdgeSpeech } from '../services/fetchEdgeSpeech';
 import { SsmlOptions } from '../utils/genSSML';
 
 export const useEdgeSpeech = (defaultText: string, options: SsmlOptions) => {
@@ -12,7 +12,7 @@ export const useEdgeSpeech = (defaultText: string, options: SsmlOptions) => {
 
   const { isLoading } = useSWR(
     shouldFetch ? [options.name, text].join('-') : null,
-    () => postEdgeSpeech(text, options),
+    () => fetchEdgeSpeech(text, options),
     {
       onError: () => setShouldFetch(false),
       onSuccess: (audioBufferSource) => {

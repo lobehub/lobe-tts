@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import { AzureSpeechOptions, postAzureSpeech } from '../services/postAzureSpeech';
+import { AzureSpeechOptions, fetchAzureSpeech } from '../services/fetchAzureSpeech';
 
 export const useAzureSpeech = (defaultText: string, options: AzureSpeechOptions) => {
   const [data, setDate] = useState<AudioBufferSourceNode>();
@@ -11,7 +11,7 @@ export const useAzureSpeech = (defaultText: string, options: AzureSpeechOptions)
 
   const { isLoading } = useSWR(
     shouldFetch ? [options.name, text].join('-') : null,
-    () => postAzureSpeech(text, options),
+    () => fetchAzureSpeech(text, options),
     {
       onError: () => setShouldFetch(false),
       onSuccess: (audioBufferSource) => {

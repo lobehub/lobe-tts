@@ -6,14 +6,13 @@ import { Flexbox } from 'react-layout-kit';
 
 const defaultText = '这是一段使用 Microsoft Speech 的语音演示';
 
-const API = 'https://lobe-tts-preview.vercel.app/api/index';
 export default () => {
   const store = useCreateStore();
   const options: any = useControls(
     {
       api: {
         label: 'MICROSOFT_SPEECH_PROXY_URL',
-        value: API,
+        value: '',
       },
       name: {
         options: getEdgeVoiceList(),

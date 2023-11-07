@@ -6,4 +6,4 @@ title: useSpeechSynthes
 
 ## hooks
 
-<code src="./demos/SpeechSynthes.tsx" nopadding></code>
+<code src="./demos/index.tsx" nopadding></code>
