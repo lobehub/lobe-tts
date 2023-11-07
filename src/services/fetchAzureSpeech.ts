@@ -9,8 +9,7 @@ import {
 } from 'microsoft-cognitiveservices-speech-sdk';
 
 import { AZURE_SPEECH_KEY, AZURE_SPEECH_REGION } from '@/const/api';
-
-import { type SsmlOptions, genSSML } from '../utils/genSSML';
+import { type SsmlOptions, genSSML } from '@/utils/genSSML';
 
 export interface AzureSpeechOptions extends SsmlOptions {
   api: {

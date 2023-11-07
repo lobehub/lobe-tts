@@ -1,8 +1,8 @@
-export { fetchAzureSpeech } from './services/fetchAzureSpeech';
-export { fetchEdgeSpeech } from './services/fetchEdgeSpeech';
-export { fetchMicrosoftSpeech } from './services/fetchMicrosoftSpeech';
-export { fetchOpenaiSTT } from './services/fetchOpenaiSTT';
-export { fetchOpenaiTTS } from './services/fetchOpenaiTTS';
+export { type AzureSpeechOptions, fetchAzureSpeech } from './services/fetchAzureSpeech';
+export { type EdgeSpeechOptions, fetchEdgeSpeech } from './services/fetchEdgeSpeech';
+export { fetchMicrosoftSpeech, type MicrosoftSpeechOptions } from './services/fetchMicrosoftSpeech';
+export { fetchOpenaiSTT, type OpenaiSttOptions } from './services/fetchOpenaiSTT';
+export { fetchOpenaiTTS, type OpenaiTtsOptions } from './services/fetchOpenaiTTS';
 export { useAzureSpeech } from './useAzureSpeech';
 export { useEdgeSpeech } from './useEdgeSpeech';
 export { useMicrosoftSpeech } from './useMicrosoftSpeech';

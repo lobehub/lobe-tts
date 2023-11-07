@@ -1,10 +1,9 @@
 import { OPENAI_API_KEY, OPENAI_TTS_URL } from '@/const/api';
-
-import { type SsmlOptions } from '../utils/genSSML';
+import { type SsmlOptions } from '@/utils/genSSML';
 
 export type OpenaiVoice = 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer';
 
-export interface OpenaiTtsOptions extends SsmlOptions {
+export interface OpenaiTtsOptions extends Pick<SsmlOptions, 'name'> {
   api: {
     key: string;
     proxy: string;

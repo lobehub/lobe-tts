@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { OPENAI_API_KEY, OPENAI_STT_URL } from '@/const/api';
 
-export interface OpenaiTtsOptions {
+export interface OpenaiSttOptions {
   api: {
     key: string;
     proxy: string;
@@ -13,7 +13,7 @@ export interface OpenaiTtsOptions {
 // 纯文本生成语音
 export const fetchOpenaiSTT = async (
   speech: Blob,
-  { api, model = 'whisper-1' }: OpenaiTtsOptions,
+  { api, model = 'whisper-1' }: OpenaiSttOptions,
 ): Promise<string> => {
   const key = api.key || OPENAI_API_KEY;
   const url = OPENAI_STT_URL(api.proxy);

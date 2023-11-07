@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import {
-  type MicrosoftSpeechOptions,
-  fetchMicrosoftSpeech,
-} from '../services/fetchMicrosoftSpeech';
+import { type MicrosoftSpeechOptions, fetchMicrosoftSpeech } from '@/services/fetchMicrosoftSpeech';
 
-export const useMicrosoftSpeech = (defaultText: string, options: MicrosoftSpeechOptions) => {
+export const useMicrosoftSpeech = (
+  defaultText: string,
+  { api, name, pitch, rate, style }: MicrosoftSpeechOptions,
+) => {
   const [data, setDate] = useState<AudioBufferSourceNode>();
   const [text, setText] = useState<string>(defaultText);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const { isLoading } = useSWR(
-    shouldFetch ? [options.name, text].join('-') : null,
-    () => fetchMicrosoftSpeech(text, options),
+    shouldFetch ? [name, text].join('-') : null,
+    () => fetchMicrosoftSpeech(text, { api, name, pitch, rate, style }),
     {
       onError: () => setShouldFetch(false),
       onSuccess: (audioBufferSource) => {

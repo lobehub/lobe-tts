@@ -15,7 +15,7 @@ export default () => {
         label: 'OPENAI_API_KEY',
         value: '',
       },
-      region: {
+      proxy: {
         label: 'OPENAI_PROXY_URL',
         value: '',
       },
@@ -28,34 +28,6 @@ export default () => {
       name: {
         options: getOpenaiVoiceList(),
         value: 'alloy',
-      },
-      pitch: {
-        max: 1,
-        min: -1,
-        step: 0.1,
-        value: 0,
-      },
-      rate: {
-        max: 1,
-        min: -1,
-        step: 0.1,
-        value: 0,
-      },
-      style: {
-        options: [
-          'affectionate',
-          'angry',
-          'calm',
-          'cheerful',
-          'disgruntled',
-          'embarrassed',
-          'fearful',
-          'general',
-          'gentle',
-          'sad',
-          'serious',
-        ],
-        value: 'general',
       },
     },
     { store },

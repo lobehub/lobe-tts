@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import { fetchEdgeSpeech } from '../services/fetchEdgeSpeech';
-import { SsmlOptions } from '../utils/genSSML';
+import { EdgeSpeechOptions, fetchEdgeSpeech } from '@/services/fetchEdgeSpeech';
 
-export const useEdgeSpeech = (defaultText: string, options: SsmlOptions) => {
+export const useEdgeSpeech = (defaultText: string, { api, name }: EdgeSpeechOptions) => {
   const [data, setDate] = useState<AudioBufferSourceNode>();
   const [text, setText] = useState<string>(defaultText);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const { isLoading } = useSWR(
-    shouldFetch ? [options.name, text].join('-') : null,
-    () => fetchEdgeSpeech(text, options),
+    shouldFetch ? [name, text].join('-') : null,
+    () => fetchEdgeSpeech(text, { api, name }),
     {
       onError: () => setShouldFetch(false),
       onSuccess: (audioBufferSource) => {

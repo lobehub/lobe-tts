@@ -1,14 +1,18 @@
 import qs from 'query-string';
 import { v4 as uuidv4 } from 'uuid';
 
-import { type SsmlOptions, genSSML } from '../utils/genSSML';
-import { genSendContent } from '../utils/genSendContent';
-import { getHeadersAndData } from '../utils/getHeadersAndData';
+import { EDDGE_API_TOKEN, EDDGE_PROXY_URL } from '@/const/api';
+import { type SsmlOptions, genSSML } from '@/utils/genSSML';
+import { genSendContent } from '@/utils/genSendContent';
+import { getHeadersAndData } from '@/utils/getHeadersAndData';
 
-const API = 'wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1';
-const TOKEN = '6A5AA1D4EAFF4E9FB37E23D68491D6F4';
-
-export const fetchEdgeSpeech = async (text: string, options: SsmlOptions) => {
+export interface EdgeSpeechOptions extends Pick<SsmlOptions, 'name'> {
+  api: {
+    key: string;
+    proxy: string;
+  };
+}
+export const fetchEdgeSpeech = async (text: string, { api, ...options }: EdgeSpeechOptions) => {
   const connectId = uuidv4().replaceAll('-', '');
   const date = new Date().toString();
   const audioContext = new AudioContext();
@@ -18,9 +22,9 @@ export const fetchEdgeSpeech = async (text: string, options: SsmlOptions) => {
     qs.stringifyUrl({
       query: {
         ConnectionId: connectId,
-        TrustedClientToken: TOKEN,
+        TrustedClientToken: api.key || EDDGE_API_TOKEN,
       },
-      url: API,
+      url: api.proxy || EDDGE_PROXY_URL,
     }),
   );
   ws.binaryType = 'arraybuffer';

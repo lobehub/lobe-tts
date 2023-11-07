@@ -8,6 +8,21 @@ const defaultText = '这是一段使用 Edge Speech 的语音演示';
 
 export default () => {
   const store = useCreateStore();
+
+  const api: any = useControls(
+    {
+      key: {
+        label: 'EDDGE_API_TOKEN',
+        value: '',
+      },
+      proxy: {
+        label: 'EDDGE_PROXY_URL',
+        value: '',
+      },
+    },
+    { store },
+  );
+
   const options: any = useControls(
     {
       name: {
@@ -17,7 +32,11 @@ export default () => {
     },
     { store },
   );
-  const { setText, isLoading, isPlaying, start, stop } = useEdgeSpeech(defaultText, options);
+
+  const { setText, isLoading, isPlaying, start, stop } = useEdgeSpeech(defaultText, {
+    api,
+    ...options,
+  });
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>

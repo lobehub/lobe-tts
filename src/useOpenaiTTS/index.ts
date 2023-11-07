@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import { type OpenaiTtsOptions, fetchOpenaiTTS } from '../services/fetchOpenaiTTS';
+import { type OpenaiTtsOptions, fetchOpenaiTTS } from '@/services/fetchOpenaiTTS';
 
-export const useOpenaiTTS = (defaultText: string, options: OpenaiTtsOptions) => {
+export const useOpenaiTTS = (defaultText: string, { api, name }: OpenaiTtsOptions) => {
   const [data, setDate] = useState<AudioBufferSourceNode>();
   const [text, setText] = useState<string>(defaultText);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   const { isLoading } = useSWR(
-    shouldFetch ? [options.name, text].join('-') : null,
-    () => fetchOpenaiTTS(text, options),
+    shouldFetch ? [name, text].join('-') : null,
+    () => fetchOpenaiTTS(text, { api, name }),
     {
       onError: () => setShouldFetch(false),
       onSuccess: (audioBufferSource) => {
