@@ -86,16 +86,17 @@ Click button below to deploy your private plugins' gateway.
 
 This project provides some additional configuration items set with environment variables:
 
-| Environment Variable             | Description                                                                                                                                             | Example                                                                                   |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `OPENAI_API_KEY`                 | This is the API key you apply on the OpenAI account page                                                                                                | `sk-xxxxxx...xxxxxx`                                                                      |
-| `OPENAI_PROXY_URL`               | If you manually configure the OpenAI interface proxy, you can use this configuration item to override the default OpenAI API request base URL           | `https://api.chatanywhere.cn/v1`<br/>The default value is<br/>`https://api.openai.com/v1` |
-| `AZURE_SPEECH_KEY`               | This is the API key of Azure Speech Service                                                                                                             |                                                                                           |
-| `AZURE_SPEECH_REGION`            | This is the region of Azure Speech Service                                                                                                              |                                                                                           |
-| `MICROSOFT_SPEECH_PROXY_URL`     | If you manually configure the Microsoft Speech interface proxy, you can use this configuration item to override the default Speech API request base URL |                                                                                           |
-| `MICROSOFT_SPEECH_ALLOW_ORIGINS` | Allow origins , string or string array                                                                                                                  |                                                                                           |
-| `EDDGE_API_TOKEN`                | This is the API key of Edge Speech Service                                                                                                              | `6A5AA1D4EAFF4E9FB37E23D68491D6F4`                                                        |
-| `EDDGE_PROXY_URL`                | If you manually configure the Edge interface proxy, you can use this configuration item to override the default Edge wss request base URL               | `wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1`             |
+| Environment Variable         | Description                                                                                                                                             | Default                     |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `ALLOW_ORIGINS`              | Allow origins , string or string array                                                                                                                  |                             |
+| `OPENAI_API_KEY`             | This is the API key you apply on the OpenAI account page                                                                                                | `sk-xxxxxx...xxxxxx`        |
+| `OPENAI_PROXY_URL`           | If you manually configure the OpenAI interface proxy, you can use this configuration item to override the default OpenAI API request base URL           | `https://api.openai.com/v1` |
+| `AZURE_SPEECH_KEY`           | This is the API key of Azure Speech Service                                                                                                             |                             |
+| `AZURE_SPEECH_REGION`        | This is the region of Azure Speech Service                                                                                                              |                             |
+| `AZURE_SPEECH_PROXY_URL`     | If you manually configure the AZURE Speech interface proxy, you can use this configuration item to override the default Speech API request base URL     | `/api/azure-speech`         |
+| `MICROSOFT_SPEECH_PROXY_URL` | If you manually configure the Microsoft Speech interface proxy, you can use this configuration item to override the default Speech API request base URL | `/api/microsoft-speech`     |
+| `EDDGE_API_TOKEN`            | This is the API key of Edge Speech Service                                                                                                              |                             |
+| `EDDGE_PROXY_URL`            | If you manually configure the Edge interface proxy, you can use this configuration item to override the default Edge wss request base URL               |                             |
 
 <div align="right">
 

@@ -1,7 +1,10 @@
 import urlJoin from 'url-join';
 
+export const MICROSOFT_SPPECH_URL =
+  'https://southeastasia.api.speech.microsoft.com/accfreetrial/texttospeech/acc/v3.0-beta1/vcg/speak';
 export const MICROSOFT_SPEECH_PROXY_URL =
   process.env.MICROSOFT_SPEECH_PROXY_URL || '/api/microsoft-speech';
+export const AZURE_SPEECH_PROXY_URL = process.env.AZURE_SPEECH_PROXY_URL || '/api/azure-speech';
 export const AZURE_SPEECH_KEY = process.env.AZURE_SPEECH_KEY || '';
 export const AZURE_SPEECH_REGION = process.env.AZURE_SPEECH_REGION || '';
 export const OPENAI_API_KEY = process.env.OPENAI_API_KEY || '';

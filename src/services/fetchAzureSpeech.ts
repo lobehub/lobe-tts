@@ -1,14 +1,4 @@
-import {
-  AudioConfig,
-  PropertyId,
-  ResultReason,
-  SpeechConfig,
-  SpeechSynthesisOutputFormat,
-  SpeechSynthesisResult,
-  SpeechSynthesizer,
-} from 'microsoft-cognitiveservices-speech-sdk';
-
-import { AZURE_SPEECH_KEY, AZURE_SPEECH_REGION } from '@/const/api';
+import { AZURE_SPEECH_PROXY_URL } from '@/const/api';
 import { type SsmlOptions, genSSML } from '@/utils/genSSML';
 
 export interface AzureSpeechOptions extends SsmlOptions {
@@ -18,45 +8,30 @@ export interface AzureSpeechOptions extends SsmlOptions {
   };
 }
 
-// 纯文本生成语音
 export const fetchAzureSpeech = async (
   text: string,
   { api, ...options }: AzureSpeechOptions,
 ): Promise<AudioBufferSourceNode> => {
-  const key = api.key || AZURE_SPEECH_KEY;
-  const region = api.key || AZURE_SPEECH_REGION;
-  const speechConfig = SpeechConfig.fromSubscription(key, region);
-  speechConfig.setProperty(PropertyId.SpeechServiceResponse_RequestSentenceBoundary, 'true');
-  speechConfig.speechSynthesisOutputFormat = SpeechSynthesisOutputFormat.Webm24Khz16BitMonoOpus;
-
-  const audioConfig = AudioConfig.fromDefaultSpeakerOutput();
-  const synthesizer: SpeechSynthesizer | null = new SpeechSynthesizer(speechConfig, audioConfig);
-
-  const completeCb = async (
-    result: SpeechSynthesisResult,
-    resolve: (value: AudioBufferSourceNode) => void,
-  ) => {
-    if (result.reason === ResultReason.SynthesizingAudioCompleted) {
-      const audioData = result.audioData;
-      const audioContext = new AudioContext();
-      const audioBufferSource = audioContext.createBufferSource();
-      audioBufferSource.buffer = await audioContext.decodeAudioData(audioData);
-      audioBufferSource.connect(audioContext.destination);
-      resolve(audioBufferSource);
-    }
-    synthesizer.close();
-  };
-
-  const errCb = (err: string, reject: (err?: any) => void) => {
-    reject(err);
-    synthesizer.close();
-  };
-
-  return new Promise<AudioBufferSourceNode>((resolve, reject) => {
-    synthesizer.speakSsmlAsync(
-      genSSML(text, options),
-      (result) => completeCb(result, resolve),
-      (err) => errCb(err, reject),
-    );
+  const data = JSON.stringify({
+    api,
+    ssml: genSSML(text, options),
   });
+
+  const response: Response = await fetch(AZURE_SPEECH_PROXY_URL, {
+    body: data,
+    method: 'POST',
+    // @ts-ignore
+    responseType: 'arraybuffer',
+  });
+
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  const audioData = await response.arrayBuffer();
+  const audioContext = new AudioContext();
+  const audioBufferSource = audioContext.createBufferSource();
+  audioBufferSource.buffer = await audioContext.decodeAudioData(audioData);
+  audioBufferSource.connect(audioContext.destination);
+  return audioBufferSource;
 };
