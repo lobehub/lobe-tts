@@ -49,7 +49,10 @@ export default () => {
     },
     { store },
   );
-  const { setText, isLoading, isPlaying, start, stop } = useMicrosoftSpeech(defaultText, options);
+  const { setText, isLoading, isPlaying, start, stop, url } = useMicrosoftSpeech(
+    defaultText,
+    options,
+  );
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>
@@ -67,6 +70,7 @@ export default () => {
           </Button>
         )}
         <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
+        {url && <audio controls src={url} />}
       </Flexbox>
     </StoryBook>
   );

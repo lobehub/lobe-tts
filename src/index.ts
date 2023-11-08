@@ -3,9 +3,11 @@ export { type EdgeSpeechOptions, fetchEdgeSpeech } from './services/fetchEdgeSpe
 export { fetchMicrosoftSpeech, type MicrosoftSpeechOptions } from './services/fetchMicrosoftSpeech';
 export { fetchOpenaiSTT, type OpenaiSttOptions } from './services/fetchOpenaiSTT';
 export { fetchOpenaiTTS, type OpenaiTtsOptions } from './services/fetchOpenaiTTS';
+export { useAudioRecorder } from './useAudioRecorder';
 export { useAzureSpeech } from './useAzureSpeech';
 export { useEdgeSpeech } from './useEdgeSpeech';
 export { useMicrosoftSpeech } from './useMicrosoftSpeech';
+export { useOpenaiSTT, useOpenaiSTTWithPSR, useOpenaiSTTWithSR } from './useOpenaiSTT';
 export { useOpenaiTTS } from './useOpenaiTTS';
 export { usePersistedSpeechRecognition } from './useSpeechRecognition/usePersistedSpeechRecognition';
 export { useSpeechRecognition } from './useSpeechRecognition/useSpeechRecognition';

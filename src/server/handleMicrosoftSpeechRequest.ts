@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { MICROSOFT_SPPECH_URL } from '@/const/api';
+import { MICROSOFT_SPPECH_URL } from '../const/api';
 
 export const handleMicrosoftSpeechRequest = async (req: Request) => {
   const DEFAULT_HEADERS = new Headers({

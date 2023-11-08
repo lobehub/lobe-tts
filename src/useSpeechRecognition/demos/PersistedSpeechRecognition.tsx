@@ -13,13 +13,14 @@ export default () => {
     { store },
   );
 
-  const { text, start, stop, isLoading } = usePersistedSpeechRecognition(locale);
+  const { text, start, stop, isLoading, formattedTime, url } =
+    usePersistedSpeechRecognition(locale);
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>
         {isLoading ? (
           <Button block icon={<Icon icon={StopCircle} />} onClick={stop}>
-            Stop
+            Stop {formattedTime}
           </Button>
         ) : (
           <Button block icon={<Icon icon={Mic} />} onClick={start} type={'primary'}>
@@ -27,6 +28,7 @@ export default () => {
           </Button>
         )}
         <Input.TextArea placeholder={'Recognition result...'} value={text} />
+        {url && <audio controls src={url} />}
       </Flexbox>
     </StoryBook>
   );

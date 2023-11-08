@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { SsmlOptions } from '@/utils/genSSML';
 
@@ -21,13 +21,19 @@ export const useSpeechSynthes = (defaultText: string, { name, rate, pitch }: Ssm
   speechSynthesisUtterance.onstart = () => setIsLoading(true);
   speechSynthesisUtterance.onend = () => setIsLoading(false);
 
+  const handleStart = useCallback(() => {
+    speechSynthesis.speak(speechSynthesisUtterance);
+  }, [speechSynthesis, speechSynthesisUtterance]);
+
+  const handleStop = useCallback(() => {
+    speechSynthesis.cancel();
+    setIsLoading(false);
+  }, [speechSynthesis]);
+
   return {
     isLoading,
     setText,
-    start: () => speechSynthesis.speak(speechSynthesisUtterance),
-    stop: () => {
-      speechSynthesis.cancel();
-      setIsLoading(false);
-    },
+    start: handleStart,
+    stop: handleStop,
   };
 };

@@ -1,4 +1,5 @@
 import { OPENAI_API_KEY, OPENAI_TTS_URL } from '@/const/api';
+import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
 import { type SsmlOptions } from '@/utils/genSSML';
 
 export type OpenaiVoice = 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer';
@@ -11,12 +12,10 @@ export interface OpenaiTtsOptions extends Pick<SsmlOptions, 'name'> {
   model?: 'tts-1' | 'tts-1-hd';
   name: OpenaiVoice;
 }
-
-// 纯文本生成语音
 export const fetchOpenaiTTS = async (
   text: string,
   { api, model = 'tts-1', ...options }: OpenaiTtsOptions,
-): Promise<AudioBufferSourceNode> => {
+): Promise<Blob> => {
   const key = api.key || OPENAI_API_KEY;
   const url = OPENAI_TTS_URL(api.proxy);
 
@@ -37,10 +36,6 @@ export const fetchOpenaiTTS = async (
     throw new Error('Network response was not ok');
   }
 
-  const audioData = await response.arrayBuffer();
-  const audioContext = new AudioContext();
-  const audioBufferSource = audioContext.createBufferSource();
-  audioBufferSource.buffer = await audioContext.decodeAudioData(audioData);
-  audioBufferSource.connect(audioContext.destination);
-  return audioBufferSource;
+  const arrayBuffer = await response.arrayBuffer();
+  return await arrayBufferConvert(arrayBuffer);
 };

@@ -1,64 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
 
-const SpeechRecognition =
-  (globalThis as any)?.SpeechRecognition || (window as any)?.webkitSpeechRecognition;
+import { useAudioRecorder } from '@/useAudioRecorder';
+import { useRecognition } from '@/useSpeechRecognition/useRecognition';
 
-export const useSpeechRecognition = (locale: string) => {
-  const [recognition, setRecognition] = useState<any>(null);
-  const [text, setText] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [finalStop, setFinalStop] = useState<boolean>(false);
+export const useSpeechRecognition = (
+  locale: string,
+  options?: { onBolbAvailable?: (blob: Blob) => void; onTextChange?: (value: string) => void },
+) => {
+  const {
+    time,
+    formattedTime,
+    start: startRecord,
+    stop: stopRecord,
+    blob,
+    url,
+  } = useAudioRecorder(options?.onBolbAvailable);
+  const { isLoading, start, stop, text } = useRecognition(locale, {
+    onRecognitionEnd: () => {
+      stopRecord();
+    },
+    onTextChange: options?.onTextChange,
+  });
 
-  useEffect(() => {
-    if (recognition) return;
-    try {
-      const speechRecognition = new SpeechRecognition();
+  const handleStart = useCallback(() => {
+    start();
+    startRecord();
+  }, [start, startRecord]);
 
-      speechRecognition.interimResults = true;
-      speechRecognition.continuous = true;
-      speechRecognition.onstart = () => {
-        setFinalStop(false);
-        setIsLoading(true);
-      };
-      speechRecognition.onend = () => {
-        setIsLoading(false);
-        setFinalStop(true);
-      };
-      speechRecognition.onresult = ({ results }: any) => {
-        if (!results) return;
-        const result = results[0];
-        if (!finalStop && result?.[0]?.transcript) setText(result[0].transcript);
-        if (result.isFinal) {
-          speechRecognition.abort();
-          setIsLoading(false);
-        }
-      };
-      setRecognition(speechRecognition);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (recognition) recognition.lang = locale;
-  }, [locale, recognition]);
-
-  const handleStop = () => {
-    try {
-      recognition.abort();
-    } catch {}
-    setIsLoading(false);
-  };
+  const handleStop = useCallback(() => {
+    stop();
+    stopRecord();
+  }, [stop, stopRecord]);
 
   return {
+    blob,
+    formattedTime,
     isLoading,
-    start: () => {
-      try {
-        setText('');
-        recognition.start();
-      } catch {}
-    },
-    stop: () => handleStop(),
+    start: handleStart,
+    stop: handleStop,
     text,
+    time,
+    url,
   };
 };

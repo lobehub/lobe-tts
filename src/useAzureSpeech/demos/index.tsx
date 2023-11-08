@@ -60,7 +60,7 @@ export default () => {
     },
     { store },
   );
-  const { setText, isLoading, isPlaying, start, stop } = useAzureSpeech(defaultText, {
+  const { setText, isLoading, isPlaying, start, stop, url } = useAzureSpeech(defaultText, {
     api,
     ...options,
   });
@@ -81,6 +81,7 @@ export default () => {
           </Button>
         )}
         <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
+        {url && <audio controls src={url} />}
       </Flexbox>
     </StoryBook>
   );

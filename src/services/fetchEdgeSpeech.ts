@@ -2,6 +2,7 @@ import qs from 'query-string';
 import { v4 as uuidv4 } from 'uuid';
 
 import { EDDGE_API_TOKEN, EDDGE_PROXY_URL } from '@/const/api';
+import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
 import { type SsmlOptions, genSSML } from '@/utils/genSSML';
 import { genSendContent } from '@/utils/genSendContent';
 import { getHeadersAndData } from '@/utils/getHeadersAndData';
@@ -12,11 +13,12 @@ export interface EdgeSpeechOptions extends Pick<SsmlOptions, 'name'> {
     proxy: string;
   };
 }
-export const fetchEdgeSpeech = async (text: string, { api, ...options }: EdgeSpeechOptions) => {
+export const fetchEdgeSpeech = async (
+  text: string,
+  { api, ...options }: EdgeSpeechOptions,
+): Promise<Blob> => {
   const connectId = uuidv4().replaceAll('-', '');
   const date = new Date().toString();
-  const audioContext = new AudioContext();
-  const audioBufferSource = audioContext.createBufferSource();
 
   const ws = new WebSocket(
     qs.stringifyUrl({
@@ -61,7 +63,7 @@ export const fetchEdgeSpeech = async (text: string, { api, ...options }: EdgeSpe
     );
   });
 
-  return new Promise<AudioBufferSourceNode>((resolve) => {
+  return new Promise((resolve) => {
     let audioData = new ArrayBuffer(0);
     let downloadAudio = false;
 
@@ -77,9 +79,7 @@ export const fetchEdgeSpeech = async (text: string, { api, ...options }: EdgeSpe
           case 'turn.end': {
             downloadAudio = false;
             if (!audioData.byteLength) return;
-            audioBufferSource.buffer = await audioContext.decodeAudioData(audioData);
-            audioBufferSource.connect(audioContext.destination);
-            resolve(audioBufferSource);
+            resolve(await arrayBufferConvert(audioData));
             break;
           }
         }

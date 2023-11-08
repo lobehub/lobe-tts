@@ -1,4 +1,5 @@
 import { AZURE_SPEECH_PROXY_URL } from '@/const/api';
+import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
 import { type SsmlOptions, genSSML } from '@/utils/genSSML';
 
 export interface AzureSpeechOptions extends SsmlOptions {
@@ -11,7 +12,7 @@ export interface AzureSpeechOptions extends SsmlOptions {
 export const fetchAzureSpeech = async (
   text: string,
   { api, ...options }: AzureSpeechOptions,
-): Promise<AudioBufferSourceNode> => {
+): Promise<Blob> => {
   const data = JSON.stringify({
     api,
     ssml: genSSML(text, options),
@@ -28,10 +29,6 @@ export const fetchAzureSpeech = async (
     throw new Error('Network response was not ok');
   }
 
-  const audioData = await response.arrayBuffer();
-  const audioContext = new AudioContext();
-  const audioBufferSource = audioContext.createBufferSource();
-  audioBufferSource.buffer = await audioContext.decodeAudioData(audioData);
-  audioBufferSource.connect(audioContext.destination);
-  return audioBufferSource;
+  const arrayBuffer = await response.arrayBuffer();
+  return await arrayBufferConvert(arrayBuffer);
 };

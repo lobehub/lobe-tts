@@ -8,7 +8,7 @@ import {
   SpeechSynthesizer,
 } from 'microsoft-cognitiveservices-speech-sdk';
 
-import { AZURE_SPEECH_KEY, AZURE_SPEECH_REGION } from '@/const/api';
+import { AZURE_SPEECH_KEY, AZURE_SPEECH_REGION } from '../const/api';
 
 const fetchAzureSpeech = async (ssml: string, { api }: any): Promise<ArrayBuffer> => {
   const key = api.key || AZURE_SPEECH_KEY;

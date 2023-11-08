@@ -33,7 +33,7 @@ export default () => {
     { store },
   );
 
-  const { setText, isLoading, isPlaying, start, stop } = useEdgeSpeech(defaultText, {
+  const { setText, isLoading, isPlaying, start, stop, url } = useEdgeSpeech(defaultText, {
     api,
     ...options,
   });
@@ -54,6 +54,7 @@ export default () => {
           </Button>
         )}
         <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
+        {url && <audio controls src={url} />}
       </Flexbox>
     </StoryBook>
   );

@@ -1,4 +1,5 @@
 import { MICROSOFT_SPEECH_PROXY_URL } from '@/const/api';
+import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
 import { type SsmlOptions } from '@/utils/genSSML';
 import { genSSML } from '@/utils/genSSML';
 
@@ -9,7 +10,7 @@ export interface MicrosoftSpeechOptions extends SsmlOptions {
 export const fetchMicrosoftSpeech = async (
   text: string,
   { api, ...options }: MicrosoftSpeechOptions,
-): Promise<AudioBufferSourceNode> => {
+): Promise<Blob> => {
   const data = JSON.stringify({
     offsetInPlainText: 0,
     properties: {
@@ -30,10 +31,6 @@ export const fetchMicrosoftSpeech = async (
     throw new Error('Network response was not ok');
   }
 
-  const audioData = await response.arrayBuffer();
-  const audioContext = new AudioContext();
-  const audioBufferSource = audioContext.createBufferSource();
-  audioBufferSource.buffer = await audioContext.decodeAudioData(audioData);
-  audioBufferSource.connect(audioContext.destination);
-  return audioBufferSource;
+  const arrayBuffer = await response.arrayBuffer();
+  return await arrayBufferConvert(arrayBuffer);
 };
