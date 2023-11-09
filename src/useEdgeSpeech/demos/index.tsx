@@ -1,4 +1,4 @@
-import { getEdgeVoiceList, useEdgeSpeech } from '@lobehub/tts';
+import { AudioPlayer, AudioVisualizer, getEdgeVoiceList, useEdgeSpeech } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { StopCircle, Volume2 } from 'lucide-react';
@@ -33,7 +33,7 @@ export default () => {
     { store },
   );
 
-  const { setText, isLoading, isPlaying, start, stop, url } = useEdgeSpeech(defaultText, {
+  const { setText, isLoading, isPlaying, start, stop, audio } = useEdgeSpeech(defaultText, {
     api,
     ...options,
   });
@@ -54,7 +54,8 @@ export default () => {
           </Button>
         )}
         <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
-        {url && <audio controls src={url} />}
+        {audio && <AudioPlayer audio={audio} />}
+        {audio && <AudioVisualizer audio={audio} />}
       </Flexbox>
     </StoryBook>
   );

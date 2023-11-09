@@ -62,7 +62,7 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "lodash-es": "^4",
+    "lodash-es": "^4.17.21",
     "microsoft-cognitiveservices-speech-sdk": "^1",
     "query-string": "^8",
     "ssml-document": "^1",
@@ -74,7 +74,7 @@
     "@commitlint/cli": "^18",
     "@lobehub/lint": "latest",
     "@lobehub/ui": "latest",
-    "@types/lodash-es": "^4",
+    "@types/lodash-es": "^4.17.10",
     "@types/node": "^20",
     "@types/query-string": "^6",
     "@types/react": "^18",

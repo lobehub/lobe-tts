@@ -39,10 +39,15 @@ export const useTTS = ({
 
   const handleStart = useCallback(() => {
     if (keyCache !== key) {
+      if (audio) {
+        audio.remove();
+        setAudio(undefined);
+      }
+      if (url) {
+        URL.revokeObjectURL(url);
+        setUrl(undefined);
+      }
       setBlob(undefined);
-      setUrl(undefined);
-      audio?.remove();
-      setAudio(undefined);
       setShouldFetch(true);
       return;
     }
@@ -54,7 +59,7 @@ export const useTTS = ({
     } catch {
       setIsPlaying(false);
     }
-  }, [keyCache, key, audio, isPlaying, shouldFetch]);
+  }, [keyCache, key, audio, isPlaying, shouldFetch, url]);
 
   const handleStop = useCallback(() => {
     if (!isPlaying) return;

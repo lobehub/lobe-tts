@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { secondsToMinutesAndSeconds } from '@/utils/secondsToMinutesAndSeconds';
 
@@ -10,6 +10,7 @@ export const useAudioRecorder = (onBolbAvailable?: (blob: Blob) => void) => {
   // eslint-disable-next-line no-undef
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timer>();
   const [blob, setBlob] = useState<Blob>();
+  const [url, setUrl] = useState<string>();
 
   const _startTimer = useCallback(() => {
     const interval = setInterval(() => {
@@ -27,6 +28,8 @@ export const useAudioRecorder = (onBolbAvailable?: (blob: Blob) => void) => {
   }, [timerInterval]);
 
   const start = useCallback(() => {
+    if (url) URL.revokeObjectURL(url);
+    setUrl(undefined);
     setBlob(undefined);
     if (timerInterval !== undefined) return;
 
@@ -40,7 +43,9 @@ export const useAudioRecorder = (onBolbAvailable?: (blob: Blob) => void) => {
         _startTimer();
 
         recorder.addEventListener('dataavailable', (event) => {
-          setBlob(event.data);
+          const blobData = event.data;
+          setBlob(blobData);
+          setUrl(URL.createObjectURL(blobData));
           onBolbAvailable?.(event.data);
           recorder.stream.getTracks().forEach((t) => t.stop());
           // @ts-ignore
@@ -50,7 +55,7 @@ export const useAudioRecorder = (onBolbAvailable?: (blob: Blob) => void) => {
       .catch((error: DOMException) => {
         console.log(error.name, error.message, error.cause);
       });
-  }, [timerInterval, _startTimer]);
+  }, [timerInterval, _startTimer, url]);
 
   const stop = useCallback(() => {
     mediaRecorder?.stop();
@@ -58,8 +63,6 @@ export const useAudioRecorder = (onBolbAvailable?: (blob: Blob) => void) => {
     setTime(0);
     setIsRecording(false);
   }, [mediaRecorder, _stopTimer]);
-
-  const url = useMemo(() => blob && URL.createObjectURL(blob), [blob]);
 
   return {
     blob,

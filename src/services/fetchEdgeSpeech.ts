@@ -7,6 +7,36 @@ import { type SsmlOptions, genSSML } from '@/utils/genSSML';
 import { genSendContent } from '@/utils/genSendContent';
 import { getHeadersAndData } from '@/utils/getHeadersAndData';
 
+const configConent = JSON.stringify({
+  context: {
+    synthesis: {
+      audio: {
+        metadataoptions: { sentenceBoundaryEnabled: false, wordBoundaryEnabled: true },
+        outputFormat: 'audio-24khz-48kbitrate-mono-mp3',
+      },
+    },
+  },
+});
+
+const genHeader = (connectId: string) => {
+  const date = new Date().toString();
+  const configHeader = {
+    'Content-Type': 'application/json; charset=utf-8',
+    'Path': 'speech.config',
+    'X-Timestamp': date,
+  };
+  const contentHeader = {
+    'Content-Type': 'application/ssml+xml',
+    'Path': 'ssml',
+    'X-RequestId': connectId,
+    'X-Timestamp': date,
+  };
+  return {
+    configHeader,
+    contentHeader,
+  };
+};
+
 export interface EdgeSpeechOptions extends Pick<SsmlOptions, 'name'> {
   api: {
     key: string;
@@ -18,74 +48,39 @@ export const fetchEdgeSpeech = async (
   { api, ...options }: EdgeSpeechOptions,
 ): Promise<Blob> => {
   const connectId = uuidv4().replaceAll('-', '');
-  const date = new Date().toString();
-
-  const ws = new WebSocket(
-    qs.stringifyUrl({
-      query: {
-        ConnectionId: connectId,
-        TrustedClientToken: api.key || EDDGE_API_TOKEN,
-      },
-      url: api.proxy || EDDGE_PROXY_URL,
-    }),
-  );
-  ws.binaryType = 'arraybuffer';
-  ws.addEventListener('open', () => {
-    ws.send(
-      genSendContent(
-        {
-          'Content-Type': 'application/json; charset=utf-8',
-          'Path': 'speech.config',
-          'X-Timestamp': date,
-        },
-        JSON.stringify({
-          context: {
-            synthesis: {
-              audio: {
-                metadataoptions: { sentenceBoundaryEnabled: false, wordBoundaryEnabled: true },
-                outputFormat: 'audio-24khz-48kbitrate-mono-mp3',
-              },
-            },
-          },
-        }),
-      ),
-    );
-    ws.send(
-      genSendContent(
-        {
-          'Content-Type': 'application/ssml+xml',
-          'Path': 'ssml',
-          'X-RequestId': connectId,
-          'X-Timestamp': date,
-        },
-        genSSML(text, options),
-      ),
-    );
+  const url = qs.stringifyUrl({
+    query: {
+      ConnectionId: connectId,
+      TrustedClientToken: api.key || EDDGE_API_TOKEN,
+    },
+    url: api.proxy || EDDGE_PROXY_URL,
   });
 
-  return new Promise((resolve) => {
-    let audioData = new ArrayBuffer(0);
-    let downloadAudio = false;
+  const { configHeader, contentHeader } = genHeader(connectId);
+  const config = genSendContent(configHeader, configConent);
+  const content = genSendContent(contentHeader, genSSML(text, options));
 
-    ws.addEventListener('message', async (event) => {
+  return new Promise((resolve, reject) => {
+    const ws = new WebSocket(url);
+    ws.binaryType = 'arraybuffer';
+    const onOpen = () => {
+      ws.send(config);
+      ws.send(content);
+    };
+    let audioData = new ArrayBuffer(0);
+    const onMessage = async (event: MessageEvent<any>) => {
       if (typeof event.data === 'string') {
         const { headers } = getHeadersAndData(event.data);
-        const path = headers['Path'];
-        switch (path) {
-          case 'turn.start': {
-            downloadAudio = true;
-            break;
-          }
+        switch (headers['Path']) {
           case 'turn.end': {
-            downloadAudio = false;
+            ws.close();
             if (!audioData.byteLength) return;
-            resolve(await arrayBufferConvert(audioData));
+            const blob = await arrayBufferConvert(audioData);
+            resolve(blob);
             break;
           }
         }
       } else if (event.data instanceof ArrayBuffer) {
-        if (!downloadAudio) return;
-
         const dataview = new DataView(event.data);
         const headerLength = dataview.getInt16(0);
         if (event.data.byteLength > headerLength + 2) {
@@ -97,6 +92,13 @@ export const fetchEdgeSpeech = async (
           audioData = newAudioData;
         }
       }
-    });
+    };
+    const onError = () => {
+      reject(new Error('WebSocket error occurred.'));
+      ws.close();
+    };
+    ws.addEventListener('open', onOpen);
+    ws.addEventListener('message', onMessage);
+    ws.addEventListener('error', onError);
   });
 };
