@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useSWR from 'swr';
 
 import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
+import { audioBufferToBlob } from '@/utils/audioBufferToBlob';
 import { playAudioBlob } from '@/utils/playAudioBlob';
 
 export const useBlobUrl = (src: string) => {
@@ -18,12 +19,14 @@ export const useBlobUrl = (src: string) => {
       return await arrayBufferConvert(buffer);
     },
     {
-      onSuccess: (data) => {
-        if (!data || data.size === 0) return;
+      onSuccess: async (data) => {
+        if (!data) return;
+        const blob = await audioBufferToBlob(data);
+        if (!blob || blob.size === 0) return;
         if (audio) audio.remove();
         if (url) URL.revokeObjectURL(url);
-        setBlob(data);
-        const newAudio = playAudioBlob(data);
+        setBlob(blob);
+        const newAudio = playAudioBlob(blob);
         setUrl(newAudio.url);
         setAudio(newAudio.audio);
         setIsGlobalLoading(false);

@@ -1,6 +1,5 @@
-import { AudioPlayer } from '@lobehub/tts';
+import { AudioPlayer, useAudioPlayer } from '@lobehub/tts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
-import { useCallback } from 'react';
 
 export default () => {
   const store = useCreateStore();
@@ -23,14 +22,11 @@ export default () => {
     { store },
   );
 
-  const Content = useCallback(
-    () => <AudioPlayer audio={new Audio(url)} {...options} />,
-    [url, options],
-  );
+  const audio = useAudioPlayer(url);
 
   return (
     <StoryBook levaStore={store}>
-      <Content />
+      <AudioPlayer audio={audio} {...options} />
     </StoryBook>
   );
 };

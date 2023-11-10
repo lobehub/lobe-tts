@@ -12,7 +12,7 @@ export interface AzureSpeechOptions extends SsmlOptions {
 export const fetchAzureSpeech = async (
   text: string,
   { api, ...options }: AzureSpeechOptions,
-): Promise<Blob> => {
+): Promise<AudioBuffer> => {
   const data = JSON.stringify({
     api,
     ssml: genSSML(text, options),

@@ -1,6 +1,5 @@
-import { AudioVisualizer, useBlobUrl } from '@lobehub/tts';
+import { AudioPlayer, AudioVisualizer, useAudioPlayer } from '@lobehub/tts';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
-import { useCallback } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 export default () => {
@@ -18,13 +17,13 @@ export default () => {
         max: 100,
         min: 0,
         step: 1,
-        value: 24,
+        value: 8,
       },
       count: {
         max: 48,
         min: 0,
         step: 1,
-        value: 4,
+        value: 13,
       },
       gap: {
         max: 24,
@@ -45,27 +44,22 @@ export default () => {
         value: 48,
       },
       width: {
-        max: 480,
+        max: 48,
         min: 0,
         step: 1,
-        value: 48,
+        value: 16,
       },
     },
     { store },
   );
 
-  const { audio, isLoading } = useBlobUrl(url);
-
-  const Content = useCallback(() => {
-    if (!audio?.src || isLoading) return 'Loading...';
-    audio.play();
-    return <AudioVisualizer audio={audio} barStyle={barStyle} />;
-  }, [isLoading, audio, barStyle]);
+  const { ref, isLoading, ...audio } = useAudioPlayer(url);
 
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>
-        <Content />
+        <AudioPlayer audio={audio} />
+        {!isLoading && audio.duration > 0 && <AudioVisualizer audioRef={ref} barStyle={barStyle} />}
       </Flexbox>
     </StoryBook>
   );

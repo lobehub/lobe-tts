@@ -1,86 +1,76 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-import { playAudioBlob } from '@/utils/playAudioBlob';
+import { AudioProps } from '@/AudioPlayer';
+import { useStreamAudioPlayer } from '@/hooks/useStreamAudioPlayer';
+import { splitTextIntoSegments } from '@/utils/splitTextIntoSegments';
 
-export const useTTS = ({
-  fetchTTS,
-  setText,
-  key,
-}: {
-  fetchTTS: (props: any) => Promise<Blob>;
-  key: string;
-  setText: (text: string) => void;
-}) => {
-  const [keyCache, setKeyCache] = useState<string>();
-  const [blob, setBlob] = useState<Blob>();
-  const [audio, setAudio] = useState<HTMLAudioElement>();
-  const [url, setUrl] = useState<string>();
+export interface TTSHook {
+  audio: AudioProps;
+  isGlobalLoading: boolean;
+  isLoading: boolean;
+  start: () => void;
+  stop: () => void;
+}
+
+export const useTTS = (
+  text: string,
+  fetchTTS: (segmentText: string) => Promise<AudioBuffer>,
+): TTSHook => {
+  const { load, reset, ...rest } = useStreamAudioPlayer();
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
+  const [index, setIndex] = useState<number>(0);
+  const [textArray, setTextArray] = useState<string[]>([]);
 
-  const { isLoading } = useSWR(shouldFetch ? key : null, fetchTTS, {
-    onSuccess: (blob) => {
-      const { url, audio } = playAudioBlob(blob);
-      setBlob(blob);
-      setUrl(url);
-      setAudio(audio);
-      if (!isPlaying) audio.play();
-      audio.addEventListener('play', () => {
-        setIsPlaying(true);
-      });
-      audio.addEventListener('ended', () => {
-        setIsPlaying(false);
-      });
-      setShouldFetch(false);
-      setKeyCache(key);
+  const { isLoading } = useSWR(
+    shouldFetch && textArray?.length > 0 ? textArray?.[index] : null,
+    async () => await fetchTTS(textArray[index]),
+    {
+      onSuccess: (data) => {
+        console.log(index, data);
+        load(data);
+        if (index < textArray.length - 1) {
+          setIndex(index + 1);
+        } else {
+          setShouldFetch(false);
+          setIsGlobalLoading(false);
+        }
+      },
     },
-  });
+  );
+
+  const handleReset = useCallback((newText: string[] = []) => {
+    setShouldFetch(false);
+    setIsGlobalLoading(false);
+    reset();
+    setIndex(0);
+    setTextArray(newText);
+  }, []);
 
   const handleStart = useCallback(() => {
-    if (keyCache !== key) {
-      if (audio) {
-        audio.remove();
-        setAudio(undefined);
-      }
-      if (url) {
-        URL.revokeObjectURL(url);
-        setUrl(undefined);
-      }
-      setBlob(undefined);
-      setShouldFetch(true);
-      return;
-    }
-    if (isPlaying || shouldFetch) return;
-    if (!audio) return;
-    try {
-      audio?.play();
-      setIsPlaying(true);
-    } catch {
-      setIsPlaying(false);
-    }
-  }, [keyCache, key, audio, isPlaying, shouldFetch, url]);
+    if (isLoading) return;
+    setShouldFetch(true);
+    setIsGlobalLoading(true);
+  }, [isLoading]);
 
   const handleStop = useCallback(() => {
-    if (!isPlaying) return;
-    setShouldFetch(false);
-    setIsPlaying(false);
-    if (!audio) return;
-    try {
-      audio.pause();
-      // @ts-ignore
-      audio.currentTime = 0;
-    } catch {}
-  }, [audio, isPlaying]);
+    handleReset();
+  }, []);
+
+  useEffect(() => {
+    const texts = splitTextIntoSegments(text);
+    handleReset(texts);
+    return () => {
+      handleReset();
+    };
+  }, [text]);
 
   return {
-    audio,
-    blob,
-    isLoading: isLoading,
-    isPlaying: isPlaying,
-    setText,
+    audio: rest,
+    isGlobalLoading,
+    isLoading,
     start: handleStart,
     stop: handleStop,
-    url,
   };
 };

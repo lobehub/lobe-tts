@@ -62,19 +62,23 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "lodash-es": "^4.17.21",
+    "@lobehub/ui": "latest",
+    "antd": "^5",
+    "antd-style": "^3",
+    "lodash-es": "^4",
+    "lucide-react": "latest",
     "microsoft-cognitiveservices-speech-sdk": "^1",
     "query-string": "^8",
+    "react-layout-kit": "^1",
     "ssml-document": "^1",
     "swr": "^2",
-    "url-join": "^5.0.0",
+    "url-join": "^5",
     "uuid": "^9"
   },
   "devDependencies": {
     "@commitlint/cli": "^18",
     "@lobehub/lint": "latest",
-    "@lobehub/ui": "latest",
-    "@types/lodash-es": "^4.17.10",
+    "@types/lodash-es": "^4",
     "@types/node": "^20",
     "@types/query-string": "^6",
     "@types/react": "^18",
@@ -88,11 +92,9 @@
     "father": "4",
     "husky": "^8",
     "lint-staged": "^15",
-    "lucide-react": "latest",
     "prettier": "^3",
     "react": "^18",
     "react-dom": "^18",
-    "react-layout-kit": "^1",
     "remark": "^14",
     "remark-cli": "^11",
     "semantic-release": "^21",
@@ -100,7 +102,9 @@
     "vercel": "^28"
   },
   "peerDependencies": {
+    "@lobehub/ui": ">=1",
     "antd": ">=5",
+    "antd-style": ">=3",
     "react": ">=18",
     "react-dom": ">=18"
   },

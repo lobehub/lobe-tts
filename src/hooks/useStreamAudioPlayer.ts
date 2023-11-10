@@ -1,33 +1,22 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
-import useSWR from 'swr';
 
 import { AudioProps } from '@/AudioPlayer';
-import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
-import { audioBufferToBlob } from '@/utils/audioBufferToBlob';
+import { audioBufferToBlob, audioBuffersToBlob } from '@/utils/audioBufferToBlob';
 
-export interface AudioPlayerHook extends AudioProps {
-  isLoading?: boolean;
+export interface StreamAudioPlayerHook extends AudioProps {
+  download: () => void;
+  load: (audioBuffer: AudioBuffer) => void;
   ref: RefObject<HTMLAudioElement>;
   reset: () => void;
 }
 
-export const useAudioPlayer = (src: string): AudioPlayerHook => {
+export const useStreamAudioPlayer = (): StreamAudioPlayerHook => {
   const audioRef = useRef<HTMLAudioElement>(new Audio());
+  const [audioBuffers, setAudioBuffer] = useState<AudioBuffer[]>([]);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const { isLoading } = useSWR(src, async () => {
-    const data = await fetch(src);
-    const arrayBuffer = await data.arrayBuffer();
-    const audioBuffer = await arrayBufferConvert(arrayBuffer);
-    const newBlob = await audioBufferToBlob(audioBuffer);
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
-    if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
-    audioRef.current.src = URL.createObjectURL(newBlob);
-    audioRef.current.load();
-  });
+  const [maxLength, setMaxLength] = useState(0);
 
   useEffect(() => {
     if (!audioRef.current) return;
@@ -41,11 +30,6 @@ export const useAudioPlayer = (src: string): AudioPlayerHook => {
       console.error('Error loading audio:', audioRef.current.error);
     };
 
-    const onEnded = async () => {
-      setIsPlaying(false);
-      audioRef.current.currentTime = 0;
-      setCurrentTime(0);
-    };
     audioRef.current.addEventListener('error', onError);
     audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
     audioRef.current.addEventListener('timeupdate', onTimeUpdate);
@@ -53,12 +37,54 @@ export const useAudioPlayer = (src: string): AudioPlayerHook => {
     return () => {
       audioRef.current.pause();
       audioRef.current.load();
-      audioRef.current.removeEventListener('ended', onEnded);
       audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
       audioRef.current.removeEventListener('timeupdate', onTimeUpdate);
       audioRef.current.removeEventListener('error', onError);
     };
   }, []);
+
+  useEffect(() => {
+    if (!audioRef.current) return;
+    const onEnded = async () => {
+      audioRef.current.pause();
+      if (maxLength < audioBuffers.length) {
+        const cacheTime = audioRef.current.currentTime;
+        const newBlob = await audioBuffersToBlob(audioBuffers);
+        if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
+        const newUrl = URL.createObjectURL(newBlob);
+        audioRef.current.src = newUrl;
+        audioRef.current.load();
+        audioRef.current.currentTime = cacheTime;
+        audioRef.current.play();
+        setMaxLength(audioBuffers.length);
+      } else {
+        setIsPlaying(false);
+        audioRef.current.currentTime = 0;
+        setCurrentTime(0);
+      }
+    };
+
+    audioRef.current.addEventListener('ended', onEnded);
+
+    return () => {
+      audioRef.current.removeEventListener('ended', onEnded);
+    };
+  }, [maxLength, audioBuffers]);
+
+  const addAudioBuffer = useCallback(
+    async (audioBuffer: AudioBuffer) => {
+      if (maxLength === 0) {
+        const newBlob = await audioBufferToBlob(audioBuffer);
+        audioRef.current.src = URL.createObjectURL(newBlob);
+        audioRef.current.load();
+        audioRef.current.play();
+        setIsPlaying(true);
+        setMaxLength(1);
+      }
+      setAudioBuffer((prev) => [...prev, audioBuffer]);
+    },
+    [maxLength],
+  );
 
   const handlePlay = useCallback(() => {
     setIsPlaying(true);
@@ -86,6 +112,7 @@ export const useAudioPlayer = (src: string): AudioPlayerHook => {
     audioRef.current.currentTime = 0;
     if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
     audioRef.current.src = '';
+    setAudioBuffer([]);
     setDuration(0);
     setCurrentTime(0);
   }, []);
@@ -101,8 +128,8 @@ export const useAudioPlayer = (src: string): AudioPlayerHook => {
     currentTime,
     download: handleDownload,
     duration,
-    isLoading,
     isPlaying,
+    load: addAudioBuffer,
     pause: handlePause,
     play: handlePlay,
     ref: audioRef,

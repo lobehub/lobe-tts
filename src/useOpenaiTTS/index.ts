@@ -5,9 +5,9 @@ import { useTTS } from '@/useTTS';
 
 export const useOpenaiTTS = (defaultText: string, { api, name }: OpenaiTtsOptions) => {
   const [text, setText] = useState<string>(defaultText);
-  return useTTS({
-    fetchTTS: () => fetchOpenaiTTS(text, { api, name }),
-    key: [name, text].join('-'),
+  const rest = useTTS(text, (segmentText: string) => fetchOpenaiTTS(segmentText, { api, name }));
+  return {
     setText,
-  });
+    ...rest,
+  };
 };

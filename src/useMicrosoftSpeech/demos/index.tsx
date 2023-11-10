@@ -1,4 +1,4 @@
-import { getEdgeVoiceList, useMicrosoftSpeech } from '@lobehub/tts';
+import { AudioPlayer, getEdgeVoiceList, useMicrosoftSpeech } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { StopCircle, Volume2 } from 'lucide-react';
@@ -49,14 +49,11 @@ export default () => {
     },
     { store },
   );
-  const { setText, isLoading, isPlaying, start, stop, url } = useMicrosoftSpeech(
-    defaultText,
-    options,
-  );
+  const { setText, isLoading, audio, start, stop } = useMicrosoftSpeech(defaultText, options);
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>
-        {isPlaying ? (
+        {audio.isPlaying ? (
           <Button block icon={<Icon icon={StopCircle} />} onClick={stop}>
             Stop
           </Button>
@@ -70,7 +67,7 @@ export default () => {
           </Button>
         )}
         <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
-        {url && <audio controls src={url} />}
+        <AudioPlayer audio={audio} />
       </Flexbox>
     </StoryBook>
   );

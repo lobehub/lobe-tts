@@ -46,7 +46,7 @@ export interface EdgeSpeechOptions extends Pick<SsmlOptions, 'name'> {
 export const fetchEdgeSpeech = async (
   text: string,
   { api, ...options }: EdgeSpeechOptions,
-): Promise<Blob> => {
+): Promise<AudioBuffer> => {
   const connectId = uuidv4().replaceAll('-', '');
   const url = qs.stringifyUrl({
     query: {
@@ -75,8 +75,8 @@ export const fetchEdgeSpeech = async (
           case 'turn.end': {
             ws.close();
             if (!audioData.byteLength) return;
-            const blob = await arrayBufferConvert(audioData);
-            resolve(blob);
+            const audioBuffer = await arrayBufferConvert(audioData);
+            resolve(audioBuffer);
             break;
           }
         }
