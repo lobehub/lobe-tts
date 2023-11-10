@@ -1,4 +1,4 @@
-import { getEdgeVoiceList, useAzureSpeech } from '@lobehub/tts';
+import { StreamAudioPlayer, getEdgeVoiceList, useAzureSpeech } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { StopCircle, Volume2 } from 'lucide-react';
@@ -60,14 +60,14 @@ export default () => {
     },
     { store },
   );
-  const { setText, isLoading, isPlaying, start, stop, url } = useAzureSpeech(defaultText, {
+  const { setText, isLoading, audio, start, stop } = useAzureSpeech(defaultText, {
     api,
     ...options,
   });
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>
-        {isPlaying ? (
+        {audio.isPlaying ? (
           <Button block icon={<Icon icon={StopCircle} />} onClick={stop}>
             Stop
           </Button>
@@ -81,7 +81,7 @@ export default () => {
           </Button>
         )}
         <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
-        {url && <audio controls src={url} />}
+        <StreamAudioPlayer audio={audio} />
       </Flexbox>
     </StoryBook>
   );

@@ -1,7 +1,7 @@
-import { AudioPlayer, AudioVisualizer, getEdgeVoiceList, useEdgeSpeech } from '@lobehub/tts';
+import { StreamAudioPlayer, getEdgeVoiceList, useEdgeSpeech } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
-import { StopCircle, Volume2 } from 'lucide-react';
+import { Volume2 } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
 
 const defaultText = '这是一段使用 Edge Speech 的语音演示';
@@ -33,18 +33,14 @@ export default () => {
     { store },
   );
 
-  const { setText, isLoading, isPlaying, start, stop, audio } = useEdgeSpeech(defaultText, {
+  const { setText, isGlobalLoading, start, stop, audio } = useEdgeSpeech(defaultText, {
     api,
     ...options,
   });
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>
-        {isPlaying ? (
-          <Button block icon={<Icon icon={StopCircle} />} onClick={stop}>
-            Stop
-          </Button>
-        ) : isLoading ? (
+        {isGlobalLoading ? (
           <Button block loading onClick={stop}>
             Generating...
           </Button>
@@ -54,8 +50,7 @@ export default () => {
           </Button>
         )}
         <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
-        {audio && <AudioPlayer audio={audio} />}
-        {audio && <AudioVisualizer audio={audio} />}
+        <StreamAudioPlayer audio={audio} />
       </Flexbox>
     </StoryBook>
   );

@@ -10,7 +10,7 @@ export interface MicrosoftSpeechOptions extends SsmlOptions {
 export const fetchMicrosoftSpeech = async (
   text: string,
   { api, ...options }: MicrosoftSpeechOptions,
-): Promise<Blob> => {
+): Promise<AudioBuffer> => {
   const data = JSON.stringify({
     offsetInPlainText: 0,
     properties: {

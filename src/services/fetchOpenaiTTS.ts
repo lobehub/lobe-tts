@@ -15,7 +15,7 @@ export interface OpenaiTtsOptions extends Pick<SsmlOptions, 'name'> {
 export const fetchOpenaiTTS = async (
   text: string,
   { api, model = 'tts-1', ...options }: OpenaiTtsOptions,
-): Promise<Blob> => {
+): Promise<AudioBuffer> => {
   const key = api.key || OPENAI_API_KEY;
   const url = OPENAI_TTS_URL(api.proxy);
 
