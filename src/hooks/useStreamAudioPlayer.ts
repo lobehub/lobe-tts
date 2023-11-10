@@ -1,156 +1,140 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
-type BufferQueueItem = {
-  audioBuffer: AudioBuffer;
-  endOffset: number;
-  startOffset: number;
-};
+import { AudioProps } from '@/AudioPlayer';
+import { audioBufferToBlob, audioBuffersToBlob } from '@/utils/audioBufferToBlob';
 
-export interface AudioProps {
-  currentTime: number;
-  duration: number;
-  isPlaying: boolean;
-  pause: () => void;
-  play: () => void;
-  setTime: (time: number) => void;
-  stop: () => void;
-}
 export interface StreamAudioPlayerHook extends AudioProps {
+  download: () => void;
   load: (audioBuffer: AudioBuffer) => void;
+  ref: RefObject<HTMLAudioElement>;
   reset: () => void;
 }
 
 export const useStreamAudioPlayer = (): StreamAudioPlayerHook => {
-  const audioContextRef = useRef<AudioContext | null>(null);
-  const [bufferQueue, setBufferQueue] = useState<BufferQueueItem[]>([]);
+  const audioRef = useRef<HTMLAudioElement>(new Audio());
+  const [audioBuffers, setAudioBuffer] = useState<AudioBuffer[]>([]);
+  const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const sourceNodeRef = useRef<AudioBufferSourceNode | null>(null);
-  const startTimeRef = useRef(0);
-  const startOffsetRef = useRef(0);
+  const [maxLength, setMaxLength] = useState(0);
 
-  const initAudioContext = () => {
-    if (!audioContextRef.current) {
-      audioContextRef.current = new AudioContext();
-    }
-  };
-
-  const addAudioBuffer = useCallback(
-    (audioBuffer: AudioBuffer) => {
-      initAudioContext();
-      const context = audioContextRef.current;
-      if (context) {
-        const newItem: BufferQueueItem = {
-          audioBuffer,
-          endOffset: duration + audioBuffer.duration,
-          startOffset: duration,
-        };
-        setBufferQueue((prevQueue) => [...prevQueue, newItem]);
-        setDuration(newItem.endOffset);
-      }
-    },
-    [duration],
-  );
-
-  const playAudio = useCallback(() => {
-    if (!audioContextRef.current || isPlaying) return;
-
-    const context = audioContextRef.current;
-    const sourceNode = context.createBufferSource();
-    sourceNodeRef.current = sourceNode;
-
-    const nextBufferItem = bufferQueue.find((item) => item.startOffset >= currentTime);
-    if (nextBufferItem) {
-      sourceNode.buffer = nextBufferItem.audioBuffer;
-      const playOffset = currentTime - nextBufferItem.startOffset;
-      sourceNode.connect(context.destination);
-      sourceNode.start(0, playOffset);
-      startTimeRef.current = context.currentTime - playOffset;
-      startOffsetRef.current = playOffset;
-
-      setIsPlaying(true);
-
-      sourceNode.addEventListener('ended', () => {
-        // 检查是否是队列中的最后一段音频
-        setIsPlaying(false);
-        if (nextBufferItem === bufferQueue.at(-1)) {
-          setCurrentTime(0); // 回到开头
-        } else {
-          setCurrentTime(nextBufferItem.endOffset);
-        }
-        sourceNodeRef.current = null;
-      });
-    }
-  }, [bufferQueue, currentTime, isPlaying]);
-
-  const pauseAudio = useCallback(() => {
-    if (!audioContextRef.current || !isPlaying) return;
-
-    sourceNodeRef.current?.stop();
-    setIsPlaying(false);
-  }, [isPlaying]);
-
-  const seekAudio = useCallback(
-    (time: number) => {
-      if (time < 0 || time > duration) return;
-
-      const wasPlaying = isPlaying;
-      pauseAudio();
-      setCurrentTime(time);
-
-      if (wasPlaying) {
-        playAudio();
-      }
-    },
-    [duration, isPlaying, pauseAudio, playAudio],
-  );
-
-  // Update currentTime while playing
   useEffect(() => {
-    let intervalId: any;
-
-    if (isPlaying) {
-      intervalId = setInterval(() => {
-        if (!audioContextRef.current) return;
-        const elapsed = audioContextRef.current.currentTime - startTimeRef.current;
-        setCurrentTime(startOffsetRef.current + elapsed);
-      }, 100);
-    }
-
-    return () => {
-      clearInterval(intervalId);
+    if (!audioRef.current) return;
+    const onLoadedMetadata = () => {
+      setDuration(audioRef.current.duration);
     };
-  }, [isPlaying]);
+    const onTimeUpdate = () => {
+      setCurrentTime(audioRef.current.currentTime);
+    };
+    const onError = () => {
+      console.error('Error loading audio:', audioRef.current.error);
+    };
 
-  // Clean up the audio context on unmount
-  useEffect(() => {
+    audioRef.current.addEventListener('error', onError);
+    audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
+    audioRef.current.addEventListener('timeupdate', onTimeUpdate);
+
     return () => {
-      audioContextRef.current?.close();
+      audioRef.current.pause();
+      audioRef.current.load();
+      audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
+      audioRef.current.removeEventListener('timeupdate', onTimeUpdate);
+      audioRef.current.removeEventListener('error', onError);
     };
   }, []);
 
-  const stopAudio = useCallback(() => {
-    pauseAudio();
-    seekAudio(0);
-  }, [pauseAudio, seekAudio]);
+  useEffect(() => {
+    if (!audioRef.current) return;
+    const onEnded = async () => {
+      audioRef.current.pause();
+      if (maxLength < audioBuffers.length) {
+        const cacheTime = audioRef.current.currentTime;
+        const newBlob = await audioBuffersToBlob(audioBuffers);
+        if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
+        const newUrl = URL.createObjectURL(newBlob);
+        audioRef.current.src = newUrl;
+        audioRef.current.load();
+        audioRef.current.currentTime = cacheTime;
+        audioRef.current.play();
+        setMaxLength(audioBuffers.length);
+      } else {
+        setIsPlaying(false);
+        audioRef.current.currentTime = 0;
+        setCurrentTime(0);
+      }
+    };
 
-  const resetAudio = useCallback(() => {
-    pauseAudio();
-    seekAudio(0);
-    setBufferQueue([]);
+    audioRef.current.addEventListener('ended', onEnded);
+
+    return () => {
+      audioRef.current.removeEventListener('ended', onEnded);
+    };
+  }, [maxLength, audioBuffers]);
+
+  const addAudioBuffer = useCallback(
+    async (audioBuffer: AudioBuffer) => {
+      if (maxLength === 0) {
+        const newBlob = await audioBufferToBlob(audioBuffer);
+        audioRef.current.src = URL.createObjectURL(newBlob);
+        audioRef.current.load();
+        audioRef.current.play();
+        setIsPlaying(true);
+        setMaxLength(1);
+      }
+      setAudioBuffer((prev) => [...prev, audioBuffer]);
+    },
+    [maxLength],
+  );
+
+  const handlePlay = useCallback(() => {
+    setIsPlaying(true);
+    audioRef.current.play();
+  }, []);
+
+  const handlePause = useCallback(() => {
+    setIsPlaying(false);
+    audioRef.current.pause();
+  }, []);
+
+  const handleStop = useCallback(() => {
+    setIsPlaying(false);
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+  }, []);
+
+  const setTime = useCallback((value: number) => {
+    setCurrentTime(value);
+    audioRef.current.currentTime = value;
+  }, []);
+
+  const reset = useCallback(() => {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
+    audioRef.current.src = '';
+    setAudioBuffer([]);
     setDuration(0);
-  }, [pauseAudio, seekAudio]);
+    setCurrentTime(0);
+  }, []);
+
+  const handleDownload = useCallback(() => {
+    const a = document.createElement('a');
+    a.href = audioRef.current.src;
+    a.download = 'audio.wav';
+    a.click();
+  }, []);
 
   return {
     currentTime,
+    download: handleDownload,
     duration,
     isPlaying,
     load: addAudioBuffer,
-    pause: pauseAudio,
-    play: playAudio,
-    reset: resetAudio,
-    setTime: seekAudio,
-    stop: stopAudio,
+    pause: handlePause,
+    play: handlePlay,
+    ref: audioRef,
+    reset,
+    setTime,
+    stop: handleStop,
   };
 };

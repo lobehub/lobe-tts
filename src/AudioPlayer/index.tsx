@@ -1,17 +1,28 @@
 import { ActionIcon, ActionIconProps, Tag } from '@lobehub/ui';
 import { Slider } from 'antd';
-import { Pause, Play, StopCircle } from 'lucide-react';
+import { Download, Pause, Play, StopCircle } from 'lucide-react';
 import React, { memo, useMemo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import { useAudioPlayer } from '@/hooks/useAudioPlayer';
 import { secondsToMinutesAndSeconds } from '@/utils/secondsToMinutesAndSeconds';
+
+export interface AudioProps {
+  currentTime: number;
+  download: () => void;
+  duration: number;
+  isPlaying: boolean;
+  pause: () => void;
+  play: () => void;
+  setTime: (time: number) => void;
+  stop: () => void;
+}
 
 export interface AudioPlayerProps {
   allowPause?: boolean;
-  audio: HTMLAudioElement;
+  audio: AudioProps;
   buttonSize?: ActionIconProps['size'];
   className?: string;
+  showDownload?: boolean;
   showSlider?: boolean;
   showTime?: boolean;
   style?: React.CSSProperties;
@@ -32,19 +43,13 @@ const AudioPlayer = memo<AudioPlayerProps>(
     showTime = true,
     showSlider = true,
     timeRender = 'text',
+    showDownload = true,
   }) => {
-    const {
-      isPlaying,
-      play,
-      stop,
-      togglePlayPause,
-      duration,
-      setTime,
-      currentTime,
-      formatedLeftTime,
-      formatedCurrentTime,
-      formatedDuration,
-    } = useAudioPlayer(audio);
+    const { isPlaying, play, stop, pause, duration, setTime, currentTime, download } = audio;
+
+    const formatedLeftTime = secondsToMinutesAndSeconds(duration - currentTime);
+    const formatedCurrentTime = secondsToMinutesAndSeconds(currentTime);
+    const formatedDuration = secondsToMinutesAndSeconds(duration);
 
     const Time = useMemo(
       () => (timeRender === 'tag' ? Tag : (props: any) => <time {...props} />),
@@ -57,12 +62,12 @@ const AudioPlayer = memo<AudioPlayerProps>(
         className={className}
         gap={8}
         horizontal
-        style={{ paddingRight: 8, width: '100%', ...style }}
+        style={{ paddingRight: showDownload ? 0 : 8, width: '100%', ...style }}
       >
         {allowPause ? (
           <ActionIcon
             icon={isPlaying ? Pause : Play}
-            onClick={togglePlayPause}
+            onClick={isPlaying ? pause : play}
             size={buttonSize}
             style={{ flex: 'none' }}
           />
@@ -95,6 +100,14 @@ const AudioPlayer = memo<AudioPlayerProps>(
               </span>
             )}
           </Time>
+        )}
+        {showDownload && (
+          <ActionIcon
+            icon={Download}
+            onClick={download}
+            size={buttonSize}
+            style={{ flex: 'none' }}
+          />
         )}
       </Flexbox>
     );

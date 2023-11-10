@@ -1,81 +1,113 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import useSWR from 'swr';
 
-import { secondsToMinutesAndSeconds } from '@/utils/secondsToMinutesAndSeconds';
+import { AudioProps } from '@/AudioPlayer';
+import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
+import { audioBufferToBlob } from '@/utils/audioBufferToBlob';
 
-export const useAudioPlayer = (audio: HTMLAudioElement) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+export interface AudioPlayerHook extends AudioProps {
+  isLoading?: boolean;
+  ref: RefObject<HTMLAudioElement>;
+  reset: () => void;
+}
+
+export const useAudioPlayer = (src: string): AudioPlayerHook => {
+  const audioRef = useRef<HTMLAudioElement>(new Audio());
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const audioRef = useRef(audio);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const { isLoading } = useSWR(src, async () => {
+    const data = await fetch(src);
+    const arrayBuffer = await data.arrayBuffer();
+    const audioBuffer = await arrayBufferConvert(arrayBuffer);
+    const newBlob = await audioBufferToBlob(audioBuffer);
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
+    audioRef.current.src = URL.createObjectURL(newBlob);
+    audioRef.current.load();
+  });
 
   useEffect(() => {
-    if (!audio) return;
-    const currentAudio = audioRef.current;
+    if (!audioRef.current) return;
     const onLoadedMetadata = () => {
-      setDuration(currentAudio.duration);
+      setDuration(audioRef.current.duration);
     };
     const onTimeUpdate = () => {
-      setCurrentTime(currentAudio.currentTime);
+      setCurrentTime(audioRef.current.currentTime);
     };
-    const onEnded = () => {
+    const onError = () => {
+      console.error('Error loading audio:', audioRef.current.error);
+    };
+
+    const onEnded = async () => {
       setIsPlaying(false);
-      currentAudio.pause();
-      currentAudio.currentTime = 0;
+      audioRef.current.currentTime = 0;
       setCurrentTime(0);
     };
-
-    currentAudio.addEventListener('loadedmetadata', onLoadedMetadata);
-    currentAudio.addEventListener('timeupdate', onTimeUpdate);
-    currentAudio.addEventListener('ended', onEnded);
+    audioRef.current.addEventListener('error', onError);
+    audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
+    audioRef.current.addEventListener('timeupdate', onTimeUpdate);
 
     return () => {
-      currentAudio.pause();
-      currentAudio.load();
-      currentAudio.removeEventListener('loadedmetadata', onLoadedMetadata);
-      currentAudio.removeEventListener('timeupdate', onTimeUpdate);
-      currentAudio.removeEventListener('ended', onEnded);
-    };
-  }, [audio]);
-
-  const hangleTogglePlayPause = useCallback(() => {
-    if (isPlaying) {
       audioRef.current.pause();
-    } else {
-      audioRef.current.play();
-    }
-    setIsPlaying(!isPlaying);
-  }, [isPlaying, audioRef]);
+      audioRef.current.load();
+      audioRef.current.removeEventListener('ended', onEnded);
+      audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
+      audioRef.current.removeEventListener('timeupdate', onTimeUpdate);
+      audioRef.current.removeEventListener('error', onError);
+    };
+  }, []);
 
   const handlePlay = useCallback(() => {
     setIsPlaying(true);
     audioRef.current.play();
-  }, [audioRef]);
+  }, []);
+
+  const handlePause = useCallback(() => {
+    setIsPlaying(false);
+    audioRef.current.pause();
+  }, []);
 
   const handleStop = useCallback(() => {
     setIsPlaying(false);
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
-  }, [audioRef]);
+  }, []);
 
-  const setTime = useCallback(
-    (value: number) => {
-      setCurrentTime(value);
-      audioRef.current.currentTime = value;
-    },
-    [audioRef],
-  );
+  const setTime = useCallback((value: number) => {
+    setCurrentTime(value);
+    audioRef.current.currentTime = value;
+  }, []);
+
+  const reset = useCallback(() => {
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
+    if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
+    audioRef.current.src = '';
+    setDuration(0);
+    setCurrentTime(0);
+  }, []);
+
+  const handleDownload = useCallback(() => {
+    const a = document.createElement('a');
+    a.href = audioRef.current.src;
+    a.download = 'audio.wav';
+    a.click();
+  }, []);
 
   return {
     currentTime,
+    download: handleDownload,
     duration,
-    formatedCurrentTime: secondsToMinutesAndSeconds(currentTime),
-    formatedDuration: secondsToMinutesAndSeconds(duration),
-    formatedLeftTime: secondsToMinutesAndSeconds(duration - currentTime),
+    isLoading,
     isPlaying,
-    leftTime: duration - currentTime,
+    pause: handlePause,
     play: handlePlay,
+    ref: audioRef,
+    reset,
     setTime,
     stop: handleStop,
-    togglePlayPause: hangleTogglePlayPause,
   };
 };

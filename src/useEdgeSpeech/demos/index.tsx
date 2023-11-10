@@ -1,4 +1,4 @@
-import { StreamAudioPlayer, getEdgeVoiceList, useEdgeSpeech } from '@lobehub/tts';
+import { AudioPlayer, getEdgeVoiceList, useEdgeSpeech } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
@@ -50,7 +50,7 @@ export default () => {
           </Button>
         )}
         <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
-        <StreamAudioPlayer audio={audio} />
+        <AudioPlayer audio={audio} />
       </Flexbox>
     </StoryBook>
   );

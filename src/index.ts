@@ -1,8 +1,4 @@
 export { default as AudioPlayer, type AudioPlayerProps } from './AudioPlayer';
-export {
-  default as StreamAudioPlayer,
-  type StreamAudioPlayerProps,
-} from './AudioPlayer/StreamAudioPlayer';
 export { default as AudioVisualizer, type AudioVisualizerProps } from './AudioVisualizer';
 export { useAudioPlayer } from './hooks/useAudioPlayer';
 export { useAudioVisualizer } from './hooks/useAudioVisualizer';

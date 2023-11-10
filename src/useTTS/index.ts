@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-import { AudioProps, useStreamAudioPlayer } from '@/hooks/useStreamAudioPlayer';
+import { AudioProps } from '@/AudioPlayer';
+import { useStreamAudioPlayer } from '@/hooks/useStreamAudioPlayer';
+import { splitTextIntoSegments } from '@/utils/splitTextIntoSegments';
 
-interface TTSHook {
+export interface TTSHook {
   audio: AudioProps;
   isGlobalLoading: boolean;
   isLoading: boolean;
@@ -57,7 +59,8 @@ export const useTTS = (
   }, []);
 
   useEffect(() => {
-    handleReset(text.split('\n').filter(Boolean));
+    const texts = splitTextIntoSegments(text);
+    handleReset(texts);
     return () => {
       handleReset();
     };
