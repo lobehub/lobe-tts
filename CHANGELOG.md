@@ -2,6 +2,32 @@
 
 # Changelog
 
+## [Version 1.6.0](https://github.com/lobehub/lobe-tts/compare/v1.5.0...v1.6.0)
+
+<sup>Released on **2023-11-10**</sup>
+
+#### ✨ Features
+
+- **misc**: Add stream player, Add stream tts.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add stream player ([72e90ac](https://github.com/lobehub/lobe-tts/commit/72e90ac))
+- **misc**: Add stream tts ([51d4129](https://github.com/lobehub/lobe-tts/commit/51d4129))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.5.0](https://github.com/lobehub/lobe-tts/compare/v1.4.1...v1.5.0)
 
 <sup>Released on **2023-11-09**</sup>
