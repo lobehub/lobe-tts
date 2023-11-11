@@ -1,34 +1,20 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "baseUrl": ".",
     "declaration": true,
     "downlevelIteration": true,
-    "target": "ESNext",
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "react-jsx",
-    "incremental": true,
-    "baseUrl": ".",
     "paths": {
       "@@/*": [".dumi/tmp/*"],
       "@/*": ["./src/*"],
       "@lobehub/tts": ["src"],
       "@lobehub/tts/*": ["src/*"]
-    },
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    }
   },
   "include": ["src", "docs", "lib", ".dumirc.ts", "api", "**/*.ts", "**/*.d.ts", "**/*.tsx"]
 }
