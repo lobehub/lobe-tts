@@ -1,4 +1,4 @@
-import { AudioPlayer, getOpenaiVoiceList, useOpenaiTTS } from '@lobehub/tts';
+import { AudioPlayer, openaiVoiceList, useOpenaiTTS } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
@@ -26,7 +26,7 @@ export default () => {
   const options: any = useControls(
     {
       name: {
-        options: getOpenaiVoiceList(),
+        options: openaiVoiceList,
         value: 'alloy',
       },
     },

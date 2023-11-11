@@ -1,4 +1,4 @@
-import { getSpeechSynthesVoiceList, useSpeechSynthes } from '@lobehub/tts';
+import { genLevaOptions, getSpeechSynthesVoiceOptions, useSpeechSynthes } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { StopCircle, Volume2 } from 'lucide-react';
@@ -11,7 +11,7 @@ export default () => {
   const options: any = useControls(
     {
       name: {
-        options: getSpeechSynthesVoiceList(),
+        options: genLevaOptions(getSpeechSynthesVoiceOptions()),
         value: '婷婷',
       },
       pitch: {

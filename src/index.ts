@@ -1,5 +1,10 @@
 export { default as AudioPlayer, type AudioPlayerProps } from './AudioPlayer';
 export { default as AudioVisualizer, type AudioVisualizerProps } from './AudioVisualizer';
+export { default as azureVoiceList } from './data/azureVoiceList';
+export { default as edgeVoiceList } from './data/edgeVoiceList';
+export { default as voiceLocale } from './data/locales';
+export { default as nameList } from './data/nameList';
+export { default as openaiVoiceList } from './data/openaiVoiceList';
 export { useAudioPlayer } from './hooks/useAudioPlayer';
 export { useAudioVisualizer } from './hooks/useAudioVisualizer';
 export { useBlobUrl } from './hooks/useBlobUrl';
@@ -19,8 +24,10 @@ export { usePersistedSpeechRecognition } from './useSpeechRecognition/usePersist
 export { useSpeechRecognition } from './useSpeechRecognition/useSpeechRecognition';
 export { useSpeechSynthes } from './useSpeechSynthes';
 export {
-  getAzureVoiceList,
-  getEdgeVoiceList,
-  getOpenaiVoiceList,
-  getSpeechSynthesVoiceList,
+  genLevaOptions,
+  getAzureVoiceOptions,
+  getEdgeVoiceOptions,
+  getOpenaiVoiceOptions,
+  getSpeechSynthesVoiceOptions,
+  getVoiceLocaleOptions,
 } from './utils/getVoiceList';

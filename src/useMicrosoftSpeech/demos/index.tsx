@@ -1,4 +1,4 @@
-import { AudioPlayer, getEdgeVoiceList, useMicrosoftSpeech } from '@lobehub/tts';
+import { AudioPlayer, genLevaOptions, getEdgeVoiceOptions, useMicrosoftSpeech } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
@@ -15,7 +15,7 @@ export default () => {
         value: '',
       },
       name: {
-        options: getEdgeVoiceList(),
+        options: genLevaOptions(getEdgeVoiceOptions()),
         value: 'zh-CN-YunxiaNeural',
       },
       pitch: {
