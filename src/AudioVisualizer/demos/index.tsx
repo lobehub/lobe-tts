@@ -57,9 +57,9 @@ export default () => {
 
   return (
     <StoryBook levaStore={store}>
-      <Flexbox gap={8}>
-        <AudioPlayer audio={audio} />
-        {!isLoading && audio.duration > 0 && <AudioVisualizer audioRef={ref} barStyle={barStyle} />}
+      <Flexbox align={'center'} gap={8}>
+        <AudioPlayer audio={audio} isLoading={isLoading} style={{ width: '100%' }} />
+        <AudioVisualizer audioRef={ref} barStyle={barStyle} isLoading={isLoading} />
       </Flexbox>
     </StoryBook>
   );

@@ -16,6 +16,7 @@ export const useAudioVisualizer = (
   const analyserRef = useRef<AnalyserNode | null>(null);
   const dataArrayRef = useRef<Uint8Array | null>(null);
   const animationFrameIdRef = useRef<number | null>(null);
+  const audioSourceRef = useRef<MediaElementAudioSourceNode | null>(null);
   const [init, setInit] = useState(false);
 
   const renderFrame = throttle(() => {
@@ -40,37 +41,24 @@ export const useAudioVisualizer = (
   useEffect(() => {
     if (!audioRef.current) return;
 
-    // 初始化AudioContext
-    const audioContext = new AudioContext();
-    audioContextRef.current = audioContext;
-
-    // 确保AudioContext处于活动状态
-    if (audioContext.state === 'suspended') {
-      audioContext.resume().then(() => {
-        console.log('Playback resumed successfully');
-      });
+    try {
+      audioContextRef.current = new AudioContext();
+      analyserRef.current = audioContextRef.current.createAnalyser();
+      analyserRef.current.fftSize = 256;
+      const bufferLength = analyserRef.current.frequencyBinCount;
+      dataArrayRef.current = new Uint8Array(bufferLength);
+      audioSourceRef.current = audioContextRef.current.createMediaElementSource(audioRef.current);
+      audioSourceRef.current.connect(analyserRef.current);
+      analyserRef.current.connect(audioContextRef.current.destination);
+    } catch (error) {
+      console.error(error);
     }
 
-    const analyser = audioContext.createAnalyser();
-    analyserRef.current = analyser;
-    analyser.fftSize = 256;
-    const bufferLength = analyser.frequencyBinCount;
-    dataArrayRef.current = new Uint8Array(bufferLength);
-
-    // 创建音频源
-    const audioSource = audioContext.createMediaElementSource(audioRef.current);
-    audioSource.connect(analyser);
-    analyser.connect(audioContext.destination);
     setInit(true);
     return () => {
-      audioSource.disconnect();
-      analyser.disconnect();
-
-      // 关闭AudioContext
-      if (audioContextRef.current) {
-        audioContextRef.current.close();
-      }
-
+      audioSourceRef.current?.disconnect();
+      analyserRef.current?.disconnect();
+      audioContextRef.current?.close();
       setInit(false);
     };
   }, []);

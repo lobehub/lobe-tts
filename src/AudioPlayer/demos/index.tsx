@@ -8,7 +8,6 @@ export default () => {
     {
       allowPause: false,
       showSlider: true,
-      showTime: true,
       timeRender: {
         options: ['text', 'tag'],
         value: 'text',
@@ -22,11 +21,11 @@ export default () => {
     { store },
   );
 
-  const audio = useAudioPlayer(url);
+  const { isLoading, ...audio } = useAudioPlayer(url);
 
   return (
     <StoryBook levaStore={store}>
-      <AudioPlayer audio={audio} {...options} />
+      <AudioPlayer audio={audio} isLoading={isLoading} {...options} />
     </StoryBook>
   );
 };

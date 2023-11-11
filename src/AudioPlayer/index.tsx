@@ -1,6 +1,6 @@
-import { ActionIcon, ActionIconProps, Tag } from '@lobehub/ui';
-import { Slider } from 'antd';
-import { Download, Pause, Play, StopCircle } from 'lucide-react';
+import { ActionIcon, ActionIconProps, Icon, Tag } from '@lobehub/ui';
+import { Dropdown, Slider } from 'antd';
+import { Download, PauseCircle, Play, StopCircle } from 'lucide-react';
 import React, { memo, useMemo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
@@ -22,9 +22,8 @@ export interface AudioPlayerProps {
   audio: AudioProps;
   buttonSize?: ActionIconProps['size'];
   className?: string;
-  showDownload?: boolean;
+  isLoading?: boolean;
   showSlider?: boolean;
-  showTime?: boolean;
   style?: React.CSSProperties;
   timeRender?: 'tag' | 'text';
   timeStyle?: React.CSSProperties;
@@ -33,17 +32,16 @@ export interface AudioPlayerProps {
 
 const AudioPlayer = memo<AudioPlayerProps>(
   ({
+    isLoading,
     style,
     timeStyle,
     buttonSize,
     className,
     audio,
-    allowPause,
+    allowPause = true,
     timeType = 'left',
-    showTime = true,
     showSlider = true,
     timeRender = 'text',
-    showDownload = true,
   }) => {
     const { isPlaying, play, stop, pause, duration, setTime, currentTime, download } = audio;
 
@@ -62,35 +60,41 @@ const AudioPlayer = memo<AudioPlayerProps>(
         className={className}
         gap={8}
         horizontal
-        style={{ paddingRight: showDownload ? 0 : 8, width: '100%', ...style }}
+        style={{ paddingRight: 8, width: '100%', ...style }}
       >
-        {allowPause ? (
-          <ActionIcon
-            icon={isPlaying ? Pause : Play}
-            onClick={isPlaying ? pause : play}
-            size={buttonSize}
-            style={{ flex: 'none' }}
-          />
-        ) : (
-          <ActionIcon
-            icon={isPlaying ? StopCircle : Play}
-            onClick={isPlaying ? stop : play}
-            size={buttonSize}
-            style={{ flex: 'none' }}
-          />
-        )}
+        <ActionIcon
+          icon={isPlaying ? (allowPause ? PauseCircle : StopCircle) : Play}
+          loading={isLoading}
+          onClick={isPlaying ? (allowPause ? pause : stop) : play}
+          size={buttonSize || { blockSize: 32, fontSize: 16 }}
+          style={{ flex: 'none' }}
+        />
         {showSlider && (
           <Slider
+            disabled={duration === 0}
             max={duration}
             min={0}
             onChange={(e) => setTime(e)}
+            step={0.01}
             style={{ flex: 1 }}
             tooltip={{ formatter: secondsToMinutesAndSeconds as any }}
             value={currentTime}
           />
         )}
-        {showTime && (
-          <Time style={{ flex: 'none', ...timeStyle }}>
+        <Dropdown
+          disabled={duration === 0}
+          menu={{
+            items: [
+              {
+                key: 'download',
+                label: <Icon icon={Download} size={{ fontSize: 16 }} />,
+                onClick: download,
+              },
+            ],
+          }}
+          placement="top"
+        >
+          <Time style={{ cursor: 'pointer', flex: 'none', ...timeStyle }}>
             {timeType === 'left' && formatedLeftTime}
             {timeType === 'current' && formatedCurrentTime}
             {timeType === 'combine' && (
@@ -100,15 +104,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
               </span>
             )}
           </Time>
-        )}
-        {showDownload && (
-          <ActionIcon
-            icon={Download}
-            onClick={download}
-            size={buttonSize}
-            style={{ flex: 'none' }}
-          />
-        )}
+        </Dropdown>
       </Flexbox>
     );
   },

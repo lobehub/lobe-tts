@@ -16,8 +16,10 @@ export const useAudioPlayer = (src: string): AudioPlayerHook => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isGlobalLoading, setIsGlobalLoading] = useState(true);
 
   const { isLoading } = useSWR(src, async () => {
+    setIsGlobalLoading(true);
     const data = await fetch(src);
     const arrayBuffer = await data.arrayBuffer();
     const audioBuffer = await arrayBufferConvert(arrayBuffer);
@@ -33,6 +35,7 @@ export const useAudioPlayer = (src: string): AudioPlayerHook => {
     if (!audioRef.current) return;
     const onLoadedMetadata = () => {
       setDuration(audioRef.current.duration);
+      setIsGlobalLoading(false);
     };
     const onTimeUpdate = () => {
       setCurrentTime(audioRef.current.currentTime);
@@ -46,6 +49,8 @@ export const useAudioPlayer = (src: string): AudioPlayerHook => {
       audioRef.current.currentTime = 0;
       setCurrentTime(0);
     };
+
+    audioRef.current.addEventListener('ended', onEnded);
     audioRef.current.addEventListener('error', onError);
     audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
     audioRef.current.addEventListener('timeupdate', onTimeUpdate);
@@ -57,6 +62,7 @@ export const useAudioPlayer = (src: string): AudioPlayerHook => {
       audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
       audioRef.current.removeEventListener('timeupdate', onTimeUpdate);
       audioRef.current.removeEventListener('error', onError);
+      setIsGlobalLoading(true);
     };
   }, []);
 
@@ -101,7 +107,7 @@ export const useAudioPlayer = (src: string): AudioPlayerHook => {
     currentTime,
     download: handleDownload,
     duration,
-    isLoading,
+    isLoading: isLoading || isGlobalLoading,
     isPlaying,
     pause: handlePause,
     play: handlePlay,

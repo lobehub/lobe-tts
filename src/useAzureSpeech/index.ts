@@ -8,7 +8,7 @@ export const useAzureSpeech = (
   { api, name, style, pitch, rate }: AzureSpeechOptions,
 ) => {
   const [text, setText] = useState<string>(defaultText);
-  const rest = useTTS(text, (segmentText: string) =>
+  const rest = useTTS(name, text, (segmentText: string) =>
     fetchAzureSpeech(segmentText, { api, name, pitch, rate, style }),
   );
   return {

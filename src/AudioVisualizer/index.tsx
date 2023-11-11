@@ -1,45 +1,49 @@
-import { useTheme } from 'antd-style';
-import React, { RefObject, memo } from 'react';
+import { Icon } from '@lobehub/ui';
+import { Loader2 } from 'lucide-react';
+import { CSSProperties, RefObject, memo } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { Flexbox } from 'react-layout-kit';
 
-import { useAudioVisualizer } from '@/hooks/useAudioVisualizer';
+import Visualizer, { VisualizerProps } from '@/AudioVisualizer/Visualizer';
 
 export interface AudioVisualizerProps {
   audioRef: RefObject<HTMLAudioElement>;
-  barStyle?: {
-    borderRadius?: number;
-    count?: number;
-    gap?: number;
-    maxHeight?: number;
-    minHeight?: number;
-    width?: number;
-  };
+  barStyle?: VisualizerProps;
+  className?: string;
   color?: string;
+  isLoading?: boolean;
+  style?: CSSProperties;
 }
 
-const AudioVisualizer = memo<AudioVisualizerProps>(({ color, audioRef, barStyle }) => {
-  const { count, width, gap } = { count: 4, gap: 4, width: 48, ...barStyle };
-  const maxHeight = barStyle?.maxHeight || width * 3;
-  const minHeight = barStyle?.minHeight || width;
-  const borderRadius = barStyle?.borderRadius || width / 2;
-  const theme = useTheme();
-  const bars = useAudioVisualizer(audioRef, { count });
-  return (
-    <Flexbox align={'center'} gap={gap} horizontal style={{ height: maxHeight }}>
-      {bars.map((bar, index) => (
-        <div
-          key={index}
-          style={{
-            background: color || theme.colorPrimary,
-            borderRadius,
-            height: minHeight + (bar / 255) * (maxHeight - minHeight),
-            transition: 'height 50ms cubic-bezier(.2,-0.5,.8,1.5)',
-            width,
-          }}
-        />
-      ))}
-    </Flexbox>
-  );
-});
+const AudioVisualizer = memo<AudioVisualizerProps>(
+  ({ audioRef, isLoading, barStyle, style, className }) => {
+    const { count, width, gap } = { count: 4, gap: 4, width: 48, ...barStyle };
+    const maxHeight = barStyle?.maxHeight || width * 3;
+    const containerStyle: CSSProperties = {
+      fontSize: 24,
+      height: maxHeight,
+      minWidth: (width + gap) * count,
+      ...style,
+    };
+    return (
+      <ErrorBoundary fallback={<div className={className} style={containerStyle}></div>}>
+        <Flexbox
+          align={'center'}
+          className={className}
+          gap={gap}
+          horizontal
+          justify={'center'}
+          style={containerStyle}
+        >
+          {isLoading ? (
+            <Icon icon={Loader2} spin />
+          ) : (
+            <Visualizer audioRef={audioRef} {...barStyle} />
+          )}
+        </Flexbox>
+      </ErrorBoundary>
+    );
+  },
+);
 
 export default AudioVisualizer;

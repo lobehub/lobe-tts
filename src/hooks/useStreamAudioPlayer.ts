@@ -81,7 +81,7 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerHook => {
         setIsPlaying(true);
         setMaxLength(1);
       }
-      setAudioBuffer((prev) => [...prev, audioBuffer]);
+      setAudioBuffer((prev) => [...prev, audioBuffer].filter(Boolean));
     },
     [maxLength],
   );
@@ -112,6 +112,7 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerHook => {
     audioRef.current.currentTime = 0;
     if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
     audioRef.current.src = '';
+    setMaxLength(0);
     setAudioBuffer([]);
     setDuration(0);
     setCurrentTime(0);

@@ -14,6 +14,7 @@ export interface TTSHook {
 }
 
 export const useTTS = (
+  key: string,
   text: string,
   fetchTTS: (segmentText: string) => Promise<AudioBuffer>,
 ): TTSHook => {
@@ -24,11 +25,10 @@ export const useTTS = (
   const [textArray, setTextArray] = useState<string[]>([]);
 
   const { isLoading } = useSWR(
-    shouldFetch && textArray?.length > 0 ? textArray?.[index] : null,
+    shouldFetch && textArray?.length > 0 ? [key, textArray?.[index]] : null,
     async () => await fetchTTS(textArray[index]),
     {
       onSuccess: (data) => {
-        console.log(index, data);
         load(data);
         if (index < textArray.length - 1) {
           setIndex(index + 1);
@@ -50,6 +50,7 @@ export const useTTS = (
 
   const handleStart = useCallback(() => {
     if (isLoading) return;
+    reset();
     setShouldFetch(true);
     setIsGlobalLoading(true);
   }, [isLoading]);
