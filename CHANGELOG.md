@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.7.0](https://github.com/lobehub/lobe-tts/compare/v1.6.1...v1.7.0)
+
+<sup>Released on **2023-11-11**</sup>
+
+#### ✨ Features
+
+- **misc**: Add options func.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add options func ([9cd3d1b](https://github.com/lobehub/lobe-tts/commit/9cd3d1b))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.6.1](https://github.com/lobehub/lobe-tts/compare/v1.6.0...v1.6.1)
 
 <sup>Released on **2023-11-11**</sup>
