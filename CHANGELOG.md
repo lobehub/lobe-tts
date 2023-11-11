@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.8.0](https://github.com/lobehub/lobe-tts/compare/v1.7.1...v1.8.0)
+
+<sup>Released on **2023-11-11**</sup>
+
+#### ✨ Features
+
+- **misc**: Add new callback functions for audio player events and update fetchOpenaiTTS function.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add new callback functions for audio player events and update fetchOpenaiTTS function ([523b3ac](https://github.com/lobehub/lobe-tts/commit/523b3ac))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.7.1](https://github.com/lobehub/lobe-tts/compare/v1.7.0...v1.7.1)
 
 <sup>Released on **2023-11-11**</sup>
