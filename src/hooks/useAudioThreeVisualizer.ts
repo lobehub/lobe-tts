@@ -1,15 +1,8 @@
 import { throttle } from 'lodash-es';
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
-export const useAudioVisualizer = (
-  audioRef: RefObject<HTMLAudioElement>,
-  {
-    count = 5,
-  }: {
-    count: number;
-  },
-) => {
-  const barsSet = Array.from({ length: (count + 1) / 2 }).fill(0) as number[];
+export const useAudioThreeVisualizer = (audioRef: RefObject<HTMLAudioElement>) => {
+  const barsSet = Array.from({ length: 2 }).fill(0) as number[];
   const [bars, setBars] = useState<number[]>([0, 0, 0, 0]);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -71,6 +64,5 @@ export const useAudioVisualizer = (
     };
   }, [init]);
 
-  const reverseBars = [...bars].slice(1, bars.length).reverse();
-  return [...reverseBars, ...bars];
+  return bars;
 };

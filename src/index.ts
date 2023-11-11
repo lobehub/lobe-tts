@@ -1,9 +1,10 @@
-export { default as AudioPlayer, type AudioPlayerProps } from './AudioPlayer';
+export { default as AudioPlayer, type AudioPlayerProps, type AudioProps } from './AudioPlayer';
+export { default as AudioThreeVisualizer } from './AudioThreeVisualizer';
 export { default as AudioVisualizer, type AudioVisualizerProps } from './AudioVisualizer';
-export { useAudioPlayer } from './hooks/useAudioPlayer';
+export { type AudioPlayerHook, useAudioPlayer } from './hooks/useAudioPlayer';
 export { useAudioVisualizer } from './hooks/useAudioVisualizer';
 export { useBlobUrl } from './hooks/useBlobUrl';
-export { useStreamAudioPlayer } from './hooks/useStreamAudioPlayer';
+export { type StreamAudioPlayerHook, useStreamAudioPlayer } from './hooks/useStreamAudioPlayer';
 export { type AzureSpeechOptions, fetchAzureSpeech } from './services/fetchAzureSpeech';
 export { type EdgeSpeechOptions, fetchEdgeSpeech } from './services/fetchEdgeSpeech';
 export { fetchMicrosoftSpeech, type MicrosoftSpeechOptions } from './services/fetchMicrosoftSpeech';
