@@ -10,7 +10,7 @@ export interface OpenaiTtsOptions extends Pick<SsmlOptions, 'name'> {
     proxy: string;
   };
   model?: 'tts-1' | 'tts-1-hd';
-  name: OpenaiVoice;
+  name: OpenaiVoice | string;
 }
 export const fetchOpenaiTTS = async (
   text: string,

@@ -1,7 +1,7 @@
 import { ActionIcon, ActionIconProps, Icon, Tag } from '@lobehub/ui';
 import { Dropdown, Slider } from 'antd';
 import { Download, PauseCircle, Play, StopCircle } from 'lucide-react';
-import React, { memo, useMemo } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 import { secondsToMinutesAndSeconds } from '@/utils/secondsToMinutesAndSeconds';
@@ -23,6 +23,10 @@ export interface AudioPlayerProps {
   buttonSize?: ActionIconProps['size'];
   className?: string;
   isLoading?: boolean;
+  onInitPlay?: () => void;
+  onPause?: () => void;
+  onPlay?: () => void;
+  onStop?: () => void;
   showSlider?: boolean;
   style?: React.CSSProperties;
   timeRender?: 'tag' | 'text';
@@ -42,6 +46,10 @@ const AudioPlayer = memo<AudioPlayerProps>(
     timeType = 'left',
     showSlider = true,
     timeRender = 'text',
+    onInitPlay,
+    onPause,
+    onStop,
+    onPlay,
   }) => {
     const { isPlaying, play, stop, pause, duration, setTime, currentTime, download } = audio;
 
@@ -50,9 +58,28 @@ const AudioPlayer = memo<AudioPlayerProps>(
     const formatedDuration = secondsToMinutesAndSeconds(duration);
 
     const Time = useMemo(
-      () => (timeRender === 'tag' ? Tag : (props: any) => <time {...props} />),
+      () => (timeRender === 'tag' ? Tag : (props: any) => <div {...props} />),
       [timeRender],
     );
+
+    const handlePlay = useCallback(() => {
+      if ((!duration || duration === 0) && !isLoading) {
+        onInitPlay?.();
+      } else {
+        play?.();
+        onPlay?.();
+      }
+    }, [play, duration]);
+
+    const handlePause = useCallback(() => {
+      pause?.();
+      onPause?.();
+    }, [pause]);
+
+    const handleStop = useCallback(() => {
+      stop?.();
+      onStop?.();
+    }, [stop]);
 
     return (
       <Flexbox
@@ -65,7 +92,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
         <ActionIcon
           icon={isPlaying ? (allowPause ? PauseCircle : StopCircle) : Play}
           loading={isLoading}
-          onClick={isPlaying ? (allowPause ? pause : stop) : play}
+          onClick={isPlaying ? (allowPause ? handlePause : handleStop) : handlePlay}
           size={buttonSize || { blockSize: 32, fontSize: 16 }}
           style={{ flex: 'none' }}
         />
