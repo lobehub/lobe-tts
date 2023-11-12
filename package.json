@@ -100,7 +100,7 @@
     "remark-cli": "^11",
     "semantic-release": "^21",
     "typescript": "^5",
-    "vercel": "^28"
+    "vercel": "^32.0.0"
   },
   "peerDependencies": {
     "@lobehub/ui": ">=1",
