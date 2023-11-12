@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { MICROSOFT_SPPECH_URL } from '../const/api';
 
-export const handleMicrosoftSpeechRequest = async (req: Request) => {
+export const handleMicrosoftSpeechRequest = async (req: Request, options?: any) => {
   const DEFAULT_HEADERS = new Headers({
     'accept': '*/*',
     'accept-language': 'zh-CN,zh;q=0.9',
@@ -26,7 +26,8 @@ export const handleMicrosoftSpeechRequest = async (req: Request) => {
     method: 'POST',
     // @ts-ignore
     responseType: 'arraybuffer',
+    ...options,
   });
 
-  return new Response(res.body, res);
+  return res;
 };

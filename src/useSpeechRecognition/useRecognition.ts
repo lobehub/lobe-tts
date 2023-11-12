@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 const SpeechRecognition =
+  // @ts-ignore
   (globalThis as any)?.SpeechRecognition || (window as any)?.webkitSpeechRecognition;
 
 export const useRecognition = (

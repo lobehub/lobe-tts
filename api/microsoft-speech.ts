@@ -11,5 +11,5 @@ export default async (req: Request) => {
   const origin = getAllowOrigins(req);
   if (!origin) return new Response('Origin Not Allowed', { status: 403 });
   const res = await handleMicrosoftSpeechRequest(req);
-  return cors(req, res, { methods: ['POST'], origin });
+  return cors(req, new Response(res.body, res), { methods: ['POST'], origin });
 };
