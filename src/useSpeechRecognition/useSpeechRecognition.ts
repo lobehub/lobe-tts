@@ -3,10 +3,12 @@ import { useCallback } from 'react';
 import { useAudioRecorder } from '@/useAudioRecorder';
 import { useRecognition } from '@/useSpeechRecognition/useRecognition';
 
-export const useSpeechRecognition = (
-  locale: string,
-  options?: { onBolbAvailable?: (blob: Blob) => void; onTextChange?: (value: string) => void },
-) => {
+export interface SpeechRecognitionOptions {
+  onBolbAvailable?: (blob: Blob) => void;
+  onTextChange?: (value: string) => void;
+}
+
+export const useSpeechRecognition = (locale: string, options?: SpeechRecognitionOptions) => {
   const {
     time,
     formattedTime,

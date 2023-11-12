@@ -1,11 +1,13 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import { useAudioRecorder } from '@/useAudioRecorder';
-import { useRecognition } from '@/useSpeechRecognition/useRecognition';
+
+import { useRecognition } from './useRecognition';
+import { SpeechRecognitionOptions } from './useSpeechRecognition';
 
 export const usePersistedSpeechRecognition = (
   locale: string,
-  options?: { onBolbAvailable?: (blob: Blob) => void; onTextChange?: (value: string) => void },
+  options?: SpeechRecognitionOptions,
 ) => {
   const [texts, setTexts] = useState<string[]>([]);
   const [isGLobalLoading, setIsGlobalLoading] = useState<boolean>(false);

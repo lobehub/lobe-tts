@@ -1,10 +1,16 @@
 import { useCallback, useState } from 'react';
 import useSWR from 'swr';
 
-import { OpenaiSttOptions, fetchOpenaiSTT } from '@/services/fetchOpenaiSTT';
+import { fetchOpenaiSTT } from '@/services/fetchOpenaiSTT';
 import { useSpeechRecognition } from '@/useSpeechRecognition';
 
-export const useOpenaiSTTWithSR = (locale: string, options: OpenaiSttOptions) => {
+import { OpenaiSpeechRecognitionOptions } from './useOpenaiSTT';
+
+export const useOpenaiSTTWithSR = (
+  locale: string,
+  { onBolbAvailable, onTextChange, ...options }: OpenaiSpeechRecognitionOptions,
+) => {
+  const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [text, setText] = useState<string>();
   const {
@@ -16,8 +22,14 @@ export const useOpenaiSTTWithSR = (locale: string, options: OpenaiSttOptions) =>
     time,
     formattedTime,
   } = useSpeechRecognition(locale, {
-    onBolbAvailable: () => setShouldFetch(true),
-    onTextChange: setText,
+    onBolbAvailable: (blobData) => {
+      setShouldFetch(true);
+      onBolbAvailable?.(blobData);
+    },
+    onTextChange: (data) => {
+      setText(data);
+      onTextChange?.(data);
+    },
   });
 
   const key = new Date().getDate().toString();
@@ -29,11 +41,14 @@ export const useOpenaiSTTWithSR = (locale: string, options: OpenaiSttOptions) =>
       onSuccess: (data) => {
         setShouldFetch(false);
         setText(data);
+        onTextChange?.(data);
+        setIsGlobalLoading(false);
       },
     },
   );
 
   const handleStart = useCallback(() => {
+    setIsGlobalLoading(true);
     start();
     setText('');
   }, [start]);
@@ -41,7 +56,7 @@ export const useOpenaiSTTWithSR = (locale: string, options: OpenaiSttOptions) =>
   return {
     blob,
     formattedTime,
-    isLoading: isLoading || isRecording,
+    isLoading: isGlobalLoading || isLoading || isRecording,
     isRecording,
     start: handleStart,
     stop,

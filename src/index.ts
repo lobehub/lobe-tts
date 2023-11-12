@@ -18,10 +18,18 @@ export { useAudioRecorder } from './useAudioRecorder';
 export { useAzureSpeech } from './useAzureSpeech';
 export { useEdgeSpeech } from './useEdgeSpeech';
 export { useMicrosoftSpeech } from './useMicrosoftSpeech';
-export { useOpenaiSTT, useOpenaiSTTWithPSR, useOpenaiSTTWithSR } from './useOpenaiSTT';
+export {
+  type OpenaiSpeechRecognitionOptions,
+  useOpenaiSTT,
+  useOpenaiSTTWithPSR,
+  useOpenaiSTTWithSR,
+} from './useOpenaiSTT';
 export { useOpenaiTTS } from './useOpenaiTTS';
 export { usePersistedSpeechRecognition } from './useSpeechRecognition/usePersistedSpeechRecognition';
-export { useSpeechRecognition } from './useSpeechRecognition/useSpeechRecognition';
+export {
+  type SpeechRecognitionOptions,
+  useSpeechRecognition,
+} from './useSpeechRecognition/useSpeechRecognition';
 export { useSpeechSynthes } from './useSpeechSynthes';
 export {
   genLevaOptions,
