@@ -6,18 +6,18 @@ export type OpenaiVoice = 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimme
 
 export interface OpenaiTtsOptions extends Pick<SsmlOptions, 'name'> {
   api: {
-    key: string;
-    proxy: string;
+    key?: string;
+    proxy?: string;
   };
   model?: 'tts-1' | 'tts-1-hd';
   name: OpenaiVoice | string;
 }
 export const fetchOpenaiTTS = async (
   text: string,
-  { api, model = 'tts-1', ...options }: OpenaiTtsOptions,
+  { api = {}, model = 'tts-1', ...options }: OpenaiTtsOptions,
 ): Promise<AudioBuffer> => {
-  const key = api.key || OPENAI_API_KEY;
-  const url = OPENAI_TTS_URL(api.proxy);
+  const key = api?.key || OPENAI_API_KEY;
+  const url = OPENAI_TTS_URL(api?.proxy);
 
   const headers = new Headers({
     'Authorization': `Bearer ${key}`,

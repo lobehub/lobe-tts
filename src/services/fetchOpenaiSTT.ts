@@ -4,7 +4,7 @@ import { OPENAI_API_KEY, OPENAI_STT_URL } from '@/const/api';
 
 export interface OpenaiSttOptions {
   api?: {
-    key: string;
+    key?: string;
     proxy?: string;
   };
   model?: 'whisper-1';
@@ -13,7 +13,7 @@ export interface OpenaiSttOptions {
 // 纯文本生成语音
 export const fetchOpenaiSTT = async (
   speech: Blob,
-  { api, model = 'whisper-1' }: OpenaiSttOptions,
+  { api = {}, model = 'whisper-1' }: OpenaiSttOptions,
 ): Promise<string> => {
   const key = api?.key || OPENAI_API_KEY;
   const url = OPENAI_STT_URL(api?.proxy);
@@ -36,8 +36,6 @@ export const fetchOpenaiSTT = async (
   }
 
   const json = await response.json();
-
-  console.log(json);
 
   return json?.text;
 };

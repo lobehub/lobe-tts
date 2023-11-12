@@ -52,8 +52,8 @@ export const useAudioRecorder = (onBolbAvailable?: (blob: Blob) => void) => {
           setMediaRecorder();
         });
       })
-      .catch((error: DOMException) => {
-        console.log(error.name, error.message, error.cause);
+      .catch((error) => {
+        console.error(error);
       });
   }, [timerInterval, _startTimer, url]);
 

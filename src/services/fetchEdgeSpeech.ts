@@ -38,22 +38,22 @@ const genHeader = (connectId: string) => {
 };
 
 export interface EdgeSpeechOptions extends Pick<SsmlOptions, 'name'> {
-  api: {
-    key: string;
-    proxy: string;
+  api?: {
+    key?: string;
+    proxy?: string;
   };
 }
 export const fetchEdgeSpeech = async (
   text: string,
-  { api, ...options }: EdgeSpeechOptions,
+  { api = {}, ...options }: EdgeSpeechOptions,
 ): Promise<AudioBuffer> => {
   const connectId = uuidv4().replaceAll('-', '');
   const url = qs.stringifyUrl({
     query: {
       ConnectionId: connectId,
-      TrustedClientToken: api.key || EDDGE_API_TOKEN,
+      TrustedClientToken: api?.key || EDDGE_API_TOKEN,
     },
-    url: api.proxy || EDDGE_PROXY_URL,
+    url: api?.proxy || EDDGE_PROXY_URL,
   });
 
   const { configHeader, contentHeader } = genHeader(connectId);

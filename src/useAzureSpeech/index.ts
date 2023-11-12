@@ -3,13 +3,10 @@ import { useState } from 'react';
 import { AzureSpeechOptions, fetchAzureSpeech } from '@/services/fetchAzureSpeech';
 import { useTTS } from '@/useTTS';
 
-export const useAzureSpeech = (
-  defaultText: string,
-  { api, name, style, pitch, rate }: AzureSpeechOptions,
-) => {
+export const useAzureSpeech = (defaultText: string, options: AzureSpeechOptions) => {
   const [text, setText] = useState<string>(defaultText);
-  const rest = useTTS(name, text, (segmentText: string) =>
-    fetchAzureSpeech(segmentText, { api, name, pitch, rate, style }),
+  const rest = useTTS(options.name, text, (segmentText: string) =>
+    fetchAzureSpeech(segmentText, options),
   );
   return {
     setText,

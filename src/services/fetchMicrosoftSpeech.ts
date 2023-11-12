@@ -4,12 +4,14 @@ import { type SsmlOptions } from '@/utils/genSSML';
 import { genSSML } from '@/utils/genSSML';
 
 export interface MicrosoftSpeechOptions extends SsmlOptions {
-  api?: string;
+  api?: {
+    proxy?: string;
+  };
 }
 
 export const fetchMicrosoftSpeech = async (
   text: string,
-  { api, ...options }: MicrosoftSpeechOptions,
+  { api = {}, ...options }: MicrosoftSpeechOptions,
 ): Promise<AudioBuffer> => {
   const data = JSON.stringify({
     offsetInPlainText: 0,
@@ -19,8 +21,9 @@ export const fetchMicrosoftSpeech = async (
     ssml: genSSML(text, options),
     ttsAudioFormat: 'audio-24khz-160kbitrate-mono-mp3',
   });
+  const url = api?.proxy || MICROSOFT_SPEECH_PROXY_URL;
 
-  const response: Response = await fetch(api || MICROSOFT_SPEECH_PROXY_URL, {
+  const response: Response = await fetch(url, {
     body: data,
     method: 'POST',
     // @ts-ignore
