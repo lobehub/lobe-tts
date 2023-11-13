@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { OPENAI_API_KEY, OPENAI_STT_URL } from '@/const/api';
+import { RECORD_MIME_TYPE } from '@/const/mimeType';
 
 export interface OpenaiSttOptions {
   api?: {
@@ -22,8 +23,8 @@ export const fetchOpenaiSTT = async (
     Authorization: `Bearer ${key}`,
   });
 
-  const filename = `${uuidv4()}.webm`;
-  const file = new File([speech], filename, { type: 'audio/webm' });
+  const filename = `${uuidv4()}.${RECORD_MIME_TYPE().extension}`;
+  const file = new File([speech], filename, { type: RECORD_MIME_TYPE().mineType });
 
   const body = new FormData();
   body.append('file', file);

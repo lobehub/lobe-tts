@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 
+import { RECORD_MIME_TYPE } from '@/const/mimeType';
 import { secondsToMinutesAndSeconds } from '@/utils/secondsToMinutesAndSeconds';
 
 export const useAudioRecorder = (onBolbAvailable?: (blob: Blob) => void) => {
@@ -37,7 +38,9 @@ export const useAudioRecorder = (onBolbAvailable?: (blob: Blob) => void) => {
       .getUserMedia({ audio: true })
       .then((stream) => {
         setIsRecording(true);
-        const recorder: MediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+        const recorder: MediaRecorder = new MediaRecorder(stream, {
+          mimeType: RECORD_MIME_TYPE().mineType,
+        });
         setMediaRecorder(recorder);
         recorder.start();
         _startTimer();
