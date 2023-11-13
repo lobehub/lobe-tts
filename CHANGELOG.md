@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.11.1](https://github.com/lobehub/lobe-tts/compare/v1.11.0...v1.11.1)
+
+<sup>Released on **2023-11-13**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix mine type in safari.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix mine type in safari ([8181a8e](https://github.com/lobehub/lobe-tts/commit/8181a8e))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.11.0](https://github.com/lobehub/lobe-tts/compare/v1.10.0...v1.11.0)
 
 <sup>Released on **2023-11-12**</sup>
