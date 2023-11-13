@@ -1,14 +1,14 @@
 import { useCallback, useState } from 'react';
-import useSWR from 'swr';
 
-import { fetchOpenaiSTT } from '@/services/fetchOpenaiSTT';
+import { OpenaiSTTFetcher, useOpenaiSTT } from '@/useOpenaiSTT/useOpenaiSTT';
 import { usePersistedSpeechRecognition } from '@/useSpeechRecognition';
 
-import { OpenaiSpeechRecognitionOptions } from './useOpenaiSTT';
+import { OpenaiSpeechRecognitionOptions } from './useOpenaiSTTWithRecord';
 
 export const useOpenaiSTTWithPSR = (
   locale: string,
   { onBolbAvailable, onTextChange, ...options }: OpenaiSpeechRecognitionOptions,
+  fetcher?: OpenaiSTTFetcher,
 ) => {
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
@@ -32,26 +32,35 @@ export const useOpenaiSTTWithPSR = (
     },
   });
 
-  const key = new Date().getDate().toString();
-
-  const { isLoading } = useSWR(
-    shouldFetch && blob ? key : null,
-    async () => await fetchOpenaiSTT(blob as any, options),
-    {
-      onSuccess: (data) => {
-        setShouldFetch(false);
-        setText(data);
-        onTextChange?.(data);
-        setIsGlobalLoading(false);
-      },
-    },
-  );
-
   const handleStart = useCallback(() => {
     setIsGlobalLoading(true);
     start();
     setText('');
   }, [start]);
+
+  const handleStop = useCallback(() => {
+    stop();
+    setShouldFetch(false);
+    setIsGlobalLoading(false);
+  }, [stop]);
+
+  const { isLoading } = useOpenaiSTT(
+    shouldFetch,
+    blob,
+    options,
+    {
+      onError: (err) => {
+        console.error(err);
+        handleStop();
+      },
+      onSuccess: (data) => {
+        setText(data);
+        onTextChange?.(data);
+        handleStop();
+      },
+    },
+    fetcher,
+  );
 
   return {
     blob,
@@ -59,7 +68,7 @@ export const useOpenaiSTTWithPSR = (
     isLoading: isGlobalLoading || isLoading || isRecording,
     isRecording,
     start: handleStart,
-    stop,
+    stop: handleStop,
     text,
     time,
     url,

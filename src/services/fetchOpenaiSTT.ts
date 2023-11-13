@@ -1,20 +1,21 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { OPENAI_API_KEY, OPENAI_STT_URL } from '@/const/api';
-import { RECORD_MIME_TYPE } from '@/const/mimeType';
+import { RecordMineType, getRecordMineType } from '@/utils/getRecordMineType';
 
 export interface OpenaiSttOptions {
   api?: {
     key?: string;
     proxy?: string;
   };
+  mineType?: RecordMineType;
   model?: 'whisper-1';
 }
 
 // 纯文本生成语音
 export const fetchOpenaiSTT = async (
   speech: Blob,
-  { api = {}, model = 'whisper-1' }: OpenaiSttOptions,
+  { api = {}, model = 'whisper-1', mineType }: OpenaiSttOptions,
 ): Promise<string> => {
   const key = api?.key || OPENAI_API_KEY;
   const url = OPENAI_STT_URL(api?.proxy);
@@ -23,8 +24,10 @@ export const fetchOpenaiSTT = async (
     Authorization: `Bearer ${key}`,
   });
 
-  const filename = `${uuidv4()}.${RECORD_MIME_TYPE().extension}`;
-  const file = new File([speech], filename, { type: RECORD_MIME_TYPE().mineType });
+  const filename = `${uuidv4()}.${mineType?.extension || getRecordMineType().extension}`;
+  const file = new File([speech], filename, {
+    type: mineType?.mineType || getRecordMineType().mineType,
+  });
 
   const body = new FormData();
   body.append('file', file);

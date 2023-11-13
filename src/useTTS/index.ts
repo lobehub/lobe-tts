@@ -24,10 +24,26 @@ export const useTTS = (
   const [index, setIndex] = useState<number>(0);
   const [textArray, setTextArray] = useState<string[]>([]);
 
+  const handleReset = useCallback((newText: string[] = []) => {
+    setShouldFetch(false);
+    setIsGlobalLoading(false);
+    reset();
+    setIndex(0);
+    setTextArray(newText);
+  }, []);
+
+  const handleStop = useCallback(() => {
+    handleReset();
+  }, []);
+
   const { isLoading } = useSWR(
     shouldFetch && textArray?.length > 0 ? [key, textArray?.[index]] : null,
     async () => await fetchTTS(textArray[index]),
     {
+      onError: (err) => {
+        console.error(err);
+        handleReset();
+      },
       onSuccess: (data) => {
         load(data);
         if (index < textArray.length - 1) {
@@ -40,24 +56,12 @@ export const useTTS = (
     },
   );
 
-  const handleReset = useCallback((newText: string[] = []) => {
-    setShouldFetch(false);
-    setIsGlobalLoading(false);
-    reset();
-    setIndex(0);
-    setTextArray(newText);
-  }, []);
-
   const handleStart = useCallback(() => {
     if (isLoading) return;
     reset();
     setShouldFetch(true);
     setIsGlobalLoading(true);
   }, [isLoading]);
-
-  const handleStop = useCallback(() => {
-    handleReset();
-  }, []);
 
   useEffect(() => {
     const texts = splitTextIntoSegments(text);

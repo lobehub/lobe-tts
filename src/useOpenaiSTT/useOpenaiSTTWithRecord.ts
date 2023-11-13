@@ -1,36 +1,25 @@
 import { useCallback, useState } from 'react';
 
+import { OpenaiSttOptions } from '@/services/fetchOpenaiSTT';
+import { useAudioRecorder } from '@/useAudioRecorder';
 import { OpenaiSTTFetcher, useOpenaiSTT } from '@/useOpenaiSTT/useOpenaiSTT';
-import { useSpeechRecognition } from '@/useSpeechRecognition';
+import { SpeechRecognitionOptions } from '@/useSpeechRecognition/useSpeechRecognition';
 
-import { OpenaiSpeechRecognitionOptions } from './useOpenaiSTTWithRecord';
+export type OpenaiSpeechRecognitionOptions = SpeechRecognitionOptions & OpenaiSttOptions;
 
-export const useOpenaiSTTWithSR = (
-  locale: string,
+export const useOpenaiSTTWithRecord = (
   { onBolbAvailable, onTextChange, ...options }: OpenaiSpeechRecognitionOptions,
   fetcher?: OpenaiSTTFetcher,
 ) => {
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [text, setText] = useState<string>();
-  const {
-    start,
-    stop,
-    blob,
-    url,
-    isLoading: isRecording,
-    time,
-    formattedTime,
-  } = useSpeechRecognition(locale, {
-    onBolbAvailable: (blobData) => {
+  const { start, stop, blob, url, isRecording, time, formattedTime } = useAudioRecorder(
+    (blobData) => {
       setShouldFetch(true);
       onBolbAvailable?.(blobData);
     },
-    onTextChange: (data) => {
-      setText(data);
-      onTextChange?.(data);
-    },
-  });
+  );
 
   const handleStart = useCallback(() => {
     setIsGlobalLoading(true);
@@ -53,9 +42,9 @@ export const useOpenaiSTTWithSR = (
         console.error(err);
         handleStop();
       },
-      onSuccess: (data) => {
+      onSuccess: (data, value) => {
         setText(data);
-        onTextChange?.(data);
+        onTextChange?.(value);
         handleStop();
       },
     },

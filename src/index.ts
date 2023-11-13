@@ -20,8 +20,10 @@ export { useEdgeSpeech } from './useEdgeSpeech';
 export { useMicrosoftSpeech } from './useMicrosoftSpeech';
 export {
   type OpenaiSpeechRecognitionOptions,
+  type OpenaiSTTFetcher,
   useOpenaiSTT,
   useOpenaiSTTWithPSR,
+  useOpenaiSTTWithRecord,
   useOpenaiSTTWithSR,
 } from './useOpenaiSTT';
 export { useOpenaiTTS } from './useOpenaiTTS';
@@ -31,6 +33,7 @@ export {
   useSpeechRecognition,
 } from './useSpeechRecognition/useSpeechRecognition';
 export { useSpeechSynthes } from './useSpeechSynthes';
+export { getRecordMineType, type RecordMineType } from './utils/getRecordMineType';
 export {
   genLevaOptions,
   getAzureVoiceOptions,

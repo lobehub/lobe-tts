@@ -1,4 +1,4 @@
-import { useOpenaiSTT } from '@lobehub/tts';
+import { useOpenaiSTTWithRecord } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
@@ -20,7 +20,9 @@ export default () => {
     { store },
   );
 
-  const { text, start, stop, isLoading, isRecording, url, formattedTime } = useOpenaiSTT({ api });
+  const { text, start, stop, isLoading, isRecording, url, formattedTime } = useOpenaiSTTWithRecord({
+    api,
+  });
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>
