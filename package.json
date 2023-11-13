@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/tts",
-  "version": "1.11.1",
+  "version": "1.12.0",
   "description": "A high-quality & reliable TTS React Hooks library",
   "homepage": "https://github.com/lobehub/lobe-tts",
   "bugs": {
