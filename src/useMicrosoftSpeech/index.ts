@@ -5,7 +5,7 @@ import { useTTS } from '@/useTTS';
 
 export const useMicrosoftSpeech = (defaultText: string, options: MicrosoftSpeechOptions) => {
   const [text, setText] = useState<string>(defaultText);
-  const rest = useTTS(options.name, text, (segmentText: string) =>
+  const rest = useTTS(options.voice, text, (segmentText: string) =>
     fetchMicrosoftSpeech(segmentText, options),
   );
   return {

@@ -2,18 +2,18 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { SsmlOptions } from '@/utils/genSSML';
 
-export const useSpeechSynthes = (defaultText: string, { name, rate, pitch }: SsmlOptions) => {
+export const useSpeechSynthes = (defaultText: string, { voice, rate, pitch }: SsmlOptions) => {
   const [voiceList, setVoiceList] = useState(speechSynthesis.getVoices());
   const [text, setText] = useState<string>(defaultText);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const speechSynthesisUtterance = useMemo(() => {
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.voice = voiceList.find((item) => item.name === name) as any;
+    utterance.voice = voiceList.find((item) => item.name === voice) as any;
     if (pitch) utterance.pitch = pitch * 10;
     if (rate) utterance.rate = rate * 10;
     return utterance;
-  }, [text, voiceList, rate, pitch, name]);
+  }, [text, voiceList, rate, pitch, voice]);
 
   speechSynthesis.onvoiceschanged = () => {
     setVoiceList(speechSynthesis.getVoices());

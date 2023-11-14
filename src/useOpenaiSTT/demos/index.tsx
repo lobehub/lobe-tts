@@ -1,4 +1,4 @@
-import { useOpenaiSTTWithRecord } from '@lobehub/tts';
+import { OPENAI_STT_API_URL, useOpenaiSTTWithRecord } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
@@ -16,6 +16,7 @@ export default () => {
         label: 'OPENAI_PROXY_URL',
         value: '',
       },
+      url: OPENAI_STT_API_URL,
     },
     { store },
   );

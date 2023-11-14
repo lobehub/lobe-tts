@@ -1,8 +1,18 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { MICROSOFT_SPPECH_URL } from '../const/api';
+import { MICROSOFT_SPEECH_URL } from '../const/api';
+import { MicrosoftSpeechPayload } from '../server/types';
+import { genSSML } from '../utils/genSSML';
 
-export const handleMicrosoftSpeechRequest = async (req: Request, options?: any) => {
+interface CreateMicrosoftSpeechComletionOptions {
+  payload: MicrosoftSpeechPayload;
+}
+
+export const createMicrosoftSpeechComletion = async ({
+  payload,
+}: CreateMicrosoftSpeechComletionOptions) => {
+  const { input, options } = payload;
+
   const DEFAULT_HEADERS = new Headers({
     'accept': '*/*',
     'accept-language': 'zh-CN,zh;q=0.9',
@@ -20,13 +30,21 @@ export const handleMicrosoftSpeechRequest = async (req: Request, options?: any) 
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
   });
 
-  const res = await fetch(MICROSOFT_SPPECH_URL, {
-    body: req.body,
+  const body = JSON.stringify({
+    offsetInPlainText: 0,
+    properties: {
+      SpeakTriggerSource: 'AccTuningPagePlayButton',
+    },
+    ssml: genSSML(input, options),
+    ttsAudioFormat: 'audio-24khz-160kbitrate-mono-mp3',
+  });
+
+  const res = await fetch(MICROSOFT_SPEECH_URL, {
+    body,
     headers: DEFAULT_HEADERS,
     method: 'POST',
     // @ts-ignore
     responseType: 'arraybuffer',
-    ...options,
   });
 
   return res;
