@@ -10,10 +10,6 @@ export default () => {
   const store = useCreateStore();
   const options: any = useControls(
     {
-      name: {
-        options: genLevaOptions(getSpeechSynthesVoiceOptions()),
-        value: '婷婷',
-      },
       pitch: {
         max: 1,
         min: -1,
@@ -25,6 +21,10 @@ export default () => {
         min: -1,
         step: 0.1,
         value: 0,
+      },
+      voice: {
+        options: genLevaOptions(getSpeechSynthesVoiceOptions()),
+        value: '婷婷',
       },
     },
     { store },

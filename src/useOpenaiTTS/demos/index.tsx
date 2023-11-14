@@ -1,4 +1,4 @@
-import { AudioPlayer, openaiVoiceList, useOpenaiTTS } from '@lobehub/tts';
+import { AudioPlayer, OPENAI_TTS_API_URL, openaiVoiceList, useOpenaiTTS } from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
@@ -19,13 +19,14 @@ export default () => {
         label: 'OPENAI_PROXY_URL',
         value: '',
       },
+      url: OPENAI_TTS_API_URL,
     },
     { store },
   );
 
   const options: any = useControls(
     {
-      name: {
+      voice: {
         options: openaiVoiceList,
         value: 'alloy',
       },

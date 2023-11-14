@@ -1,12 +1,15 @@
-import { v4 as uuidv4 } from 'uuid';
+import OpenAI from 'openai';
 
-import { OPENAI_API_KEY, OPENAI_STT_URL } from '@/const/api';
+import { OPENAI_API_KEY, OPENAI_PROXY_URL } from '@/const/api';
+import { createOpenaiAudioTranscriptionsCompletion } from '@/server/createOpenaiAudioTranscriptionsCompletion';
+import { OpenAISTTPayload } from '@/server/types';
 import { RecordMineType, getRecordMineType } from '@/utils/getRecordMineType';
 
 export interface OpenaiSttOptions {
   api?: {
     key?: string;
     proxy?: string;
+    url?: string;
   };
   mineType?: RecordMineType;
   model?: 'whisper-1';
@@ -18,28 +21,22 @@ export const fetchOpenaiSTT = async (
   { api = {}, model = 'whisper-1', mineType }: OpenaiSttOptions,
 ): Promise<string> => {
   const key = api?.key || OPENAI_API_KEY;
-  const url = OPENAI_STT_URL(api?.proxy);
+  const url = api?.proxy || OPENAI_PROXY_URL;
 
-  const headers = new Headers({
-    Authorization: `Bearer ${key}`,
-  });
+  const payload: OpenAISTTPayload = {
+    blob: speech,
+    options: {
+      mineType: mineType || getRecordMineType(),
+      model,
+    },
+  };
 
-  const filename = `${uuidv4()}.${mineType?.extension || getRecordMineType().extension}`;
-  const file = new File([speech], filename, {
-    type: mineType?.mineType || getRecordMineType().mineType,
-  });
+  const response = (await (api?.url
+    ? fetch(api.url, { body: JSON.stringify(payload), method: 'POST' })
+    : createOpenaiAudioTranscriptionsCompletion({
+        openai: new OpenAI({ apiKey: key, baseURL: url }),
+        payload,
+      }))) as string;
 
-  const body = new FormData();
-  body.append('file', file);
-  body.append('model', model);
-
-  const response: Response = await fetch(url, { body, headers, method: 'POST' });
-
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-
-  const json = await response.json();
-
-  return json?.text;
+  return response;
 };

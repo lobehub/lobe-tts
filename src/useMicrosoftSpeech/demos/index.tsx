@@ -1,4 +1,10 @@
-import { AudioPlayer, genLevaOptions, getEdgeVoiceOptions, useMicrosoftSpeech } from '@lobehub/tts';
+import {
+  AudioPlayer,
+  MICROSOFT_SPEECH_API_URL,
+  genLevaOptions,
+  getEdgeVoiceOptions,
+  useMicrosoftSpeech,
+} from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
@@ -8,16 +14,17 @@ const defaultText = '这是一段使用 Microsoft Speech 的语音演示';
 
 export default () => {
   const store = useCreateStore();
+  const api: any = useControls(
+    {
+      url: {
+        label: 'MICROSOFT_SPEECH_API_URL',
+        value: MICROSOFT_SPEECH_API_URL,
+      },
+    },
+    { store },
+  );
   const options: any = useControls(
     {
-      api: {
-        label: 'MICROSOFT_SPEECH_PROXY_URL',
-        value: '',
-      },
-      name: {
-        options: genLevaOptions(getEdgeVoiceOptions()),
-        value: 'zh-CN-YunxiaNeural',
-      },
       pitch: {
         max: 1,
         min: -1,
@@ -46,10 +53,17 @@ export default () => {
         ],
         value: 'general',
       },
+      voice: {
+        options: genLevaOptions(getEdgeVoiceOptions()),
+        value: 'zh-CN-YunxiaNeural',
+      },
     },
     { store },
   );
-  const { setText, isGlobalLoading, audio, start, stop } = useMicrosoftSpeech(defaultText, options);
+  const { setText, isGlobalLoading, audio, start, stop } = useMicrosoftSpeech(defaultText, {
+    api,
+    ...options,
+  });
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>

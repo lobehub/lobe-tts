@@ -1,4 +1,10 @@
-import { AudioPlayer, genLevaOptions, getEdgeVoiceOptions, useEdgeSpeech } from '@lobehub/tts';
+import {
+  AudioPlayer,
+  EDGE_SPEECH_API_URL,
+  genLevaOptions,
+  getEdgeVoiceOptions,
+  useEdgeSpeech,
+} from '@lobehub/tts';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
@@ -11,21 +17,14 @@ export default () => {
 
   const api: any = useControls(
     {
-      key: {
-        label: 'EDDGE_API_TOKEN',
-        value: '',
-      },
-      proxy: {
-        label: 'EDDGE_PROXY_URL',
-        value: '',
-      },
+      url: EDGE_SPEECH_API_URL,
     },
     { store },
   );
 
   const options: any = useControls(
     {
-      name: {
+      voice: {
         options: genLevaOptions(getEdgeVoiceOptions()),
         value: 'zh-CN-YunxiaNeural',
       },
