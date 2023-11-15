@@ -11,9 +11,9 @@ export class MicrosoftSpeechTTS {
   get voiceOptions() {
     return getAzureVoiceOptions(this.locale);
   }
-  get localeOptions() {
-    return getVoiceLocaleOptions();
-  }
+
+  static localeOptions = getVoiceLocaleOptions();
+
   voiceList = azureVoiceList;
   voiceName = voiceName;
   fetch = fetchMicrosoftSpeech;

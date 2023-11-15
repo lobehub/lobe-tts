@@ -8,13 +8,13 @@ export class EdgeSpeechTTS {
   constructor(locale?: string) {
     this.locale = locale;
   }
+
   get voiceOptions() {
     return getEdgeVoiceOptions(this.locale);
   }
-  get localeOptions() {
-    return getVoiceLocaleOptions();
-  }
-  voiceList = edgeVoiceList;
-  voiceName = voiceName;
+
+  static localeOptions = getVoiceLocaleOptions();
+  static voiceList = edgeVoiceList;
+  static voiceName = voiceName;
   fetch = fetchEdgeSpeech;
 }

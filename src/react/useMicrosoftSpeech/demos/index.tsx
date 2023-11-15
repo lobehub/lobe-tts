@@ -1,9 +1,11 @@
-import { MICROSOFT_SPEECH_API_URL, genLevaOptions, getEdgeVoiceOptions } from '@lobehub/tts';
+import { MICROSOFT_SPEECH_API_URL, MicrosoftSpeechTTS } from '@lobehub/tts';
 import { AudioPlayer, useMicrosoftSpeech } from '@lobehub/tts/react';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
+
+import { genLevaOptions } from '../../_util/leva';
 
 const defaultText = '这是一段使用 Microsoft Speech 的语音演示';
 
@@ -49,7 +51,7 @@ export default () => {
         value: 'general',
       },
       voice: {
-        options: genLevaOptions(getEdgeVoiceOptions()),
+        options: genLevaOptions(new MicrosoftSpeechTTS().voiceOptions),
         value: 'zh-CN-YunxiaNeural',
       },
     },

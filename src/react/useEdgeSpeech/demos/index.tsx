@@ -1,9 +1,11 @@
-import { EDGE_SPEECH_API_URL, genLevaOptions, getEdgeVoiceOptions } from '@lobehub/tts';
+import { EDGE_SPEECH_API_URL, EdgeSpeechTTS } from '@lobehub/tts';
 import { AudioPlayer, useEdgeSpeech } from '@lobehub/tts/react';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
+
+import { genLevaOptions } from '../../_util/leva';
 
 const defaultText = '这是一段使用 Edge Speech 的语音演示';
 
@@ -20,7 +22,7 @@ export default () => {
   const options: any = useControls(
     {
       voice: {
-        options: genLevaOptions(getEdgeVoiceOptions()),
+        options: genLevaOptions(new EdgeSpeechTTS().voiceOptions),
         value: 'zh-CN-YunxiaNeural',
       },
     },

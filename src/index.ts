@@ -3,24 +3,12 @@ export { MicrosoftSpeechTTS } from './class/MicrosoftSpeechTTS';
 export { OpenaiSTT } from './class/OpenaiSTT';
 export { OpenaiTTS } from './class/OpenaiTTS';
 export { VoiceList } from './class/VoiceList';
-export { default as azureVoiceList } from './data/azureVoiceList';
-export { default as edgeVoiceList } from './data/edgeVoiceList';
-export { default as voiceLocale } from './data/locales';
-export { default as openaiVoiceList } from './data/openaiVoiceList';
-export { default as voiceList } from './data/voiceList';
-export { type EdgeSpeechOptions, fetchEdgeSpeech } from './services/fetchEdgeSpeech';
-export { fetchMicrosoftSpeech, type MicrosoftSpeechOptions } from './services/fetchMicrosoftSpeech';
-export { fetchOpenaiSTT, type OpenaiSttOptions } from './services/fetchOpenaiSTT';
-export { fetchOpenaiTTS, type OpenaiTtsOptions } from './services/fetchOpenaiTTS';
+export { type EdgeSpeechOptions } from './services/fetchEdgeSpeech';
+export { type MicrosoftSpeechOptions } from './services/fetchMicrosoftSpeech';
+export { type OpenaiSttOptions } from './services/fetchOpenaiSTT';
+export { type OpenaiTtsOptions } from './services/fetchOpenaiTTS';
 export { getRecordMineType, type RecordMineType } from './utils/getRecordMineType';
-export {
-  genLevaOptions,
-  getAzureVoiceOptions,
-  getEdgeVoiceOptions,
-  getOpenaiVoiceOptions,
-  getSpeechSynthesVoiceOptions,
-  getVoiceLocaleOptions,
-} from './utils/getVoiceList';
+export { getSpeechSynthesVoiceOptions } from './utils/getVoiceList';
 export {
   EDGE_SPEECH_API_URL,
   MICROSOFT_SPEECH_API_URL,

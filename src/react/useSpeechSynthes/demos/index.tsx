@@ -1,9 +1,11 @@
-import { genLevaOptions, getSpeechSynthesVoiceOptions } from '@lobehub/tts';
+import { getSpeechSynthesVoiceOptions } from '@lobehub/tts';
 import { useSpeechSynthes } from '@lobehub/tts/react';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { StopCircle, Volume2 } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
+
+import { genLevaOptions } from '../../_util/leva';
 
 const defaultText = '这是一段使用 Speech Synthes 的语音演示';
 

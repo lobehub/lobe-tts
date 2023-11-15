@@ -56,9 +56,3 @@ export const getOpenaiVoiceOptions = (): SelectProps['options'] => {
 export const getVoiceLocaleOptions = (): SelectProps['options'] => {
   return Object.entries(voiceLocale).map(([value, label]) => ({ label, value }));
 };
-
-export const genLevaOptions = (options: SelectProps['options']) => {
-  const data: any = {};
-  options?.forEach((item: any) => (data[item?.label || item?.value] = item?.value));
-  return data;
-};
