@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.12.1-beta.2](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.1...v1.12.1-beta.2)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: 将 react 部分抽取到 /react 子级路径下.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: 将 react 部分抽取到 /react 子级路径下 ([80b24e8](https://github.com/lobehub/lobe-tts/commit/80b24e8))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.12.1-beta.1](https://github.com/lobehub/lobe-tts/compare/v1.12.0...v1.12.1-beta.1)
 
 <sup>Released on **2023-11-15**</sup>
