@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.15.0](https://github.com/lobehub/lobe-tts/compare/v1.14.3...v1.15.0)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ✨ Features
+
+- **misc**: Add speech synthesis and speech-to-text functionality.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add speech synthesis and speech-to-text functionality ([56a8883](https://github.com/lobehub/lobe-tts/commit/56a8883))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.14.3](https://github.com/lobehub/lobe-tts/compare/v1.14.2...v1.14.3)
 
 <sup>Released on **2023-11-15**</sup>
