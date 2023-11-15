@@ -21,6 +21,11 @@
       "import": "./es/index.js",
       "module": "./es/index.js"
     },
+    "./server": {
+      "types": "./es/server/index.d.ts",
+      "import": "./es/server/index.js",
+      "module": "./es/server/index.js"
+    },
     "./react": {
       "types": "./es/react/index.d.ts",
       "import": "./es/react/index.js",
