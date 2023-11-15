@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.12.1-beta.3](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.2...v1.12.1-beta.3)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Fix react entry.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Fix react entry ([6a4631d](https://github.com/lobehub/lobe-tts/commit/6a4631d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.12.1-beta.2](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.1...v1.12.1-beta.2)
 
 <sup>Released on **2023-11-15**</sup>
