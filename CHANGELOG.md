@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.12.1-beta.5](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.4...v1.12.1-beta.5)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor to fix build.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor to fix build ([d875be6](https://github.com/lobehub/lobe-tts/commit/d875be6))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.12.1-beta.4](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.3...v1.12.1-beta.4)
 
 <sup>Released on **2023-11-15**</sup>
