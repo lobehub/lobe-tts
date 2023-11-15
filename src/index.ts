@@ -1,3 +1,8 @@
+export { EdgeSpeechTTS } from './class/EdgeSpeechTTS';
+export { MicorsoftSpeechTTS } from './class/MicorsoftSpeechTTS';
+export { OpenaiSTT } from './class/OpenaiSTT';
+export { OpenaiTTS } from './class/OpenaiTTS';
+export { VoiceList } from './class/VoiceList';
 export { default as azureVoiceList } from './data/azureVoiceList';
 export { default as edgeVoiceList } from './data/edgeVoiceList';
 export { default as voiceLocale } from './data/locales';

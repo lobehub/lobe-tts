@@ -35,7 +35,6 @@
   ],
   "scripts": {
     "build": "father build",
-    "build:server": "tsc server.ts --declaration",
     "ci": "npm run lint && npm run type-check",
     "dev": "father dev",
     "docs:build": "npm run setup && npm run build && dumi build",
