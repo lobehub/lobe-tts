@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.16.0](https://github.com/lobehub/lobe-tts/compare/v1.15.0...v1.16.0)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ✨ Features
+
+- **misc**: Introduce useSpeechRecognition function for audio players, visualizers, and speech recognition.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Introduce useSpeechRecognition function for audio players, visualizers, and speech recognition ([72afa61](https://github.com/lobehub/lobe-tts/commit/72afa61))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.15.0](https://github.com/lobehub/lobe-tts/compare/v1.14.3...v1.15.0)
 
 <sup>Released on **2023-11-15**</sup>
