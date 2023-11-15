@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { MICROSOFT_SPEECH_URL } from '@/const/api';
-import { MicrosoftSpeechPayload } from '@/server/types';
-import { genSSML } from '@/utils/genSSML';
+import { MICROSOFT_SPEECH_URL } from '../const/api';
+import { MicrosoftSpeechPayload } from '../server/types';
+import { genSSML } from '../utils/genSSML';
 
 interface CreateMicrosoftSpeechComletionOptions {
   payload: MicrosoftSpeechPayload;

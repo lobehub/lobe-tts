@@ -1,11 +1,11 @@
 import qs from 'query-string';
 import { v4 as uuidv4 } from 'uuid';
 
-import { EDGE_API_TOKEN, EDGE_SPEECH_URL } from '@/const/api';
-import { EdgeSpeechPayload } from '@/server/types';
-import { genSSML } from '@/utils/genSSML';
-import { genSendContent } from '@/utils/genSendContent';
-import { getHeadersAndData } from '@/utils/getHeadersAndData';
+import { EDGE_API_TOKEN, EDGE_SPEECH_URL } from '../const/api';
+import { EdgeSpeechPayload } from '../server/types';
+import { genSSML } from '../utils/genSSML';
+import { genSendContent } from '../utils/genSendContent';
+import { getHeadersAndData } from '../utils/getHeadersAndData';
 
 const configConent = JSON.stringify({
   context: {
