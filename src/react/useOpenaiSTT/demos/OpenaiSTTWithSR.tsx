@@ -4,6 +4,8 @@ import { Button, Input } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
 
+import { OPENAI_STT_API_URL } from '../../_const/api';
+
 export default () => {
   const store = useCreateStore();
   const api: any = useControls(
@@ -16,6 +18,7 @@ export default () => {
         label: 'OPENAI_PROXY_URL',
         value: '',
       },
+      url: OPENAI_STT_API_URL,
     },
     { store },
   );

@@ -4,11 +4,14 @@ import { useAudioRecorder } from '@/react/useAudioRecorder';
 import { useRecognition } from '@/react/useSpeechRecognition/useRecognition';
 
 export interface SpeechRecognitionOptions {
-  onBolbAvailable?: (blob: Blob) => void;
+  onBlobAvailable?: (blob: Blob) => void;
   onTextChange?: (value: string) => void;
 }
 
-export const useSpeechRecognition = (locale: string, options?: SpeechRecognitionOptions) => {
+export const useSpeechRecognition = (
+  locale: string,
+  { onBlobAvailable, onTextChange }: SpeechRecognitionOptions = {},
+) => {
   const {
     time,
     formattedTime,
@@ -16,12 +19,12 @@ export const useSpeechRecognition = (locale: string, options?: SpeechRecognition
     stop: stopRecord,
     blob,
     url,
-  } = useAudioRecorder(options?.onBolbAvailable);
+  } = useAudioRecorder(onBlobAvailable);
   const { isLoading, start, stop, text } = useRecognition(locale, {
     onRecognitionEnd: () => {
       stopRecord();
     },
-    onTextChange: options?.onTextChange,
+    onTextChange: onTextChange,
   });
 
   const handleStart = useCallback(() => {

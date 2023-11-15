@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { getRecordMineType } from '@/utils/getRecordMineType';
 import { secondsToMinutesAndSeconds } from '@/utils/secondsToMinutesAndSeconds';
 
-export const useAudioRecorder = (onBolbAvailable?: (blob: Blob) => void) => {
+export const useAudioRecorder = (onBlobAvailable?: (blob: Blob) => void) => {
   const [isRecording, setIsRecording] = useState(false);
 
   const [time, setTime] = useState(0);
@@ -49,7 +49,7 @@ export const useAudioRecorder = (onBolbAvailable?: (blob: Blob) => void) => {
           const blobData = event.data;
           setBlob(blobData);
           setUrl(URL.createObjectURL(blobData));
-          onBolbAvailable?.(event.data);
+          onBlobAvailable?.(event.data);
           recorder.stream.getTracks().forEach((t) => t.stop());
           // @ts-ignore
           setMediaRecorder();

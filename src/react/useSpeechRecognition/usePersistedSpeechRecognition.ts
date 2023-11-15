@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useAudioRecorder } from '@/react/useAudioRecorder';
 
@@ -7,8 +7,9 @@ import { SpeechRecognitionOptions } from './useSpeechRecognition';
 
 export const usePersistedSpeechRecognition = (
   locale: string,
-  options?: SpeechRecognitionOptions,
+  { onBlobAvailable, onTextChange }: SpeechRecognitionOptions = {},
 ) => {
+  const [resultText, setResultText] = useState<string>();
   const [texts, setTexts] = useState<string[]>([]);
   const [isGLobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const {
@@ -18,7 +19,7 @@ export const usePersistedSpeechRecognition = (
     stop: stopRecord,
     blob,
     url,
-  } = useAudioRecorder(options?.onBolbAvailable);
+  } = useAudioRecorder(onBlobAvailable);
   const { text, stop, start, isLoading } = useRecognition(locale, {
     onRecognitionEnd: () => {
       if (isGLobalLoading && !isLoading) {
@@ -41,11 +42,11 @@ export const usePersistedSpeechRecognition = (
     setIsGlobalLoading(false);
   }, [stop, stopRecord]);
 
-  const resultText = useMemo(() => {
+  useEffect(() => {
     const mergedText = [...texts, text].filter(Boolean).join(' ');
-    options?.onTextChange?.(mergedText);
-    return mergedText;
-  }, [texts, text, options?.onTextChange]);
+    setResultText(mergedText);
+    onTextChange?.(mergedText);
+  }, [texts, text, onTextChange]);
 
   return {
     blob,

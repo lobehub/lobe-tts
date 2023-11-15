@@ -1,6 +1,6 @@
 export { default as AudioPlayer, type AudioPlayerProps } from './AudioPlayer';
 export { default as AudioVisualizer, type AudioVisualizerProps } from './AudioVisualizer';
-export { useAudioPlayer } from './hooks/useAudioPlayer';
+export { type AudioPlayerHook, useAudioPlayer } from './hooks/useAudioPlayer';
 export { useAudioVisualizer } from './hooks/useAudioVisualizer';
 export { useBlobUrl } from './hooks/useBlobUrl';
 export { useStreamAudioPlayer } from './hooks/useStreamAudioPlayer';
@@ -21,3 +21,7 @@ export {
   useSpeechRecognition,
 } from './useSpeechRecognition/useSpeechRecognition';
 export { useSpeechSynthes } from './useSpeechSynthes';
+export { type EdgeSpeechOptions } from '@/services/fetchEdgeSpeech';
+export { type MicrosoftSpeechOptions } from '@/services/fetchMicrosoftSpeech';
+export { type OpenaiSttOptions } from '@/services/fetchOpenaiSTT';
+export { type OpenaiTtsOptions } from '@/services/fetchOpenaiTTS';

@@ -17,13 +17,14 @@ export interface STTConfig extends SpeechRecognitionOptions, SWRConfiguration {
 export const useOpenaiSTTWithRecord = (
   options: OpenaiSttOptions,
   {
-    onBolbAvailable,
+    onBlobAvailable,
     onTextChange,
     onSuccess,
     onError,
     onFinished,
     onStart,
     onStop,
+    ...restConfig
   }: STTConfig = {},
 ) => {
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
@@ -32,7 +33,7 @@ export const useOpenaiSTTWithRecord = (
   const { start, stop, blob, url, isRecording, time, formattedTime } = useAudioRecorder(
     (blobData) => {
       setShouldFetch(true);
-      onBolbAvailable?.(blobData);
+      onBlobAvailable?.(blobData);
     },
   );
 
@@ -63,6 +64,7 @@ export const useOpenaiSTTWithRecord = (
       handleStop();
       onFinished?.(data, ...rest);
     },
+    ...restConfig,
   });
 
   return {

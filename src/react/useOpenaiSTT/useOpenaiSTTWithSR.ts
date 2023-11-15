@@ -9,13 +9,14 @@ export const useOpenaiSTTWithSR = (
   locale: string,
   options: OpenaiSpeechRecognitionOptions,
   {
-    onBolbAvailable,
+    onBlobAvailable,
     onTextChange,
     onSuccess,
     onError,
     onFinished,
     onStart,
     onStop,
+    ...restConfig
   }: STTConfig = {},
 ) => {
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
@@ -30,9 +31,9 @@ export const useOpenaiSTTWithSR = (
     time,
     formattedTime,
   } = useSpeechRecognition(locale, {
-    onBolbAvailable: (blobData) => {
+    onBlobAvailable: (blobData) => {
       setShouldFetch(true);
-      onBolbAvailable?.(blobData);
+      onBlobAvailable?.(blobData);
     },
     onTextChange: (data) => {
       setText(data);
@@ -67,6 +68,7 @@ export const useOpenaiSTTWithSR = (
       handleStop();
       onFinished?.(data, ...rest);
     },
+    ...restConfig,
   });
 
   return {
