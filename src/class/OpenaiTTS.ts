@@ -14,5 +14,5 @@ export class OpenaiTTS {
 
   static localeOptions = getVoiceLocaleOptions();
 
-  fetch = fetchOpenaiTTS;
+  static fetch = fetchOpenaiTTS;
 }

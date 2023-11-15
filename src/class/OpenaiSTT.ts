@@ -1,5 +1,5 @@
 import { fetchOpenaiSTT } from '@/services/fetchOpenaiSTT';
 
-export class OpenaiSTT {
-  fetch = fetchOpenaiSTT;
-}
+export const OpenaiSTT = {
+  fetch: fetchOpenaiSTT,
+};

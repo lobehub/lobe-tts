@@ -16,5 +16,5 @@ export class EdgeSpeechTTS {
   static localeOptions = getVoiceLocaleOptions();
   static voiceList = edgeVoiceList;
   static voiceName = voiceName;
-  fetch = fetchEdgeSpeech;
+  static fetch = fetchEdgeSpeech;
 }

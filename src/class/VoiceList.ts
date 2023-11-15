@@ -16,23 +16,27 @@ export class VoiceList {
     return getSpeechSynthesVoiceOptions(this.locale);
   }
 
+  static allSpeechSynthesVoiceOptions = getSpeechSynthesVoiceOptions();
+
   get azureVoiceOptions() {
     return getAzureVoiceOptions(this.locale);
   }
+
+  static allAzureVoiceOptions = getAzureVoiceOptions();
 
   get edgeVoiceOptions() {
     return getEdgeVoiceOptions(this.locale);
   }
 
+  static allEdgeVoiceOptions = getEdgeVoiceOptions();
+
   get microsoftVoiceOptions() {
     return getEdgeVoiceOptions(this.locale);
   }
 
-  get openaiVoiceOptions() {
-    return getOpenaiVoiceOptions();
-  }
+  static allMicrosoftVoiceOptions = getEdgeVoiceOptions();
 
-  get localeOptions() {
-    return getVoiceLocaleOptions();
-  }
+  static openaiVoiceOptions = getOpenaiVoiceOptions();
+
+  static localeOptions = getVoiceLocaleOptions();
 }

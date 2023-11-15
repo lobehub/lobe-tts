@@ -1,9 +1,10 @@
-import { OPENAI_STT_API_URL } from '@lobehub/tts';
 import { useOpenaiSTTWithRecord } from '@lobehub/tts/react';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
+
+import { OPENAI_STT_API_URL } from '../../_const/api';
 
 export default () => {
   const store = useCreateStore();
