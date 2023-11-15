@@ -37,7 +37,7 @@
     "build:server": "tsc server.ts --declaration",
     "ci": "npm run lint && npm run type-check",
     "dev": "father dev",
-    "docs:build": "npm run setup && dumi build",
+    "docs:build": "npm run setup && npm run build && dumi build",
     "docs:build-analyze": "ANALYZE=1 dumi build",
     "docs:dev": "npm run setup && dumi dev",
     "doctor": "father doctor",
