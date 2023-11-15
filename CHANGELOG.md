@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.13.0-beta.1](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.6...v1.13.0-beta.1)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ✨ Features
+
+- **misc**: Add class.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add class ([07245e3](https://github.com/lobehub/lobe-tts/commit/07245e3))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.12.1-beta.6](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.5...v1.12.1-beta.6)
 
 <sup>Released on **2023-11-15**</sup>
