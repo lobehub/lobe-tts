@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.14.1](https://github.com/lobehub/lobe-tts/compare/v1.14.0...v1.14.1)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix to use due entries.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix to use due entries ([071a0fe](https://github.com/lobehub/lobe-tts/commit/071a0fe))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.14.0](https://github.com/lobehub/lobe-tts/compare/v1.13.0...v1.14.0)
 
 <sup>Released on **2023-11-15**</sup>
