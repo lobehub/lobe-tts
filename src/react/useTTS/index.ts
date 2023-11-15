@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import useSWR from 'swr';
+import useSWR, { type SWRConfiguration } from 'swr';
 
 import { AudioProps } from '@/react/AudioPlayer';
 import { useStreamAudioPlayer } from '@/react/hooks/useStreamAudioPlayer';
 import { splitTextIntoSegments } from '@/utils/splitTextIntoSegments';
 
-export interface TTSHook {
+export interface TTSHook extends SWRConfiguration {
   audio: AudioProps;
   isGlobalLoading: boolean;
   isLoading: boolean;
@@ -13,10 +13,17 @@ export interface TTSHook {
   stop: () => void;
 }
 
+export interface TTSConfig extends SWRConfiguration {
+  onFinish?: SWRConfiguration['onSuccess'];
+  onStart?: () => void;
+  onStop?: () => void;
+}
+
 export const useTTS = (
   key: string,
   text: string,
   fetchTTS: (segmentText: string) => Promise<AudioBuffer>,
+  { onError, onSuccess, onFinish, onStart, onStop, ...restSWRConfig }: TTSConfig = {},
 ): TTSHook => {
   const { load, reset, ...rest } = useStreamAudioPlayer();
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
@@ -33,6 +40,7 @@ export const useTTS = (
   }, []);
 
   const handleStop = useCallback(() => {
+    onStop?.();
     handleReset();
   }, []);
 
@@ -40,24 +48,29 @@ export const useTTS = (
     shouldFetch && textArray?.length > 0 ? [key, textArray?.[index]] : null,
     async () => await fetchTTS(textArray[index]),
     {
-      onError: (err) => {
+      onError: (err, ...rest) => {
+        onError?.(err, ...rest);
         console.error(err);
         handleReset();
       },
-      onSuccess: (data) => {
+      onSuccess: (data, ...rest) => {
+        onSuccess?.(data, ...rest);
         load(data);
         if (index < textArray.length - 1) {
           setIndex(index + 1);
         } else {
+          onFinish?.(data, ...rest);
           setShouldFetch(false);
           setIsGlobalLoading(false);
         }
       },
+      ...restSWRConfig,
     },
   );
 
   const handleStart = useCallback(() => {
     if (isLoading) return;
+    onStart?.();
     reset();
     setShouldFetch(true);
     setIsGlobalLoading(true);

@@ -3,7 +3,7 @@ import voiceName from '@/data/voiceList';
 import { fetchMicrosoftSpeech } from '@/services/fetchMicrosoftSpeech';
 import { getAzureVoiceOptions, getVoiceLocaleOptions } from '@/utils/getVoiceList';
 
-export class MicorsoftSpeechTTS {
+export class MicrosoftSpeechTTS {
   private locale?: string;
   constructor(locale?: string) {
     this.locale = locale;

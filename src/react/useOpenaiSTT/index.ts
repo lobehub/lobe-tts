@@ -1,4 +1,4 @@
-export { type OpenaiSTTFetcher, useOpenaiSTT } from './useOpenaiSTT';
+export { useOpenaiSTT } from './useOpenaiSTT';
 export { useOpenaiSTTWithPSR } from './useOpenaiSTTWithPSR';
 export {
   type OpenaiSpeechRecognitionOptions,

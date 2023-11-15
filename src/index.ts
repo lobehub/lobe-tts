@@ -1,5 +1,5 @@
 export { EdgeSpeechTTS } from './class/EdgeSpeechTTS';
-export { MicorsoftSpeechTTS } from './class/MicorsoftSpeechTTS';
+export { MicrosoftSpeechTTS } from './class/MicrosoftSpeechTTS';
 export { OpenaiSTT } from './class/OpenaiSTT';
 export { OpenaiTTS } from './class/OpenaiTTS';
 export { VoiceList } from './class/VoiceList';

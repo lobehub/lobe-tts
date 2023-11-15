@@ -9,7 +9,6 @@ export { useEdgeSpeech } from './useEdgeSpeech';
 export { useMicrosoftSpeech } from './useMicrosoftSpeech';
 export {
   type OpenaiSpeechRecognitionOptions,
-  type OpenaiSTTFetcher,
   useOpenaiSTT,
   useOpenaiSTTWithPSR,
   useOpenaiSTTWithRecord,
