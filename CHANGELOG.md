@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.13.0-beta.3](https://github.com/lobehub/lobe-tts/compare/v1.13.0-beta.2...v1.13.0-beta.3)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor the demo usage.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor the demo usage ([802c59a](https://github.com/lobehub/lobe-tts/commit/802c59a))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.13.0-beta.2](https://github.com/lobehub/lobe-tts/compare/v1.13.0-beta.1...v1.13.0-beta.2)
 
 <sup>Released on **2023-11-15**</sup>
