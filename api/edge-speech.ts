@@ -1,5 +1,4 @@
-import { createEdgeSpeechComletion } from '../src/server/createEdgeSpeechComletion';
-import { EdgeSpeechPayload } from '../src/server/types';
+import { EdgeSpeechPayload, createEdgeSpeechComletion } from '@lobehub/tts';
 
 export const config = {
   runtime: 'edge',
@@ -7,7 +6,8 @@ export const config = {
 
 export default async (req: Request) => {
   if (req.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
+
   const payload = (await req.json()) as EdgeSpeechPayload;
-  const res = await createEdgeSpeechComletion({ payload });
-  return res;
+
+  return createEdgeSpeechComletion({ payload });
 };

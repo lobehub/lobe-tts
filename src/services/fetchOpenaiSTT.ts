@@ -1,4 +1,4 @@
-import { OPENAI_API_KEY, OPENAI_PROXY_URL, OPENAI_STT_URL } from '@/const/api';
+import { OPENAI_BASE_URL, OPENAI_STT_URL } from '@/const/api';
 import { OpenAISTTPayload } from '@/server/types';
 import { RecordMineType, getRecordMineType } from '@/utils/getRecordMineType';
 
@@ -26,8 +26,7 @@ export const fetchOpenaiSTT = async (
   speech: Blob,
   { api = {}, model = 'whisper-1', mineType }: OpenaiSttOptions,
 ): Promise<string> => {
-  const key = api?.key || OPENAI_API_KEY;
-  const url = api?.proxy || OPENAI_PROXY_URL;
+  const { key, url = OPENAI_BASE_URL } = api;
 
   const payload: OpenAISTTPayload = {
     blob: speech,

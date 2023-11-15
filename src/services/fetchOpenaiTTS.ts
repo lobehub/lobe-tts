@@ -1,4 +1,4 @@
-import { OPENAI_API_KEY, OPENAI_PROXY_URL, OPENAI_TTS_URL } from '@/const/api';
+import { OPENAI_BASE_URL, OPENAI_TTS_URL } from '@/const/api';
 import { OpenAITTSPayload } from '@/server/types';
 import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
 import { type SsmlOptions } from '@/utils/genSSML';
@@ -18,8 +18,7 @@ export const fetchOpenaiTTS = async (
   input: string,
   { api = {}, model = 'tts-1', voice }: OpenaiTtsOptions,
 ): Promise<AudioBuffer> => {
-  const key = api?.key || OPENAI_API_KEY;
-  const url = api?.proxy || OPENAI_PROXY_URL;
+  const { key, url = OPENAI_BASE_URL } = api;
 
   const payload: OpenAITTSPayload = {
     input,

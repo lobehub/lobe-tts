@@ -1,5 +1,4 @@
-import { createMicrosoftSpeechComletion } from '../src/server/createMicrosoftSpeechComletion';
-import { MicrosoftSpeechPayload } from '../src/server/types';
+import { MicrosoftSpeechPayload, createMicrosoftSpeechComletion } from '@lobehub/tts';
 
 export const config = {
   runtime: 'edge',
