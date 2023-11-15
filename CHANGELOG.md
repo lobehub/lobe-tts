@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.13.0-beta.4](https://github.com/lobehub/lobe-tts/compare/v1.13.0-beta.3...v1.13.0-beta.4)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ✨ Features
+
+- **misc**: Add duplex to microsoft fetch.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add duplex to microsoft fetch ([205d97b](https://github.com/lobehub/lobe-tts/commit/205d97b))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.13.0-beta.3](https://github.com/lobehub/lobe-tts/compare/v1.13.0-beta.2...v1.13.0-beta.3)
 
 <sup>Released on **2023-11-15**</sup>
