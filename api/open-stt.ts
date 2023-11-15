@@ -1,7 +1,5 @@
+import { OpenAISTTPayload, createOpenaiAudioTranscriptionsCompletion } from '@lobehub/tts';
 import OpenAI from 'openai';
-
-import { createOpenaiAudioTranscriptionsCompletion } from '../src/server/createOpenaiAudioTranscriptionsCompletion';
-import { OpenAISTTPayload } from '../src/server/types';
 
 export const config = {
   runtime: 'edge',
