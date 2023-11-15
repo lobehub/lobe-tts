@@ -51,11 +51,10 @@ export default defineConfig({
   mfsu: isWin ? undefined : {},
   npmClient: 'pnpm',
   publicPath: '/',
-  resolve: isProduction
-    ? {
-        entryFile: './src/index.ts',
-      }
-    : undefined,
+  resolve: {
+    atomDirs: [{ dir: 'src/react', type: 'component' }],
+    entryFile: isProduction ? './src/index.ts' : undefined,
+  },
   styles: [
     `html, body { background: transparent;  }
 
