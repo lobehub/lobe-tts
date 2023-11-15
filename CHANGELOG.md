@@ -2,6 +2,39 @@
 
 # Changelog
 
+## [Version 1.12.0-beta.1](https://github.com/lobehub/lobe-tts/compare/v1.11.1...v1.12.0-beta.1)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor api.
+
+#### ✨ Features
+
+- **misc**: Enhance OpenAI speech-to-text functionality and modify API endpoints.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor api ([fde8346](https://github.com/lobehub/lobe-tts/commit/fde8346))
+
+#### What's improved
+
+- **misc**: Enhance OpenAI speech-to-text functionality and modify API endpoints ([61126aa](https://github.com/lobehub/lobe-tts/commit/61126aa))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.11.1](https://github.com/lobehub/lobe-tts/compare/v1.11.0...v1.11.1)
 
 <sup>Released on **2023-11-13**</sup>
