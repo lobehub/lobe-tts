@@ -57,7 +57,7 @@ export default defineConfig({
   publicPath: '/',
   resolve: {
     atomDirs: [{ dir: 'src/react', type: 'component' }],
-    entryFile: isProduction ? './src/react/index.ts' : undefined,
+    entryFile: isProduction ? './src/index.ts' : undefined,
   },
   styles: [
     `html, body { background: transparent;  }
