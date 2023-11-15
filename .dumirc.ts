@@ -1,4 +1,5 @@
 import { defineConfig } from 'dumi';
+import path from 'node:path';
 
 import { description, homepage, name } from './package.json';
 
@@ -41,6 +42,9 @@ const themeConfig = {
 };
 
 export default defineConfig({
+  alias: {
+    '@lobehub/tts/react': path.join(__dirname, './src/react'),
+  },
   apiParser: isProduction ? {} : false,
   base: '/',
   define: {
@@ -51,11 +55,10 @@ export default defineConfig({
   mfsu: isWin ? undefined : {},
   npmClient: 'pnpm',
   publicPath: '/',
-  resolve: isProduction
-    ? {
-        entryFile: './src/index.ts',
-      }
-    : undefined,
+  resolve: {
+    atomDirs: [{ dir: 'src/react', type: 'component' }],
+    entryFile: isProduction ? './src/index.ts' : undefined,
+  },
   styles: [
     `html, body { background: transparent;  }
 

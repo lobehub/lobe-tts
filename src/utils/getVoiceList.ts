@@ -4,9 +4,9 @@ import { flatten } from 'lodash-es';
 import azureVoiceList from '@/data/azureVoiceList';
 import edgeVoiceList from '@/data/edgeVoiceList';
 import voiceLocale from '@/data/locales';
-import nameList from '@/data/nameList';
 import openaiVoiceList from '@/data/openaiVoiceList';
 import speechSynthesVoiceList from '@/data/speechSynthesVoiceList';
+import voiceList from '@/data/voiceList';
 
 export const genSpeechSynthesVoiceList = () => {
   const data = speechSynthesis.getVoices();
@@ -38,7 +38,7 @@ export const getAzureVoiceOptions = (locale?: string): SelectProps['options'] =>
       ? (azureVoiceList as any)?.[locale] || []
       : flatten(Object.values(azureVoiceList));
 
-  return data.map((voice: any) => ({ label: (nameList as any)?.[voice] || voice, value: voice }));
+  return data.map((voice: any) => ({ label: (voiceList as any)?.[voice] || voice, value: voice }));
 };
 
 export const getEdgeVoiceOptions = (locale?: string): SelectProps['options'] => {
@@ -46,7 +46,7 @@ export const getEdgeVoiceOptions = (locale?: string): SelectProps['options'] => 
     locale && (edgeVoiceList as any)[locale]
       ? (edgeVoiceList as any)[locale] || []
       : flatten(Object.values(edgeVoiceList));
-  return data.map((voice: any) => ({ label: (nameList as any)?.[voice] || voice, value: voice }));
+  return data.map((voice: any) => ({ label: (voiceList as any)?.[voice] || voice, value: voice }));
 };
 
 export const getOpenaiVoiceOptions = (): SelectProps['options'] => {
@@ -55,10 +55,4 @@ export const getOpenaiVoiceOptions = (): SelectProps['options'] => {
 
 export const getVoiceLocaleOptions = (): SelectProps['options'] => {
   return Object.entries(voiceLocale).map(([value, label]) => ({ label, value }));
-};
-
-export const genLevaOptions = (options: SelectProps['options']) => {
-  const data: any = {};
-  options?.forEach((item: any) => (data[item?.label || item?.value] = item?.value));
-  return data;
 };

@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/tts",
-  "version": "1.12.0",
+  "version": "1.13.0-beta.3",
   "description": "A high-quality & reliable TTS React Hooks library",
   "homepage": "https://github.com/lobehub/lobe-tts",
   "bugs": {
@@ -13,6 +13,20 @@
   "license": "MIT",
   "author": "LobeHub <i@lobehub.com>",
   "sideEffects": false,
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.js",
+      "module": "./es/index.js"
+    },
+    "./react": {
+      "types": "./es/react/index.d.ts",
+      "import": "./es/react/index.js",
+      "module": "./es/react/index.js"
+    }
+  },
   "main": "es/index.js",
   "module": "es/index.js",
   "types": "es/index.d.ts",
@@ -21,10 +35,9 @@
   ],
   "scripts": {
     "build": "father build",
-    "build:server": "tsc server.ts --declaration",
     "ci": "npm run lint && npm run type-check",
     "dev": "father dev",
-    "docs:build": "npm run setup && dumi build",
+    "docs:build": "npm run setup && npm run build && dumi build",
     "docs:build-analyze": "ANALYZE=1 dumi build",
     "docs:dev": "npm run setup && dumi dev",
     "doctor": "father doctor",
@@ -66,11 +79,10 @@
     "antd-style": "^3",
     "lodash-es": "^4",
     "lucide-react": "latest",
-    "microsoft-cognitiveservices-speech-sdk": "^1",
+    "openai": "^4.17.3",
     "query-string": "^8",
     "react-error-boundary": "^4.0.11",
     "react-layout-kit": "^1",
-    "ssml-document": "^1",
     "swr": "^2",
     "url-join": "^5",
     "uuid": "^9"

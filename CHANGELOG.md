@@ -2,6 +2,231 @@
 
 # Changelog
 
+## [Version 1.13.0-beta.3](https://github.com/lobehub/lobe-tts/compare/v1.13.0-beta.2...v1.13.0-beta.3)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor the demo usage.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor the demo usage ([802c59a](https://github.com/lobehub/lobe-tts/commit/802c59a))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 1.13.0-beta.2](https://github.com/lobehub/lobe-tts/compare/v1.13.0-beta.1...v1.13.0-beta.2)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ✨ Features
+
+- **misc**: Add SWR config to hooks.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add SWR config to hooks ([2c49e02](https://github.com/lobehub/lobe-tts/commit/2c49e02))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 1.13.0-beta.1](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.6...v1.13.0-beta.1)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ✨ Features
+
+- **misc**: Add class.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add class ([07245e3](https://github.com/lobehub/lobe-tts/commit/07245e3))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 1.12.1-beta.6](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.5...v1.12.1-beta.6)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor to fix build.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor to fix build ([9858fcb](https://github.com/lobehub/lobe-tts/commit/9858fcb))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 1.12.1-beta.5](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.4...v1.12.1-beta.5)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor to fix build.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor to fix build ([d875be6](https://github.com/lobehub/lobe-tts/commit/d875be6))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 1.12.1-beta.4](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.3...v1.12.1-beta.4)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix client fetch.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix client fetch ([9262608](https://github.com/lobehub/lobe-tts/commit/9262608))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 1.12.1-beta.3](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.2...v1.12.1-beta.3)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Fix react entry.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Fix react entry ([6a4631d](https://github.com/lobehub/lobe-tts/commit/6a4631d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 1.12.1-beta.2](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.1...v1.12.1-beta.2)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: 将 react 部分抽取到 /react 子级路径下.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: 将 react 部分抽取到 /react 子级路径下 ([80b24e8](https://github.com/lobehub/lobe-tts/commit/80b24e8))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 1.12.1-beta.1](https://github.com/lobehub/lobe-tts/compare/v1.12.0...v1.12.1-beta.1)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor api.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor api ([a7c0095](https://github.com/lobehub/lobe-tts/commit/a7c0095))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.12.0](https://github.com/lobehub/lobe-tts/compare/v1.11.1...v1.12.0)
 
 <sup>Released on **2023-11-13**</sup>

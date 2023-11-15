@@ -1,36 +1,47 @@
-import { OPENAI_API_KEY, OPENAI_TTS_URL } from '@/const/api';
+import { OPENAI_BASE_URL, OPENAI_TTS_URL } from '@/const/api';
+import { OpenAITTSPayload } from '@/server/types';
 import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
 import { type SsmlOptions } from '@/utils/genSSML';
 
 export type OpenaiVoice = 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer';
 
-export interface OpenaiTtsOptions extends Pick<SsmlOptions, 'name'> {
+export interface OpenaiTtsOptions extends Pick<SsmlOptions, 'voice'>, OpenAITTSPayload {
   api: {
     key?: string;
     proxy?: string;
+    url?: string;
   };
   model?: 'tts-1' | 'tts-1-hd';
-  name: OpenaiVoice | string;
+  voice: OpenaiVoice;
 }
 export const fetchOpenaiTTS = async (
-  text: string,
-  { api = {}, model = 'tts-1', ...options }: OpenaiTtsOptions,
+  input: string,
+  { api = {}, model = 'tts-1', voice }: OpenaiTtsOptions,
 ): Promise<AudioBuffer> => {
-  const key = api?.key || OPENAI_API_KEY;
-  const url = OPENAI_TTS_URL(api?.proxy);
+  const { key, url = OPENAI_BASE_URL } = api;
 
-  const headers = new Headers({
-    'Authorization': `Bearer ${key}`,
-    'Content-Type': 'application/json',
-  });
+  const payload: OpenAITTSPayload = {
+    input,
+    options: {
+      model,
+      voice,
+    },
+  };
 
-  const body = JSON.stringify({
-    input: text,
-    model,
-    voice: options.name,
-  });
-
-  const response: Response = await fetch(url, { body, headers, method: 'POST' });
+  const response = await (api?.url
+    ? fetch(api.url, { body: JSON.stringify(payload), method: 'POST' })
+    : fetch(OPENAI_TTS_URL(url), {
+        body: JSON.stringify({
+          input,
+          model,
+          voice,
+        }),
+        headers: new Headers({
+          'Authorization': `Bearer ${key}`,
+          'Content-Type': 'application/json',
+        }),
+        method: 'POST',
+      }));
 
   if (!response.ok) {
     throw new Error('Network response was not ok');
