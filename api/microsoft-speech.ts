@@ -1,4 +1,5 @@
-import { MicrosoftSpeechPayload, createMicrosoftSpeechComletion } from '@/index';
+import { createMicrosoftSpeechComletion } from '../src/server/createMicrosoftSpeechComletion';
+import { MicrosoftSpeechPayload } from '../src/server/types';
 
 export const config = {
   runtime: 'edge',
