@@ -13,25 +13,27 @@
   "license": "MIT",
   "author": "LobeHub <i@lobehub.com>",
   "sideEffects": false,
-  "type": "module",
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "types": "./es/index.d.ts",
       "import": "./es/index.js",
-      "module": "./es/index.js"
+      "module": "./es/index.js",
+      "require": "./lib/index.js"
     },
     "./react": {
       "types": "./es/react/index.d.ts",
       "import": "./es/react/index.js",
-      "module": "./es/react/index.js"
+      "module": "./es/react/index.js",
+      "require": "./lib/react/index.js"
     }
   },
-  "main": "es/index.js",
+  "main": "lib/index.js",
   "module": "es/index.js",
   "types": "es/index.d.ts",
   "files": [
-    "es"
+    "es",
+    "lib"
   ],
   "scripts": {
     "build": "father build",
