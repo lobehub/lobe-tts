@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.12.1-beta.4](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.3...v1.12.1-beta.4)
+
+<sup>Released on **2023-11-15**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix client fetch.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix client fetch ([9262608](https://github.com/lobehub/lobe-tts/commit/9262608))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.12.1-beta.3](https://github.com/lobehub/lobe-tts/compare/v1.12.1-beta.2...v1.12.1-beta.3)
 
 <sup>Released on **2023-11-15**</sup>
