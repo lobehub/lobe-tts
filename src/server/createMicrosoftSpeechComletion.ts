@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { MICROSOFT_SPEECH_URL } from '../const/api';
-import { MicrosoftSpeechPayload } from '../server/types';
-import { genSSML } from '../utils/genSSML';
+import { MICROSOFT_SPEECH_URL } from '@/const/api';
+import { MicrosoftSpeechPayload } from '@/server/types';
+import { genSSML } from '@/utils/genSSML';
 
 interface CreateMicrosoftSpeechComletionOptions {
   payload: MicrosoftSpeechPayload;
@@ -41,6 +41,8 @@ export const createMicrosoftSpeechComletion = async ({
 
   const res = await fetch(MICROSOFT_SPEECH_URL, {
     body,
+    // @ts-ignore
+    duplex: 'half',
     headers: DEFAULT_HEADERS,
     method: 'POST',
     // @ts-ignore
