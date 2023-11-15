@@ -1,7 +1,4 @@
-import OpenAI from 'openai';
-
-import { OPENAI_API_KEY, OPENAI_PROXY_URL } from '@/const/api';
-import { createOpenaiAudioSpeechCompletion } from '@/server/createOpenaiAudioSpeechCompletion';
+import { OPENAI_API_KEY, OPENAI_PROXY_URL, OPENAI_TTS_URL } from '@/const/api';
 import { OpenAITTSPayload } from '@/server/types';
 import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
 import { type SsmlOptions } from '@/utils/genSSML';
@@ -34,9 +31,17 @@ export const fetchOpenaiTTS = async (
 
   const response = await (api?.url
     ? fetch(api.url, { body: JSON.stringify(payload), method: 'POST' })
-    : await createOpenaiAudioSpeechCompletion({
-        openai: new OpenAI({ apiKey: key, baseURL: url }),
-        payload,
+    : fetch(OPENAI_TTS_URL(url), {
+        body: JSON.stringify({
+          input,
+          model,
+          voice,
+        }),
+        headers: new Headers({
+          'Authorization': `Bearer ${key}`,
+          'Content-Type': 'application/json',
+        }),
+        method: 'POST',
       }));
 
   if (!response.ok) {

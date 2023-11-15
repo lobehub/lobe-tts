@@ -19,6 +19,10 @@ export const fetchEdgeSpeech = async (
     ? fetch(api.url, { body: JSON.stringify(payload), method: 'POST' })
     : await createEdgeSpeechComletion({ payload }));
 
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
   const arrayBuffer = await response.arrayBuffer();
   const audioBuffer = await arrayBufferConvert(arrayBuffer);
   return audioBuffer;

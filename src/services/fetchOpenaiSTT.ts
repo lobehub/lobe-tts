@@ -1,10 +1,18 @@
-import OpenAI from 'openai';
-
-import { OPENAI_API_KEY, OPENAI_PROXY_URL } from '@/const/api';
-import { createOpenaiAudioTranscriptionsCompletion } from '@/server/createOpenaiAudioTranscriptionsCompletion';
+import { OPENAI_API_KEY, OPENAI_PROXY_URL, OPENAI_STT_URL } from '@/const/api';
 import { OpenAISTTPayload } from '@/server/types';
 import { RecordMineType, getRecordMineType } from '@/utils/getRecordMineType';
 
+const genSTTBody = ({ blob, options }: OpenAISTTPayload) => {
+  const filename = `${Date.now()}.${options.mineType.extension}`;
+  const file = new File([blob], filename, {
+    type: options.mineType.mineType,
+  });
+
+  const body = new FormData();
+  body.append('file', file);
+  body.append('model', options.model);
+  return body;
+};
 export interface OpenaiSttOptions {
   api?: {
     key?: string;
@@ -14,8 +22,6 @@ export interface OpenaiSttOptions {
   mineType?: RecordMineType;
   model?: 'whisper-1';
 }
-
-// 纯文本生成语音
 export const fetchOpenaiSTT = async (
   speech: Blob,
   { api = {}, model = 'whisper-1', mineType }: OpenaiSttOptions,
@@ -31,12 +37,21 @@ export const fetchOpenaiSTT = async (
     },
   };
 
-  const response = (await (api?.url
+  const response = await (api?.url
     ? fetch(api.url, { body: JSON.stringify(payload), method: 'POST' })
-    : createOpenaiAudioTranscriptionsCompletion({
-        openai: new OpenAI({ apiKey: key, baseURL: url }),
-        payload,
-      }))) as string;
+    : fetch(OPENAI_STT_URL(url), {
+        body: genSTTBody(payload),
+        headers: new Headers({
+          Authorization: `Bearer ${key}`,
+        }),
+        method: 'POST',
+      }));
 
-  return response;
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  const json = await response.json();
+
+  return json.text;
 };

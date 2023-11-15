@@ -1,3 +1,5 @@
+import urlJoin from 'url-join';
+
 export const MICROSOFT_SPEECH_URL =
   'https://southeastasia.api.speech.microsoft.com/accfreetrial/texttospeech/acc/v3.0-beta1/vcg/speak';
 export const EDGE_SPEECH_URL =
@@ -19,3 +21,7 @@ export const OPENAI_PROXY_URL =
   process.env.OPENAI_PROXY_URL ||
   process.env.NEXT_PUBLIC_OPENAI_PROXY_URL ||
   'https://api.openai.com/v1';
+
+export const OPENAI_TTS_URL = (api?: string) => urlJoin(api || OPENAI_PROXY_URL, 'audio/speech');
+export const OPENAI_STT_URL = (api?: string) =>
+  urlJoin(api || OPENAI_PROXY_URL, 'audio/transcriptions');

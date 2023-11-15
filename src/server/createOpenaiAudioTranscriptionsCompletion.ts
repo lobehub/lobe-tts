@@ -25,5 +25,5 @@ export const createOpenaiAudioTranscriptionsCompletion = async ({
     { headers: { Accept: '*/*' } },
   );
 
-  return response.text;
+  return response;
 };

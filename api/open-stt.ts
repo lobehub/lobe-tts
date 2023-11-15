@@ -15,5 +15,9 @@ export default async (req: Request) => {
   if (!OPENAI_API_KEY) return new Response('OPENAI_API_KEY is not set', { status: 500 });
   const openai = new OpenAI({ apiKey: OPENAI_API_KEY, baseURL: OPENAI_PROXY_URL });
   const res = await createOpenaiAudioTranscriptionsCompletion({ openai, payload });
-  return res;
+  return new Response(JSON.stringify(res), {
+    headers: {
+      'content-type': 'application/json;charset=UTF-8',
+    },
+  });
 };
