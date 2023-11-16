@@ -7,8 +7,9 @@ import voiceLocale from '@/core/data/locales';
 import speechSynthesisVoiceList from './voiceList';
 
 const genSpeechSynthesisVoiceList = () => {
-  if (!SpeechSynthesis) return;
+  if (!SpeechSynthesis) return speechSynthesisVoiceList;
   const data = SpeechSynthesis?.getVoices();
+  if (!data) return speechSynthesisVoiceList;
   const localeKeys = Object.keys(voiceLocale);
   const list: any = {};
   for (const voice of data) {
@@ -22,11 +23,9 @@ const genSpeechSynthesisVoiceList = () => {
 };
 
 export const getSpeechSynthesisVoiceOptions = (locale?: string): SelectProps['options'] => {
-  const speechSynthesVoiceList = genSpeechSynthesisVoiceList();
+  const voiceList = genSpeechSynthesisVoiceList();
   const data: string[] =
-    locale && speechSynthesVoiceList?.[locale]
-      ? speechSynthesVoiceList?.[locale] || []
-      : flatten(Object.values(speechSynthesVoiceList));
+    locale && voiceList?.[locale] ? voiceList?.[locale] || [] : flatten(Object.values(voiceList));
 
   return data.map((voice) => ({ label: voice, value: voice }));
 };
