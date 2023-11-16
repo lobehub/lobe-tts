@@ -2,6 +2,33 @@
 
 # Changelog
 
+### [Version 1.17.1](https://github.com/lobehub/lobe-tts/compare/v1.17.0...v1.17.1)
+
+<sup>Released on **2023-11-16**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Add speech synthesis and recognition polyfill, Fix export, Fix options type export.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Add speech synthesis and recognition polyfill ([76269d9](https://github.com/lobehub/lobe-tts/commit/76269d9))
+- **misc**: Fix export ([a01cb3c](https://github.com/lobehub/lobe-tts/commit/a01cb3c))
+- **misc**: Fix options type export ([4402715](https://github.com/lobehub/lobe-tts/commit/4402715))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.17.0](https://github.com/lobehub/lobe-tts/compare/v1.16.2...v1.17.0)
 
 <sup>Released on **2023-11-16**</sup>
