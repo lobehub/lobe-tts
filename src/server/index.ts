@@ -1,2 +1,8 @@
-export { createOpenaiAudioSpeech } from './createOpenaiAudioSpeech';
-export { createOpenaiAudioTranscriptions } from './createOpenaiAudioTranscriptions';
+export {
+  createOpenaiAudioSpeech,
+  type CreateOpenaiAudioSpeechCompletionOptions,
+} from './createOpenaiAudioSpeech';
+export {
+  createOpenaiAudioTranscriptions,
+  type CreateOpenaiAudioTranscriptionsOptions,
+} from './createOpenaiAudioTranscriptions';

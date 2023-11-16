@@ -5,7 +5,7 @@ import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
 
-import { MICROSOFT_SPEECH_API_URL } from '../../_util/api';
+import { MICROSOFT_SPEECH_BACKEND_URL } from '../../_util/api';
 import { genLevaOptions } from '../../_util/leva';
 
 const defaultText = '这是一段使用 Microsoft Speech 的语音演示';
@@ -14,9 +14,9 @@ export default () => {
   const store = useCreateStore();
   const api: any = useControls(
     {
-      url: {
-        label: 'MICROSOFT_SPEECH_API_URL',
-        value: MICROSOFT_SPEECH_API_URL,
+      backendUrl: {
+        label: 'MICROSOFT_SPEECH_BACKEND_URL',
+        value: MICROSOFT_SPEECH_BACKEND_URL,
       },
     },
     { store },
@@ -36,19 +36,7 @@ export default () => {
         value: 0,
       },
       style: {
-        options: [
-          'affectionate',
-          'angry',
-          'calm',
-          'cheerful',
-          'disgruntled',
-          'embarrassed',
-          'fearful',
-          'general',
-          'gentle',
-          'sad',
-          'serious',
-        ],
+        options: MicrosoftSpeechTTS.styleList,
         value: 'general',
       },
       voice: {

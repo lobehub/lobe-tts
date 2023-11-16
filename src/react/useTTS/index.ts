@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import useSWR, { type SWRConfiguration } from 'swr';
 
 import { splitTextIntoSegments } from '@/core/utils/splitTextIntoSegments';
-import { AudioProps } from '@/react/AudioPlayer';
+import { type AudioProps } from '@/react/AudioPlayer';
 import { useStreamAudioPlayer } from '@/react/hooks/useStreamAudioPlayer';
 
 export interface TTSHook extends SWRConfiguration {

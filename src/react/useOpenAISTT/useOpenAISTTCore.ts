@@ -1,12 +1,9 @@
 import useSWR, { type SWRConfiguration } from 'swr';
 
-import { OpenAISTTPayload, OpenaiSTT } from '@/core/OpenAISTT';
+import { type OpenAISTTAPI, type OpenAISTTPayload, OpenaiSTT } from '@/core/OpenAISTT';
 
 export interface OpenAISTTCoreOptions extends OpenAISTTPayload, SWRConfiguration {
-  api?: {
-    key: string;
-    url: string;
-  };
+  api?: OpenAISTTAPI;
   shouldFetch?: boolean;
 }
 export const useOpenAISTTCore = (config: OpenAISTTCoreOptions) => {
@@ -16,10 +13,7 @@ export const useOpenAISTTCore = (config: OpenAISTTCoreOptions) => {
   return useSWR(
     shouldFetch && speech ? key : null,
     async () => {
-      const instance = new OpenaiSTT({
-        apiKey: api?.key,
-        baseUrl: api?.url,
-      });
+      const instance = new OpenaiSTT(api);
 
       return instance.create({ options, speech });
     },

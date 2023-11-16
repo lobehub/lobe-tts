@@ -6,6 +6,6 @@ title: useMicrosoftSpeech
 
 ## hooks
 
-- ENV: `MICROSOFT_SPEECH_API_URL`
+- ENV: `MICROSOFT_SPEECH_BACKEND_URL`
 
 <code src="./demos/index.tsx" nopadding></code>

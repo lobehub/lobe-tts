@@ -2,9 +2,8 @@ import urlJoin from 'url-join';
 
 import { OPENAI_BASE_URL } from '@/core/const/api';
 import { arrayBufferConvert } from '@/core/utils/arrayBufferConvert';
-import { getVoiceLocaleOptions } from '@/core/utils/getVoiceList';
 
-import openaiVoiceList, { getOpenaiVoiceOptions } from './voiceList';
+import voiceList, { getOpenaiVoiceOptions } from './voiceList';
 
 export type OpenaiVoice = 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer';
 
@@ -25,33 +24,49 @@ export interface OpenAITTSPayload {
   };
 }
 
-export class OpenAITTS {
-  static voiceList = openaiVoiceList;
-  private BASE_URL: string;
-  private OPENAI_API_KEY: string | undefined;
+export interface OpenAITTSAPI {
+  apiKey?: string;
+  backendUrl?: string;
+  baseUrl?: string;
+}
 
-  constructor({ baseUrl, apiKey }: { apiKey?: string; baseUrl?: string } = {}) {
-    this.BASE_URL = baseUrl || OPENAI_BASE_URL;
+export class OpenAITTS {
+  private OPENAI_BASE_URL: string;
+  private OPENAI_API_KEY: string | undefined;
+  private BACKEND_URL: string | undefined;
+
+  constructor({ baseUrl, apiKey, backendUrl }: OpenAITTSAPI = {}) {
+    this.OPENAI_BASE_URL = baseUrl || OPENAI_BASE_URL;
     this.OPENAI_API_KEY = apiKey;
+    this.BACKEND_URL = backendUrl;
   }
 
   get voiceOptions() {
     return getOpenaiVoiceOptions();
   }
 
-  static localeOptions = getVoiceLocaleOptions();
+  static voiceList = voiceList;
 
-  create = async ({ input, options }: OpenAITTSPayload): Promise<AudioBuffer> => {
-    const url = urlJoin(this.BASE_URL, 'audio/speech');
+  fetch = async (payload: OpenAITTSPayload) => {
+    const url = urlJoin(this.OPENAI_BASE_URL, 'audio/speech');
+    return this.BACKEND_URL
+      ? fetch(this.BACKEND_URL, { body: JSON.stringify(payload), method: 'POST' })
+      : fetch(url, {
+          body: JSON.stringify({
+            input: payload.input,
+            model: payload.options?.model || 'tts-1',
+            voice: payload.options.voice,
+          }),
+          headers: new Headers({
+            'Authorization': `Bearer ${this.OPENAI_API_KEY}`,
+            'Content-Type': 'application/json',
+          }),
+          method: 'POST',
+        });
+  };
 
-    const response = await fetch(url, {
-      body: JSON.stringify({ input, model: options?.model || 'tts-1', voice: options.voice }),
-      headers: new Headers({
-        'Authorization': `Bearer ${this.OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-      }),
-      method: 'POST',
-    });
+  create = async (payload: OpenAITTSPayload): Promise<AudioBuffer> => {
+    const response = await this.fetch(payload);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');

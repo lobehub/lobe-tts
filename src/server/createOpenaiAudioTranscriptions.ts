@@ -1,8 +1,8 @@
 import OpenAI from 'openai';
 
-import { OpenAISTTPayload } from '@/core/OpenAISTT';
+import type { OpenAISTTPayload } from '@/core/OpenAISTT';
 
-interface CreateOpenaiAudioTranscriptionsOptions {
+export interface CreateOpenaiAudioTranscriptionsOptions {
   openai: OpenAI;
   payload: OpenAISTTPayload;
 }

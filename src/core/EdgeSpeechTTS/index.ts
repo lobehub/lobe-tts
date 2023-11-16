@@ -1,30 +1,24 @@
 import edgeVoiceList from '@/core/EdgeSpeechTTS/edgeVoiceList';
 import voiceName from '@/core/data/voiceList';
 import { arrayBufferConvert } from '@/core/utils/arrayBufferConvert';
-import { SsmlOptions } from '@/core/utils/genSSML';
 import { getVoiceLocaleOptions } from '@/core/utils/getVoiceList';
 
-import { createEdgeSpeech } from './createEdgeSpeech';
+import { type EdgeSpeechPayload, createEdgeSpeech } from './createEdgeSpeech';
 import { getEdgeVoiceOptions } from './options';
 
-export interface EdgeSpeechPayload {
-  /**
-   * @title 语音合成的文本
-   */
-  input: string;
-  /**
-   * @title SSML 语音合成的配置
-   */
-  options: Pick<SsmlOptions, 'voice'>;
+export type { EdgeSpeechPayload } from './createEdgeSpeech';
+
+export interface EdgeSpeechAPI {
+  backendURL?: string;
 }
 
 export class EdgeSpeechTTS {
   private locale?: string;
-  private BASE_URL: string | undefined;
+  private BACKEND_URL: string | undefined;
 
-  constructor({ baseURL, locale }: { baseURL?: string; locale?: string } = {}) {
+  constructor({ backendURL, locale }: EdgeSpeechAPI & { locale?: string } = {}) {
     this.locale = locale;
-    this.BASE_URL = baseURL;
+    this.BACKEND_URL = backendURL;
   }
 
   get voiceOptions() {
@@ -37,8 +31,8 @@ export class EdgeSpeechTTS {
   static createRequest = createEdgeSpeech;
 
   private fetch = async (payload: EdgeSpeechPayload) => {
-    const response = await (this.BASE_URL
-      ? fetch(this.BASE_URL, { body: JSON.stringify(payload), method: 'POST' })
+    const response = await (this.BACKEND_URL
+      ? fetch(this.BACKEND_URL, { body: JSON.stringify(payload), method: 'POST' })
       : createEdgeSpeech({ payload }));
 
     if (!response.ok) {

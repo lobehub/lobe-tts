@@ -2,7 +2,10 @@ import { useCallback } from 'react';
 
 import { useAudioRecorder } from '@/react/useAudioRecorder';
 
-import { SpeechRecognitionCoreOptions, useSpeechRecognitionCore } from './useSpeechRecognitionCore';
+import {
+  type SpeechRecognitionCoreOptions,
+  useSpeechRecognitionCore,
+} from './useSpeechRecognitionCore';
 
 export interface SpeechRecognitionRecorderOptions extends SpeechRecognitionCoreOptions {
   onBlobAvailable?: (blob: Blob) => void;

@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { useOpenAISTTCore } from '@/react/useOpenAISTT/useOpenAISTTCore';
 import { useSpeechRecognitionInteractive } from '@/react/useSpeechRecognition/useSpeechRecognitionInteractive';
 
-import { OpenAISTTRecorderOptions } from './useOpenAISTTRecorder';
+import { type OpenAISTTRecorderOptions } from './useOpenAISTTRecorder';
 
 export const useOpenAISTTInteractive = (
   locale: string,

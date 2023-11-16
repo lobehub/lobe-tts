@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
-import { type MicrosoftSpeechPayload, MicrosoftSpeechTTS } from '@/core/MicrosoftSpeechTTS';
-import { TTSConfig, useTTS } from '@/react/useTTS';
+import {
+  type MicrosoftSpeechAPI,
+  type MicrosoftSpeechPayload,
+  MicrosoftSpeechTTS,
+} from '@/core/MicrosoftSpeechTTS';
+import { type TTSConfig, useTTS } from '@/react/useTTS';
 
 export interface MicrosoftSpeechOptions extends Pick<MicrosoftSpeechPayload, 'options'>, TTSConfig {
-  api?: {
-    url?: string;
-  };
+  api?: MicrosoftSpeechAPI;
   locale?: string;
 }
 
@@ -17,7 +19,7 @@ export const useMicrosoftSpeech = (defaultText: string, config: MicrosoftSpeechO
     options.voice,
     text,
     (segmentText: string) => {
-      const instance = new MicrosoftSpeechTTS({ baseURL: api?.url, locale });
+      const instance = new MicrosoftSpeechTTS({ ...api, locale });
       return instance.create({ input: segmentText, options });
     },
     swrConfig,

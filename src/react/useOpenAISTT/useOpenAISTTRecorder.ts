@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
-import { SWRConfiguration } from 'swr';
+import type { SWRConfiguration } from 'swr';
 
 import { useAudioRecorder } from '@/react/useAudioRecorder';
 import { useOpenAISTTCore } from '@/react/useOpenAISTT/useOpenAISTTCore';
-import { SpeechRecognitionRecorderOptions } from '@/react/useSpeechRecognition/useSpeechRecognitionAutoStop';
+import { type SpeechRecognitionRecorderOptions } from '@/react/useSpeechRecognition/useSpeechRecognitionAutoStop';
 
-import { OpenAISTTCoreOptions } from './useOpenAISTTCore';
+import { type OpenAISTTCoreOptions } from './useOpenAISTTCore';
 
 export interface OpenAISTTRecorderOptions
   extends SpeechRecognitionRecorderOptions,

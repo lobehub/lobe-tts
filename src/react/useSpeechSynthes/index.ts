@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { SpeechSynthesis, SpeechSynthesisUtterance } from '@/core/const/polyfill';
-import { SsmlOptions } from '@/core/utils/genSSML';
+import { type SsmlOptions } from '@/core/utils/genSSML';
 
 export interface SpeechSynthesOptions extends Pick<SsmlOptions, 'voice' | 'rate' | 'pitch'> {
   onStart?: () => void;

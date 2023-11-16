@@ -89,7 +89,7 @@ This project provides some additional configuration items set with environment v
 | Environment Variable | Description                                                                                                                                   | Default                     |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
 | `OPENAI_API_KEY`     | This is the API key you apply on the OpenAI account page                                                                                      | `sk-xxxxxx...xxxxxx`        |
-| `OPENAI_PROXY_URL`   | If you manually configure the OpenAI interface proxy, you can use this configuration item to override the default OpenAI API request base URL | `https://api.openai.com/v1` |
+| `OPENAI_BASE_URL`    | If you manually configure the OpenAI interface proxy, you can use this configuration item to override the default OpenAI API request base URL | `https://api.openai.com/v1` |
 
 <div align="right">
 

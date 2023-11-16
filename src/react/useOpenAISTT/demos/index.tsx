@@ -10,12 +10,12 @@ export default () => {
   const store = useCreateStore();
   const api: any = useControls(
     {
-      key: {
+      apiKey: {
         label: 'OPENAI_API_KEY',
         value: '',
       },
-      proxy: {
-        label: 'OPENAI_PROXY_URL',
+      baseUrl: {
+        label: 'OPENAI_BASE_URL',
         value: OPENAI_BASE_URL,
       },
     },

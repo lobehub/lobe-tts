@@ -1,19 +1,24 @@
+import styleList from '@/core/data/styleList';
 import voiceName from '@/core/data/voiceList';
 import { arrayBufferConvert } from '@/core/utils/arrayBufferConvert';
 import { getVoiceLocaleOptions } from '@/core/utils/getVoiceList';
 
-import { MicrosoftSpeechPayload, createMicrosoftSpeech } from './createMicrosoftSpeech';
+import { type MicrosoftSpeechPayload, createMicrosoftSpeech } from './createMicrosoftSpeech';
 import azureVoiceList, { getAzureVoiceOptions } from './voiceList';
 
 export type { MicrosoftSpeechPayload } from './createMicrosoftSpeech';
 
+export interface MicrosoftSpeechAPI {
+  backendUrl?: string;
+}
+
 export class MicrosoftSpeechTTS {
   private locale?: string;
-  private BASE_URL: string | undefined;
+  private BACKEND_URL: string | undefined;
 
-  constructor({ baseURL, locale }: { baseURL?: string; locale?: string } = {}) {
+  constructor({ backendUrl, locale }: MicrosoftSpeechAPI & { locale?: string } = {}) {
     this.locale = locale;
-    this.BASE_URL = baseURL;
+    this.BACKEND_URL = backendUrl;
   }
   get voiceOptions() {
     return getAzureVoiceOptions(this.locale);
@@ -24,10 +29,11 @@ export class MicrosoftSpeechTTS {
 
   static voiceList = azureVoiceList;
   static voiceName = voiceName;
+  static styleList = styleList;
 
   private fetch = async (payload: MicrosoftSpeechPayload) => {
-    const response = await (this.BASE_URL
-      ? fetch(this.BASE_URL, { body: JSON.stringify(payload), method: 'POST' })
+    const response = await (this.BACKEND_URL
+      ? fetch(this.BACKEND_URL, { body: JSON.stringify(payload), method: 'POST' })
       : createMicrosoftSpeech({ payload }));
 
     if (!response.ok) {

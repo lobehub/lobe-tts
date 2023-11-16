@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { useAudioRecorder } from '@/react/useAudioRecorder';
-import { SpeechRecognitionRecorderOptions } from '@/react/useSpeechRecognition/useSpeechRecognitionAutoStop';
+import { type SpeechRecognitionRecorderOptions } from '@/react/useSpeechRecognition/useSpeechRecognitionAutoStop';
 
 import { useSpeechRecognitionCore } from './useSpeechRecognitionCore';
 

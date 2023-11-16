@@ -1,8 +1,8 @@
 import OpenAI from 'openai';
 
-import { OpenAITTSPayload } from '../core/OpenAITTS';
+import type { OpenAITTSPayload } from '../core/OpenAITTS';
 
-interface CreateOpenaiAudioSpeechCompletionOptions {
+export interface CreateOpenaiAudioSpeechCompletionOptions {
   openai: OpenAI;
   payload: OpenAITTSPayload;
 }
