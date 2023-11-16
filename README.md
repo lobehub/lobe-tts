@@ -44,7 +44,7 @@ A high-quality & reliable TTS React Hooks library
 
 ## 📦 Installation
 
-> **Important**\
+> \[!IMPORTANT]\
 > This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
 
 To install `@lobehub/tts`, run the following command:
@@ -57,7 +57,7 @@ $ bun add @lobehub/tts
 
 ### Compile with Next.js
 
-> **Note**\
+> \[!NOTE]\
 > By work correct with Next.js SSR, add `transpilePackages: ['@lobehub/tts']` to `next.config.js`. For example:
 
 ```js
@@ -86,17 +86,10 @@ Click button below to deploy your private plugins' gateway.
 
 This project provides some additional configuration items set with environment variables:
 
-| Environment Variable       | Description                                                                                                                                             | Default                     |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `ALLOW_ORIGINS`            | Allow origins , string or string array                                                                                                                  |                             |
-| `OPENAI_API_KEY`           | This is the API key you apply on the OpenAI account page                                                                                                | `sk-xxxxxx...xxxxxx`        |
-| `OPENAI_PROXY_URL`         | If you manually configure the OpenAI interface proxy, you can use this configuration item to override the default OpenAI API request base URL           | `https://api.openai.com/v1` |
-| `AZURE_SPEECH_KEY`         | This is the API key of Azure Speech Service                                                                                                             |                             |
-| `AZURE_SPEECH_REGION`      | This is the region of Azure Speech Service                                                                                                              |                             |
-| `AZURE_SPEECH_PROXY_URL`   | If you manually configure the AZURE Speech interface proxy, you can use this configuration item to override the default Speech API request base URL     | `/api/azure-speech`         |
-| `MICROSOFT_SPEECH_API_URL` | If you manually configure the Microsoft Speech interface proxy, you can use this configuration item to override the default Speech API request base URL | `/api/microsoft-speech`     |
-| `EDGE_API_TOKEN`           | This is the API key of Edge Speech Service                                                                                                              |                             |
-| `EDGE_SPEECH_API_URL`      | If you manually configure the Edge interface proxy, you can use this configuration item to override the default Edge wss request base URL               |                             |
+| Environment Variable | Description                                                                                                                                   | Default                     |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| `OPENAI_API_KEY`     | This is the API key you apply on the OpenAI account page                                                                                      | `sk-xxxxxx...xxxxxx`        |
+| `OPENAI_PROXY_URL`   | If you manually configure the OpenAI interface proxy, you can use this configuration item to override the default OpenAI API request base URL | `https://api.openai.com/v1` |
 
 <div align="right">
 
