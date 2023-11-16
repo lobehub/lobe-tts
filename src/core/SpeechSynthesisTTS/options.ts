@@ -1,14 +1,14 @@
 import { SelectProps } from 'antd';
 import { flatten } from 'lodash-es';
 
-import { speechSynthesis } from '@/core/const/polyfill';
+import { SpeechSynthesis } from '@/core/const/polyfill';
 import voiceLocale from '@/core/data/locales';
 
 import speechSynthesisVoiceList from './voiceList';
 
 const genSpeechSynthesisVoiceList = () => {
-  if (!speechSynthesis) return;
-  const data = speechSynthesis?.getVoices();
+  if (!SpeechSynthesis) return;
+  const data = SpeechSynthesis?.getVoices();
   const localeKeys = Object.keys(voiceLocale);
   const list: any = {};
   for (const voice of data) {
