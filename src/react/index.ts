@@ -8,7 +8,6 @@ export { useAudioRecorder } from './useAudioRecorder';
 export { type EdgeSpeechOptions, useEdgeSpeech } from './useEdgeSpeech';
 export { type MicrosoftSpeechOptions, useMicrosoftSpeech } from './useMicrosoftSpeech';
 export {
-  type OpenaiSpeechRecognitionOptions,
   type OpenAISTTConfig,
   useOpenaiSTT,
   useOpenaiSTTWithPSR,
