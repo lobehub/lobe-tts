@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.16.2](https://github.com/lobehub/lobe-tts/compare/v1.16.1...v1.16.2)
+
+<sup>Released on **2023-11-16**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor to class usage and ui.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor to class usage and ui ([0a47f03](https://github.com/lobehub/lobe-tts/commit/0a47f03))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.16.1](https://github.com/lobehub/lobe-tts/compare/v1.16.0...v1.16.1)
 
 <sup>Released on **2023-11-16**</sup>
