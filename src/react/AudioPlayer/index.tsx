@@ -1,7 +1,7 @@
-import { ActionIcon, ActionIconProps, Icon, Tag } from '@lobehub/ui';
+import { ActionIcon, type ActionIconProps, Icon, Tag } from '@lobehub/ui';
 import { Dropdown, Slider } from 'antd';
 import { Download, PauseCircle, Play, StopCircle } from 'lucide-react';
-import React, { memo, useCallback, useMemo } from 'react';
+import { type CSSProperties, memo, useCallback, useMemo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 import { secondsToMinutesAndSeconds } from '@/core/utils/secondsToMinutesAndSeconds';
@@ -28,9 +28,9 @@ export interface AudioPlayerProps {
   onPlay?: () => void;
   onStop?: () => void;
   showSlider?: boolean;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   timeRender?: 'tag' | 'text';
-  timeStyle?: React.CSSProperties;
+  timeStyle?: CSSProperties;
   timeType?: 'left' | 'current' | 'combine';
 }
 
@@ -41,7 +41,16 @@ const AudioPlayer = memo<AudioPlayerProps>(
     timeStyle,
     buttonSize,
     className,
-    audio,
+    audio = {
+      currentTime: 0,
+      download: () => {},
+      duration: 0,
+      isPlaying: false,
+      pause: () => {},
+      play: () => {},
+      setTime: () => {},
+      stop: () => {},
+    },
     allowPause = true,
     timeType = 'left',
     showSlider = true,
@@ -53,9 +62,9 @@ const AudioPlayer = memo<AudioPlayerProps>(
   }) => {
     const { isPlaying, play, stop, pause, duration, setTime, currentTime, download } = audio;
 
-    const formatedLeftTime = secondsToMinutesAndSeconds(duration - currentTime);
-    const formatedCurrentTime = secondsToMinutesAndSeconds(currentTime);
-    const formatedDuration = secondsToMinutesAndSeconds(duration);
+    const formattedLeftTime = secondsToMinutesAndSeconds(duration - currentTime);
+    const formattedCurrentTime = secondsToMinutesAndSeconds(currentTime);
+    const formattedDuration = secondsToMinutesAndSeconds(duration);
 
     const Time = useMemo(
       () => (timeRender === 'tag' ? Tag : (props: any) => <div {...props} />),
@@ -122,12 +131,12 @@ const AudioPlayer = memo<AudioPlayerProps>(
           placement="top"
         >
           <Time style={{ cursor: 'pointer', flex: 'none', ...timeStyle }}>
-            {timeType === 'left' && formatedLeftTime}
-            {timeType === 'current' && formatedCurrentTime}
+            {timeType === 'left' && formattedLeftTime}
+            {timeType === 'current' && formattedCurrentTime}
             {timeType === 'combine' && (
               <span>
-                {formatedCurrentTime}
-                <span style={{ opacity: 0.66 }}>{` / ${formatedDuration}`}</span>
+                {formattedCurrentTime}
+                <span style={{ opacity: 0.66 }}>{` / ${formattedDuration}`}</span>
               </span>
             )}
           </Time>

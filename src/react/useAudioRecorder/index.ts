@@ -8,8 +8,7 @@ export const useAudioRecorder = (onBlobAvailable?: (blob: Blob) => void) => {
 
   const [time, setTime] = useState(0);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder>();
-  // eslint-disable-next-line no-undef
-  const [timerInterval, setTimerInterval] = useState<NodeJS.Timer>();
+  const [timerInterval, setTimerInterval] = useState<any>();
   const [blob, setBlob] = useState<Blob>();
   const [url, setUrl] = useState<string>();
 
