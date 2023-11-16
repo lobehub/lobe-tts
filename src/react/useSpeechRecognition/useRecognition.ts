@@ -1,11 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-let SpeechRecognition: any;
-
-try {
-  SpeechRecognition =
-    (globalThis as any)?.SpeechRecognition || (window as any)?.webkitSpeechRecognition;
-} catch {}
+import { SpeechRecognition } from '@/core/const/polyfill';
 
 export const useRecognition = (
   locale: string,

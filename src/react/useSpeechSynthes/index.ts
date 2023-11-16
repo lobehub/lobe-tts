@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
+import { speechSynthesis } from '@/core/const/polyfill';
 import { SsmlOptions } from '@/core/utils/genSSML';
 
 export const useSpeechSynthes = (defaultText: string, { voice, rate, pitch }: SsmlOptions) => {
@@ -9,7 +10,7 @@ export const useSpeechSynthes = (defaultText: string, { voice, rate, pitch }: Ss
 
   const speechSynthesisUtterance = useMemo(() => {
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.voice = voiceList.find((item) => item.name === voice) as any;
+    utterance.voice = voiceList.find((item: any) => item.name === voice) as any;
     if (pitch) utterance.pitch = pitch * 10;
     if (rate) utterance.rate = rate * 10;
     return utterance;
