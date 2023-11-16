@@ -68,7 +68,7 @@ export const useOpenaiSTTWithSR = (
       handleStop();
       onFinished?.(data, ...rest);
     },
-    options: config.options,
+    options: config.options!,
     shouldFetch,
     speech: blob as Blob,
     ...restConfig,

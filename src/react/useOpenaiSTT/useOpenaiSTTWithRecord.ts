@@ -7,7 +7,7 @@ import { SpeechRecognitionOptions } from '@/react/useSpeechRecognition/useSpeech
 
 import { OpenAISTTConfig } from './useOpenaiSTT';
 
-export type OpenaiSpeechRecognitionOptions = SpeechRecognitionOptions & OpenAISTTConfig;
+export type OpenaiSpeechRecognitionOptions = SpeechRecognitionOptions & Partial<OpenAISTTConfig>;
 
 export interface STTConfig extends SpeechRecognitionOptions, SWRConfiguration {
   onFinished?: SWRConfiguration['onSuccess'];
@@ -16,7 +16,7 @@ export interface STTConfig extends SpeechRecognitionOptions, SWRConfiguration {
 }
 
 export const useOpenaiSTTWithRecord = (
-  config: OpenAISTTConfig,
+  config: Partial<OpenAISTTConfig>,
   {
     onBlobAvailable,
     onTextChange,
@@ -65,7 +65,7 @@ export const useOpenaiSTTWithRecord = (
       handleStop();
       onFinished?.(data, ...rest);
     },
-    options: config.options,
+    options: config.options!,
     shouldFetch,
     speech: blob as Blob,
     ...restConfig,

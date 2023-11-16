@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { OpenAITTS, type OpenAITTSPayload } from '@/core/OpenAITTS';
 import { TTSConfig, useTTS } from '@/react/useTTS';
 
-export interface OpenAITTSConfig extends OpenAITTSPayload, TTSConfig {
+export interface OpenAITTSConfig extends Pick<OpenAITTSPayload, 'options'>, TTSConfig {
   api?: {
     key?: string;
     proxy?: string;

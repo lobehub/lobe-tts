@@ -7,7 +7,7 @@ import { OpenaiSpeechRecognitionOptions, STTConfig } from './useOpenaiSTTWithRec
 
 export const useOpenaiSTTWithPSR = (
   locale: string,
-  options: OpenaiSpeechRecognitionOptions,
+  config: OpenaiSpeechRecognitionOptions,
   {
     onBlobAvailable,
     onTextChange,
@@ -68,7 +68,7 @@ export const useOpenaiSTTWithPSR = (
       handleStop();
       onFinished?.(data, ...rest);
     },
-    options,
+    options: config.options!,
     shouldFetch,
     speech: blob as Blob,
     ...restConfig,
