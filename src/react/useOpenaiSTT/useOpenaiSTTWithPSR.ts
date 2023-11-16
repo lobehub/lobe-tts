@@ -3,11 +3,10 @@ import { useCallback, useState } from 'react';
 import { useOpenaiSTT } from '@/react/useOpenaiSTT/useOpenaiSTT';
 import { usePersistedSpeechRecognition } from '@/react/useSpeechRecognition';
 
-import { OpenaiSpeechRecognitionOptions, STTConfig } from './useOpenaiSTTWithRecord';
+import { STTConfig } from './useOpenaiSTTWithRecord';
 
 export const useOpenaiSTTWithPSR = (
   locale: string,
-  config: OpenaiSpeechRecognitionOptions,
   {
     onBlobAvailable,
     onTextChange,
@@ -16,6 +15,7 @@ export const useOpenaiSTTWithPSR = (
     onFinished,
     onStart,
     onStop,
+    options,
     ...restConfig
   }: STTConfig = {},
 ) => {
@@ -68,7 +68,7 @@ export const useOpenaiSTTWithPSR = (
       handleStop();
       onFinished?.(data, ...rest);
     },
-    options: config.options!,
+    options: options!,
     shouldFetch,
     speech: blob as Blob,
     ...restConfig,
