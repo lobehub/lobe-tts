@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.18.3](https://github.com/lobehub/lobe-tts/compare/v1.18.2...v1.18.3)
+
+<sup>Released on **2023-11-16**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix api props.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix api props ([8740b6d](https://github.com/lobehub/lobe-tts/commit/8740b6d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.18.2](https://github.com/lobehub/lobe-tts/compare/v1.18.1...v1.18.2)
 
 <sup>Released on **2023-11-16**</sup>
