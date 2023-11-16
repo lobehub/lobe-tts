@@ -17,33 +17,32 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "types": "./es/index.d.ts",
-      "import": "./es/index.js",
-      "module": "./es/index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "module": "./dist/index.js"
     },
     "./server": {
-      "types": "./es/server/index.d.ts",
-      "import": "./es/server/index.js",
-      "module": "./es/server/index.js"
+      "types": "./server/index.d.ts",
+      "import": "./server/index.js",
+      "module": "./server/index.js"
     },
     "./react": {
-      "types": "./es/react/index.d.ts",
-      "import": "./es/react/index.js",
-      "module": "./es/react/index.js"
+      "types": "./react/index.d.ts",
+      "import": "./react/index.js",
+      "module": "./react/index.js"
     }
   },
-  "main": "es/index.js",
-  "module": "es/index.js",
-  "types": "es/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "es",
-    "server.d.ts",
-    "react.d.ts"
+    "dist",
+    "react",
+    "server"
   ],
   "scripts": {
-    "build": "father build && npm run build:entry",
-    "build:entry": "tsx scripts/build-entries.ts",
-    "ci": "npm run lint && npm run type-check",
+    "build": "father build",
+    "ci": "npm run lint && npm run type-check && npm run doctor",
     "clean": "rm react.d.ts server.d.ts",
     "dev": "father dev",
     "docs:build": "npm run setup && npm run build && dumi build",
@@ -83,9 +82,7 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@lobehub/ui": "latest",
-    "antd": "^5",
-    "antd-style": "^3",
+    "@babel/runtime": "^7",
     "lodash-es": "^4",
     "lucide-react": "latest",
     "openai": "^4.17.3",
@@ -99,6 +96,7 @@
   "devDependencies": {
     "@commitlint/cli": "^18",
     "@lobehub/lint": "latest",
+    "@lobehub/ui": "^1",
     "@types/lodash-es": "^4",
     "@types/node": "^20",
     "@types/query-string": "^6",
@@ -106,6 +104,8 @@
     "@types/react-dom": "^18",
     "@types/uuid": "^9",
     "@vercel/node": "^3",
+    "antd": "^5",
+    "antd-style": "^3",
     "commitlint": "^18",
     "dumi": "^2",
     "dumi-theme-lobehub": "latest",
