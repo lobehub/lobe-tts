@@ -36,15 +36,19 @@
   "module": "es/index.js",
   "types": "es/index.d.ts",
   "files": [
-    "es"
+    "es",
+    "server.d.ts",
+    "react.d.ts"
   ],
   "scripts": {
-    "build": "father build",
+    "build": "father build && npm run build:entry",
+    "build:entry": "tsx scripts/build-entries.ts",
     "ci": "npm run lint && npm run type-check",
+    "clean": "rm react.d.ts server.d.ts",
     "dev": "father dev",
     "docs:build": "npm run setup && npm run build && dumi build",
     "docs:build-analyze": "ANALYZE=1 dumi build",
-    "docs:dev": "npm run setup && dumi dev",
+    "docs:dev": "npm run clean && npm run setup && dumi dev",
     "doctor": "father doctor",
     "lint": "eslint \"{src,api,lib}/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:md": "remark . --quiet --frail --output",
@@ -115,6 +119,7 @@
     "remark": "^14",
     "remark-cli": "^11",
     "semantic-release": "^21",
+    "tsx": "^4.1.2",
     "typescript": "^5",
     "vercel": "^28"
   },
