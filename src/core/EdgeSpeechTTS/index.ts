@@ -34,7 +34,7 @@ export class EdgeSpeechTTS {
   static localeOptions = getVoiceLocaleOptions();
   static voiceList = edgeVoiceList;
   static voiceName = voiceName;
-  static completion = createEdgeSpeech;
+  static createRequest = createEdgeSpeech;
 
   private fetch = async (payload: EdgeSpeechPayload) => {
     const response = await (this.BASE_URL

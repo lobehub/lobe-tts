@@ -20,6 +20,7 @@ export class MicrosoftSpeechTTS {
   }
 
   static localeOptions = getVoiceLocaleOptions();
+  static createRequest: typeof createMicrosoftSpeech = createMicrosoftSpeech;
 
   static voiceList = azureVoiceList;
   static voiceName = voiceName;
