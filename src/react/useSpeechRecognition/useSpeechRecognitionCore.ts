@@ -2,17 +2,28 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { SpeechRecognition } from '@/core/const/polyfill';
 
-export const useRecognition = (
+export interface SpeechRecognitionCoreOptions {
+  onRecognitionError?: (error: any) => void;
+  onRecognitionFinish?: (value: string) => void;
+  onRecognitionStart?: () => void;
+  onRecognitionStop?: () => void;
+  onTextChange?: (value: string) => void;
+}
+
+export const useSpeechRecognitionCore = (
   locale: string,
-  options?: {
-    onRecognitionEnd?: () => void;
-    onTextChange?: (value: string) => void;
-  },
+  {
+    onTextChange,
+    onRecognitionStart,
+    onRecognitionFinish,
+    onRecognitionStop,
+    onRecognitionError,
+  }: SpeechRecognitionCoreOptions = {},
 ) => {
   const [recognition, setRecognition] = useState<any>(null);
   const [text, setText] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [finalStop, setFinalStop] = useState<boolean>(false);
+  const [isFinalStop, setFinalStop] = useState<boolean>(false);
 
   useEffect(() => {
     if (recognition) return;
@@ -32,49 +43,57 @@ export const useRecognition = (
       speechRecognition.onresult = ({ results }: any) => {
         if (!results) return;
         const result = results[0];
-        if (!finalStop && result?.[0]?.transcript) {
+        if (!isFinalStop && result?.[0]?.transcript) {
           const value = result[0].transcript;
           setText(value);
-          options?.onTextChange?.(value);
+          onTextChange?.(value);
         }
         if (result.isFinal) {
           speechRecognition.abort();
-          setIsLoading(false);
         }
       };
       setRecognition(speechRecognition);
     } catch (error) {
       console.error(error);
+      onRecognitionError?.(error);
     }
-  }, [options]);
+  }, [isFinalStop]);
 
   useEffect(() => {
-    if (!isLoading) {
-      options?.onRecognitionEnd?.();
+    if (!isLoading && text) {
+      onRecognitionFinish?.(text);
     }
-  }, [isLoading, options]);
+  }, [text, isLoading]);
 
   useEffect(() => {
     if (recognition) recognition.lang = locale;
-  }, [locale, recognition]);
+  }, [recognition, locale]);
 
   const handleStart = useCallback(() => {
     setText('');
-    options?.onTextChange?.('');
+    onTextChange?.('');
     try {
       recognition.start();
-    } catch {}
-  }, [options, recognition]);
+      onRecognitionStart?.();
+    } catch (error) {
+      console.error('handleStart', error);
+      onRecognitionError?.(error);
+    }
+  }, [recognition]);
 
   const handleStop = useCallback(() => {
     try {
       recognition.abort();
-    } catch {}
+      onRecognitionStop?.();
+    } catch (error) {
+      console.error(error);
+      onRecognitionError?.(error);
+    }
     setIsLoading(false);
   }, [recognition]);
 
   return {
-    isLoading,
+    isLoading: isLoading,
     start: handleStart,
     stop: handleStop,
     text,

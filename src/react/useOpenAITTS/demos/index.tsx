@@ -1,5 +1,5 @@
 import { OpenAITTS } from '@lobehub/tts';
-import { AudioPlayer, useOpenaiTTS } from '@lobehub/tts/react';
+import { AudioPlayer, useOpenAITTS } from '@lobehub/tts/react';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
@@ -35,7 +35,7 @@ export default () => {
     },
     { store },
   );
-  const { setText, isGlobalLoading, audio, start, stop } = useOpenaiTTS(defaultText, {
+  const { setText, isGlobalLoading, audio, start, stop } = useOpenAITTS(defaultText, {
     api,
     options,
   });

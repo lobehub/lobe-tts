@@ -1,13 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { useAudioRecorder } from '@/react/useAudioRecorder';
+import { SpeechRecognitionRecorderOptions } from '@/react/useSpeechRecognition/useSpeechRecognitionAutoStop';
 
-import { useRecognition } from './useRecognition';
-import { SpeechRecognitionOptions } from './useSpeechRecognition';
+import { useSpeechRecognitionCore } from './useSpeechRecognitionCore';
 
-export const usePersistedSpeechRecognition = (
+export const useSpeechRecognitionInteractive = (
   locale: string,
-  { onBlobAvailable, onTextChange }: SpeechRecognitionOptions = {},
+  {
+    onBlobAvailable,
+    onTextChange,
+    onRecognitionFinish,
+    onStop,
+    onStart,
+    ...rest
+  }: SpeechRecognitionRecorderOptions = {},
 ) => {
   const [resultText, setResultText] = useState<string>();
   const [texts, setTexts] = useState<string[]>([]);
@@ -20,16 +27,18 @@ export const usePersistedSpeechRecognition = (
     blob,
     url,
   } = useAudioRecorder(onBlobAvailable);
-  const { text, stop, start, isLoading } = useRecognition(locale, {
-    onRecognitionEnd: () => {
+  const { text, stop, start, isLoading } = useSpeechRecognitionCore(locale, {
+    onRecognitionFinish: (data) => {
       if (isGLobalLoading && !isLoading) {
-        if (text) setTexts([...texts, text]);
+        if (data) setTexts([...texts, data]);
         start();
       }
     },
+    ...rest,
   });
 
   const handleStart = useCallback(() => {
+    onStart?.();
     setTexts([]);
     setIsGlobalLoading(true);
     start();
@@ -37,16 +46,20 @@ export const usePersistedSpeechRecognition = (
   }, [start, startRecord]);
 
   const handleStop = useCallback(() => {
+    onStop?.();
     stop();
     stopRecord();
     setIsGlobalLoading(false);
-  }, [stop, stopRecord]);
+    if (resultText) {
+      onRecognitionFinish?.(resultText);
+    }
+  }, [stop, stopRecord, resultText]);
 
   useEffect(() => {
     const mergedText = [...texts, text].filter(Boolean).join(' ');
     setResultText(mergedText);
     onTextChange?.(mergedText);
-  }, [texts, text, onTextChange]);
+  }, [texts, text]);
 
   return {
     blob,

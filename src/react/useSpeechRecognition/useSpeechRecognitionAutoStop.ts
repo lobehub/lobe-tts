@@ -1,16 +1,24 @@
 import { useCallback } from 'react';
 
 import { useAudioRecorder } from '@/react/useAudioRecorder';
-import { useRecognition } from '@/react/useSpeechRecognition/useRecognition';
 
-export interface SpeechRecognitionOptions {
+import { SpeechRecognitionCoreOptions, useSpeechRecognitionCore } from './useSpeechRecognitionCore';
+
+export interface SpeechRecognitionRecorderOptions extends SpeechRecognitionCoreOptions {
   onBlobAvailable?: (blob: Blob) => void;
-  onTextChange?: (value: string) => void;
+  onStart?: () => void;
+  onStop?: () => void;
 }
 
-export const useSpeechRecognition = (
+export const useSpeechRecognitionAutoStop = (
   locale: string,
-  { onBlobAvailable, onTextChange }: SpeechRecognitionOptions = {},
+  {
+    onStart,
+    onStop,
+    onBlobAvailable,
+    onRecognitionFinish,
+    ...rest
+  }: SpeechRecognitionRecorderOptions = {},
 ) => {
   const {
     time,
@@ -20,19 +28,22 @@ export const useSpeechRecognition = (
     blob,
     url,
   } = useAudioRecorder(onBlobAvailable);
-  const { isLoading, start, stop, text } = useRecognition(locale, {
-    onRecognitionEnd: () => {
+  const { isLoading, start, stop, text } = useSpeechRecognitionCore(locale, {
+    onRecognitionFinish: (data) => {
+      onRecognitionFinish?.(data);
       stopRecord();
     },
-    onTextChange: onTextChange,
+    ...rest,
   });
 
   const handleStart = useCallback(() => {
+    onStart?.();
     start();
     startRecord();
   }, [start, startRecord]);
 
   const handleStop = useCallback(() => {
+    onStop?.();
     stop();
     stopRecord();
   }, [stop, stopRecord]);

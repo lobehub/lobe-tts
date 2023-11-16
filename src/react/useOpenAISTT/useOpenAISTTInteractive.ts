@@ -1,41 +1,53 @@
 import { useCallback, useState } from 'react';
-import { SWRConfiguration } from 'swr';
 
-import { useAudioRecorder } from '@/react/useAudioRecorder';
-import { useOpenaiSTT } from '@/react/useOpenaiSTT/useOpenaiSTT';
-import { SpeechRecognitionOptions } from '@/react/useSpeechRecognition/useSpeechRecognition';
+import { useOpenAISTTCore } from '@/react/useOpenAISTT/useOpenAISTTCore';
+import { useSpeechRecognitionInteractive } from '@/react/useSpeechRecognition/useSpeechRecognitionInteractive';
 
-import { OpenAISTTConfig } from './useOpenaiSTT';
+import { OpenAISTTRecorderOptions } from './useOpenAISTTRecorder';
 
-export interface STTConfig
-  extends SpeechRecognitionOptions,
-    SWRConfiguration,
-    Partial<OpenAISTTConfig> {
-  onFinished?: SWRConfiguration['onSuccess'];
-  onStart?: () => void;
-  onStop?: () => void;
-}
-
-export const useOpenaiSTTWithRecord = ({
-  onBlobAvailable,
-  onTextChange,
-  onSuccess,
-  onError,
-  onFinished,
-  onStart,
-  onStop,
-  options,
-  ...restConfig
-}: STTConfig = {}) => {
+export const useOpenAISTTInteractive = (
+  locale: string,
+  {
+    onBlobAvailable,
+    onTextChange,
+    onSuccess,
+    onError,
+    onFinished,
+    onStart,
+    onStop,
+    options,
+    onRecognitionStop,
+    onRecognitionStart,
+    onRecognitionError,
+    onRecognitionFinish,
+    ...restConfig
+  }: OpenAISTTRecorderOptions = {},
+) => {
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [text, setText] = useState<string>();
-  const { start, stop, blob, url, isRecording, time, formattedTime } = useAudioRecorder(
-    (blobData) => {
+  const {
+    start,
+    stop,
+    blob,
+    url,
+    isLoading: isRecording,
+    time,
+    formattedTime,
+  } = useSpeechRecognitionInteractive(locale, {
+    onBlobAvailable: (blobData) => {
       setShouldFetch(true);
       onBlobAvailable?.(blobData);
     },
-  );
+    onRecognitionError,
+    onRecognitionFinish,
+    onRecognitionStart,
+    onRecognitionStop,
+    onTextChange: (data) => {
+      setText(data);
+      onTextChange?.(data);
+    },
+  });
 
   const handleStart = useCallback(() => {
     onStart?.();
@@ -51,7 +63,7 @@ export const useOpenaiSTTWithRecord = ({
     setIsGlobalLoading(false);
   }, [stop]);
 
-  const { isLoading } = useOpenaiSTT({
+  const { isLoading } = useOpenAISTTCore({
     onError: (err, ...rest) => {
       onError?.(err, ...rest);
       console.error(err);

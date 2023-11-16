@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { OpenAITTS, type OpenAITTSPayload } from '@/core/OpenAITTS';
 import { TTSConfig, useTTS } from '@/react/useTTS';
 
-export interface OpenAITTSConfig extends Pick<OpenAITTSPayload, 'options'>, TTSConfig {
+export interface OpenAITTSOptions extends Pick<OpenAITTSPayload, 'options'>, TTSConfig {
   api?: {
     key?: string;
     proxy?: string;
   };
 }
 
-export const useOpenaiTTS = (defaultText: string, config: OpenAITTSConfig) => {
+export const useOpenAITTS = (defaultText: string, config: OpenAITTSOptions) => {
   const [text, setText] = useState<string>(defaultText);
   const { options, api, ...swrConfig } = config;
   const rest = useTTS(

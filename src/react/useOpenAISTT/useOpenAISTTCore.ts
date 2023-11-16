@@ -2,14 +2,14 @@ import useSWR, { type SWRConfiguration } from 'swr';
 
 import { OpenAISTTPayload, OpenaiSTT } from '@/core/OpenAISTT';
 
-export interface OpenAISTTConfig extends OpenAISTTPayload, SWRConfiguration {
+export interface OpenAISTTCoreOptions extends OpenAISTTPayload, SWRConfiguration {
   api?: {
     key: string;
     url: string;
   };
   shouldFetch?: boolean;
 }
-export const useOpenaiSTT = (config: OpenAISTTConfig) => {
+export const useOpenAISTTCore = (config: OpenAISTTCoreOptions) => {
   const key = new Date().getDate().toString();
   const { shouldFetch, api, options, speech, ...swrConfig } = config;
 

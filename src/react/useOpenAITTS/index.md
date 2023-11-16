@@ -1,7 +1,7 @@
 ---
 nav: Components
 group: TTS
-title: useOpenaiTTS
+title: useOpenAITTS
 ---
 
 ## hooks

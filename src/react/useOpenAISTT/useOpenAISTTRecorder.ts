@@ -1,45 +1,39 @@
 import { useCallback, useState } from 'react';
+import { SWRConfiguration } from 'swr';
 
-import { useOpenaiSTT } from '@/react/useOpenaiSTT/useOpenaiSTT';
-import { usePersistedSpeechRecognition } from '@/react/useSpeechRecognition';
+import { useAudioRecorder } from '@/react/useAudioRecorder';
+import { useOpenAISTTCore } from '@/react/useOpenAISTT/useOpenAISTTCore';
+import { SpeechRecognitionRecorderOptions } from '@/react/useSpeechRecognition/useSpeechRecognitionAutoStop';
 
-import { STTConfig } from './useOpenaiSTTWithRecord';
+import { OpenAISTTCoreOptions } from './useOpenAISTTCore';
 
-export const useOpenaiSTTWithPSR = (
-  locale: string,
-  {
-    onBlobAvailable,
-    onTextChange,
-    onSuccess,
-    onError,
-    onFinished,
-    onStart,
-    onStop,
-    options,
-    ...restConfig
-  }: STTConfig = {},
-) => {
+export interface OpenAISTTRecorderOptions
+  extends SpeechRecognitionRecorderOptions,
+    SWRConfiguration,
+    Partial<OpenAISTTCoreOptions> {
+  onFinished?: SWRConfiguration['onSuccess'];
+}
+
+export const useOpenAISTTRecorder = ({
+  onBlobAvailable,
+  onTextChange,
+  onSuccess,
+  onError,
+  onFinished,
+  onStart,
+  onStop,
+  options,
+  ...restConfig
+}: OpenAISTTRecorderOptions = {}) => {
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [text, setText] = useState<string>();
-  const {
-    start,
-    stop,
-    blob,
-    url,
-    isLoading: isRecording,
-    time,
-    formattedTime,
-  } = usePersistedSpeechRecognition(locale, {
-    onBlobAvailable: (blobData) => {
+  const { start, stop, blob, url, isRecording, time, formattedTime } = useAudioRecorder(
+    (blobData) => {
       setShouldFetch(true);
       onBlobAvailable?.(blobData);
     },
-    onTextChange: (data) => {
-      setText(data);
-      onTextChange?.(data);
-    },
-  });
+  );
 
   const handleStart = useCallback(() => {
     onStart?.();
@@ -55,7 +49,7 @@ export const useOpenaiSTTWithPSR = (
     setIsGlobalLoading(false);
   }, [stop]);
 
-  const { isLoading } = useOpenaiSTT({
+  const { isLoading } = useOpenAISTTCore({
     onError: (err, ...rest) => {
       onError?.(err, ...rest);
       console.error(err);

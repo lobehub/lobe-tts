@@ -5,13 +5,13 @@ import { arrayBufferConvert } from '@/core/utils/arrayBufferConvert';
 import { audioBufferToBlob } from '@/core/utils/audioBufferToBlob';
 import { AudioProps } from '@/react/AudioPlayer';
 
-export interface AudioPlayerHook extends AudioProps {
+export interface AudioPlayerReturn extends AudioProps {
   isLoading?: boolean;
   ref: RefObject<HTMLAudioElement>;
   reset: () => void;
 }
 
-export const useAudioPlayer = (src: string): AudioPlayerHook => {
+export const useAudioPlayer = (src: string): AudioPlayerReturn => {
   const audioRef = useRef<HTMLAudioElement>(new Audio());
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);

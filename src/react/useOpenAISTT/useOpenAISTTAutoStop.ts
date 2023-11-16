@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
 
-import { useOpenaiSTT } from '@/react/useOpenaiSTT/useOpenaiSTT';
-import { useSpeechRecognition } from '@/react/useSpeechRecognition';
+import { useOpenAISTTCore } from '@/react/useOpenAISTT/useOpenAISTTCore';
+import { useSpeechRecognitionAutoStop } from '@/react/useSpeechRecognition/useSpeechRecognitionAutoStop';
 
-import { STTConfig } from './useOpenaiSTTWithRecord';
+import { OpenAISTTRecorderOptions } from './useOpenAISTTRecorder';
 
-export const useOpenaiSTTWithSR = (
+export const useOpenAISTTAutoStop = (
   locale: string,
   {
     onBlobAvailable,
@@ -16,8 +16,12 @@ export const useOpenaiSTTWithSR = (
     onStart,
     onStop,
     options,
+    onRecognitionStop,
+    onRecognitionStart,
+    onRecognitionError,
+    onRecognitionFinish,
     ...restConfig
-  }: STTConfig = {},
+  }: OpenAISTTRecorderOptions = {},
 ) => {
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
@@ -30,11 +34,15 @@ export const useOpenaiSTTWithSR = (
     isLoading: isRecording,
     time,
     formattedTime,
-  } = useSpeechRecognition(locale, {
+  } = useSpeechRecognitionAutoStop(locale, {
     onBlobAvailable: (blobData) => {
       setShouldFetch(true);
       onBlobAvailable?.(blobData);
     },
+    onRecognitionError,
+    onRecognitionFinish,
+    onRecognitionStart,
+    onRecognitionStop,
     onTextChange: (data) => {
       setText(data);
       onTextChange?.(data);
@@ -55,7 +63,7 @@ export const useOpenaiSTTWithSR = (
     setIsGlobalLoading(false);
   }, [stop]);
 
-  const { isLoading } = useOpenaiSTT({
+  const { isLoading } = useOpenAISTTCore({
     onError: (err, ...rest) => {
       onError?.(err, ...rest);
       console.error(err);

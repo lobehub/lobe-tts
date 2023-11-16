@@ -3,14 +3,14 @@ import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { audioBufferToBlob, audioBuffersToBlob } from '@/core/utils/audioBufferToBlob';
 import { AudioProps } from '@/react/AudioPlayer';
 
-export interface StreamAudioPlayerHook extends AudioProps {
+export interface StreamAudioPlayerReturn extends AudioProps {
   download: () => void;
   load: (audioBuffer: AudioBuffer) => void;
   ref: RefObject<HTMLAudioElement>;
   reset: () => void;
 }
 
-export const useStreamAudioPlayer = (): StreamAudioPlayerHook => {
+export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
   const audioRef = useRef<HTMLAudioElement>(new Audio());
   const [audioBuffers, setAudioBuffer] = useState<AudioBuffer[]>([]);
   const [currentTime, setCurrentTime] = useState(0);

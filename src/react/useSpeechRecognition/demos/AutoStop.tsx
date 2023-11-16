@@ -1,27 +1,11 @@
-import { useOpenaiSTTWithSR } from '@lobehub/tts/react';
+import { useSpeechRecognition } from '@lobehub/tts/react';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
 
-import { OPENAI_BASE_URL } from '@/core/const/api';
-
 export default () => {
   const store = useCreateStore();
-  const api: any = useControls(
-    {
-      key: {
-        label: 'OPENAI_API_KEY',
-        value: '',
-      },
-      proxy: {
-        label: 'OPENAI_PROXY_URL',
-        value: OPENAI_BASE_URL,
-      },
-    },
-    { store },
-  );
-
   const { locale }: any = useControls(
     {
       locale: 'zh-CN',
@@ -29,20 +13,15 @@ export default () => {
     { store },
   );
 
-  const { text, start, stop, isLoading, isRecording, url, formattedTime } = useOpenaiSTTWithSR(
-    locale,
-    { api },
-  );
+  const { text, start, stop, isLoading, formattedTime, url } = useSpeechRecognition(locale, {
+    autoStop: true,
+  });
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>
-        {isRecording ? (
+        {isLoading ? (
           <Button block icon={<Icon icon={StopCircle} />} onClick={stop}>
             Stop {formattedTime}
-          </Button>
-        ) : isLoading ? (
-          <Button block loading>
-            Recognition...
           </Button>
         ) : (
           <Button block icon={<Icon icon={Mic} />} onClick={start} type={'primary'}>

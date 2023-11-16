@@ -1,4 +1,4 @@
-import { useOpenaiSTTWithPSR } from '@lobehub/tts/react';
+import { useOpenAISTT } from '@lobehub/tts/react';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
@@ -29,11 +29,10 @@ export default () => {
     { store },
   );
 
-  const { text, start, stop, isLoading, isRecording, url, formattedTime } = useOpenaiSTTWithPSR(
-    locale,
-    { api },
-  );
-
+  const { text, start, stop, isLoading, isRecording, url, formattedTime } = useOpenAISTT(locale, {
+    api,
+    autoStop: true,
+  });
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>
