@@ -5,9 +5,8 @@
     "downlevelIteration": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "lib": ["dom", "ES2015", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "resolveJsonModule": true,
-    "moduleResolution": "node",
     "skipLibCheck": true,
     "strict": true,
     "paths": {
@@ -17,6 +16,5 @@
       "@lobehub/tts/react": ["./src/react"]
     }
   },
-  "exclude": ["react.d.ts", "server.d.ts"],
-  "include": ["src", "docs", "lib", ".dumirc.ts", "api", "**/*.ts", "**/*.d.ts", "**/*.tsx"]
+  "include": ["src", "docs", ".dumirc.ts", "api", "**/*.ts", "**/*.d.ts", "**/*.tsx"]
 }

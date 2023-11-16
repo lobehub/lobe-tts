@@ -4,7 +4,7 @@ import { Button, Input } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
 
-import { OPENAI_STT_API_URL } from '../../_util/api';
+import { OPENAI_BASE_URL } from '@/core/const/api';
 
 export default () => {
   const store = useCreateStore();
@@ -16,9 +16,8 @@ export default () => {
       },
       proxy: {
         label: 'OPENAI_PROXY_URL',
-        value: '',
+        value: OPENAI_BASE_URL,
       },
-      url: OPENAI_STT_API_URL,
     },
     { store },
   );
@@ -26,6 +25,7 @@ export default () => {
   const { text, start, stop, isLoading, isRecording, url, formattedTime } = useOpenaiSTTWithRecord({
     api,
   });
+
   return (
     <StoryBook levaStore={store}>
       <Flexbox gap={8}>

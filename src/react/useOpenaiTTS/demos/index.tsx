@@ -5,7 +5,7 @@ import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
 
-import { OPENAI_TTS_API_URL } from '../../_util/api';
+import { OPENAI_BASE_URL } from '@/core/const/api';
 
 const defaultText = '这是一段使用 OpenAI Speech to Text 的语音演示';
 
@@ -20,7 +20,7 @@ export default () => {
       },
       proxy: {
         label: 'OPENAI_PROXY_URL',
-        value: OPENAI_TTS_API_URL,
+        value: OPENAI_BASE_URL,
       },
     },
     { store },
