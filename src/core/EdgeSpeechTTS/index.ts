@@ -9,16 +9,16 @@ import { getEdgeVoiceOptions } from './options';
 export type { EdgeSpeechPayload } from './createEdgeSpeech';
 
 export interface EdgeSpeechAPI {
-  backendURL?: string;
+  backendUrl?: string;
 }
 
 export class EdgeSpeechTTS {
   private locale?: string;
   private BACKEND_URL: string | undefined;
 
-  constructor({ backendURL, locale }: EdgeSpeechAPI & { locale?: string } = {}) {
+  constructor({ backendUrl, locale }: EdgeSpeechAPI & { locale?: string } = {}) {
     this.locale = locale;
-    this.BACKEND_URL = backendURL;
+    this.BACKEND_URL = backendUrl;
   }
 
   get voiceOptions() {
