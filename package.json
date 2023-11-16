@@ -36,6 +36,7 @@
   "module": "./core/index.js",
   "types": "./core/index.d.ts",
   "files": [
+    "dist",
     "core",
     "react",
     "server"
