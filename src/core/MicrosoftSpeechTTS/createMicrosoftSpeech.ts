@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { SsmlOptions, genSSML } from '@/core/utils/genSSML';
+import { SsmlOptions, genSSML } from '../utils/genSSML';
 
 const MICROSOFT_SPEECH_URL =
   'https://southeastasia.api.speech.microsoft.com/accfreetrial/texttospeech/acc/v3.0-beta1/vcg/speak';

@@ -1,9 +1,9 @@
 import qs from 'query-string';
 import { v4 as uuidv4 } from 'uuid';
 
-import { SsmlOptions, genSSML } from '@/core/utils/genSSML';
-import { genSendContent } from '@/core/utils/genSendContent';
-import { getHeadersAndData } from '@/core/utils/getHeadersAndData';
+import { SsmlOptions, genSSML } from '../utils/genSSML';
+import { genSendContent } from '../utils/genSendContent';
+import { getHeadersAndData } from '../utils/getHeadersAndData';
 
 export interface EdgeSpeechPayload {
   /**
