@@ -1,7 +1,8 @@
 import OpenAI from 'openai';
 
 import { OpenAITTSPayload } from '@/core';
-import { createOpenaiAudioSpeech } from '@/server/createOpenaiAudioSpeech';
+
+import { createOpenaiAudioSpeech } from '../src/server/createOpenaiAudioSpeech';
 
 export const config = {
   runtime: 'edge',

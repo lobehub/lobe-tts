@@ -1,5 +1,4 @@
-import { EdgeSpeechPayload } from '@/core';
-import { createEdgeSpeech } from '@/core/EdgeSpeechTTS/createEdgeSpeech';
+import { EdgeSpeechPayload, createEdgeSpeech } from '../src/core/EdgeSpeechTTS/createEdgeSpeech';
 
 export const config = {
   runtime: 'edge',

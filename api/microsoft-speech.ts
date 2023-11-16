@@ -1,5 +1,7 @@
-import { MicrosoftSpeechPayload } from '@/core';
-import { createMicrosoftSpeech } from '@/core/MicrosoftSpeechTTS/createMicrosoftSpeech';
+import {
+  MicrosoftSpeechPayload,
+  createMicrosoftSpeech,
+} from '../src/core/MicrosoftSpeechTTS/createMicrosoftSpeech';
 
 export const config = {
   runtime: 'edge',

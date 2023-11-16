@@ -1,7 +1,8 @@
 import OpenAI from 'openai';
 
 import { OpenAISTTPayload } from '@/core';
-import { createOpenaiAudioTranscriptions } from '@/server/createOpenaiAudioTranscriptions';
+
+import { createOpenaiAudioTranscriptions } from '../src/server/createOpenaiAudioTranscriptions';
 
 export const config = {
   runtime: 'edge',
