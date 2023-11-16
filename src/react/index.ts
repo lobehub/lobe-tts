@@ -5,8 +5,8 @@ export { useAudioVisualizer } from './hooks/useAudioVisualizer';
 export { useBlobUrl } from './hooks/useBlobUrl';
 export { useStreamAudioPlayer } from './hooks/useStreamAudioPlayer';
 export { useAudioRecorder } from './useAudioRecorder';
-export { useEdgeSpeech } from './useEdgeSpeech';
-export { useMicrosoftSpeech } from './useMicrosoftSpeech';
+export { type EdgeSpeechOptions,useEdgeSpeech } from './useEdgeSpeech';
+export { type MicrosoftSpeechOptions,useMicrosoftSpeech } from './useMicrosoftSpeech';
 export {
   type OpenaiSpeechRecognitionOptions,
   type OpenAISTTConfig,
@@ -21,4 +21,4 @@ export {
   type SpeechRecognitionOptions,
   useSpeechRecognition,
 } from './useSpeechRecognition/useSpeechRecognition';
-export { useSpeechSynthes } from './useSpeechSynthes';
+export { type SpeechSynthesOptions,useSpeechSynthes } from './useSpeechSynthes';

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { type MicrosoftSpeechPayload, MicrosoftSpeechTTS } from '@/core/MicrosoftSpeechTTS';
 import { TTSConfig, useTTS } from '@/react/useTTS';
 
-interface MicrosoftSpeechOptions extends Pick<MicrosoftSpeechPayload, 'options'>, TTSConfig {
+export interface MicrosoftSpeechOptions extends Pick<MicrosoftSpeechPayload, 'options'>, TTSConfig {
   api?: {
     url?: string;
   };

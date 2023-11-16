@@ -1,9 +1,9 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 
-import { AudioProps } from '@/react/AudioPlayer';
 import { arrayBufferConvert } from '@/core/utils/arrayBufferConvert';
 import { audioBufferToBlob } from '@/core/utils/audioBufferToBlob';
+import { AudioProps } from '@/react/AudioPlayer';
 
 export interface AudioPlayerHook extends AudioProps {
   isLoading?: boolean;

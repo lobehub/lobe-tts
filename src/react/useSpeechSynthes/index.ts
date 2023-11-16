@@ -1,14 +1,22 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { speechSynthesis } from '@/core/const/polyfill';
+import { SpeechSynthesis, SpeechSynthesisUtterance } from '@/core/const/polyfill';
 import { SsmlOptions } from '@/core/utils/genSSML';
 
-export const useSpeechSynthes = (defaultText: string, { voice, rate, pitch }: SsmlOptions) => {
-  const [voiceList, setVoiceList] = useState(speechSynthesis.getVoices());
+export interface SpeechSynthesOptions extends Pick<SsmlOptions, 'voice' | 'rate' | 'pitch'> {
+  onStart?: () => void;
+  onStop?: () => void;
+}
+export const useSpeechSynthes = (
+  defaultText: string,
+  { voice, rate, pitch, ...options }: SpeechSynthesOptions,
+) => {
+  const [voiceList, setVoiceList] = useState(SpeechSynthesis?.getVoices());
   const [text, setText] = useState<string>(defaultText);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const speechSynthesisUtterance = useMemo(() => {
+    if (!SpeechSynthesisUtterance) return;
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.voice = voiceList.find((item: any) => item.name === voice) as any;
     if (pitch) utterance.pitch = pitch * 10;
@@ -16,20 +24,26 @@ export const useSpeechSynthes = (defaultText: string, { voice, rate, pitch }: Ss
     return utterance;
   }, [text, voiceList, rate, pitch, voice]);
 
-  speechSynthesis.onvoiceschanged = () => {
-    setVoiceList(speechSynthesis.getVoices());
-  };
-  speechSynthesisUtterance.onstart = () => setIsLoading(true);
-  speechSynthesisUtterance.onend = () => setIsLoading(false);
+  useEffect(() => {
+    if (!SpeechSynthesis) return;
+
+    SpeechSynthesis.onvoiceschanged = () => {
+      setVoiceList(SpeechSynthesis?.getVoices());
+    };
+    SpeechSynthesis.onstart = () => setIsLoading(true);
+    SpeechSynthesis.onend = () => setIsLoading(false);
+  }, []);
 
   const handleStart = useCallback(() => {
-    speechSynthesis.speak(speechSynthesisUtterance);
-  }, [speechSynthesis, speechSynthesisUtterance]);
+    options?.onStart?.();
+    SpeechSynthesis?.speak(speechSynthesisUtterance);
+  }, [speechSynthesisUtterance]);
 
   const handleStop = useCallback(() => {
-    speechSynthesis.cancel();
+    options?.onStop?.();
+    speechSynthesis?.cancel();
     setIsLoading(false);
-  }, [speechSynthesis]);
+  }, []);
 
   return {
     isLoading,

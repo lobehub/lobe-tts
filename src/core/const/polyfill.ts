@@ -13,10 +13,21 @@ const getSpeechSynthesis = () => {
     return (
       (globalThis as any)?.speechSynthesis ||
       (window as any)?.speechSynthesis ||
-      (window as any)?.speechSynthesis
+      (window as any)?.webkitSpeechSynthesis
+    );
+  } catch {}
+};
+
+const getSpeechSynthesisUtterance = () => {
+  try {
+    return (
+      (globalThis as any)?.SpeechSynthesisUtterance ||
+      (window as any)?.SpeechSynthesisUtterance ||
+      (window as any)?.webkitSpeechSynthesisUtterance
     );
   } catch {}
 };
 
 export const SpeechRecognition = getSpeechRecognition();
-export const speechSynthesis = getSpeechSynthesis();
+export const SpeechSynthesis = getSpeechSynthesis();
+export const SpeechSynthesisUtterance = getSpeechSynthesisUtterance();
