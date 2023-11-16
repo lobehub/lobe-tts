@@ -1,21 +1,28 @@
 import useSWR, { type SWRConfiguration } from 'swr';
 
-import { OpenaiSttOptions, fetchOpenaiSTT } from '@/services/fetchOpenaiSTT';
-import { getRecordMineType } from '@/utils/getRecordMineType';
+import { OpenAISTTPayload, OpenaiSTT } from '@/core/OpenAISTT';
 
-export const useOpenaiSTT = (
-  shouldFetch?: boolean,
-  blob?: Blob,
-  options?: OpenaiSttOptions,
-  config?: SWRConfiguration,
-) => {
+export interface OpenAISTTConfig extends OpenAISTTPayload, SWRConfiguration {
+  api?: {
+    key: string;
+    url: string;
+  };
+  shouldFetch?: boolean;
+}
+export const useOpenaiSTT = (config: OpenAISTTConfig) => {
   const key = new Date().getDate().toString();
-
-  const optionsWithMineType: OpenaiSttOptions = { ...options, mineType: getRecordMineType() };
+  const { shouldFetch, api, options, speech, ...swrConfig } = config;
 
   return useSWR(
-    shouldFetch && blob ? key : null,
-    async () => await fetchOpenaiSTT(blob as Blob, optionsWithMineType),
-    config,
+    shouldFetch && speech ? key : null,
+    async () => {
+      const instance = new OpenaiSTT({
+        apiKey: api?.key,
+        baseUrl: api?.url,
+      });
+
+      return instance.create({ options, speech });
+    },
+    swrConfig,
   );
 };

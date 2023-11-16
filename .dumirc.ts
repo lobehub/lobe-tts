@@ -4,7 +4,6 @@ import path from 'node:path';
 import { description, homepage, name } from './package.json';
 
 const isProduction = process.env.NODE_ENV === 'production';
-const isWin = process.platform === 'win32';
 
 const themeConfig = {
   actions: [
@@ -42,9 +41,11 @@ const themeConfig = {
 };
 
 export default defineConfig({
+  /* eslint-disable sort-keys-fix/sort-keys-fix */
   alias: {
     '@lobehub/tts/react': path.join(__dirname, './src/react'),
   },
+  /* eslint-enable */
   apiParser: isProduction ? {} : false,
   base: '/',
   define: {
@@ -52,7 +53,8 @@ export default defineConfig({
   },
   favicons: ['https://npm.elemecdn.com/@lobehub/assets-favicons/assets/favicon.ico'],
   locales: [{ id: 'en-US', name: 'English' }],
-  mfsu: isWin ? undefined : {},
+  // mfsu: isWin ? undefined : {},
+  mfsu: false,
   npmClient: 'pnpm',
   publicPath: '/',
   resolve: {

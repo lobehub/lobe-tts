@@ -17,9 +17,9 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "module": "./dist/index.js"
+      "types": "./core/index.d.ts",
+      "import": "./core/index.js",
+      "module": "./core/index.js"
     },
     "./server": {
       "types": "./server/index.d.ts",
@@ -32,22 +32,21 @@
       "module": "./react/index.js"
     }
   },
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./core/index.js",
+  "module": "./core/index.js",
+  "types": "./core/index.d.ts",
   "files": [
-    "dist",
+    "core",
     "react",
     "server"
   ],
   "scripts": {
     "build": "father build",
     "ci": "npm run lint && npm run type-check && npm run doctor",
-    "clean": "rm react.d.ts server.d.ts",
     "dev": "father dev",
     "docs:build": "npm run setup && npm run build && dumi build",
     "docs:build-analyze": "ANALYZE=1 dumi build",
-    "docs:dev": "npm run clean && npm run setup && dumi dev",
+    "docs:dev": "npm run setup && dumi dev",
     "doctor": "father doctor",
     "lint": "eslint \"{src,api,lib}/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:md": "remark . --quiet --frail --output",

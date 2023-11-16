@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 
-import { createOpenaiAudioSpeechCompletion } from '../src/server/createOpenaiAudioSpeechCompletion';
-import { OpenAITTSPayload } from '../src/server/types';
+import { OpenAITTSPayload } from '@/core';
+import { createOpenaiAudioSpeech } from '@/server/createOpenaiAudioSpeech';
 
 export const config = {
   runtime: 'edge',
@@ -17,5 +17,5 @@ export default async (req: Request) => {
 
   const openai = new OpenAI({ apiKey: OPENAI_API_KEY, baseURL: OPENAI_PROXY_URL });
 
-  return createOpenaiAudioSpeechCompletion({ openai, payload });
+  return createOpenaiAudioSpeech({ openai, payload });
 };

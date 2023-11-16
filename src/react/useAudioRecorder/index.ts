@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
-import { getRecordMineType } from '@/utils/getRecordMineType';
-import { secondsToMinutesAndSeconds } from '@/utils/secondsToMinutesAndSeconds';
+import { getRecordMineType } from '@/core/utils/getRecordMineType';
+import { secondsToMinutesAndSeconds } from '@/core/utils/secondsToMinutesAndSeconds';
 
 export const useAudioRecorder = (onBlobAvailable?: (blob: Blob) => void) => {
   const [isRecording, setIsRecording] = useState(false);

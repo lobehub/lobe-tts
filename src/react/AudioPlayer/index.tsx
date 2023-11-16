@@ -4,7 +4,7 @@ import { Download, PauseCircle, Play, StopCircle } from 'lucide-react';
 import React, { memo, useCallback, useMemo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import { secondsToMinutesAndSeconds } from '@/utils/secondsToMinutesAndSeconds';
+import { secondsToMinutesAndSeconds } from '@/core/utils/secondsToMinutesAndSeconds';
 
 export interface AudioProps {
   currentTime: number;

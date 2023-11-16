@@ -1,6 +1,0 @@
-export {
-  EDGE_SPEECH_API_URL,
-  MICROSOFT_SPEECH_API_URL,
-  OPENAI_STT_API_URL,
-  OPENAI_TTS_API_URL,
-} from '@/const/api';

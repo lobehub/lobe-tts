@@ -14,8 +14,8 @@
     "paths": {
       "@@/*": [".dumi/tmp/*"],
       "@/*": ["./src/*"],
-      "@lobehub/tts": ["src"],
-      "@lobehub/tts/*": ["src/*"]
+      "@lobehub/tts": ["./src/core"],
+      "@lobehub/tts/react": ["./src/react"]
     }
   },
   "exclude": ["react.d.ts", "server.d.ts"],

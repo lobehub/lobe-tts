@@ -1,10 +1,8 @@
-import {
-  getAzureVoiceOptions,
-  getEdgeVoiceOptions,
-  getOpenaiVoiceOptions,
-  getSpeechSynthesVoiceOptions,
-  getVoiceLocaleOptions,
-} from '@/utils/getVoiceList';
+import { getEdgeVoiceOptions } from '@/core/EdgeSpeechTTS/options';
+import { getAzureVoiceOptions } from '@/core/MicrosoftSpeechTTS/voiceList';
+import { getOpenaiVoiceOptions } from '@/core/OpenAITTS/voiceList';
+import { getSpeechSynthesisVoiceOptions } from '@/core/SpeechSynthesisTTS/options';
+import { getVoiceLocaleOptions } from '@/core/utils/getVoiceList';
 
 export class VoiceList {
   private locale?: string;
@@ -13,10 +11,10 @@ export class VoiceList {
   }
 
   get speechSynthesVoiceOptions() {
-    return getSpeechSynthesVoiceOptions(this.locale);
+    return getSpeechSynthesisVoiceOptions(this.locale);
   }
 
-  static allSpeechSynthesVoiceOptions = getSpeechSynthesVoiceOptions();
+  static allSpeechSynthesVoiceOptions = getSpeechSynthesisVoiceOptions();
 
   get azureVoiceOptions() {
     return getAzureVoiceOptions(this.locale);

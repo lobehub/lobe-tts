@@ -1,16 +1,29 @@
 import { v4 as uuidv4 } from 'uuid';
 
-import { MICROSOFT_SPEECH_URL } from '../const/api';
-import { MicrosoftSpeechPayload } from '../server/types';
-import { genSSML } from '../utils/genSSML';
+import { SsmlOptions, genSSML } from '@/core/utils/genSSML';
 
-interface CreateMicrosoftSpeechComletionOptions {
+const MICROSOFT_SPEECH_URL =
+  'https://southeastasia.api.speech.microsoft.com/accfreetrial/texttospeech/acc/v3.0-beta1/vcg/speak';
+
+export interface MicrosoftSpeechPayload {
+  /**
+   * @title 语音合成的文本
+   */
+  input: string;
+  /**
+   * @title SSML 语音合成的配置
+   */
+  options: SsmlOptions;
+}
+
+interface CreateMicrosoftSpeechOptions {
   payload: MicrosoftSpeechPayload;
 }
 
-export const createMicrosoftSpeechComletion = async ({
-  payload,
-}: CreateMicrosoftSpeechComletionOptions) => {
+export const createMicrosoftSpeech = async (
+  { payload }: CreateMicrosoftSpeechOptions,
+  { proxyUrl }: { proxyUrl?: string } = {},
+) => {
   const { input, options } = payload;
 
   const DEFAULT_HEADERS = new Headers({
@@ -39,15 +52,12 @@ export const createMicrosoftSpeechComletion = async ({
     ttsAudioFormat: 'audio-24khz-160kbitrate-mono-mp3',
   });
 
-  const res = await fetch(MICROSOFT_SPEECH_URL, {
+  return fetch(proxyUrl ? proxyUrl : MICROSOFT_SPEECH_URL, {
     body,
     // @ts-ignore
     duplex: 'half',
     headers: DEFAULT_HEADERS,
     method: 'POST',
-    // @ts-ignore
     responseType: 'arraybuffer',
   });
-
-  return res;
 };

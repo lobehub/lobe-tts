@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { SsmlOptions } from '@/utils/genSSML';
+import { SsmlOptions } from '@/core/utils/genSSML';
 
 export const useSpeechSynthes = (defaultText: string, { voice, rate, pitch }: SsmlOptions) => {
   const [voiceList, setVoiceList] = useState(speechSynthesis.getVoices());

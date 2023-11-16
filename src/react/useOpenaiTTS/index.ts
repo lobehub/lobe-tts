@@ -1,19 +1,27 @@
 import { useState } from 'react';
 
+import { OpenAITTS, type OpenAITTSPayload } from '@/core/OpenAITTS';
 import { TTSConfig, useTTS } from '@/react/useTTS';
-import { type OpenaiTtsOptions, fetchOpenaiTTS } from '@/services/fetchOpenaiTTS';
 
-export const useOpenaiTTS = (
-  defaultText: string,
-  options: OpenaiTtsOptions,
-  config?: TTSConfig,
-) => {
+export interface OpenAITTSConfig extends OpenAITTSPayload, TTSConfig {
+  api?: {
+    key?: string;
+    proxy?: string;
+  };
+}
+
+export const useOpenaiTTS = (defaultText: string, config: OpenAITTSConfig) => {
   const [text, setText] = useState<string>(defaultText);
+  const { options, api, ...swrConfig } = config;
   const rest = useTTS(
     options.voice,
     text,
-    (segmentText: string) => fetchOpenaiTTS(segmentText, options),
-    config,
+    (segmentText: string) => {
+      const instance = new OpenAITTS({ apiKey: api?.key, baseUrl: api?.proxy });
+
+      return instance.create({ input: segmentText, options });
+    },
+    swrConfig,
   );
   return {
     setText,

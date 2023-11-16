@@ -1,13 +1,26 @@
 import qs from 'query-string';
 import { v4 as uuidv4 } from 'uuid';
 
-import { EDGE_API_TOKEN, EDGE_SPEECH_URL } from '../const/api';
-import { EdgeSpeechPayload } from '../server/types';
-import { genSSML } from '../utils/genSSML';
-import { genSendContent } from '../utils/genSendContent';
-import { getHeadersAndData } from '../utils/getHeadersAndData';
+import { SsmlOptions, genSSML } from '@/core/utils/genSSML';
+import { genSendContent } from '@/core/utils/genSendContent';
+import { getHeadersAndData } from '@/core/utils/getHeadersAndData';
 
-const configConent = JSON.stringify({
+export interface EdgeSpeechPayload {
+  /**
+   * @title 语音合成的文本
+   */
+  input: string;
+  /**
+   * @title SSML 语音合成的配置
+   */
+  options: Pick<SsmlOptions, 'voice'>;
+}
+
+const EDGE_SPEECH_URL =
+  'wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1';
+const EDGE_API_TOKEN = '6A5AA1D4EAFF4E9FB37E23D68491D6F4';
+
+const configContent = JSON.stringify({
   context: {
     synthesis: {
       audio: {
@@ -37,26 +50,27 @@ const genHeader = (connectId: string) => {
   };
 };
 
-interface CreateEdgeSpeechComletionOptions {
+export interface CreateEdgeSpeechCompletionOptions {
   payload: EdgeSpeechPayload;
 }
 
-export const createEdgeSpeechComletion = async ({
-  payload,
-}: CreateEdgeSpeechComletionOptions): Promise<Response> => {
+export const createEdgeSpeech = async (
+  { payload }: CreateEdgeSpeechCompletionOptions,
+  { proxyUrl, token }: { proxyUrl?: string; token?: string } = {},
+): Promise<Response> => {
   const { input, options } = payload;
 
   const connectId = uuidv4().replaceAll('-', '');
   const url = qs.stringifyUrl({
     query: {
       ConnectionId: connectId,
-      TrustedClientToken: EDGE_API_TOKEN,
+      TrustedClientToken: token ? token : EDGE_API_TOKEN,
     },
-    url: EDGE_SPEECH_URL,
+    url: proxyUrl ? proxyUrl : EDGE_SPEECH_URL,
   });
 
   const { configHeader, contentHeader } = genHeader(connectId);
-  const config = genSendContent(configHeader, configConent);
+  const config = genSendContent(configHeader, configContent);
   const content = genSendContent(contentHeader, genSSML(input, options));
 
   return new Promise((resolve, reject) => {

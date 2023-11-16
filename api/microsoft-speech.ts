@@ -1,5 +1,5 @@
-import { createMicrosoftSpeechComletion } from '../src/server/createMicrosoftSpeechComletion';
-import { MicrosoftSpeechPayload } from '../src/server/types';
+import { MicrosoftSpeechPayload } from '@/core';
+import { createMicrosoftSpeech } from '@/core/MicrosoftSpeechTTS/createMicrosoftSpeech';
 
 export const config = {
   runtime: 'edge',
@@ -9,5 +9,5 @@ export default async (req: Request) => {
   if (req.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
   const payload = (await req.json()) as MicrosoftSpeechPayload;
 
-  return createMicrosoftSpeechComletion({ payload });
+  return createMicrosoftSpeech({ payload });
 };

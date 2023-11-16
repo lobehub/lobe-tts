@@ -1,19 +1,19 @@
 import OpenAI from 'openai';
 
-import { OpenAISTTPayload } from './types';
+import { OpenAISTTPayload } from '@/core/OpenAISTT';
 
 interface CreateOpenaiAudioTranscriptionsOptions {
   openai: OpenAI;
   payload: OpenAISTTPayload;
 }
 
-export const createOpenaiAudioTranscriptionsCompletion = async ({
+export const createOpenaiAudioTranscriptions = async ({
   payload,
   openai,
 }: CreateOpenaiAudioTranscriptionsOptions) => {
-  const { blob, options } = payload;
+  const { speech, options } = payload;
 
-  const file = new File([blob], `${Date.now()}.${options.mineType.extension}`, {
+  const file = new File([speech], `${Date.now()}.${options.mineType.extension}`, {
     type: options.mineType.mineType,
   });
 

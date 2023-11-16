@@ -1,5 +1,5 @@
-import { createEdgeSpeechComletion } from '../src/server/createEdgeSpeechComletion';
-import { EdgeSpeechPayload } from '../src/server/types';
+import { EdgeSpeechPayload } from '@/core';
+import { createEdgeSpeech } from '@/core/EdgeSpeechTTS/createEdgeSpeech';
 
 export const config = {
   runtime: 'edge',
@@ -10,5 +10,5 @@ export default async (req: Request) => {
 
   const payload = (await req.json()) as EdgeSpeechPayload;
 
-  return createEdgeSpeechComletion({ payload });
+  return createEdgeSpeech({ payload });
 };

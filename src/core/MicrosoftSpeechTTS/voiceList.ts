@@ -1,4 +1,9 @@
-export default {
+import { SelectProps } from 'antd';
+import { flatten } from 'lodash-es';
+
+import voiceList from '@/core/data/voiceList';
+
+const azureVoiceList = {
   'ar-SA': ['ar-SA-HamedNeural', 'ar-SA-ZariyahNeural'],
   'de-DE': [
     'de-DE-AmalaNeural',
@@ -158,3 +163,14 @@ export default {
   ],
   'zh-TW': ['zh-TW-HsiaoChenNeural', 'zh-TW-HsiaoYuNeural', 'zh-TW-YunJheNeural'],
 } as const;
+
+export default azureVoiceList;
+
+export const getAzureVoiceOptions = (locale?: string): SelectProps['options'] => {
+  const data =
+    locale && (azureVoiceList as any)?.[locale]
+      ? (azureVoiceList as any)?.[locale] || []
+      : flatten(Object.values(azureVoiceList));
+
+  return data.map((voice: any) => ({ label: (voiceList as any)?.[voice] || voice, value: voice }));
+};

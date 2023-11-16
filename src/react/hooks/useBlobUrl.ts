@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import useSWR from 'swr';
 
-import { arrayBufferConvert } from '@/utils/arrayBufferConvert';
-import { audioBufferToBlob } from '@/utils/audioBufferToBlob';
-import { playAudioBlob } from '@/utils/playAudioBlob';
+import { arrayBufferConvert } from '@/core/utils/arrayBufferConvert';
+import { audioBufferToBlob } from '@/core/utils/audioBufferToBlob';
+import { playAudioBlob } from '@/core/utils/playAudioBlob';
 
 export const useBlobUrl = (src: string) => {
   const [audio, setAudio] = useState<HTMLAudioElement>();

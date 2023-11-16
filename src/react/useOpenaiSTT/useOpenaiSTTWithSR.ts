@@ -7,7 +7,7 @@ import { OpenaiSpeechRecognitionOptions, STTConfig } from './useOpenaiSTTWithRec
 
 export const useOpenaiSTTWithSR = (
   locale: string,
-  options: OpenaiSpeechRecognitionOptions,
+  config: OpenaiSpeechRecognitionOptions,
   {
     onBlobAvailable,
     onTextChange,
@@ -55,7 +55,7 @@ export const useOpenaiSTTWithSR = (
     setIsGlobalLoading(false);
   }, [stop]);
 
-  const { isLoading } = useOpenaiSTT(shouldFetch, blob, options, {
+  const { isLoading } = useOpenaiSTT({
     onError: (err, ...rest) => {
       onError?.(err, ...rest);
       console.error(err);
@@ -68,6 +68,9 @@ export const useOpenaiSTTWithSR = (
       handleStop();
       onFinished?.(data, ...rest);
     },
+    options: config.options,
+    shouldFetch,
+    speech: blob as Blob,
     ...restConfig,
   });
 

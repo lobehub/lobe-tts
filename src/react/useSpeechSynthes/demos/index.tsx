@@ -1,4 +1,4 @@
-import { SpeechSynthesTTS } from '@lobehub/tts';
+import { SpeechSynthesisTTS } from '@lobehub/tts';
 import { useSpeechSynthes } from '@lobehub/tts/react';
 import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
 import { Button, Input } from 'antd';
@@ -26,7 +26,7 @@ export default () => {
         value: 0,
       },
       voice: {
-        options: genLevaOptions(new SpeechSynthesTTS().voiceOptions),
+        options: genLevaOptions(new SpeechSynthesisTTS().voiceOptions),
         value: '婷婷',
       },
     },

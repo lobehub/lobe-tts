@@ -4,9 +4,10 @@ import { SWRConfiguration } from 'swr';
 import { useAudioRecorder } from '@/react/useAudioRecorder';
 import { useOpenaiSTT } from '@/react/useOpenaiSTT/useOpenaiSTT';
 import { SpeechRecognitionOptions } from '@/react/useSpeechRecognition/useSpeechRecognition';
-import { OpenaiSttOptions } from '@/services/fetchOpenaiSTT';
 
-export type OpenaiSpeechRecognitionOptions = SpeechRecognitionOptions & OpenaiSttOptions;
+import { OpenAISTTConfig } from './useOpenaiSTT';
+
+export type OpenaiSpeechRecognitionOptions = SpeechRecognitionOptions & OpenAISTTConfig;
 
 export interface STTConfig extends SpeechRecognitionOptions, SWRConfiguration {
   onFinished?: SWRConfiguration['onSuccess'];
@@ -15,7 +16,7 @@ export interface STTConfig extends SpeechRecognitionOptions, SWRConfiguration {
 }
 
 export const useOpenaiSTTWithRecord = (
-  options: OpenaiSttOptions,
+  config: OpenAISTTConfig,
   {
     onBlobAvailable,
     onTextChange,
@@ -51,7 +52,7 @@ export const useOpenaiSTTWithRecord = (
     setIsGlobalLoading(false);
   }, [stop]);
 
-  const { isLoading } = useOpenaiSTT(shouldFetch, blob, options, {
+  const { isLoading } = useOpenaiSTT({
     onError: (err, ...rest) => {
       onError?.(err, ...rest);
       console.error(err);
@@ -64,6 +65,9 @@ export const useOpenaiSTTWithRecord = (
       handleStop();
       onFinished?.(data, ...rest);
     },
+    options: config.options,
+    shouldFetch,
+    speech: blob as Blob,
     ...restConfig,
   });
 

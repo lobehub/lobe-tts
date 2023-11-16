@@ -1,19 +1,19 @@
 import OpenAI from 'openai';
 
-import { OpenAITTSPayload } from './types';
+import { OpenAITTSPayload } from '../core/OpenAITTS';
 
 interface CreateOpenaiAudioSpeechCompletionOptions {
   openai: OpenAI;
   payload: OpenAITTSPayload;
 }
 
-export const createOpenaiAudioSpeechCompletion = async ({
+export const createOpenaiAudioSpeech = async ({
   payload,
   openai,
 }: CreateOpenaiAudioSpeechCompletionOptions) => {
   const { options, input } = payload;
 
-  const response = await openai.audio.speech.create(
+  return openai.audio.speech.create(
     {
       input,
       model: options.model,
@@ -21,6 +21,4 @@ export const createOpenaiAudioSpeechCompletion = async ({
     },
     { headers: { Accept: '*/*' } },
   );
-
-  return response;
 };

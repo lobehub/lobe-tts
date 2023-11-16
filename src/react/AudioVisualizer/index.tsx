@@ -4,7 +4,7 @@ import { CSSProperties, RefObject, memo } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Flexbox } from 'react-layout-kit';
 
-import Visualizer, { VisualizerProps } from '@/react/AudioVisualizer/Visualizer';
+import Visualizer, { VisualizerProps } from './Visualizer';
 
 export interface AudioVisualizerProps {
   audioRef: RefObject<HTMLAudioElement>;

@@ -1,7 +1,7 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { AudioProps } from '@/react/AudioPlayer';
-import { audioBufferToBlob, audioBuffersToBlob } from '@/utils/audioBufferToBlob';
+import { audioBufferToBlob, audioBuffersToBlob } from '@/core/utils/audioBufferToBlob';
 
 export interface StreamAudioPlayerHook extends AudioProps {
   download: () => void;

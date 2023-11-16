@@ -55,7 +55,7 @@ export const useOpenaiSTTWithPSR = (
     setIsGlobalLoading(false);
   }, [stop]);
 
-  const { isLoading } = useOpenaiSTT(shouldFetch, blob, options, {
+  const { isLoading } = useOpenaiSTT({
     onError: (err, ...rest) => {
       onError?.(err, ...rest);
       console.error(err);
@@ -68,6 +68,9 @@ export const useOpenaiSTTWithPSR = (
       handleStop();
       onFinished?.(data, ...rest);
     },
+    options,
+    shouldFetch,
+    speech: blob as Blob,
     ...restConfig,
   });
 

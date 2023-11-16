@@ -5,7 +5,7 @@ import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';
 
-import { EDGE_SPEECH_API_URL } from '../../_const/api';
+import { EDGE_SPEECH_API_URL } from '../../_util/api';
 import { genLevaOptions } from '../../_util/leva';
 
 const defaultText = '这是一段使用 Edge Speech 的语音演示';
@@ -32,7 +32,7 @@ export default () => {
 
   const { setText, isGlobalLoading, start, stop, audio } = useEdgeSpeech(defaultText, {
     api,
-    ...options,
+    options,
   });
   return (
     <StoryBook levaStore={store}>
