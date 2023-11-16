@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.19.0](https://github.com/lobehub/lobe-tts/compare/v1.18.3...v1.19.0)
+
+<sup>Released on **2023-11-16**</sup>
+
+#### ✨ Features
+
+- **misc**: Update import statements, add default values for "audio" parameter, refactor variable names and formatting.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update import statements, add default values for "audio" parameter, refactor variable names and formatting ([c01fbf7](https://github.com/lobehub/lobe-tts/commit/c01fbf7))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.18.3](https://github.com/lobehub/lobe-tts/compare/v1.18.2...v1.18.3)
 
 <sup>Released on **2023-11-16**</sup>
