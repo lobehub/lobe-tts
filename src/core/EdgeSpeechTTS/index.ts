@@ -41,10 +41,18 @@ export class EdgeSpeechTTS {
     return response;
   };
 
-  create = async (payload: EdgeSpeechPayload): Promise<AudioBuffer> => {
-    const response = await this.fetch(payload);
+  create = async (payload: EdgeSpeechPayload): Promise<Response> => {
+    return this.fetch(payload);
+  };
 
-    const arrayBuffer = await response.arrayBuffer();
+  /**
+   * Browser only
+   * @param payload
+   */
+  createAudio = async (payload: EdgeSpeechPayload): Promise<AudioBuffer> => {
+    const res = await this.create(payload);
+
+    const arrayBuffer = await res.arrayBuffer();
 
     return arrayBufferConvert(arrayBuffer);
   };
