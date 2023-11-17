@@ -9,14 +9,20 @@ title: EdgeSpeechTTS
 
 `EdgeSpeechTTS` 类是一个用于将文本转换为语音的工具，它可以在边缘运行时环境中使用。该类提供了一系列方法来获取语音选项，创建语音合成请求，并处理返回的音频数据。
 
+### 参数
+
+- `options`: 对象，可选。
+  - `backendUrl`: 字符串，指定后端服务的 URL。如果提供，将使用此 URL 发送请求。
+  - `locale`: 字符串，指定要使用的语音区域设置。如果提供，将用于过滤可用语音列表。
+
 ### 示例
 
-以下是使用 `EdgeSpeechTTS` 类的示例代码：
-
-Node 环境：
+使用 Bun 直接运行 `EdgeSpeechTTS`：
 
 ```js
+// bun index.js
 import { EdgeSpeechTTS } from '@lobehub/tts';
+import { Buffer } from 'buffer';
 import fs from 'fs';
 import path from 'path';
 
@@ -25,27 +31,33 @@ const tts = new EdgeSpeechTTS({ locale: 'zh-CN' });
 
 // 创建语音合成请求负载
 const payload = {
-  text: '这是一段语音演示',
-  voice: 'zh-CN-XiaoxiaoNeural',
+  input: '这是一段语音演示',
+  options: {
+    voice: 'zh-CN-XiaoxiaoNeural',
+  },
 };
+
 const speechFile = path.resolve('./speech.mp3');
 
 // 调用 create 方法来合成语音
-async function main() {
-  const mp3Buffer = await tts.create(payload);
-  await fs.writeFileSync(speechFile, mp3Buffer);
-}
+const response = await tts.create(payload);
+const mp3Buffer = Buffer.from(await response.arrayBuffer());
 
-main();
+fs.writeFileSync(speechFile, mp3Buffer);
 ```
 
 在此示例中，首先实例化了 `EdgeSpeechTTS` 类，并指定了后端服务的 URL 和语音区域设置。然后创建了一个包含文本和语音选项的请求负载。最后，通过调用 `create` 方法并传入负载来合成语音。如果合成成功，将返回一个包含音频数据的 `AudioBuffer` 对象。如果出现错误，将捕获并处理。
 
-## 参数
+在 Node.js 中运行
 
-- `options`: 对象，可选。
-  - `backendUrl`: 字符串，指定后端服务的 URL。如果提供，将使用此 URL 发送请求。
-  - `locale`: 字符串，指定要使用的语音区域设置。如果提供，将用于过滤可用语音列表。
+由于 Nodejs 环境缺少 `WebSocket` 实例，所以我们需要 polyfill WebSocket。通过引入 ws 包即可。
+
+```js
+// 在文件顶部引入
+import WebSocket from 'ws';
+
+global.WebSocket = WebSocket;
+```
 
 ## 属性
 
