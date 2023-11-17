@@ -25,9 +25,9 @@ export interface OpenAITTSPayload {
 }
 
 export interface OpenAITTSAPI {
-  apiKey?: string;
-  backendUrl?: string;
-  baseUrl?: string;
+  OPENAI_API_KEY?: string;
+  OPENAI_PROXY_URL?: string;
+  serviceUrl?: string;
 }
 
 export class OpenAITTS {
@@ -35,10 +35,10 @@ export class OpenAITTS {
   private OPENAI_API_KEY: string | undefined;
   private BACKEND_URL: string | undefined;
 
-  constructor({ baseUrl, apiKey, backendUrl }: OpenAITTSAPI = {}) {
-    this.OPENAI_BASE_URL = baseUrl || OPENAI_BASE_URL;
-    this.OPENAI_API_KEY = apiKey;
-    this.BACKEND_URL = backendUrl;
+  constructor({ OPENAI_PROXY_URL, OPENAI_API_KEY, serviceUrl }: OpenAITTSAPI = {}) {
+    this.OPENAI_BASE_URL = OPENAI_PROXY_URL || OPENAI_BASE_URL;
+    this.OPENAI_API_KEY = OPENAI_API_KEY;
+    this.BACKEND_URL = serviceUrl;
   }
 
   get voiceOptions() {
@@ -65,12 +65,18 @@ export class OpenAITTS {
         });
   };
 
-  create = async (payload: OpenAITTSPayload): Promise<AudioBuffer> => {
+  create = async (payload: OpenAITTSPayload): Promise<Response> => {
     const response = await this.fetch(payload);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
+
+    return response;
+  };
+
+  createAudio = async (payload: OpenAITTSPayload): Promise<AudioBuffer> => {
+    const response = await this.create(payload);
 
     const arrayBuffer = await response.arrayBuffer();
     return await arrayBufferConvert(arrayBuffer);
