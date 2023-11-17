@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.20.0-beta.2](https://github.com/lobehub/lobe-tts/compare/v1.20.0-beta.1...v1.20.0-beta.2)
+
+<sup>Released on **2023-11-17**</sup>
+
+#### ✨ Features
+
+- **misc**: Update MicrosoftSpeech api.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update MicrosoftSpeech api ([105e2d0](https://github.com/lobehub/lobe-tts/commit/105e2d0))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.20.0-beta.1](https://github.com/lobehub/lobe-tts/compare/v1.19.1...v1.20.0-beta.1)
 
 <sup>Released on **2023-11-17**</sup>
