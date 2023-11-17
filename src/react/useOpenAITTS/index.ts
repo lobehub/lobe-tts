@@ -16,7 +16,7 @@ export const useOpenAITTS = (defaultText: string, config: OpenAITTSOptions) => {
     (segmentText: string) => {
       const instance = new OpenAITTS(api);
 
-      return instance.create({ input: segmentText, options });
+      return instance.createAudio({ input: segmentText, options });
     },
     swrConfig,
   );

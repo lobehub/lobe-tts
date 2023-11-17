@@ -17,7 +17,7 @@ export const useEdgeSpeech = (defaultText: string, config: EdgeSpeechOptions) =>
     (segmentText: string) => {
       const instance = new EdgeSpeechTTS({ ...api, locale });
 
-      return instance.create({ input: segmentText, options });
+      return instance.createAudio({ input: segmentText, options });
     },
     swrConfig,
   );

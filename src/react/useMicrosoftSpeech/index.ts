@@ -20,7 +20,7 @@ export const useMicrosoftSpeech = (defaultText: string, config: MicrosoftSpeechO
     text,
     (segmentText: string) => {
       const instance = new MicrosoftSpeechTTS({ ...api, locale });
-      return instance.create({ input: segmentText, options });
+      return instance.createAudio({ input: segmentText, options });
     },
     swrConfig,
   );

@@ -2,6 +2,82 @@
 
 # Changelog
 
+## [Version 1.20.0-beta.3](https://github.com/lobehub/lobe-tts/compare/v1.20.0-beta.2...v1.20.0-beta.3)
+
+<sup>Released on **2023-11-17**</sup>
+
+#### ✨ Features
+
+- **misc**: Update OpenAITTS api.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update OpenAITTS api ([1a14f4b](https://github.com/lobehub/lobe-tts/commit/1a14f4b))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 1.20.0-beta.2](https://github.com/lobehub/lobe-tts/compare/v1.20.0-beta.1...v1.20.0-beta.2)
+
+<sup>Released on **2023-11-17**</sup>
+
+#### ✨ Features
+
+- **misc**: Update MicrosoftSpeech api.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update MicrosoftSpeech api ([105e2d0](https://github.com/lobehub/lobe-tts/commit/105e2d0))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 1.20.0-beta.1](https://github.com/lobehub/lobe-tts/compare/v1.19.1...v1.20.0-beta.1)
+
+<sup>Released on **2023-11-17**</sup>
+
+#### ✨ Features
+
+- **misc**: Update api, update api.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update api ([884f844](https://github.com/lobehub/lobe-tts/commit/884f844))
+- **misc**: Update api ([bfa78b1](https://github.com/lobehub/lobe-tts/commit/bfa78b1))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.19.1](https://github.com/lobehub/lobe-tts/compare/v1.19.0...v1.19.1)
 
 <sup>Released on **2023-11-16**</sup>

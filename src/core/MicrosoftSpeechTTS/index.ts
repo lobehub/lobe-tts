@@ -42,8 +42,12 @@ export class MicrosoftSpeechTTS {
     return response;
   };
 
-  create = async (payload: MicrosoftSpeechPayload): Promise<AudioBuffer> => {
-    const response = await this.fetch(payload);
+  create = async (payload: MicrosoftSpeechPayload): Promise<Response> => {
+    return await this.fetch(payload);
+  };
+
+  createAudio = async (payload: MicrosoftSpeechPayload): Promise<AudioBuffer> => {
+    const response = await this.create(payload);
 
     const arrayBuffer = await response.arrayBuffer();
 
