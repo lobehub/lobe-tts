@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.20.0](https://github.com/lobehub/lobe-tts/compare/v1.19.1...v1.20.0)
+
+<sup>Released on **2023-11-17**</sup>
+
+#### ✨ Features
+
+- **misc**: Update api and document.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update api and document, closes [#12](https://github.com/lobehub/lobe-tts/issues/12) ([077812e](https://github.com/lobehub/lobe-tts/commit/077812e))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.20.0-beta.3](https://github.com/lobehub/lobe-tts/compare/v1.20.0-beta.2...v1.20.0-beta.3)
 
 <sup>Released on **2023-11-17**</sup>
