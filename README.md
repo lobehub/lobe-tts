@@ -6,7 +6,7 @@
 
 <h1>Lobe TTS</h1>
 
-A high-quality & reliable TTS React Hooks library
+A high-quality & reliable TTS library
 
 [![][npm-release-shield]][npm-release-link]
 [![][github-releasedate-shield]][github-releasedate-link]
@@ -29,11 +29,9 @@ A high-quality & reliable TTS React Hooks library
 
 #### TOC
 
+- [📦 Usage](#-usage)
 - [📦 Installation](#-installation)
   - [Compile with Next.js](#compile-with-nextjs)
-- [🛳 Self Hosting](#-self-hosting)
-  - [Deploy to Vercel](#deploy-to-vercel)
-  - [Environment Variable](#environment-variable)
 - [⌨️ Local Development](#️-local-development)
 - [🤝 Contributing](#-contributing)
 - [🔗 More Products](#-more-products)
@@ -42,12 +40,88 @@ A high-quality & reliable TTS React Hooks library
 
 </details>
 
+## 📦 Usage
+
+### Generate Speech on server
+
+run the script below use Bun: `bun index.js`
+
+```js
+// index.js
+import { EdgeSpeechTTS } from '@lobehub/tts';
+import { Buffer } from 'buffer';
+import fs from 'fs';
+import path from 'path';
+
+// Instantiate EdgeSpeechTTS
+const tts = new EdgeSpeechTTS({ locale: 'en-US' });
+
+// Create speech synthesis request payload
+const payload = {
+  input: 'This is a speech demonstration',
+  options: {
+    voice: 'en-US-GuyNeural',
+  },
+};
+
+// Call create method to synthesize speech
+const response = await tts.create(payload);
+
+// generate speech file
+const mp3Buffer = Buffer.from(await response.arrayBuffer());
+const speechFile = path.resolve('./speech.mp3');
+
+fs.writeFileSync(speechFile, mp3Buffer);
+```
+
+
+https://github.com/lobehub/lobe-tts/assets/28616219/3ab68c5a-2745-442e-8d66-ca410192ace1
+
+
+> \[!IMPORTANT]\
+> **Run on Node.js**
+> 
+> As the Node.js environment lacks the `WebSocket` instance, we need to polyfill WebSocket. This can be done by importing the ws package.
+
+```js
+// import at the top of the file
+import WebSocket from 'ws';
+
+global.WebSocket = WebSocket;
+```
+
+### Use the React Component
+
+```tsx
+import { AudioPlayer, AudioVisualizer, useAudioPlayer } from '@lobehub/tts/react';
+
+export default () => {
+  const { ref, isLoading, ...audio } = useAudioPlayer(url);
+
+  return (
+    <Flexbox align={'center'} gap={8}>
+      <AudioPlayer audio={audio} isLoading={isLoading} style={{ width: '100%' }} />
+      <AudioVisualizer audioRef={ref} isLoading={isLoading} />
+    </Flexbox>
+  );
+};
+```
+
+
+https://github.com/lobehub/lobe-tts/assets/28616219/c2638383-314f-44c3-b358-8fbbd3028d61
+
+
+
 ## 📦 Installation
 
 > \[!IMPORTANT]\
 > This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
 
 To install `@lobehub/tts`, run the following command:
+
+```bash
+$ pnpm i @lobehub/tts
+```
 
 [![][bun-shield]][bun-link]
 
@@ -65,31 +139,6 @@ const nextConfig = {
   transpilePackages: ['@lobehub/tts'],
 };
 ```
-
-<div align="right">
-
-[![][back-to-top]](#readme-top)
-
-</div>
-
-## 🛳 Self Hosting
-
-If you want to deploy this service by yourself, you can follow the steps below.
-
-### Deploy to Vercel
-
-Click button below to deploy your private plugins' gateway.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flobehub%2Flobe-tts&project-name=lobe-tts&repository-name=lobe-tts)
-
-### Environment Variable
-
-This project provides some additional configuration items set with environment variables:
-
-| Environment Variable | Description                                                                                                                                   | Default                     |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `OPENAI_API_KEY`     | This is the API key you apply on the OpenAI account page                                                                                      | `sk-xxxxxx...xxxxxx`        |
-| `OPENAI_BASE_URL`    | If you manually configure the OpenAI interface proxy, you can use this configuration item to override the default OpenAI API request base URL | `https://api.openai.com/v1` |
 
 <div align="right">
 
