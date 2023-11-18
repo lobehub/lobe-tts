@@ -26,28 +26,30 @@ export const useOpenAISTTAutoStop = (
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [text, setText] = useState<string>();
-  const {
-    start,
-    stop,
-    blob,
-    url,
-    isLoading: isRecording,
-    time,
-    formattedTime,
-  } = useSpeechRecognitionAutoStop(locale, {
-    onBlobAvailable: (blobData) => {
-      setShouldFetch(true);
-      onBlobAvailable?.(blobData);
+  const { start, stop, blob, url, isRecording, time, formattedTime } = useSpeechRecognitionAutoStop(
+    locale,
+    {
+      onBlobAvailable: (blobData) => {
+        if (!text || !blobData) {
+          console.error('Error useOpenAISTTAutoStop:', 'No text or blob available');
+          onError?.('No text or blob available', text as any, {} as any);
+          setIsGlobalLoading(false);
+          stop();
+          return;
+        }
+        setShouldFetch(true);
+        onBlobAvailable?.(blobData);
+      },
+      onRecognitionError,
+      onRecognitionFinish,
+      onRecognitionStart,
+      onRecognitionStop,
+      onTextChange: (data) => {
+        setText(data);
+        onTextChange?.(data);
+      },
     },
-    onRecognitionError,
-    onRecognitionFinish,
-    onRecognitionStart,
-    onRecognitionStop,
-    onTextChange: (data) => {
-      setText(data);
-      onTextChange?.(data);
-    },
-  });
+  );
 
   const handleStart = useCallback(() => {
     onStart?.();
@@ -63,16 +65,18 @@ export const useOpenAISTTAutoStop = (
     setIsGlobalLoading(false);
   }, [stop]);
 
-  const { isLoading } = useOpenAISTTCore({
+  const { isLoading, error, mutate } = useOpenAISTTCore({
     onError: (err, ...rest) => {
       onError?.(err, ...rest);
-      console.error(err);
+      console.error('Error useOpenAISTTAutoStop:', err);
       handleStop();
     },
-    onSuccess: (data, ...rest) => {
+    onSuccess: async (data, ...rest) => {
       onSuccess?.(data, ...rest);
-      setText(data);
-      onTextChange?.(data);
+      const json = await data.json();
+      const text = json.text;
+      setText(text);
+      onTextChange?.(text);
       handleStop();
       onFinished?.(data, ...rest);
     },
@@ -84,9 +88,11 @@ export const useOpenAISTTAutoStop = (
 
   return {
     blob,
+    error,
     formattedTime,
     isLoading: isGlobalLoading || isLoading || isRecording,
     isRecording,
+    mutate,
     start: handleStart,
     stop: handleStop,
     text,

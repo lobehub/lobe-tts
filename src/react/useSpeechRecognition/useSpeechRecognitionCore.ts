@@ -54,7 +54,7 @@ export const useSpeechRecognitionCore = (
       };
       setRecognition(speechRecognition);
     } catch (error) {
-      console.error(error);
+      console.error('Error useSpeechRecognitionCore:', error);
       onRecognitionError?.(error);
     }
   }, [isFinalStop]);
@@ -76,7 +76,7 @@ export const useSpeechRecognitionCore = (
       recognition.start();
       onRecognitionStart?.();
     } catch (error) {
-      console.error('handleStart', error);
+      console.error('Error useSpeechRecognitionCore:', 'start', error);
       onRecognitionError?.(error);
     }
   }, [recognition]);
@@ -86,7 +86,7 @@ export const useSpeechRecognitionCore = (
       recognition.abort();
       onRecognitionStop?.();
     } catch (error) {
-      console.error(error);
+      console.error('Error useSpeechRecognitionCore:', 'stop', error);
       onRecognitionError?.(error);
     }
     setIsLoading(false);

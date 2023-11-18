@@ -14,7 +14,6 @@ export const useOpenAISTTCore = (config: OpenAISTTCoreOptions) => {
     shouldFetch && speech ? key : null,
     async () => {
       const instance = new OpenaiSTT(api);
-
       return instance.create({ options, speech });
     },
     swrConfig,

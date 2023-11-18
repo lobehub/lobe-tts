@@ -1,29 +1,43 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
-import useSWR from 'swr';
+import useSWR, { SWRConfiguration } from 'swr';
 
-import { arrayBufferConvert } from '@/core/utils/arrayBufferConvert';
-import { audioBufferToBlob } from '@/core/utils/audioBufferToBlob';
 import { AudioProps } from '@/react/AudioPlayer';
 
 export interface AudioPlayerReturn extends AudioProps {
+  arrayBuffers: ArrayBuffer[];
+  download: () => void;
   isLoading?: boolean;
   ref: RefObject<HTMLAudioElement>;
   reset: () => void;
+  url: string;
 }
 
-export const useAudioPlayer = (src: string): AudioPlayerReturn => {
+export interface AudioPlayerOptions {
+  onError?: SWRConfiguration['onError'];
+  src?: string;
+  stop?: () => void;
+  type?: string;
+}
+
+export const useAudioPlayer = ({
+  src,
+  type = 'audio/mp3',
+  onError,
+}: AudioPlayerOptions = {}): AudioPlayerReturn => {
   const audioRef = useRef<HTMLAudioElement>(new Audio());
+  const [arrayBuffers, setArrayBuffers] = useState<ArrayBuffer[]>([]);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isGlobalLoading, setIsGlobalLoading] = useState(true);
 
-  const { isLoading } = useSWR(src, async () => {
+  const { isLoading } = useSWR(src || null, async () => {
+    if (!src) return;
     setIsGlobalLoading(true);
     const data = await fetch(src);
     const arrayBuffer = await data.arrayBuffer();
-    const audioBuffer = await arrayBufferConvert(arrayBuffer);
-    const newBlob = await audioBufferToBlob(audioBuffer);
+    setArrayBuffers([arrayBuffer]);
+    const newBlob = new Blob([arrayBuffer], { type: type });
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
     if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
@@ -40,8 +54,10 @@ export const useAudioPlayer = (src: string): AudioPlayerReturn => {
     const onTimeUpdate = () => {
       setCurrentTime(audioRef.current.currentTime);
     };
-    const onError = () => {
-      console.error('Error loading audio:', audioRef.current.error);
+    const onAudioError = () => {
+      console.error('Error useAudioPlayer:', 'loading audio', audioRef.current.error);
+      onError?.(audioRef.current.error, 'useAudioPlayer', {} as any);
+      stop?.();
     };
 
     const onEnded = async () => {
@@ -51,7 +67,7 @@ export const useAudioPlayer = (src: string): AudioPlayerReturn => {
     };
 
     audioRef.current.addEventListener('ended', onEnded);
-    audioRef.current.addEventListener('error', onError);
+    audioRef.current.addEventListener('error', onAudioError);
     audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
     audioRef.current.addEventListener('timeupdate', onTimeUpdate);
 
@@ -61,7 +77,7 @@ export const useAudioPlayer = (src: string): AudioPlayerReturn => {
       audioRef.current.removeEventListener('ended', onEnded);
       audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
       audioRef.current.removeEventListener('timeupdate', onTimeUpdate);
-      audioRef.current.removeEventListener('error', onError);
+      audioRef.current.removeEventListener('error', onAudioError);
       setIsGlobalLoading(true);
     };
   }, []);
@@ -96,14 +112,15 @@ export const useAudioPlayer = (src: string): AudioPlayerReturn => {
     setCurrentTime(0);
   }, []);
 
-  const handleDownload = useCallback(() => {
+  const handleDownload = useCallback(async () => {
     const a = document.createElement('a');
     a.href = audioRef.current.src;
-    a.download = 'audio.wav';
+    a.download = 'audio.mp3';
     a.click();
   }, []);
 
   return {
+    arrayBuffers: arrayBuffers,
     currentTime,
     download: handleDownload,
     duration,
@@ -115,5 +132,6 @@ export const useAudioPlayer = (src: string): AudioPlayerReturn => {
     reset,
     setTime,
     stop: handleStop,
+    url: audioRef.current.src,
   };
 };

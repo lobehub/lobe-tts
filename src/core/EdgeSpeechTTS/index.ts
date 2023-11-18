@@ -35,9 +35,6 @@ export class EdgeSpeechTTS {
       ? fetch(this.BACKEND_URL, { body: JSON.stringify(payload), method: 'POST' })
       : createEdgeSpeech({ payload }));
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
     return response;
   };
 

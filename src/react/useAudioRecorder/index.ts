@@ -55,7 +55,7 @@ export const useAudioRecorder = (onBlobAvailable?: (blob: Blob) => void) => {
         });
       })
       .catch((error) => {
-        console.error(error);
+        console.error('Error useAudioRecorder', error);
       });
   }, [timerInterval, _startTimer, url]);
 

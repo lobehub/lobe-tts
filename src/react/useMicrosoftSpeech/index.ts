@@ -15,16 +15,20 @@ export interface MicrosoftSpeechOptions extends Pick<MicrosoftSpeechPayload, 'op
 export const useMicrosoftSpeech = (defaultText: string, config: MicrosoftSpeechOptions) => {
   const [text, setText] = useState<string>(defaultText);
   const { options, locale, api, ...swrConfig } = config;
+  const [response, setResponse] = useState<Response>();
   const rest = useTTS(
     options.voice,
     text,
-    (segmentText: string) => {
+    async (segmentText: string) => {
       const instance = new MicrosoftSpeechTTS({ ...api, locale });
-      return instance.createAudio({ input: segmentText, options });
+      const res = await instance.create({ input: segmentText, options });
+      setResponse(res);
+      return res.arrayBuffer();
     },
     swrConfig,
   );
   return {
+    response,
     setText,
     ...rest,
   };

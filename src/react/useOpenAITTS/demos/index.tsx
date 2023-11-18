@@ -52,7 +52,7 @@ export default () => {
           </Button>
         )}
         <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
-        <AudioPlayer audio={audio} isLoading={isGlobalLoading} />
+        <AudioPlayer audio={audio} isLoading={isGlobalLoading} onLoadingStop={stop} />
       </Flexbox>
     </StoryBook>
   );

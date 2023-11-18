@@ -62,7 +62,7 @@ export const audioBufferToBlob = async (audioBuffer: AudioBuffer) => {
   return new Blob([wavArrayBuffer], { type: 'audio/wav' });
 };
 
-const mergeAudioBuffers = async (audioBuffers: AudioBuffer[]): Promise<AudioBuffer> => {
+export const mergeAudioBuffers = async (audioBuffers: AudioBuffer[]): Promise<AudioBuffer> => {
   const audioContext = new AudioContext();
   // 计算所有AudioBuffer的总长度
   const totalLength = audioBuffers.reduce((acc, curr) => acc + curr.length, 0);
@@ -93,14 +93,4 @@ const mergeAudioBuffers = async (audioBuffers: AudioBuffer[]): Promise<AudioBuff
   });
 
   return outputBuffer;
-};
-
-export const audioBuffersToBlob = async (audioBuffers: AudioBuffer[]) => {
-  // 连接所有的 ArrayBuffer
-  const audioBuffer =
-    audioBuffers.length > 1 ? await mergeAudioBuffers(audioBuffers) : audioBuffers[0];
-  const wavArrayBuffer = await audioBufferToWav(audioBuffer);
-
-  // 创建 Blob 对象
-  return new Blob([wavArrayBuffer], { type: 'audio/wav' });
 };

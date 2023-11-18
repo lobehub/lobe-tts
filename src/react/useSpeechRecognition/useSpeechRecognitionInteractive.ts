@@ -65,6 +65,7 @@ export const useSpeechRecognitionInteractive = (
     blob,
     formattedTime,
     isLoading: isGLobalLoading,
+    isRecording: isGLobalLoading,
     start: handleStart,
     stop: handleStop,
     text: resultText,

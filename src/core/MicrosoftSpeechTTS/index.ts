@@ -36,9 +36,6 @@ export class MicrosoftSpeechTTS {
       ? fetch(this.BACKEND_URL, { body: JSON.stringify(payload), method: 'POST' })
       : createMicrosoftSpeech({ payload }));
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
     return response;
   };
 

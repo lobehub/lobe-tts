@@ -65,12 +65,14 @@ export class OpenaiSTT {
           method: 'POST',
         });
   };
-  create = async (payload: OpenAISTTPayload): Promise<string> => {
+  create = async (payload: OpenAISTTPayload): Promise<Response> => {
     const response = await this.fetch(payload);
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
+    return response;
+  };
+
+  createText = async (payload: OpenAISTTPayload): Promise<string> => {
+    const response = await this.fetch(payload);
 
     const json = await response.json();
 

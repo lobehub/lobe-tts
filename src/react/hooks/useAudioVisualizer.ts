@@ -39,7 +39,7 @@ export const useAudioVisualizer = (
   }, []);
 
   useEffect(() => {
-    if (!audioRef.current) return;
+    if (!audioRef.current || !audioRef.current.currentSrc) return;
 
     try {
       audioContextRef.current = new AudioContext();
@@ -51,7 +51,7 @@ export const useAudioVisualizer = (
       audioSourceRef.current.connect(analyserRef.current);
       analyserRef.current.connect(audioContextRef.current.destination);
     } catch (error) {
-      console.error(error);
+      console.error('Error useAudioVisualizer:', error);
     }
 
     setInit(true);
@@ -61,7 +61,7 @@ export const useAudioVisualizer = (
       audioContextRef.current?.close();
       setInit(false);
     };
-  }, []);
+  }, [audioRef?.current?.currentSrc]);
 
   useEffect(() => {
     if (!init) return;

@@ -49,18 +49,25 @@ export const useOpenAISTTRecorder = ({
     setIsGlobalLoading(false);
   }, [stop]);
 
-  const { isLoading } = useOpenAISTTCore({
+  const {
+    isLoading,
+    error,
+    mutate,
+    data: response,
+  } = useOpenAISTTCore({
     onError: (err, ...rest) => {
       onError?.(err, ...rest);
-      console.error(err);
+      console.error('Error useOpenAISTTRecorder:', err);
       handleStop();
     },
-    onSuccess: (data, ...rest) => {
-      onSuccess?.(data, ...rest);
-      setText(data);
-      onTextChange?.(data);
+    onSuccess: async (res, ...rest) => {
+      onSuccess?.(res, ...rest);
+      const json = await res.json();
+      const text = json.text;
+      setText(text);
+      onTextChange?.(text);
       handleStop();
-      onFinished?.(data, ...rest);
+      onFinished?.(res, ...rest);
     },
     options: options!,
     shouldFetch,
@@ -70,9 +77,12 @@ export const useOpenAISTTRecorder = ({
 
   return {
     blob,
+    error,
     formattedTime,
     isLoading: isGlobalLoading || isLoading || isRecording,
     isRecording,
+    mutate,
+    response,
     start: handleStart,
     stop: handleStop,
     text,

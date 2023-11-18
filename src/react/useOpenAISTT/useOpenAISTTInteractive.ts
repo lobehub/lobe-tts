@@ -26,28 +26,28 @@ export const useOpenAISTTInteractive = (
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [text, setText] = useState<string>();
-  const {
-    start,
-    stop,
-    blob,
-    url,
-    isLoading: isRecording,
-    time,
-    formattedTime,
-  } = useSpeechRecognitionInteractive(locale, {
-    onBlobAvailable: (blobData) => {
-      setShouldFetch(true);
-      onBlobAvailable?.(blobData);
-    },
-    onRecognitionError,
-    onRecognitionFinish,
-    onRecognitionStart,
-    onRecognitionStop,
-    onTextChange: (data) => {
-      setText(data);
-      onTextChange?.(data);
-    },
-  });
+  const { start, stop, blob, url, isRecording, time, formattedTime } =
+    useSpeechRecognitionInteractive(locale, {
+      onBlobAvailable: (blobData) => {
+        if (!text || !blobData) {
+          console.error('Error useOpenAISTTAutoStop:', 'No text or blob available');
+          onError?.('No text or blob available', text as any, {} as any);
+          setIsGlobalLoading(false);
+          stop();
+          return;
+        }
+        setShouldFetch(true);
+        onBlobAvailable?.(blobData);
+      },
+      onRecognitionError,
+      onRecognitionFinish,
+      onRecognitionStart,
+      onRecognitionStop,
+      onTextChange: (data) => {
+        setText(data);
+        onTextChange?.(data);
+      },
+    });
 
   const handleStart = useCallback(() => {
     onStart?.();
@@ -63,18 +63,25 @@ export const useOpenAISTTInteractive = (
     setIsGlobalLoading(false);
   }, [stop]);
 
-  const { isLoading } = useOpenAISTTCore({
+  const {
+    isLoading,
+    error,
+    mutate,
+    data: response,
+  } = useOpenAISTTCore({
     onError: (err, ...rest) => {
       onError?.(err, ...rest);
-      console.error(err);
+      console.error('Error useOpenAISTTInteractive:', err);
       handleStop();
     },
-    onSuccess: (data, ...rest) => {
-      onSuccess?.(data, ...rest);
-      setText(data);
-      onTextChange?.(data);
+    onSuccess: async (res, ...rest) => {
+      onSuccess?.(res, ...rest);
+      const json = await res.json();
+      const text = json.text;
+      setText(text);
+      onTextChange?.(text);
       handleStop();
-      onFinished?.(data, ...rest);
+      onFinished?.(res, ...rest);
     },
     options: options!,
     shouldFetch,
@@ -84,9 +91,12 @@ export const useOpenAISTTInteractive = (
 
   return {
     blob,
+    error,
     formattedTime,
     isLoading: isGlobalLoading || isLoading || isRecording,
     isRecording,
+    mutate,
+    response,
     start: handleStart,
     stop: handleStop,
     text,

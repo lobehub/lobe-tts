@@ -1,18 +1,28 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { SWRConfiguration } from 'swr';
 
-import { audioBufferToBlob, audioBuffersToBlob } from '@/core/utils/audioBufferToBlob';
 import { AudioProps } from '@/react/AudioPlayer';
 
 export interface StreamAudioPlayerReturn extends AudioProps {
+  arrayBuffers: ArrayBuffer[];
   download: () => void;
-  load: (audioBuffer: AudioBuffer) => void;
+  load: (arrayBuffer: ArrayBuffer) => void;
   ref: RefObject<HTMLAudioElement>;
   reset: () => void;
+  url: string;
 }
 
-export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
+export interface StreamAudioPlayerOptions {
+  onError?: SWRConfiguration['onError'];
+  stop?: () => void;
+}
+
+export const useStreamAudioPlayer = ({
+  onError,
+  stop,
+}: StreamAudioPlayerOptions = {}): StreamAudioPlayerReturn => {
   const audioRef = useRef<HTMLAudioElement>(new Audio());
-  const [audioBuffers, setAudioBuffer] = useState<AudioBuffer[]>([]);
+  const [arrayBuffers, setArrayBuffers] = useState<ArrayBuffer[]>([]);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -26,11 +36,14 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
     const onTimeUpdate = () => {
       setCurrentTime(audioRef.current.currentTime);
     };
-    const onError = () => {
-      console.error('Error loading audio:', audioRef.current.error);
+    const onAudioError = () => {
+      if (!audioRef.current.currentSrc) return;
+      onError?.(audioRef.current.error, 'useStreamAudioPlayer', {} as any);
+      console.error('Error useStreamAudioPlayer:', 'loading audio', audioRef.current.error);
+      stop?.();
     };
 
-    audioRef.current.addEventListener('error', onError);
+    audioRef.current.addEventListener('error', onAudioError);
     audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
     audioRef.current.addEventListener('timeupdate', onTimeUpdate);
 
@@ -39,7 +52,7 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
       audioRef.current.load();
       audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
       audioRef.current.removeEventListener('timeupdate', onTimeUpdate);
-      audioRef.current.removeEventListener('error', onError);
+      audioRef.current.removeEventListener('error', onAudioError);
     };
   }, []);
 
@@ -47,16 +60,16 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
     if (!audioRef.current) return;
     const onEnded = async () => {
       audioRef.current.pause();
-      if (maxLength < audioBuffers.length) {
+      if (maxLength < arrayBuffers.length) {
         const cacheTime = audioRef.current.currentTime;
-        const newBlob = await audioBuffersToBlob(audioBuffers);
+        const newBlob = new Blob(arrayBuffers, { type: 'audio/mp3' });
         if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
         const newUrl = URL.createObjectURL(newBlob);
         audioRef.current.src = newUrl;
         audioRef.current.load();
         audioRef.current.currentTime = cacheTime;
         audioRef.current.play();
-        setMaxLength(audioBuffers.length);
+        setMaxLength(arrayBuffers.length);
       } else {
         setIsPlaying(false);
         audioRef.current.currentTime = 0;
@@ -69,19 +82,20 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
     return () => {
       audioRef.current.removeEventListener('ended', onEnded);
     };
-  }, [maxLength, audioBuffers]);
+  }, [maxLength, arrayBuffers]);
 
-  const addAudioBuffer = useCallback(
-    async (audioBuffer: AudioBuffer) => {
+  const loadArrayBuffer = useCallback(
+    async (arrayBuffer: ArrayBuffer) => {
+      if (!arrayBuffer) return;
       if (maxLength === 0) {
-        const newBlob = await audioBufferToBlob(audioBuffer);
+        const newBlob = new Blob([arrayBuffer], { type: 'audio/mp3' });
         audioRef.current.src = URL.createObjectURL(newBlob);
         audioRef.current.load();
         audioRef.current.play();
         setIsPlaying(true);
         setMaxLength(1);
       }
-      setAudioBuffer((prev) => [...prev, audioBuffer].filter(Boolean));
+      setArrayBuffers((prev) => [...prev, arrayBuffer].filter(Boolean));
     },
     [maxLength],
   );
@@ -113,29 +127,31 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
     if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
     audioRef.current.src = '';
     setMaxLength(0);
-    setAudioBuffer([]);
+    setArrayBuffers([]);
     setDuration(0);
     setCurrentTime(0);
   }, []);
 
-  const handleDownload = useCallback(() => {
+  const handleDownload = useCallback(async () => {
     const a = document.createElement('a');
     a.href = audioRef.current.src;
-    a.download = 'audio.wav';
+    a.download = 'audio.mp3';
     a.click();
   }, []);
 
   return {
+    arrayBuffers,
     currentTime,
     download: handleDownload,
     duration,
     isPlaying,
-    load: addAudioBuffer,
+    load: loadArrayBuffer,
     pause: handlePause,
     play: handlePlay,
     ref: audioRef,
     reset,
     setTime,
     stop: handleStop,
+    url: audioRef.current.src,
   };
 };

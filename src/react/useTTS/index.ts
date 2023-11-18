@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
-import useSWR, { type SWRConfiguration } from 'swr';
+import useSWR, { type SWRConfiguration, type SWRResponse } from 'swr';
 
 import { splitTextIntoSegments } from '@/core/utils/splitTextIntoSegments';
 import { type AudioProps } from '@/react/AudioPlayer';
 import { useStreamAudioPlayer } from '@/react/hooks/useStreamAudioPlayer';
 
-export interface TTSHook extends SWRConfiguration {
+export interface TTSHook extends SWRConfiguration, Pick<SWRResponse, 'error' | 'mutate'> {
   audio: AudioProps;
+  canStart: boolean;
   isGlobalLoading: boolean;
   isLoading: boolean;
   start: () => void;
@@ -22,14 +23,23 @@ export interface TTSConfig extends SWRConfiguration {
 export const useTTS = (
   key: string,
   text: string,
-  fetchTTS: (segmentText: string) => Promise<AudioBuffer>,
+  fetchTTS: (segmentText: string) => Promise<ArrayBuffer>,
   { onError, onSuccess, onFinish, onStart, onStop, ...restSWRConfig }: TTSConfig = {},
 ): TTSHook => {
-  const { load, reset, ...rest } = useStreamAudioPlayer();
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(0);
   const [textArray, setTextArray] = useState<string[]>([]);
+  const { load, reset, ...restAudio } = useStreamAudioPlayer({
+    onError,
+    stop: () => {
+      setShouldFetch(false);
+      setIsGlobalLoading(false);
+      reset();
+      setIndex(0);
+      setTextArray([]);
+    },
+  });
 
   const handleReset = useCallback((newText: string[] = []) => {
     setShouldFetch(false);
@@ -41,16 +51,16 @@ export const useTTS = (
 
   const handleStop = useCallback(() => {
     onStop?.();
-    handleReset();
-  }, []);
+    handleReset([]);
+  }, [handleReset]);
 
-  const { isLoading } = useSWR(
+  const { isLoading, error, mutate } = useSWR(
     shouldFetch && textArray?.length > 0 ? [key, textArray?.[index]] : null,
     async () => await fetchTTS(textArray[index]),
     {
       onError: (err, ...rest) => {
         onError?.(err, ...rest);
-        console.error(err);
+        console.error('Error useTTS:', err);
         handleReset();
       },
       onSuccess: (data, ...rest) => {
@@ -69,12 +79,12 @@ export const useTTS = (
   );
 
   const handleStart = useCallback(() => {
-    if (isLoading) return;
+    if (!text || isLoading) return;
     onStart?.();
     reset();
     setShouldFetch(true);
     setIsGlobalLoading(true);
-  }, [isLoading]);
+  }, [text, isLoading]);
 
   useEffect(() => {
     const texts = splitTextIntoSegments(text);
@@ -85,9 +95,12 @@ export const useTTS = (
   }, [text]);
 
   return {
-    audio: rest,
+    audio: restAudio,
+    canStart: !isLoading && !!text,
+    error,
     isGlobalLoading,
     isLoading,
+    mutate,
     start: handleStart,
     stop: handleStop,
   };

@@ -24,6 +24,7 @@ export interface AudioPlayerProps {
   className?: string;
   isLoading?: boolean;
   onInitPlay?: () => void;
+  onLoadingStop?: () => void;
   onPause?: () => void;
   onPlay?: () => void;
   onStop?: () => void;
@@ -41,6 +42,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
     timeStyle,
     buttonSize,
     className,
+    onLoadingStop,
     audio = {
       currentTime: 0,
       download: () => {},
@@ -90,6 +92,13 @@ const AudioPlayer = memo<AudioPlayerProps>(
       onStop?.();
     }, [stop]);
 
+    const handleStopLoading = useCallback(() => {
+      if (!isLoading) return;
+      onLoadingStop?.();
+      stop?.();
+      onStop?.();
+    }, [stop, isLoading]);
+
     return (
       <Flexbox
         align={'center'}
@@ -98,16 +107,17 @@ const AudioPlayer = memo<AudioPlayerProps>(
         horizontal
         style={{ paddingRight: 8, width: '100%', ...style }}
       >
-        <ActionIcon
-          icon={isPlaying ? (allowPause ? PauseCircle : StopCircle) : Play}
-          loading={isLoading}
-          onClick={isPlaying ? (allowPause ? handlePause : handleStop) : handlePlay}
-          size={buttonSize || { blockSize: 32, fontSize: 16 }}
-          style={{ flex: 'none' }}
-        />
+        <div onClick={handleStopLoading} style={{ flex: 'none' }}>
+          <ActionIcon
+            icon={isPlaying ? (allowPause ? PauseCircle : StopCircle) : Play}
+            loading={isLoading}
+            onClick={isPlaying ? (allowPause ? handlePause : handleStop) : handlePlay}
+            size={buttonSize || { blockSize: 32, fontSize: 16 }}
+          />
+        </div>
         {showSlider && (
           <Slider
-            disabled={duration === 0}
+            disabled={duration === 0 || isLoading}
             max={duration}
             min={0}
             onChange={(e) => setTime(e)}

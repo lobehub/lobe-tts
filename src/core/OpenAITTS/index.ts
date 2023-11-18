@@ -68,10 +68,6 @@ export class OpenAITTS {
   create = async (payload: OpenAITTSPayload): Promise<Response> => {
     const response = await this.fetch(payload);
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
     return response;
   };
 

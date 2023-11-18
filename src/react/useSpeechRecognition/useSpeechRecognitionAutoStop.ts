@@ -55,6 +55,7 @@ export const useSpeechRecognitionAutoStop = (
     blob,
     formattedTime,
     isLoading,
+    isRecording: isLoading,
     start: handleStart,
     stop: handleStop,
     text,
