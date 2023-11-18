@@ -2,6 +2,39 @@
 
 # Changelog
 
+### [Version 1.20.1](https://github.com/lobehub/lobe-tts/compare/v1.20.0...v1.20.1)
+
+<sup>Released on **2023-11-18**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor to arrayBuffer.
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix hook.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor to arrayBuffer ([ca98e26](https://github.com/lobehub/lobe-tts/commit/ca98e26))
+
+#### What's fixed
+
+- **misc**: Fix hook ([6c7ef4e](https://github.com/lobehub/lobe-tts/commit/6c7ef4e))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.20.0](https://github.com/lobehub/lobe-tts/compare/v1.19.1...v1.20.0)
 
 <sup>Released on **2023-11-17**</sup>
