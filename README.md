@@ -29,11 +29,9 @@ A high-quality & reliable TTS library
 
 #### TOC
 
+- [📦 Usage](#-usage)
 - [📦 Installation](#-installation)
   - [Compile with Next.js](#compile-with-nextjs)
-- [🛳 Self Hosting](#-self-hosting)
-  - [Deploy to Vercel](#deploy-to-vercel)
-  - [Environment Variable](#environment-variable)
 - [⌨️ Local Development](#️-local-development)
 - [🤝 Contributing](#-contributing)
 - [🔗 More Products](#-more-products)
@@ -141,31 +139,6 @@ const nextConfig = {
   transpilePackages: ['@lobehub/tts'],
 };
 ```
-
-<div align="right">
-
-[![][back-to-top]](#readme-top)
-
-</div>
-
-## 🛳 Self Hosting
-
-If you want to deploy this service by yourself, you can follow the steps below.
-
-### Deploy to Vercel
-
-Click button below to deploy your private plugins' gateway.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flobehub%2Flobe-tts&project-name=lobe-tts&repository-name=lobe-tts)
-
-### Environment Variable
-
-This project provides some additional configuration items set with environment variables:
-
-| Environment Variable | Description                                                                                                                                   | Default                     |
-| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `OPENAI_API_KEY`     | This is the API key you apply on the OpenAI account page                                                                                      | `sk-xxxxxx...xxxxxx`        |
-| `OPENAI_BASE_URL`    | If you manually configure the OpenAI interface proxy, you can use this configuration item to override the default OpenAI API request base URL | `https://api.openai.com/v1` |
 
 <div align="right">
 
