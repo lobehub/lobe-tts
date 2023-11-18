@@ -45,8 +45,6 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
   }, []);
 
   useEffect(() => {
-    if (!audioRef.current || !audioRef.current.currentSrc || audioRef.current.duration === 0)
-      return;
     const onEnded = async () => {
       if (!audioRef.current || !audioRef.current.currentSrc) return;
       audioRef.current.pause();
