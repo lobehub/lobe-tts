@@ -44,6 +44,75 @@ A high-quality & reliable TTS library
 
 ## 📦 Usage
 
+### Generate Speech on server
+
+run the script below use Bun: `bun index.js`
+
+```js
+// index.js
+import { EdgeSpeechTTS } from '@lobehub/tts';
+import { Buffer } from 'buffer';
+import fs from 'fs';
+import path from 'path';
+
+// Instantiate EdgeSpeechTTS
+const tts = new EdgeSpeechTTS({ locale: 'en-US' });
+
+// Create speech synthesis request payload
+const payload = {
+  input: 'This is a speech demonstration',
+  options: {
+    voice: 'en-US-GuyNeural',
+  },
+};
+
+// Call create method to synthesize speech
+const response = await tts.create(payload);
+
+// generate speech file
+const mp3Buffer = Buffer.from(await response.arrayBuffer());
+const speechFile = path.resolve('./speech.mp3');
+
+fs.writeFileSync(speechFile, mp3Buffer);
+```
+
+
+https://github.com/lobehub/lobe-tts/assets/28616219/3ab68c5a-2745-442e-8d66-ca410192ace1
+
+
+> \[!IMPORTANT]\
+> **Run on Node.js**
+> 
+> As the Node.js environment lacks the `WebSocket` instance, we need to polyfill WebSocket. This can be done by importing the ws package.
+
+```js
+// import at the top of the file
+import WebSocket from 'ws';
+
+global.WebSocket = WebSocket;
+```
+
+### Use the React Component
+
+```tsx
+import { AudioPlayer, AudioVisualizer, useAudioPlayer } from '@lobehub/tts/react';
+
+export default () => {
+  const { ref, isLoading, ...audio } = useAudioPlayer(url);
+
+  return (
+    <Flexbox align={'center'} gap={8}>
+      <AudioPlayer audio={audio} isLoading={isLoading} style={{ width: '100%' }} />
+      <AudioVisualizer audioRef={ref} isLoading={isLoading} />
+    </Flexbox>
+  );
+};
+```
+
+
+https://github.com/lobehub/lobe-tts/assets/28616219/c2638383-314f-44c3-b358-8fbbd3028d61
+
+
 
 ## 📦 Installation
 
