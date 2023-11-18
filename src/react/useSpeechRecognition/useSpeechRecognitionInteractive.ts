@@ -66,6 +66,7 @@ export const useSpeechRecognitionInteractive = (
     formattedTime,
     isLoading: isGLobalLoading,
     isRecording: isGLobalLoading,
+    response: new Response(JSON.stringify({ text: resultText }), { status: 200 }),
     start: handleStart,
     stop: handleStop,
     text: resultText,

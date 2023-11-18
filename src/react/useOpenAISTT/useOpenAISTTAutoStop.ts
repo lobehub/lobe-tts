@@ -65,7 +65,12 @@ export const useOpenAISTTAutoStop = (
     setIsGlobalLoading(false);
   }, [stop]);
 
-  const { isLoading, error, mutate } = useOpenAISTTCore({
+  const {
+    isLoading,
+    error,
+    mutate,
+    data: response,
+  } = useOpenAISTTCore({
     onError: (err, ...rest) => {
       onError?.(err, ...rest);
       console.error('Error useOpenAISTTAutoStop:', err);
@@ -93,6 +98,7 @@ export const useOpenAISTTAutoStop = (
     isLoading: isGlobalLoading || isLoading || isRecording,
     isRecording,
     mutate,
+    response,
     start: handleStart,
     stop: handleStop,
     text,

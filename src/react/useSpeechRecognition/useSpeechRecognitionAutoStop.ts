@@ -56,6 +56,7 @@ export const useSpeechRecognitionAutoStop = (
     formattedTime,
     isLoading,
     isRecording: isLoading,
+    response: new Response(JSON.stringify({ text }), { status: 200 }),
     start: handleStart,
     stop: handleStop,
     text,
