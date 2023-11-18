@@ -30,16 +30,7 @@ export const useTTS = (
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(0);
   const [textArray, setTextArray] = useState<string[]>([]);
-  const { load, reset, ...restAudio } = useStreamAudioPlayer({
-    onError,
-    stop: () => {
-      setShouldFetch(false);
-      setIsGlobalLoading(false);
-      reset();
-      setIndex(0);
-      setTextArray([]);
-    },
-  });
+  const { load, reset, ...restAudio } = useStreamAudioPlayer();
 
   const handleReset = useCallback((newText: string[] = []) => {
     setShouldFetch(false);

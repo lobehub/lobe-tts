@@ -1,5 +1,5 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
-import useSWR, { SWRConfiguration } from 'swr';
+import useSWR from 'swr';
 
 import { AudioProps } from '@/react/AudioPlayer';
 
@@ -13,16 +13,13 @@ export interface AudioPlayerReturn extends AudioProps {
 }
 
 export interface AudioPlayerOptions {
-  onError?: SWRConfiguration['onError'];
   src?: string;
-  stop?: () => void;
   type?: string;
 }
 
 export const useAudioPlayer = ({
   src,
   type = 'audio/mp3',
-  onError,
 }: AudioPlayerOptions = {}): AudioPlayerReturn => {
   const audioRef = useRef<HTMLAudioElement>(new Audio());
   const [arrayBuffers, setArrayBuffers] = useState<ArrayBuffer[]>([]);
@@ -56,8 +53,6 @@ export const useAudioPlayer = ({
     };
     const onAudioError = () => {
       console.error('Error useAudioPlayer:', 'loading audio', audioRef.current.error);
-      onError?.(audioRef.current.error, 'useAudioPlayer', {} as any);
-      stop?.();
     };
 
     const onEnded = async () => {

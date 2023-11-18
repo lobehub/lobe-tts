@@ -53,7 +53,7 @@ export default () => {
     { store },
   );
 
-  const { ref, isLoading, ...audio } = useAudioPlayer(url);
+  const { ref, isLoading, ...audio } = useAudioPlayer({ src: url });
 
   return (
     <StoryBook levaStore={store}>

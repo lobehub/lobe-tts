@@ -1,5 +1,4 @@
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
-import { SWRConfiguration } from 'swr';
 
 import { AudioProps } from '@/react/AudioPlayer';
 
@@ -12,15 +11,7 @@ export interface StreamAudioPlayerReturn extends AudioProps {
   url: string;
 }
 
-export interface StreamAudioPlayerOptions {
-  onError?: SWRConfiguration['onError'];
-  stop?: () => void;
-}
-
-export const useStreamAudioPlayer = ({
-  onError,
-  stop,
-}: StreamAudioPlayerOptions = {}): StreamAudioPlayerReturn => {
+export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
   const audioRef = useRef<HTMLAudioElement>(new Audio());
   const [arrayBuffers, setArrayBuffers] = useState<ArrayBuffer[]>([]);
   const [currentTime, setCurrentTime] = useState(0);
@@ -37,10 +28,7 @@ export const useStreamAudioPlayer = ({
       setCurrentTime(audioRef.current.currentTime);
     };
     const onAudioError = () => {
-      if (!audioRef.current.currentSrc) return;
-      onError?.(audioRef.current.error, 'useStreamAudioPlayer', {} as any);
       console.error('Error useStreamAudioPlayer:', 'loading audio', audioRef.current.error);
-      stop?.();
     };
 
     audioRef.current.addEventListener('error', onAudioError);
@@ -57,8 +45,10 @@ export const useStreamAudioPlayer = ({
   }, []);
 
   useEffect(() => {
-    if (!audioRef.current) return;
+    if (!audioRef.current || !audioRef.current.currentSrc || audioRef.current.duration === 0)
+      return;
     const onEnded = async () => {
+      if (!audioRef.current || !audioRef.current.currentSrc) return;
       audioRef.current.pause();
       if (maxLength < arrayBuffers.length) {
         const cacheTime = audioRef.current.currentTime;
@@ -86,6 +76,7 @@ export const useStreamAudioPlayer = ({
 
   const loadArrayBuffer = useCallback(
     async (arrayBuffer: ArrayBuffer) => {
+      console.log(arrayBuffer);
       if (!arrayBuffer) return;
       if (maxLength === 0) {
         const newBlob = new Blob([arrayBuffer], { type: 'audio/mp3' });
@@ -101,8 +92,10 @@ export const useStreamAudioPlayer = ({
   );
 
   const handlePlay = useCallback(() => {
-    setIsPlaying(true);
-    audioRef.current.play();
+    if (audioRef.current.duration > 0) {
+      setIsPlaying(true);
+      audioRef.current.play();
+    }
   }, []);
 
   const handlePause = useCallback(() => {

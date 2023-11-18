@@ -21,7 +21,7 @@ export default () => {
     { store },
   );
 
-  const { isLoading, ...audio } = useAudioPlayer(url);
+  const { isLoading, ...audio } = useAudioPlayer({ src: url });
 
   return (
     <StoryBook levaStore={store}>
