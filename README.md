@@ -6,7 +6,7 @@
 
 <h1>Lobe TTS</h1>
 
-A high-quality & reliable TTS React Hooks library
+A high-quality & reliable TTS library
 
 [![][npm-release-shield]][npm-release-link]
 [![][github-releasedate-shield]][github-releasedate-link]
@@ -42,12 +42,19 @@ A high-quality & reliable TTS React Hooks library
 
 </details>
 
+## 📦 Usage
+
+
 ## 📦 Installation
 
 > \[!IMPORTANT]\
 > This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
 
 To install `@lobehub/tts`, run the following command:
+
+```bash
+$ pnpm i @lobehub/tts
+```
 
 [![][bun-shield]][bun-link]
 
