@@ -60,7 +60,7 @@ export const useTTS = (
         if (index < textArray.length - 1) {
           setIndex(index + 1);
         } else {
-          onFinish?.(data, ...rest);
+          onFinish?.(restAudio.arrayBuffers, ...rest);
           setShouldFetch(false);
           setIsGlobalLoading(false);
         }
