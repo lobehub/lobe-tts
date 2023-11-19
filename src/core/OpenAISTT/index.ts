@@ -41,6 +41,17 @@ const genSTTBody = ({ speech, options }: OpenAISTTPayload) => {
   return body;
 };
 
+const genServiceSTTBody = ({ speech, options }: OpenAISTTPayload) => {
+  const mineType = options?.mineType || getRecordMineType();
+  const filename = `${Date.now()}.${mineType.extension}`;
+
+  const body = new FormData();
+  body.append('options', JSON.stringify(options));
+  body.append('speech', speech, filename);
+
+  return body;
+};
+
 export class OpenaiSTT {
   private OPENAI_BASE_URL: string;
   private OPENAI_API_KEY: string | undefined;
@@ -59,7 +70,7 @@ export class OpenaiSTT {
     const url = urlJoin(this.OPENAI_BASE_URL, 'audio/speech');
     return this.serviceUrl
       ? fetch(this.serviceUrl, {
-          body: JSON.stringify(payload),
+          body: genServiceSTTBody(payload),
           headers: this.headers,
           method: 'POST',
         })
