@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.21.5](https://github.com/lobehub/lobe-tts/compare/v1.21.4...v1.21.5)
+
+<sup>Released on **2023-11-19**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix stt error handle.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix stt error handle ([aaa9395](https://github.com/lobehub/lobe-tts/commit/aaa9395))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.21.4](https://github.com/lobehub/lobe-tts/compare/v1.21.3...v1.21.4)
 
 <sup>Released on **2023-11-19**</sup>
