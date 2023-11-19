@@ -9,6 +9,7 @@ import { getEdgeVoiceOptions } from './options';
 export type { EdgeSpeechPayload } from './createEdgeSpeech';
 
 export interface EdgeSpeechAPI {
+  locale?: string;
   serviceUrl?: string;
 }
 
@@ -16,7 +17,7 @@ export class EdgeSpeechTTS {
   private locale?: string;
   private serviceUrl: string | undefined;
 
-  constructor({ serviceUrl, locale }: EdgeSpeechAPI & { locale?: string } = {}) {
+  constructor({ serviceUrl, locale }: EdgeSpeechAPI = {}) {
     this.locale = locale;
     this.serviceUrl = serviceUrl;
   }

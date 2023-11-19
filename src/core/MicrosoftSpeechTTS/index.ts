@@ -9,6 +9,7 @@ import azureVoiceList, { getAzureVoiceOptions } from './voiceList';
 export type { MicrosoftSpeechPayload } from './createMicrosoftSpeech';
 
 export interface MicrosoftSpeechAPI {
+  locale?: string;
   serviceUrl?: string;
 }
 
@@ -16,7 +17,7 @@ export class MicrosoftSpeechTTS {
   private locale?: string;
   private serviceUrl: string | undefined;
 
-  constructor({ serviceUrl, locale }: MicrosoftSpeechAPI & { locale?: string } = {}) {
+  constructor({ serviceUrl, locale }: MicrosoftSpeechAPI = {}) {
     this.locale = locale;
     this.serviceUrl = serviceUrl;
   }
