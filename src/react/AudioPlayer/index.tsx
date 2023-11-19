@@ -22,6 +22,7 @@ export interface AudioPlayerProps {
   audio: AudioProps;
   buttonActive?: boolean;
   buttonSize?: ActionIconProps['size'];
+  buttonStyle?: CSSProperties;
   className?: string;
   isLoading?: boolean;
   onInitPlay?: () => void;
@@ -35,6 +36,7 @@ export interface AudioPlayerProps {
   timeRender?: 'tag' | 'text';
   timeStyle?: CSSProperties;
   timeType?: 'left' | 'current' | 'combine';
+  title?: string;
 }
 
 const AudioPlayer = memo<AudioPlayerProps>(
@@ -64,6 +66,8 @@ const AudioPlayer = memo<AudioPlayerProps>(
     onInitPlay,
     onPause,
     onStop,
+    title,
+    buttonStyle,
     onPlay,
   }) => {
     const { isPlaying, play, stop, pause, duration, setTime, currentTime, download } = audio;
@@ -118,6 +122,8 @@ const AudioPlayer = memo<AudioPlayerProps>(
             loading={isLoading}
             onClick={isPlaying ? (allowPause ? handlePause : handleStop) : handlePlay}
             size={buttonSize || { blockSize: 32, fontSize: 16 }}
+            style={buttonStyle}
+            title={title}
           />
         </div>
         {showSlider && (
