@@ -23,6 +23,7 @@ export interface OpenAISTTPayload {
 export interface OpenAISTTAPI {
   OPENAI_API_KEY?: string;
   OPENAI_PROXY_URL?: string;
+  headers?: Headers;
   serviceUrl?: string;
 }
 
@@ -44,19 +45,24 @@ export class OpenaiSTT {
   private OPENAI_BASE_URL: string;
   private OPENAI_API_KEY: string | undefined;
   private serviceUrl: string | undefined;
-
+  private headers?: Headers;
   constructor(api: OpenAISTTAPI = {}) {
     this.OPENAI_BASE_URL = api.OPENAI_PROXY_URL || OPENAI_BASE_URL;
     this.OPENAI_API_KEY = api.OPENAI_API_KEY;
     this.serviceUrl = api.serviceUrl;
+    this.headers = api.headers;
   }
 
   static safeRecordMineType = getRecordMineType;
 
-  fetch = async (payload: OpenAISTTPayload, headers?: Headers) => {
+  fetch = async (payload: OpenAISTTPayload) => {
     const url = urlJoin(this.OPENAI_BASE_URL, 'audio/speech');
     return this.serviceUrl
-      ? fetch(this.serviceUrl, { body: JSON.stringify(payload), headers, method: 'POST' })
+      ? fetch(this.serviceUrl, {
+          body: JSON.stringify(payload),
+          headers: this.headers,
+          method: 'POST',
+        })
       : fetch(url, {
           body: genSTTBody(payload),
           headers: new Headers({
@@ -65,8 +71,8 @@ export class OpenaiSTT {
           method: 'POST',
         });
   };
-  create = async (payload: OpenAISTTPayload, headers?: Headers): Promise<Response> => {
-    const response = await this.fetch(payload, headers);
+  create = async (payload: OpenAISTTPayload): Promise<Response> => {
+    const response = await this.fetch(payload);
 
     return response;
   };

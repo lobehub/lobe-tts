@@ -11,7 +11,6 @@ export interface OpenAISTTRecorderOptions
   extends SpeechRecognitionRecorderOptions,
     SWRConfiguration,
     Partial<OpenAISTTCoreOptions> {
-  headers?: Headers;
   onFinished?: SWRConfiguration['onSuccess'];
 }
 

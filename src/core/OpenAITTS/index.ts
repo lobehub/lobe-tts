@@ -27,6 +27,7 @@ export interface OpenAITTSPayload {
 export interface OpenAITTSAPI {
   OPENAI_API_KEY?: string;
   OPENAI_PROXY_URL?: string;
+  headers?: Headers;
   serviceUrl?: string;
 }
 
@@ -34,11 +35,13 @@ export class OpenAITTS {
   private OPENAI_BASE_URL: string;
   private OPENAI_API_KEY: string | undefined;
   private serviceUrl: string | undefined;
+  private headers?: Headers;
 
   constructor(api: OpenAITTSAPI = {}) {
     this.OPENAI_BASE_URL = api.OPENAI_PROXY_URL || OPENAI_BASE_URL;
     this.OPENAI_API_KEY = api.OPENAI_API_KEY;
     this.serviceUrl = api.serviceUrl;
+    this.headers = api.headers;
   }
 
   get voiceOptions() {
@@ -65,8 +68,8 @@ export class OpenAITTS {
         });
   };
 
-  create = async (payload: OpenAITTSPayload, headers?: Headers): Promise<Response> => {
-    const response = await this.fetch(payload, headers);
+  create = async (payload: OpenAITTSPayload): Promise<Response> => {
+    const response = await this.fetch(payload);
 
     return response;
   };
