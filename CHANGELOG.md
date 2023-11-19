@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.21.2](https://github.com/lobehub/lobe-tts/compare/v1.21.1...v1.21.2)
+
+<sup>Released on **2023-11-19**</sup>
+
+#### 💄 Styles
+
+- **misc**: Add showTime and buttonActive to AudioPlayer.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Add showTime and buttonActive to AudioPlayer ([e7bcf49](https://github.com/lobehub/lobe-tts/commit/e7bcf49))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.21.1](https://github.com/lobehub/lobe-tts/compare/v1.21.0...v1.21.1)
 
 <sup>Released on **2023-11-19**</sup>
