@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.21.0](https://github.com/lobehub/lobe-tts/compare/v1.20.3...v1.21.0)
+
+<sup>Released on **2023-11-19**</sup>
+
+#### ✨ Features
+
+- **misc**: Add header options.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add header options ([0ab0a4a](https://github.com/lobehub/lobe-tts/commit/0ab0a4a))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.20.3](https://github.com/lobehub/lobe-tts/compare/v1.20.2...v1.20.3)
 
 <sup>Released on **2023-11-18**</sup>
