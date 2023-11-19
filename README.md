@@ -6,7 +6,7 @@
 
 <h1>Lobe TTS</h1>
 
-A high-quality & reliable TTS library
+A high-quality & reliable TTS/STT library for Server and Browser
 
 [![][npm-release-shield]][npm-release-link]
 [![][github-releasedate-shield]][github-releasedate-link]
@@ -20,7 +20,7 @@ A high-quality & reliable TTS library
 
 [Changelog](./CHANGELOG.md) · [Report Bug][github-issues-link] · [Request Feature][github-issues-link]
 
-![](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
+![](https://github-production-user-asset-6210df.s3.amazonaws.com/17870709/284077909-854cc09a-b3c7-4fc4-9ea7-f7137abba351.png)
 
 </div>
 
@@ -29,7 +29,10 @@ A high-quality & reliable TTS library
 
 #### TOC
 
+- [📖 Introduction](#-introduction)
 - [📦 Usage](#-usage)
+  - [Generate Speech on server](#generate-speech-on-server)
+  - [Use the React Component](#use-the-react-component)
 - [📦 Installation](#-installation)
   - [Compile with Next.js](#compile-with-nextjs)
 - [⌨️ Local Development](#️-local-development)
@@ -39,6 +42,22 @@ A high-quality & reliable TTS library
 ####
 
 </details>
+
+## 📖 Introduction
+
+[🤖 Lobe Chat](https://github.com/lobehub/lobe-chat) supports Text-to-Speech (TTS) and Speech-to-Text (STT) technologies, enabling our application to convert text messages into clear voice outputs,
+allowing users to interact with our conversational agent as if they were talking to a real person. Users can choose from a variety of voices to pair with the agent.
+
+In the process of implementing this feature, we found that there was no satisfactory TTS (Text-to-Speech) frontend library available on the market.
+As a result, we invested a lot of effort, including data conversion, audio progress management, and speech visualization, among other tasks.
+
+> \[!NOTE]
+>
+> Therefore, we decided to refine our implementation and make it open source, hoping to assist developers who wish to implement TTS.
+> [@lobehub/tts][npm-release-link] is a high-quality TTS toolkit developed in TypeScript, which supports usage both on the server-side and in the browser.
+>
+> - **Server-side:** With just 15 lines of code, you can achieve high-quality voice generation capabilities comparable to OpenAI's TTS service. It currently supports EdgeSpeechTTS, MicrosoftTTS, OpenAITTS, and OpenAISTT.
+> - **Browser-side:** It provides high-quality React Hooks and visual audio components, supporting common functions such as loading, playing, pausing, and dragging the timeline. Additionally, it offers a very rich set of capabilities for adjusting the audio track styles.
 
 ## 📦 Usage
 
@@ -74,13 +93,11 @@ const speechFile = path.resolve('./speech.mp3');
 fs.writeFileSync(speechFile, mp3Buffer);
 ```
 
-
-https://github.com/lobehub/lobe-tts/assets/28616219/3ab68c5a-2745-442e-8d66-ca410192ace1
-
+<https://github.com/lobehub/lobe-tts/assets/28616219/3ab68c5a-2745-442e-8d66-ca410192ace1>
 
 > \[!IMPORTANT]\
 > **Run on Node.js**
-> 
+>
 > As the Node.js environment lacks the `WebSocket` instance, we need to polyfill WebSocket. This can be done by importing the ws package.
 
 ```js
@@ -107,10 +124,7 @@ export default () => {
 };
 ```
 
-
-https://github.com/lobehub/lobe-tts/assets/28616219/c2638383-314f-44c3-b358-8fbbd3028d61
-
-
+<https://github.com/lobehub/lobe-tts/assets/28616219/c2638383-314f-44c3-b358-8fbbd3028d61>
 
 ## 📦 Installation
 
