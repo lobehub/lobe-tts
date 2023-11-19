@@ -10,13 +10,13 @@ apiHeader:
 This class supports converting text to speech and provides a series of methods to retrieve speech options and create speech synthesis requests.
 
 ```ts
-constructor(options: MicrosoftSpeechAPI & { locale?: string }): MicrosoftSpeechTTS
+constructor(options: MicrosoftSpeechAPI): MicrosoftSpeechTTS
 ```
 
 ## Parameters
 
 - `options`: Object, optional.
-  - `backendUrl`: String, specifies the URL of Microsoft Speech Services. If provided, requests will be sent to this URL.
+  - `serviceUrl`: String, specifies the URL of Microsoft Speech Services. If provided, requests will be sent to this URL.
   - `locale`: String, specifies the language region to use. If provided, it will be used to filter the available voices.
 
 ## Examples

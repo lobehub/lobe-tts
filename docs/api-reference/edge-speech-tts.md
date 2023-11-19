@@ -10,7 +10,7 @@ apiHeader:
 This class supports converting text to speech and provides a set of methods to retrieve voice options and create speech synthesis requests.
 
 ```ts
-constructor(options: EdgeSpeechAPI & { locale?: string }): EdgeSpeechTTS
+constructor(options: EdgeSpeechAPI): EdgeSpeechTTS
 ```
 
 ## Parameters

@@ -10,7 +10,7 @@ apiHeader:
 该类支持将文本转换为语音，并提供了一系列方法来获取语音选项，创建语音合成请求。
 
 ```ts
-constructor(options: MicrosoftSpeechAPI & { locale?: string }): MicrosoftSpeechTTS
+constructor(options: MicrosoftSpeechAPI): MicrosoftSpeechTTS
 ```
 
 ## 参数

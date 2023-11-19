@@ -16,7 +16,7 @@ constructor(options: OpenAITTSAPI): OpenAITTS
 ## 参数
 
 - `options`: 对象，可选。
-  - `OPENAI_PROXY_URL`: 字符串，指定 OpenAI 代理 URL。如果提供，将使用此 URL 发送请求。
+  - `OPENAI_PROXY_URL`: 字符串，指定 OpenAI 代理 URL。如果提供，将使用此 URL 替换默认的 Base Url。
   - `OPENAI_API_KEY`: 字符串，指定 OpenAI API 密钥。如果提供，将用于身份验证。
   - `serviceUrl`: 字符串，指定要使用的 OpenAI 语音服务的 URL。如果提供，将用于发送请求。
 
