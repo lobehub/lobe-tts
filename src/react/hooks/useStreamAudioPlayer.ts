@@ -70,7 +70,6 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
 
   const loadArrayBuffer = useCallback(
     async (arrayBuffer: ArrayBuffer) => {
-      console.log(arrayBuffer);
       if (!arrayBuffer) return;
       if (maxLength === 0) {
         const newBlob = new Blob([arrayBuffer], { type: 'audio/mp3' });

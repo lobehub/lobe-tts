@@ -32,10 +32,6 @@ export default () => {
 
   const { setText, isGlobalLoading, start, stop, audio } = useEdgeSpeech(defaultText, {
     api,
-    onError: (err, ...rest) => {
-      console.log(err);
-      console.log(...rest);
-    },
     options,
   });
   return (
