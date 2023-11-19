@@ -9,16 +9,16 @@ import { getEdgeVoiceOptions } from './options';
 export type { EdgeSpeechPayload } from './createEdgeSpeech';
 
 export interface EdgeSpeechAPI {
-  backendUrl?: string;
+  serviceUrl?: string;
 }
 
 export class EdgeSpeechTTS {
   private locale?: string;
-  private BACKEND_URL: string | undefined;
+  private serviceUrl: string | undefined;
 
-  constructor({ backendUrl, locale }: EdgeSpeechAPI & { locale?: string } = {}) {
+  constructor({ serviceUrl, locale }: EdgeSpeechAPI & { locale?: string } = {}) {
     this.locale = locale;
-    this.BACKEND_URL = backendUrl;
+    this.serviceUrl = serviceUrl;
   }
 
   get voiceOptions() {
@@ -30,16 +30,16 @@ export class EdgeSpeechTTS {
   static voiceName = voiceName;
   static createRequest = createEdgeSpeech;
 
-  private fetch = async (payload: EdgeSpeechPayload) => {
-    const response = await (this.BACKEND_URL
-      ? fetch(this.BACKEND_URL, { body: JSON.stringify(payload), method: 'POST' })
+  private fetch = async (payload: EdgeSpeechPayload, headers?: Headers) => {
+    const response = await (this.serviceUrl
+      ? fetch(this.serviceUrl, { body: JSON.stringify(payload), headers, method: 'POST' })
       : createEdgeSpeech({ payload }));
 
     return response;
   };
 
-  create = async (payload: EdgeSpeechPayload): Promise<Response> => {
-    return this.fetch(payload);
+  create = async (payload: EdgeSpeechPayload, headers?: Headers): Promise<Response> => {
+    return this.fetch(payload, headers);
   };
 
   /**

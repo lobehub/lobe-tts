@@ -15,10 +15,7 @@ export default () => {
 
   const api: any = useControls(
     {
-      backendUrl: {
-        label: 'EDGE_SPEECH_BACKEND_URL',
-        value: EDGE_SPEECH_BACKEND_URL,
-      },
+      serviceUrl: EDGE_SPEECH_BACKEND_URL,
     },
     { store },
   );

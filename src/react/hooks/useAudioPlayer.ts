@@ -51,9 +51,6 @@ export const useAudioPlayer = ({
     const onTimeUpdate = () => {
       setCurrentTime(audioRef.current.currentTime);
     };
-    const onAudioError = () => {
-      console.error('Error useAudioPlayer:', 'loading audio', audioRef.current.error);
-    };
 
     const onEnded = async () => {
       setIsPlaying(false);
@@ -62,7 +59,7 @@ export const useAudioPlayer = ({
     };
 
     audioRef.current.addEventListener('ended', onEnded);
-    audioRef.current.addEventListener('error', onAudioError);
+
     audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
     audioRef.current.addEventListener('timeupdate', onTimeUpdate);
 
@@ -72,7 +69,7 @@ export const useAudioPlayer = ({
       audioRef.current.removeEventListener('ended', onEnded);
       audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
       audioRef.current.removeEventListener('timeupdate', onTimeUpdate);
-      audioRef.current.removeEventListener('error', onAudioError);
+
       setIsGlobalLoading(true);
     };
   }, []);

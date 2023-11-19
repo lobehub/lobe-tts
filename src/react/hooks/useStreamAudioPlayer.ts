@@ -27,11 +27,7 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
     const onTimeUpdate = () => {
       setCurrentTime(audioRef.current.currentTime);
     };
-    const onAudioError = () => {
-      console.error('Error useStreamAudioPlayer:', 'loading audio', audioRef.current.error);
-    };
 
-    audioRef.current.addEventListener('error', onAudioError);
     audioRef.current.addEventListener('loadedmetadata', onLoadedMetadata);
     audioRef.current.addEventListener('timeupdate', onTimeUpdate);
 
@@ -40,7 +36,6 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
       audioRef.current.load();
       audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
       audioRef.current.removeEventListener('timeupdate', onTimeUpdate);
-      audioRef.current.removeEventListener('error', onAudioError);
     };
   }, []);
 

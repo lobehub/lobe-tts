@@ -14,10 +14,7 @@ export default () => {
   const store = useCreateStore();
   const api: any = useControls(
     {
-      backendUrl: {
-        label: 'MICROSOFT_SPEECH_BACKEND_URL',
-        value: MICROSOFT_SPEECH_BACKEND_URL,
-      },
+      serviceUrl: MICROSOFT_SPEECH_BACKEND_URL,
     },
     { store },
   );

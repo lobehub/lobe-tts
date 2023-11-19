@@ -9,16 +9,16 @@ import azureVoiceList, { getAzureVoiceOptions } from './voiceList';
 export type { MicrosoftSpeechPayload } from './createMicrosoftSpeech';
 
 export interface MicrosoftSpeechAPI {
-  backendUrl?: string;
+  serviceUrl?: string;
 }
 
 export class MicrosoftSpeechTTS {
   private locale?: string;
-  private BACKEND_URL: string | undefined;
+  private serviceUrl: string | undefined;
 
-  constructor({ backendUrl, locale }: MicrosoftSpeechAPI & { locale?: string } = {}) {
+  constructor({ serviceUrl, locale }: MicrosoftSpeechAPI & { locale?: string } = {}) {
     this.locale = locale;
-    this.BACKEND_URL = backendUrl;
+    this.serviceUrl = serviceUrl;
   }
   get voiceOptions() {
     return getAzureVoiceOptions(this.locale);
@@ -31,16 +31,16 @@ export class MicrosoftSpeechTTS {
   static voiceName = voiceName;
   static styleList = styleList;
 
-  private fetch = async (payload: MicrosoftSpeechPayload) => {
-    const response = await (this.BACKEND_URL
-      ? fetch(this.BACKEND_URL, { body: JSON.stringify(payload), method: 'POST' })
+  private fetch = async (payload: MicrosoftSpeechPayload, headers?: Headers) => {
+    const response = await (this.serviceUrl
+      ? fetch(this.serviceUrl, { body: JSON.stringify(payload), headers, method: 'POST' })
       : createMicrosoftSpeech({ payload }));
 
     return response;
   };
 
-  create = async (payload: MicrosoftSpeechPayload): Promise<Response> => {
-    return await this.fetch(payload);
+  create = async (payload: MicrosoftSpeechPayload, headers?: Headers): Promise<Response> => {
+    return await this.fetch(payload, headers);
   };
 
   createAudio = async (payload: MicrosoftSpeechPayload): Promise<AudioBuffer> => {

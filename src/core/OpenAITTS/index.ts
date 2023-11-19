@@ -33,12 +33,12 @@ export interface OpenAITTSAPI {
 export class OpenAITTS {
   private OPENAI_BASE_URL: string;
   private OPENAI_API_KEY: string | undefined;
-  private BACKEND_URL: string | undefined;
+  private serviceUrl: string | undefined;
 
-  constructor({ OPENAI_PROXY_URL, OPENAI_API_KEY, serviceUrl }: OpenAITTSAPI = {}) {
-    this.OPENAI_BASE_URL = OPENAI_PROXY_URL || OPENAI_BASE_URL;
-    this.OPENAI_API_KEY = OPENAI_API_KEY;
-    this.BACKEND_URL = serviceUrl;
+  constructor(api: OpenAITTSAPI = {}) {
+    this.OPENAI_BASE_URL = api.OPENAI_PROXY_URL || OPENAI_BASE_URL;
+    this.OPENAI_API_KEY = api.OPENAI_API_KEY;
+    this.serviceUrl = api.serviceUrl;
   }
 
   get voiceOptions() {
@@ -47,10 +47,10 @@ export class OpenAITTS {
 
   static voiceList = voiceList;
 
-  fetch = async (payload: OpenAITTSPayload) => {
+  fetch = async (payload: OpenAITTSPayload, headers?: Headers) => {
     const url = urlJoin(this.OPENAI_BASE_URL, 'audio/speech');
-    return this.BACKEND_URL
-      ? fetch(this.BACKEND_URL, { body: JSON.stringify(payload), method: 'POST' })
+    return this.serviceUrl
+      ? fetch(this.serviceUrl, { body: JSON.stringify(payload), headers, method: 'POST' })
       : fetch(url, {
           body: JSON.stringify({
             input: payload.input,
@@ -65,8 +65,8 @@ export class OpenAITTS {
         });
   };
 
-  create = async (payload: OpenAITTSPayload): Promise<Response> => {
-    const response = await this.fetch(payload);
+  create = async (payload: OpenAITTSPayload, headers?: Headers): Promise<Response> => {
+    const response = await this.fetch(payload, headers);
 
     return response;
   };
