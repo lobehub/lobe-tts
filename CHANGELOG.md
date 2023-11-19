@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.21.3](https://github.com/lobehub/lobe-tts/compare/v1.21.2...v1.21.3)
+
+<sup>Released on **2023-11-19**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Remove console log.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Remove console log ([17b04fc](https://github.com/lobehub/lobe-tts/commit/17b04fc))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.21.2](https://github.com/lobehub/lobe-tts/compare/v1.21.1...v1.21.2)
 
 <sup>Released on **2023-11-19**</sup>
