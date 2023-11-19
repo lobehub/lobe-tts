@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.21.1](https://github.com/lobehub/lobe-tts/compare/v1.21.0...v1.21.1)
+
+<sup>Released on **2023-11-19**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Improve core types.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Improve core types ([ea9bc1e](https://github.com/lobehub/lobe-tts/commit/ea9bc1e))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.21.0](https://github.com/lobehub/lobe-tts/compare/v1.20.3...v1.21.0)
 
 <sup>Released on **2023-11-19**</sup>
