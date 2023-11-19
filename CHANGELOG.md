@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.22.0](https://github.com/lobehub/lobe-tts/compare/v1.21.5...v1.22.0)
+
+<sup>Released on **2023-11-19**</sup>
+
+#### ✨ Features
+
+- **misc**: Add new props `buttonStyle` and `title` to `AudioPlayerProps`.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add new props `buttonStyle` and `title` to `AudioPlayerProps` ([9e93042](https://github.com/lobehub/lobe-tts/commit/9e93042))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.21.5](https://github.com/lobehub/lobe-tts/compare/v1.21.4...v1.21.5)
 
 <sup>Released on **2023-11-19**</sup>
