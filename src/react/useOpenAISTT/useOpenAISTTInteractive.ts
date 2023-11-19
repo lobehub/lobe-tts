@@ -30,8 +30,6 @@ export const useOpenAISTTInteractive = (
     useSpeechRecognitionInteractive(locale, {
       onBlobAvailable: (blobData) => {
         if (!text || !blobData) {
-          console.error('Error useOpenAISTTAutoStop:', 'No text or blob available');
-          onError?.('No text or blob available', text as any, {} as any);
           setIsGlobalLoading(false);
           stop();
           return;
