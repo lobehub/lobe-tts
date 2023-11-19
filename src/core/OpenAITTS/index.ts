@@ -50,10 +50,14 @@ export class OpenAITTS {
 
   static voiceList = voiceList;
 
-  fetch = async (payload: OpenAITTSPayload, headers?: Headers) => {
+  fetch = async (payload: OpenAITTSPayload) => {
     const url = urlJoin(this.OPENAI_BASE_URL, 'audio/speech');
     return this.serviceUrl
-      ? fetch(this.serviceUrl, { body: JSON.stringify(payload), headers, method: 'POST' })
+      ? fetch(this.serviceUrl, {
+          body: JSON.stringify(payload),
+          headers: this.headers,
+          method: 'POST',
+        })
       : fetch(url, {
           body: JSON.stringify({
             input: payload.input,
