@@ -28,19 +28,23 @@ export const useAudioPlayer = ({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isGlobalLoading, setIsGlobalLoading] = useState(true);
 
-  const { isLoading } = useSWR(src || null, async () => {
-    if (!src) return;
-    setIsGlobalLoading(true);
-    const data = await fetch(src);
-    const arrayBuffer = await data.arrayBuffer();
-    setArrayBuffers([arrayBuffer]);
-    const newBlob = new Blob([arrayBuffer], { type: type });
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
-    if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
-    audioRef.current.src = URL.createObjectURL(newBlob);
-    audioRef.current.load();
-  });
+  const { isLoading } = useSWR(
+    src || null,
+    async () => {
+      if (!src) return;
+      setIsGlobalLoading(true);
+      const data = await fetch(src);
+      const arrayBuffer = await data.arrayBuffer();
+      setArrayBuffers([arrayBuffer]);
+      const newBlob = new Blob([arrayBuffer], { type: type });
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
+      audioRef.current.src = URL.createObjectURL(newBlob);
+      audioRef.current.load();
+    },
+    { revalidateOnFocus: false },
+  );
 
   useEffect(() => {
     if (!audioRef.current) return;

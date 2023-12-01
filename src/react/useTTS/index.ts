@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import useSWR, { type SWRConfiguration, type SWRResponse } from 'swr';
 
+import { cleanContent } from '@/core/utils/cleanContent';
 import { splitTextIntoSegments } from '@/core/utils/splitTextIntoSegments';
 import { type AudioProps } from '@/react/AudioPlayer';
 import { useStreamAudioPlayer } from '@/react/hooks/useStreamAudioPlayer';
@@ -65,6 +66,7 @@ export const useTTS = (
           setIsGlobalLoading(false);
         }
       },
+      revalidateOnFocus: false,
       ...restSWRConfig,
     },
   );
@@ -78,8 +80,10 @@ export const useTTS = (
   }, [text, isLoading]);
 
   useEffect(() => {
-    const texts = splitTextIntoSegments(text);
-    handleReset(texts);
+    cleanContent(text).then((content) => {
+      const texts = splitTextIntoSegments(content);
+      handleReset(texts);
+    });
     return () => {
       handleReset();
     };

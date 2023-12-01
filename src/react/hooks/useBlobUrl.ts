@@ -31,6 +31,7 @@ export const useBlobUrl = (src: string) => {
         setAudio(newAudio.audio);
         setIsGlobalLoading(false);
       },
+      revalidateOnFocus: false,
     },
   );
 

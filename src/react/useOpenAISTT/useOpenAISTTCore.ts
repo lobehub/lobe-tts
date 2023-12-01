@@ -16,6 +16,6 @@ export const useOpenAISTTCore = (init: OpenAISTTCoreOptions) => {
       const instance = new OpenaiSTT(api);
       return instance.create({ options, speech });
     },
-    swrConfig,
+    { revalidateOnFocus: false, ...swrConfig },
   );
 };

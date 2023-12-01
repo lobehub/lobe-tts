@@ -88,7 +88,10 @@
     "openai": "^4.17.3",
     "query-string": "^8",
     "react-error-boundary": "^4",
+    "remark-gfm": "^3",
+    "remark-parse": "^10",
     "swr": "^2",
+    "unified": "^11",
     "url-join": "^5",
     "uuid": "^9"
   },
@@ -122,6 +125,7 @@
     "semantic-release": "^21",
     "tsx": "^4.1.2",
     "typescript": "^5",
+    "unist-util-visit": "^5",
     "vercel": "^28"
   },
   "peerDependencies": {
