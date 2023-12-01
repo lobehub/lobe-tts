@@ -92,6 +92,7 @@
     "remark-parse": "^10",
     "swr": "^2",
     "unified": "^11",
+    "unist-util-visit": "^5",
     "url-join": "^5",
     "uuid": "^9"
   },
