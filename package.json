@@ -126,7 +126,6 @@
     "semantic-release": "^21",
     "tsx": "^4.1.2",
     "typescript": "^5",
-    "unist-util-visit": "^5",
     "vercel": "^28"
   },
   "peerDependencies": {
