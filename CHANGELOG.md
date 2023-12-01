@@ -2,6 +2,40 @@
 
 # Changelog
 
+## [Version 1.23.0](https://github.com/lobehub/lobe-tts/compare/v1.22.2...v1.23.0)
+
+<sup>Released on **2023-12-01**</sup>
+
+#### ✨ Features
+
+- **misc**: Add tts content clean.
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix deps, Fix deps.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Add tts content clean ([6879553](https://github.com/lobehub/lobe-tts/commit/6879553))
+
+#### What's fixed
+
+- **misc**: Fix deps ([de0b895](https://github.com/lobehub/lobe-tts/commit/de0b895))
+- **misc**: Fix deps ([d300040](https://github.com/lobehub/lobe-tts/commit/d300040))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.22.2](https://github.com/lobehub/lobe-tts/compare/v1.22.1...v1.22.2)
 
 <sup>Released on **2023-11-19**</sup>
