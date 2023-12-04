@@ -12,7 +12,7 @@ export interface StreamAudioPlayerReturn extends AudioProps {
 }
 
 export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
-  const audioRef = useRef<HTMLAudioElement>(new Audio());
+  const audioRef = useRef<HTMLAudioElement>();
   const [arrayBuffers, setArrayBuffers] = useState<ArrayBuffer[]>([]);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -20,11 +20,17 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
   const [maxLength, setMaxLength] = useState(0);
 
   useEffect(() => {
+    try {
+      audioRef.current = new Audio();
+    } catch {}
+
     if (!audioRef.current) return;
     const onLoadedMetadata = () => {
+      if (!audioRef.current) return;
       setDuration(audioRef.current.duration);
     };
     const onTimeUpdate = () => {
+      if (!audioRef.current) return;
       setCurrentTime(audioRef.current.currentTime);
     };
 
@@ -32,6 +38,7 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
     audioRef.current.addEventListener('timeupdate', onTimeUpdate);
 
     return () => {
+      if (!audioRef.current) return;
       audioRef.current.pause();
       audioRef.current.load();
       audioRef.current.removeEventListener('loadedmetadata', onLoadedMetadata);
@@ -64,13 +71,14 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
     audioRef.current.addEventListener('ended', onEnded);
 
     return () => {
+      if (!audioRef.current) return;
       audioRef.current.removeEventListener('ended', onEnded);
     };
   }, [maxLength, arrayBuffers]);
 
   const loadArrayBuffer = useCallback(
     async (arrayBuffer: ArrayBuffer) => {
-      if (!arrayBuffer) return;
+      if (!arrayBuffer || !audioRef.current) return;
       if (maxLength === 0) {
         const newBlob = new Blob([arrayBuffer], { type: 'audio/mp3' });
         audioRef.current.src = URL.createObjectURL(newBlob);
@@ -85,6 +93,7 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
   );
 
   const handlePlay = useCallback(() => {
+    if (!audioRef.current) return;
     if (audioRef.current.duration > 0) {
       setIsPlaying(true);
       audioRef.current.play();
@@ -92,22 +101,26 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
   }, []);
 
   const handlePause = useCallback(() => {
+    if (!audioRef.current) return;
     setIsPlaying(false);
     audioRef.current.pause();
   }, []);
 
   const handleStop = useCallback(() => {
+    if (!audioRef.current) return;
     setIsPlaying(false);
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
   }, []);
 
   const setTime = useCallback((value: number) => {
+    if (!audioRef.current) return;
     setCurrentTime(value);
     audioRef.current.currentTime = value;
   }, []);
 
   const reset = useCallback(() => {
+    if (!audioRef.current) return;
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
     if (audioRef.current.src) URL.revokeObjectURL(audioRef.current.src);
@@ -119,6 +132,7 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
   }, []);
 
   const handleDownload = useCallback(async () => {
+    if (!audioRef.current) return;
     const a = document.createElement('a');
     a.href = audioRef.current.src;
     a.download = 'audio.mp3';
@@ -134,10 +148,10 @@ export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
     load: loadArrayBuffer,
     pause: handlePause,
     play: handlePlay,
-    ref: audioRef,
+    ref: audioRef as any,
     reset,
     setTime,
     stop: handleStop,
-    url: audioRef.current.src,
+    url: audioRef?.current?.src || '',
   };
 };

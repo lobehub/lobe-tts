@@ -26,9 +26,11 @@ export const useBlobUrl = (src: string) => {
         if (audio) audio.remove();
         if (url) URL.revokeObjectURL(url);
         setBlob(blob);
-        const newAudio = playAudioBlob(blob);
-        setUrl(newAudio.url);
-        setAudio(newAudio.audio);
+        try {
+          const newAudio = playAudioBlob(blob);
+          setUrl(newAudio.url);
+          setAudio(newAudio.audio);
+        } catch {}
         setIsGlobalLoading(false);
       },
       revalidateOnFocus: false,

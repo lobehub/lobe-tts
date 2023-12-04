@@ -27,7 +27,6 @@ const getSpeechSynthesisUtterance = () => {
     );
   } catch {}
 };
-
 export const SpeechRecognition = getSpeechRecognition();
 export const SpeechSynthesis = getSpeechSynthesis();
 export const SpeechSynthesisUtterance = getSpeechSynthesisUtterance();
