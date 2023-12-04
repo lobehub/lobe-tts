@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.23.1](https://github.com/lobehub/lobe-tts/compare/v1.23.0...v1.23.1)
+
+<sup>Released on **2023-12-04**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix Audio in ssr.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix Audio in ssr ([2e5e4e5](https://github.com/lobehub/lobe-tts/commit/2e5e4e5))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.23.0](https://github.com/lobehub/lobe-tts/compare/v1.22.2...v1.23.0)
 
 <sup>Released on **2023-12-01**</sup>
