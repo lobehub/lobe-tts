@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.23.2](https://github.com/lobehub/lobe-tts/compare/v1.23.1...v1.23.2)
+
+<sup>Released on **2023-12-05**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix types.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix types ([5680944](https://github.com/lobehub/lobe-tts/commit/5680944))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.23.1](https://github.com/lobehub/lobe-tts/compare/v1.23.0...v1.23.1)
 
 <sup>Released on **2023-12-04**</sup>
