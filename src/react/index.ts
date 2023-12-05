@@ -1,5 +1,6 @@
 export { default as AudioPlayer, type AudioPlayerProps } from './AudioPlayer';
 export { default as AudioVisualizer, type AudioVisualizerProps } from './AudioVisualizer';
+export { compressString } from './compressString';
 export { type AudioPlayerReturn, useAudioPlayer } from './hooks/useAudioPlayer';
 export { useAudioVisualizer } from './hooks/useAudioVisualizer';
 export { useBlobUrl } from './hooks/useBlobUrl';

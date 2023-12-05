@@ -84,17 +84,22 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7",
+    "jieba": "^1.0.0",
+    "jieba-wasm": "^0.0.2",
     "lodash-es": "^4",
     "openai": "^4.17.3",
     "query-string": "^8",
     "react-error-boundary": "^4",
     "remark-gfm": "^3",
     "remark-parse": "^10",
+    "segment": "^0.1.3",
+    "stopword": "^2.0.8",
     "swr": "^2",
     "unified": "^11",
     "unist-util-visit": "^5",
     "url-join": "^5",
-    "uuid": "^9"
+    "uuid": "^9",
+    "words-n-numbers": "^9.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^18",
@@ -114,6 +119,7 @@
     "dumi-theme-lobehub": "latest",
     "eslint": "^8",
     "father": "4.3.1",
+    "gpt-tokenizer": "^2.1.2",
     "husky": "^8",
     "lint-staged": "^15",
     "lucide-react": "latest",

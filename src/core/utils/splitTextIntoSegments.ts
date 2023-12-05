@@ -1,4 +1,4 @@
-const toHalfWidthAndCleanSpace = (str: string): string => {
+export const toHalfWidthAndCleanSpace = (str: string): string => {
   return str
     .replaceAll(/[\uFF01-\uFF5E]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xFE_E0))
     .replaceAll('\u3000', ' ')
