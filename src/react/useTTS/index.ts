@@ -7,7 +7,9 @@ import { type AudioProps } from '@/react/AudioPlayer';
 import { useStreamAudioPlayer } from '@/react/hooks/useStreamAudioPlayer';
 
 export interface TTSHook extends SWRConfiguration, Pick<SWRResponse, 'error' | 'mutate'> {
-  audio: AudioProps;
+  audio: AudioProps & {
+    arrayBuffers: ArrayBuffer[];
+  };
   canStart: boolean;
   isGlobalLoading: boolean;
   isLoading: boolean;
@@ -61,7 +63,7 @@ export const useTTS = (
         if (index < textArray.length - 1) {
           setIndex(index + 1);
         } else {
-          onFinish?.(restAudio.arrayBuffers, ...rest);
+          onFinish?.([...restAudio.arrayBuffers, data].filter(Boolean), ...rest);
           setShouldFetch(false);
           setIsGlobalLoading(false);
         }

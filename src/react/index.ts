@@ -11,3 +11,4 @@ export { type OpenAISTTOptions, useOpenAISTT } from './useOpenAISTT';
 export { type OpenAITTSOptions, useOpenAITTS } from './useOpenAITTS';
 export { type SpeechRecognitionOptions, useSpeechRecognition } from './useSpeechRecognition';
 export { type SpeechSynthesOptions, useSpeechSynthes } from './useSpeechSynthes';
+export { type TTSHook } from './useTTS';
