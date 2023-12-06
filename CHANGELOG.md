@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.23.3](https://github.com/lobehub/lobe-tts/compare/v1.23.2...v1.23.3)
+
+<sup>Released on **2023-12-06**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix autoplay.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix autoplay ([1fafadc](https://github.com/lobehub/lobe-tts/commit/1fafadc))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.23.2](https://github.com/lobehub/lobe-tts/compare/v1.23.1...v1.23.2)
 
 <sup>Released on **2023-12-05**</sup>
