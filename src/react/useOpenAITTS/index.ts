@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { OpenAITTS, type OpenAITTSAPI, type OpenAITTSPayload } from '@/core/OpenAITTS';
-import { type TTSConfig, useTTS } from '@/react/useTTS';
+import { type TTSOptions, useTTS } from '@/react/useTTS';
 
-export interface OpenAITTSOptions extends Pick<OpenAITTSPayload, 'options'>, TTSConfig {
+export interface OpenAITTSOptions extends Pick<OpenAITTSPayload, 'options'>, TTSOptions {
   api?: OpenAITTSAPI;
 }
 

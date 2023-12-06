@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { type EdgeSpeechAPI, type EdgeSpeechPayload, EdgeSpeechTTS } from '@/core/EdgeSpeechTTS';
-import { type TTSConfig, useTTS } from '@/react/useTTS';
+import { type TTSOptions, useTTS } from '@/react/useTTS';
 
-export interface EdgeSpeechOptions extends Pick<EdgeSpeechPayload, 'options'>, TTSConfig {
+export interface EdgeSpeechOptions extends Pick<EdgeSpeechPayload, 'options'>, TTSOptions {
   api?: EdgeSpeechAPI;
   locale?: string;
 }

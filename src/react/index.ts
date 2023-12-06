@@ -1,6 +1,6 @@
 export { default as AudioPlayer, type AudioPlayerProps } from './AudioPlayer';
 export { default as AudioVisualizer, type AudioVisualizerProps } from './AudioVisualizer';
-export { type AudioPlayerReturn, useAudioPlayer } from './hooks/useAudioPlayer';
+export { type AudioPlayerResponse, useAudioPlayer } from './hooks/useAudioPlayer';
 export { useAudioVisualizer } from './hooks/useAudioVisualizer';
 export { useBlobUrl } from './hooks/useBlobUrl';
 export { useStreamAudioPlayer } from './hooks/useStreamAudioPlayer';
@@ -11,4 +11,4 @@ export { type OpenAISTTOptions, useOpenAISTT } from './useOpenAISTT';
 export { type OpenAITTSOptions, useOpenAITTS } from './useOpenAITTS';
 export { type SpeechRecognitionOptions, useSpeechRecognition } from './useSpeechRecognition';
 export { type SpeechSynthesOptions, useSpeechSynthes } from './useSpeechSynthes';
-export { type TTSHook } from './useTTS';
+export { type TTSOptions } from './useTTS';

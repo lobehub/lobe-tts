@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
 import useSWR, { type SWRConfiguration, type SWRResponse } from 'swr';
 
-import { cleanContent } from '@/core/utils/cleanContent';
 import { splitTextIntoSegments } from '@/core/utils/splitTextIntoSegments';
 import { type AudioProps } from '@/react/AudioPlayer';
 import { useStreamAudioPlayer } from '@/react/hooks/useStreamAudioPlayer';
 
-export interface TTSHook extends SWRConfiguration, Pick<SWRResponse, 'error' | 'mutate'> {
+export interface TTSResponse extends SWRConfiguration, Pick<SWRResponse, 'error' | 'mutate'> {
   audio: AudioProps & {
     arrayBuffers: ArrayBuffer[];
   };
@@ -17,7 +16,7 @@ export interface TTSHook extends SWRConfiguration, Pick<SWRResponse, 'error' | '
   stop: () => void;
 }
 
-export interface TTSConfig extends SWRConfiguration {
+export interface TTSOptions extends SWRConfiguration {
   onFinish?: SWRConfiguration['onSuccess'];
   onStart?: () => void;
   onStop?: () => void;
@@ -27,8 +26,8 @@ export const useTTS = (
   key: string,
   text: string,
   fetchTTS: (segmentText: string) => Promise<ArrayBuffer>,
-  { onError, onSuccess, onFinish, onStart, onStop, ...restSWRConfig }: TTSConfig = {},
-): TTSHook => {
+  { onError, onSuccess, onFinish, onStart, onStop, ...restSWRConfig }: TTSOptions = {},
+): TTSResponse => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [isGlobalLoading, setIsGlobalLoading] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(0);
@@ -68,7 +67,6 @@ export const useTTS = (
           setIsGlobalLoading(false);
         }
       },
-      revalidateOnFocus: false,
       ...restSWRConfig,
     },
   );
@@ -82,10 +80,8 @@ export const useTTS = (
   }, [text, isLoading]);
 
   useEffect(() => {
-    cleanContent(text).then((content) => {
-      const texts = splitTextIntoSegments(content);
-      handleReset(texts);
-    });
+    const texts = splitTextIntoSegments(text);
+    handleReset(texts);
     return () => {
       handleReset();
     };

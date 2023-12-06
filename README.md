@@ -16,7 +16,8 @@ A high-quality & reliable TTS/STT library for Server and Browser
 [![][github-forks-shield]][github-forks-link]
 [![][github-stars-shield]][github-stars-link]
 [![][github-issues-shield]][github-issues-link]
-[![][github-license-shield]][github-license-link]
+[![][github-license-shield]][github-license-link]<br/>
+[![][sponsor-shield]][sponsor-link]
 
 [Changelog](./CHANGELOG.md) · [Report Bug][github-issues-link] · [Request Feature][github-issues-link]
 
@@ -37,6 +38,7 @@ A high-quality & reliable TTS/STT library for Server and Browser
   - [Compile with Next.js](#compile-with-nextjs)
 - [⌨️ Local Development](#️-local-development)
 - [🤝 Contributing](#-contributing)
+- [🩷 Sponsor](#-sponsor)
 - [🔗 More Products](#-more-products)
 
 ####
@@ -195,6 +197,23 @@ Contributions of all types are more than welcome, if you are interested in contr
 
 </div>
 
+## 🩷 Sponsor
+
+Every bit counts and your one-time donation sparkles in our galaxy of support! You're a shooting star, making a swift and bright impact on our journey. Thank you for believing in us – your generosity guides us toward our mission, one brilliant flash at a time.
+
+<a href="https://opencollective.com/lobehub" target="_blank">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://readme-wizard.lobehub.com/api/sponsor?themeMode=dark">
+    <img  src="https://readme-wizard.lobehub.com/api/sponsor">
+  </picture>
+</a>
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
 ## 🔗 More Products
 
 - **[🤖 Lobe Chat](https://github.com/lobehub/lobe-chat)** - An open-source, extensible (Function Calling), high-performance chatbot framework. It supports one-click free deployment of your private ChatGPT/LLM web application.
@@ -241,3 +260,5 @@ This project is [MIT](./LICENSE) licensed.
 [pr-welcome-link]: https://github.com/lobehub/lobe-tts/pulls
 [pr-welcome-shield]: https://img.shields.io/badge/%F0%9F%A4%AF%20PR%20WELCOME-%E2%86%92-ffcb47?labelColor=black&style=for-the-badge
 [profile-link]: https://github.com/lobehub
+[sponsor-link]: https://opencollective.com/lobehub 'Become 🩷 LobeHub Sponsor'
+[sponsor-shield]: https://img.shields.io/badge/-Sponsor%20LobeHub-f04f88?logo=opencollective&logoColor=white&style=flat-square

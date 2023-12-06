@@ -2,7 +2,7 @@ import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { AudioProps } from '@/react/AudioPlayer';
 
-export interface StreamAudioPlayerReturn extends AudioProps {
+export interface StreamAudioPlayerResponse extends AudioProps {
   arrayBuffers: ArrayBuffer[];
   download: () => void;
   load: (arrayBuffer: ArrayBuffer) => void;
@@ -11,7 +11,7 @@ export interface StreamAudioPlayerReturn extends AudioProps {
   url: string;
 }
 
-export const useStreamAudioPlayer = (): StreamAudioPlayerReturn => {
+export const useStreamAudioPlayer = (): StreamAudioPlayerResponse => {
   const audioRef = useRef<HTMLAudioElement>();
   const [arrayBuffers, setArrayBuffers] = useState<ArrayBuffer[]>([]);
   const [currentTime, setCurrentTime] = useState(0);

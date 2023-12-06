@@ -12,5 +12,6 @@ export {
   type OpenaiVoice,
 } from '@/core/OpenAITTS';
 export { SpeechSynthesisTTS } from '@/core/SpeechSynthesisTTS';
+export { cleanContent } from '@/core/utils/cleanContent';
 export { getRecordMineType, type RecordMineType } from '@/core/utils/getRecordMineType';
 export { VoiceList } from '@/core/VoiceList';

@@ -5,9 +5,11 @@ import {
   type MicrosoftSpeechPayload,
   MicrosoftSpeechTTS,
 } from '@/core/MicrosoftSpeechTTS';
-import { type TTSConfig, useTTS } from '@/react/useTTS';
+import { type TTSOptions, useTTS } from '@/react/useTTS';
 
-export interface MicrosoftSpeechOptions extends Pick<MicrosoftSpeechPayload, 'options'>, TTSConfig {
+export interface MicrosoftSpeechOptions
+  extends Pick<MicrosoftSpeechPayload, 'options'>,
+    TTSOptions {
   api?: MicrosoftSpeechAPI;
   locale?: string;
 }

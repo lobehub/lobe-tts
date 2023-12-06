@@ -33,7 +33,6 @@ export const useBlobUrl = (src: string) => {
         } catch {}
         setIsGlobalLoading(false);
       },
-      revalidateOnFocus: false,
     },
   );
 

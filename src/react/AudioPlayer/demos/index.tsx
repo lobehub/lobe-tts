@@ -25,7 +25,7 @@ export default () => {
 
   return (
     <StoryBook levaStore={store}>
-      <AudioPlayer audio={audio} isLoading={isLoading} {...options} />
+      <AudioPlayer audio={audio} autoplay isLoading={isLoading} {...options} />
     </StoryBook>
   );
 };

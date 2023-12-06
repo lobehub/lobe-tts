@@ -20,6 +20,7 @@ export interface AudioProps {
 export interface AudioPlayerProps {
   allowPause?: boolean;
   audio: AudioProps;
+  autoplay?: boolean;
   buttonActive?: boolean;
   buttonSize?: ActionIconProps['size'];
   buttonStyle?: CSSProperties;
@@ -48,6 +49,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
     className,
     onLoadingStop,
     audio = {
+      canPlay: false,
       currentTime: 0,
       download: () => {},
       duration: 0,
