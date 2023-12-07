@@ -13,7 +13,6 @@
   "license": "MIT",
   "author": "LobeHub <i@lobehub.com>",
   "sideEffects": false,
-  "type": "module",
   "exports": {
     "./package.json": "./package.json",
     ".": {
