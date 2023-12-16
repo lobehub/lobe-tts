@@ -1,5 +1,5 @@
-import { ActionIcon, type ActionIconProps, Icon, Tag } from '@lobehub/ui';
-import { Dropdown, Slider } from 'antd';
+import { ActionIcon, type ActionIconProps, Tag } from '@lobehub/ui';
+import { Slider } from 'antd';
 import { Download, PauseCircle, Play, StopCircle } from 'lucide-react';
 import { type CSSProperties, memo, useCallback, useMemo } from 'react';
 import { Flexbox } from 'react-layout-kit';
@@ -31,6 +31,7 @@ export interface AudioPlayerProps {
   onPause?: () => void;
   onPlay?: () => void;
   onStop?: () => void;
+  showDonload?: boolean;
   showSlider?: boolean;
   showTime?: boolean;
   style?: CSSProperties;
@@ -60,6 +61,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
       stop: () => {},
     },
     allowPause = true,
+    showDonload = true,
     buttonActive,
     timeType = 'left',
     showSlider = true,
@@ -115,7 +117,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
         className={className}
         gap={8}
         horizontal
-        style={{ paddingRight: 8, width: '100%', ...style }}
+        style={{ width: '100%', ...style }}
       >
         <div onClick={handleStopLoading} style={{ flex: 'none' }}>
           <ActionIcon
@@ -141,30 +143,24 @@ const AudioPlayer = memo<AudioPlayerProps>(
           />
         )}
         {showTime && (
-          <Dropdown
-            disabled={duration === 0}
-            menu={{
-              items: [
-                {
-                  key: 'download',
-                  label: <Icon icon={Download} size={{ fontSize: 16 }} />,
-                  onClick: download,
-                },
-              ],
-            }}
-            placement="top"
-          >
-            <Time style={{ cursor: 'pointer', flex: 'none', ...timeStyle }}>
-              {timeType === 'left' && formattedLeftTime}
-              {timeType === 'current' && formattedCurrentTime}
-              {timeType === 'combine' && (
-                <span>
-                  {formattedCurrentTime}
-                  <span style={{ opacity: 0.66 }}>{` / ${formattedDuration}`}</span>
-                </span>
-              )}
-            </Time>
-          </Dropdown>
+          <Time style={{ cursor: 'pointer', flex: 'none', margin: 0, ...timeStyle }}>
+            {timeType === 'left' && formattedLeftTime}
+            {timeType === 'current' && formattedCurrentTime}
+            {timeType === 'combine' && (
+              <span>
+                {formattedCurrentTime}
+                <span style={{ opacity: 0.66 }}>{` / ${formattedDuration}`}</span>
+              </span>
+            )}
+          </Time>
+        )}
+        {!isLoading && showDonload && (
+          <ActionIcon
+            icon={Download}
+            onClick={download}
+            size={buttonSize || { blockSize: 32, fontSize: 16 }}
+            style={buttonStyle}
+          />
         )}
       </Flexbox>
     );
