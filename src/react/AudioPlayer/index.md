@@ -4,6 +4,6 @@ group: UI
 title: AudioPlayer
 ---
 
-## defualt
+## default
 
 <code src="./demos/index.tsx" nopadding></code>

@@ -6,6 +6,6 @@ apiHeader:
   pkg: '@lobehub/tts/react'
 ---
 
-## defualt
+## default
 
 <code src="./demos/index.tsx" nopadding></code>
