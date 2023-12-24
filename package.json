@@ -126,7 +126,7 @@
     "semantic-release": "^21",
     "tsx": "^4.1.2",
     "typescript": "^5",
-    "vercel": "^28"
+    "vercel": "^33.0.0"
   },
   "peerDependencies": {
     "@lobehub/ui": ">=1",
