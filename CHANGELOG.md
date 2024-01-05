@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.24.0](https://github.com/lobehub/lobe-tts/compare/v1.23.5...v1.24.0)
+
+<sup>Released on **2024-01-05**</sup>
+
+#### ✨ Features
+
+- **misc**: CreateOpenaiAudioTranscriptionsOptions add <prompt> parmas to get better transcript result .ref:<https://wulu.zone/posts/whisper-cn>.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: CreateOpenaiAudioTranscriptionsOptions add <prompt> parmas to get better transcript result .ref:<https://wulu.zone/posts/whisper-cn> ([91ba99b](https://github.com/lobehub/lobe-tts/commit/91ba99b))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.23.5](https://github.com/lobehub/lobe-tts/compare/v1.23.4...v1.23.5)
 
 <sup>Released on **2024-01-03**</sup>
