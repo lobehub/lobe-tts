@@ -21,6 +21,7 @@ export const createOpenaiAudioTranscriptions = async ({
     {
       file,
       model: options.model,
+      prompt: options.prompt || '',
     },
     { headers: { Accept: '*/*' } },
   );
