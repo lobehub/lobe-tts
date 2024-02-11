@@ -114,7 +114,7 @@
     "dumi-theme-lobehub": "latest",
     "eslint": "^8",
     "father": "4.3.1",
-    "husky": "^8",
+    "husky": "^9.0.0",
     "lint-staged": "^15",
     "lucide-react": "latest",
     "prettier": "^3",
