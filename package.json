@@ -89,7 +89,7 @@
     "query-string": "^8",
     "react-error-boundary": "^4",
     "remark-gfm": "^3",
-    "remark-parse": "^10",
+    "remark-parse": "^11.0.0",
     "swr": "^2",
     "unified": "^11",
     "unist-util-visit": "^5",
