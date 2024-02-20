@@ -88,7 +88,7 @@
     "openai": "^4.17.3",
     "query-string": "^8",
     "react-error-boundary": "^4",
-    "remark-gfm": "^3",
+    "remark-gfm": "^4.0.0",
     "remark-parse": "^10",
     "swr": "^2",
     "unified": "^11",
