@@ -86,7 +86,7 @@
     "@babel/runtime": "^7",
     "lodash-es": "^4",
     "openai": "^4.17.3",
-    "query-string": "^8",
+    "query-string": "^9.0.0",
     "react-error-boundary": "^4",
     "remark-gfm": "^3",
     "remark-parse": "^10",
