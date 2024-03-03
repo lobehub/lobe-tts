@@ -109,7 +109,7 @@
     "@vercel/node": "^3",
     "antd": "^5",
     "antd-style": "^3",
-    "commitlint": "^18",
+    "commitlint": "^19.0.0",
     "dumi": "^2",
     "dumi-theme-lobehub": "latest",
     "eslint": "^8",
