@@ -2,6 +2,23 @@
 
 # Changelog
 
+### [Version 1.24.1](https://github.com/lobehub/lobe-tts/compare/v1.24.0...v1.24.1)
+
+<sup>Released on **2024-05-02**</sup>
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.24.0](https://github.com/lobehub/lobe-tts/compare/v1.23.5...v1.24.0)
 
 <sup>Released on **2024-01-05**</sup>
