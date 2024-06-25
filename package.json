@@ -88,7 +88,7 @@
     "query-string": "^9.0.0",
     "react-error-boundary": "^4.0.13",
     "remark-gfm": "^3.0.1",
-    "remark-parse": "^10.0.2",
+    "remark-parse": "^11.0.0",
     "swr": "^2.2.5",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
