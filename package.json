@@ -87,7 +87,7 @@
     "lodash-es": "^4.17.21",
     "query-string": "^9.0.0",
     "react-error-boundary": "^4.0.13",
-    "remark-gfm": "^3.0.1",
+    "remark-gfm": "^4.0.0",
     "remark-parse": "^10.0.2",
     "swr": "^2.2.5",
     "unified": "^11.0.5",
