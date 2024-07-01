@@ -25,7 +25,7 @@ const toHalfWidthAndCleanSpace = (str: string): string => {
 export const splitTextIntoSegments = (text: string, maxChars: number = 100): string[] => {
   text = toHalfWidthAndCleanSpace(text);
 
-  const sentences = text.match(/[^.!;?]+[.!;?]+/g) || [];
+  const sentences = text.match(/[^!.;?]+[!.;?]+/g) || [];
   const segments: string[] = [];
   let currentSegment = '';
 
