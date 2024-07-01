@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.24.3](https://github.com/lobehub/lobe-tts/compare/v1.24.2...v1.24.3)
+
+<sup>Released on **2024-07-01**</sup>
+
+#### 💄 Styles
+
+- **misc**: Update lint.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Update lint ([63251ad](https://github.com/lobehub/lobe-tts/commit/63251ad))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.24.2](https://github.com/lobehub/lobe-tts/compare/v1.24.1...v1.24.2)
 
 <sup>Released on **2024-06-25**</sup>
