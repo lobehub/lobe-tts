@@ -127,7 +127,7 @@
     "stylelint": "^15.11.0",
     "tsx": "^4.16.0",
     "typescript": "^5.5.2",
-    "vercel": "^28.20.0"
+    "vercel": "^35.0.0"
   },
   "peerDependencies": {
     "@lobehub/ui": ">=1",
