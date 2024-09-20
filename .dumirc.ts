@@ -28,9 +28,9 @@ const themeConfig = {
   footer: 'Made with 🤯 by LobeHub',
   giscus: {
     category: 'Q&A',
-    categoryId: 'DIC_kwDOJloKoM4CXsCu',
-    repo: 'lobehub/lobe-ui',
-    repoId: 'R_kgDOJloKoA',
+    categoryId: 'DIC_kwDOKoaTlM4Cin-0',
+    repo: 'lobehub/lobe-tts',
+    repoId: 'R_kgDOKoaTlA',
   },
   name: 'TTS',
   socialLinks: {
@@ -51,7 +51,7 @@ export default defineConfig({
   define: {
     'process.env': process.env,
   },
-  favicons: ['https://npm.elemecdn.com/@lobehub/assets-favicons/assets/favicon.ico'],
+  favicons: ['https://lobehub.com/favicon.ico'],
   locales: [
     { id: 'en-US', name: 'English' },
     { id: 'zh-CN', name: '简体中文' },
@@ -63,6 +63,9 @@ export default defineConfig({
   resolve: {
     atomDirs: [{ dir: 'src/react', type: 'component' }],
     entryFile: isProduction ? './src/index.ts' : undefined,
+  },
+  sitemap: {
+    hostname: 'https://tts.lobehub.com',
   },
   styles: [
     `html, body { background: transparent;  }
