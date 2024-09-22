@@ -9,6 +9,6 @@ nav:
 
 ## TTS
 
-- [EdgeSpeechTTS](./edge-speech-tts.en-US.md)
-- [MicrosoftSpeechTTS](microsoft-speech-tts.en-US.md)
-- [OpenaiTTS](openai-tts.en-US.md)
+- [EdgeSpeechTTS](./edge-speech-tts.md)
+- [MicrosoftSpeechTTS](microsoft-speech-tts.md)
+- [OpenaiTTS](openai-tts.md)
