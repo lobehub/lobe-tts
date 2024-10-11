@@ -19,6 +19,8 @@ export const useSpeechSynthes = (
     if (!SpeechSynthesisUtterance) return;
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.voice = voiceList.find((item: any) => item.name === voice) as any;
+    utterance.onstart = () => setIsLoading(true);
+    utterance.onend = () => setIsLoading(false);
     if (pitch) utterance.pitch = pitch * 10;
     if (rate) utterance.rate = rate * 10;
     return utterance;
