@@ -49,7 +49,7 @@ export const createMicrosoftSpeech = async (
       SpeakTriggerSource: 'AccTuningPagePlayButton',
     },
     ssml: genSSML(input, options),
-    ttsAudioFormat: 'audio-24khz-160kbitrate-mono-mp3',
+    ttsAudioFormat: 'audio-24khz-48kbitrate-mono-mp3',
   });
 
   return fetch(proxyUrl ? proxyUrl : MICROSOFT_SPEECH_URL, {

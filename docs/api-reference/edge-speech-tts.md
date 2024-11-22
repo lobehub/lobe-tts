@@ -1,9 +1,11 @@
 ---
-group: TTS
+group: API Reference
 title: EdgeSpeechTTS
 apiHeader:
   pkg: '@lobehub/tts'
 ---
+
+## Introduction
 
 `EdgeSpeechTTS` is a class for text-to-speech conversion based on Edge Speech Service.
 

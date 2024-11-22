@@ -1,9 +1,11 @@
 ---
-group: TTS
+group: API Reference
 title: OpenAITTS
 apiHeader:
   pkg: '@lobehub/tts'
 ---
+
+## Introduction
 
 `OpenAITTS` is a class for text-to-speech using the OpenAI voice service.
 
