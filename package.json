@@ -53,7 +53,7 @@
     "lint": "eslint \"{src,api,lib}/**/*.{js,jsx,ts,tsx}\" --fix",
     "lint:md": "remark . --quiet --frail --output",
     "lint:style": "stylelint \"{src,tests}/**/*.{js,jsx,ts,tsx}\" --fix",
-    "prepare": "husky install",
+    "prepare": "husky",
     "prepublishOnly": "npm run build",
     "prettier": "prettier -c --write \"**/**\"",
     "release": "semantic-release",
