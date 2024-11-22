@@ -2,9 +2,11 @@
 nav: Components
 group: TTS
 title: useMicrosoftSpeech
+apiHeader:
+  pkg: '@lobehub/tts/react'
 ---
 
-## hooks
+## React Hooks
 
 - ENV: `MICROSOFT_SPEECH_BACKEND_URL`
 

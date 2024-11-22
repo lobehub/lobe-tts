@@ -2,6 +2,7 @@ import OpenAI from 'openai';
 
 import { OpenAISTTPayload } from '@/core';
 
+import cors from '../lib/cors';
 import { createOpenaiAudioTranscriptions } from '../src/server/createOpenaiAudioTranscriptions';
 
 export const config = {
@@ -21,9 +22,12 @@ export default async (req: Request) => {
   const openai = new OpenAI({ apiKey: OPENAI_API_KEY, baseURL: OPENAI_BASE_URL });
   const res = await createOpenaiAudioTranscriptions({ openai, payload });
 
-  return new Response(JSON.stringify(res), {
-    headers: {
-      'content-type': 'application/json;charset=UTF-8',
-    },
-  });
+  return cors(
+    req,
+    new Response(JSON.stringify(res), {
+      headers: {
+        'content-type': 'application/json;charset=UTF-8',
+      },
+    }),
+  );
 };

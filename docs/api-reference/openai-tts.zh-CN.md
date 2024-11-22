@@ -1,9 +1,11 @@
 ---
-group: TTS
+group: API Reference
 title: OpenAITTS
 apiHeader:
   pkg: '@lobehub/tts'
 ---
+
+## 介绍
 
 `OpenAITTS` 是一个基于 OpenAI 语音服务的文本转语音方法类。
 

@@ -1,9 +1,11 @@
 ---
-group: TTS
+group: API Reference
 title: MicrosoftSpeechTTS
 apiHeader:
   pkg: '@lobehub/tts'
 ---
+
+## Introduction
 
 `MicrosoftSpeechTTS` is a class for text-to-speech using Microsoft Speech Services.
 
@@ -22,7 +24,6 @@ constructor(options: MicrosoftSpeechAPI): MicrosoftSpeechTTS
 ## Examples
 
 ```js
-// index.js
 // index.js
 import { MicrosoftSpeechTTS } from '@lobehub/tts';
 

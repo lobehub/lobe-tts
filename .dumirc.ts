@@ -52,10 +52,7 @@ export default defineConfig({
     'process.env': process.env,
   },
   favicons: ['https://lobehub.com/favicon.ico'],
-  locales: [
-    { id: 'en-US', name: 'English' },
-    { id: 'zh-CN', name: '简体中文' },
-  ],
+  locales: [{ id: 'en-US', name: 'English' }],
   // mfsu: isWin ? undefined : {},
   mfsu: false,
   npmClient: 'pnpm',

@@ -2,8 +2,10 @@
 nav: Components
 group: UI
 title: AudioVisualizer
+apiHeader:
+  pkg: '@lobehub/tts/react'
 ---
 
-## default
+## Default
 
 <code src="./demos/index.tsx" nopadding></code>

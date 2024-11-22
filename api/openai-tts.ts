@@ -2,6 +2,7 @@ import OpenAI from 'openai';
 
 import { OpenAITTSPayload } from '@/core';
 
+import cors from '../lib/cors';
 import { createOpenaiAudioSpeech } from '../src/server/createOpenaiAudioSpeech';
 
 export const config = {
@@ -10,6 +11,7 @@ export const config = {
 
 export default async (req: Request) => {
   if (req.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
+
   const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
   const OPENAI_BASE_URL = process.env.OPENAI_BASE_URL;
 
@@ -19,5 +21,7 @@ export default async (req: Request) => {
 
   const openai = new OpenAI({ apiKey: OPENAI_API_KEY, baseURL: OPENAI_BASE_URL });
 
-  return createOpenaiAudioSpeech({ openai, payload });
+  const res = await createOpenaiAudioSpeech({ openai, payload });
+
+  return cors(req, res);
 };

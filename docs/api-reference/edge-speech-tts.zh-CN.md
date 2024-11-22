@@ -1,9 +1,11 @@
 ---
-group: TTS
+group: API Reference
 title: EdgeSpeechTTS
 apiHeader:
   pkg: '@lobehub/tts'
 ---
+
+## 介绍
 
 `EdgeSpeechTTS` 是一个基于 Edge 语音服务的文本转语音方法类。
 
