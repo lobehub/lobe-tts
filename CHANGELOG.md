@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.25.2](https://github.com/lobehub/lobe-tts/compare/v1.25.1...v1.25.2)
+
+<sup>Released on **2024-11-22**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Update dumi.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Update dumi ([e4af5b6](https://github.com/lobehub/lobe-tts/commit/e4af5b6))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.25.1](https://github.com/lobehub/lobe-tts/compare/v1.25.0...v1.25.1)
 
 <sup>Released on **2024-09-20**</sup>
