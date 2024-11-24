@@ -1,11 +1,13 @@
 import { defineConfig } from 'dumi';
+import { SiteThemeConfig } from 'dumi-theme-lobehub';
 import path from 'node:path';
 
 import { description, homepage, name } from './package.json';
 
 const isProduction = process.env.NODE_ENV === 'production';
+const isWin = process.platform === 'win32';
 
-const themeConfig = {
+const themeConfig: SiteThemeConfig = {
   actions: [
     {
       link: homepage,
@@ -18,21 +20,36 @@ const themeConfig = {
       type: 'primary',
     },
   ],
+  analytics: {
+    plausible: {
+      domain: 'tts.lobehub.com',
+      scriptBaseUrl: 'https://plausible.lobehub-inc.cn',
+    },
+  },
   apiHeader: {
     docUrl: `{github}/tree/master/src/{atomId}/index.md`,
     match: ['/components'],
     pkg: name,
     sourceUrl: `{github}/tree/master/src/{atomId}/index.tsx`,
   },
-  description: description,
-  footer: 'Made with 🤯 by LobeHub',
+  description,
   giscus: {
     category: 'Q&A',
     categoryId: 'DIC_kwDOKoaTlM4Cin-0',
     repo: 'lobehub/lobe-tts',
     repoId: 'R_kgDOKoaTlA',
   },
+  metadata: {
+    openGraph: {
+      image:
+        'https://repository-images.githubusercontent.com/713462676/32967e56-249e-4593-bb18-b3ed34e69669',
+    },
+  },
   name: 'TTS',
+  prefersColor: {
+    default: 'dark',
+    switch: false,
+  },
   socialLinks: {
     discord: 'https://discord.gg/AYFPHvv2jT',
     github: homepage,
@@ -41,11 +58,9 @@ const themeConfig = {
 };
 
 export default defineConfig({
-  /* eslint-disable sort-keys-fix/sort-keys-fix */
   alias: {
     '@lobehub/tts/react': path.join(__dirname, './src/react'),
   },
-  /* eslint-enable */
   apiParser: isProduction ? {} : false,
   base: '/',
   define: {
@@ -53,8 +68,7 @@ export default defineConfig({
   },
   favicons: ['https://lobehub.com/favicon.ico'],
   locales: [{ id: 'en-US', name: 'English' }],
-  // mfsu: isWin ? undefined : {},
-  mfsu: false,
+  mfsu: isWin ? undefined : {},
   npmClient: 'pnpm',
   publicPath: '/',
   resolve: {
