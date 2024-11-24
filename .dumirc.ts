@@ -10,6 +10,7 @@ const isWin = process.platform === 'win32';
 const themeConfig: SiteThemeConfig = {
   actions: [
     {
+      icon: 'Github',
       link: homepage,
       openExternal: true,
       text: 'Github',
@@ -69,6 +70,7 @@ export default defineConfig({
   exportStatic: {},
   extraBabelPlugins: ['antd-style'],
   favicons: ['https://lobehub.com/favicon.ico'],
+  jsMinifier: 'swc',
   locales: [{ id: 'en-US', name: 'English' }],
   mfsu: isWin ? undefined : {},
   npmClient: 'pnpm',

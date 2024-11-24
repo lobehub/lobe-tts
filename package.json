@@ -112,6 +112,7 @@
     "@types/react-dom": "^18.3.1",
     "@types/uuid": "^9.0.8",
     "@vercel/node": "^3.2.26",
+    "babel-plugin-antd-style": "^1.0.4",
     "commitlint": "^19.6.0",
     "concurrently": "^9.1.0",
     "dumi": "^2.4.14",
