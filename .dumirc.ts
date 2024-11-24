@@ -67,7 +67,7 @@ export default defineConfig({
   define: {
     'process.env': process.env,
   },
-  exportStatic: {},
+  // exportStatic: {},
   extraBabelPlugins: ['antd-style'],
   favicons: ['https://lobehub.com/favicon.ico'],
   jsMinifier: 'swc',
