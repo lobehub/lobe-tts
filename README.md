@@ -19,7 +19,7 @@ A high-quality & reliable TTS/STT library for Server and Browser
 [![][github-license-shield]][github-license-link]<br/>
 [![][sponsor-shield]][sponsor-link]
 
-[Changelog](./CHANGELOG.md) · [Report Bug][github-issues-link] · [Request Feature][github-issues-link]
+[Documents](https://tts.lobehub.com) · [Changelog](./CHANGELOG.md) · [Report Bug][github-issues-link] · [Request Feature][github-issues-link]
 
 ![](https://github-production-user-asset-6210df.s3.amazonaws.com/17870709/284077909-854cc09a-b3c7-4fc4-9ea7-f7137abba351.png)
 
