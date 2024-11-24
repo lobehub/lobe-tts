@@ -66,6 +66,8 @@ export default defineConfig({
   define: {
     'process.env': process.env,
   },
+  exportStatic: {},
+  extraBabelPlugins: ['antd-style'],
   favicons: ['https://lobehub.com/favicon.ico'],
   locales: [{ id: 'en-US', name: 'English' }],
   mfsu: isWin ? undefined : {},
@@ -78,6 +80,7 @@ export default defineConfig({
   sitemap: {
     hostname: 'https://tts.lobehub.com',
   },
+  ssr: isProduction ? {} : false,
   styles: [
     `html, body { background: transparent;  }
 

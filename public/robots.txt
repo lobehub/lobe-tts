@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://tts.lobehub.com
+Sitemap: https://tts.lobehub.com/sitemap.xml
