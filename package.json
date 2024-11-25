@@ -24,8 +24,10 @@
     "react.js"
   ],
   "scripts": {
-    "build": "father build && cp react.js react.d.ts && cp server.js server.d.ts",
+    "build": "npm run clean && father build && npm run build:d",
+    "build:d": "cp react.js react.d.ts && cp server.js server.d.ts",
     "ci": "npm run lint && npm run type-check && npm run doctor",
+    "clean": "rm react.d.ts && rm server.d.ts",
     "dev": "father dev",
     "docs:build": "npm run build && dumi build",
     "docs:build-analyze": "ANALYZE=1 dumi build",
