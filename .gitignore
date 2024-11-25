@@ -57,5 +57,6 @@ public/*.js
 bun.lockb
 react/**
 server/**
-
 core/**
+react.d.ts
+server.d.ts

@@ -61,6 +61,7 @@ const themeConfig: SiteThemeConfig = {
 export default defineConfig({
   alias: {
     '@lobehub/tts/react': path.join(__dirname, './src/react'),
+    '@lobehub/tts/server': path.join(__dirname, './src/server'),
   },
   apiParser: isProduction ? {} : false,
   base: '/',
