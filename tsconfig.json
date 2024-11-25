@@ -6,15 +6,24 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": true,
+    "module": "esnext",
+    "moduleResolution": "node",
     "paths": {
       "@@/*": [".dumi/tmp/*"],
       "@/*": ["./src/*"],
-      "@lobehub/tts": ["./src/core"],
-      "@lobehub/tts/react": ["./src/react"]
-    }
+      "@lobehub/tts": ["./src"],
+      "@lobehub/tts/*": ["src/*"],
+      "@lobehub/tts/react": ["./src/react"],
+      "@lobehub/tts/react/*": ["./src/react/*"],
+      "@lobehub/tts/server": ["./src/server"],
+      "@lobehub/tts/server/*": ["./src/server/*"]
+    },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es6",
+    "types": ["vitest/globals"]
   },
+  "exclude": ["./react.d.ts", "./server.d.ts"],
   "include": ["src", "docs", ".dumirc.ts", "api", "**/*.ts", "**/*.d.ts", "**/*.tsx"]
 }
