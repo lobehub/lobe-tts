@@ -68,6 +68,7 @@
   "dependencies": {
     "@babel/runtime": "^7.26.0",
     "lodash-es": "^4.17.21",
+    "markdown-to-txt": "^2.0.1",
     "query-string": "^9.1.1",
     "react-error-boundary": "^4.1.2",
     "remark-gfm": "^3.0.1",
@@ -80,7 +81,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
-    "@lobehub/i18n-cli": "^1.20.0",
+    "@lobehub/i18n-cli": "^1.20.1",
     "@lobehub/lint": "^1.24.4",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.17.7",
@@ -93,7 +94,7 @@
     "commitlint": "^19.6.0",
     "concurrently": "^9.1.0",
     "dumi": "^2.4.14",
-    "dumi-theme-lobehub": "^1.10.6",
+    "dumi-theme-lobehub": "^1.10.8",
     "eslint": "^8.57.1",
     "father": "^4.5.1",
     "husky": "^9.1.7",

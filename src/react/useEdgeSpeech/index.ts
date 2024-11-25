@@ -16,6 +16,7 @@ export const useEdgeSpeech = (defaultText: string, init: EdgeSpeechOptions) => {
     options.voice,
     text,
     async (segmentText: string) => {
+      console.log(segmentText);
       const instance = new EdgeSpeechTTS({ ...api, locale });
       const res = await instance.create({ input: segmentText, options });
       setResponse(res);

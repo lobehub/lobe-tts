@@ -1,5 +1,7 @@
+import { markdownToTxt } from 'markdown-to-txt';
+
 const toHalfWidthAndCleanSpace = (str: string): string => {
-  return str
+  return markdownToTxt(str)
     .replaceAll(/[\uFF01-\uFF5E]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xFE_E0))
     .replaceAll('\u3000', ' ')
     .replaceAll('。', '.')
@@ -22,32 +24,42 @@ const toHalfWidthAndCleanSpace = (str: string): string => {
     .replaceAll(/\s+/g, ' ');
 };
 
-export const splitTextIntoSegments = (text: string, maxChars: number = 100): string[] => {
+export const splitTextIntoSegments = (text: string, chunkSize: number = 100): string[] => {
   text = toHalfWidthAndCleanSpace(text);
 
-  const sentences = text.match(/[^!.;?]+[!.;?]+/g) || [];
-  const segments: string[] = [];
-  let currentSegment = '';
+  const chunks: string[] = [];
+  const paragraphs = text.split('\n');
+  let currentChunk = '';
 
-  sentences.forEach((sentence) => {
-    if ((currentSegment + sentence).length > maxChars) {
-      if (currentSegment.length > 0) {
-        segments.push(currentSegment.trim());
-        currentSegment = '';
-      }
-      if (sentence.length > maxChars) {
-        segments.push(sentence.trim());
-      } else {
-        currentSegment = sentence;
-      }
-    } else {
-      currentSegment += sentence;
+  function addChunk(chunk: string) {
+    if (chunk.trim()) {
+      chunks.push(chunk.trim());
     }
-  });
-
-  if (currentSegment.length > 0) {
-    segments.push(currentSegment.trim());
   }
 
-  return segments.filter(Boolean);
+  for (const paragraph of paragraphs) {
+    if (currentChunk.length + paragraph.length + 1 > chunkSize && currentChunk.length > 0) {
+      addChunk(currentChunk);
+      currentChunk = '';
+    }
+
+    if (paragraph.length > chunkSize) {
+      const sentences = paragraph.match(/[^!.?]+[!.?]+/g) || [paragraph];
+      for (const sentence of sentences) {
+        if (currentChunk.length + sentence.length + 1 > chunkSize && currentChunk.length > 0) {
+          addChunk(currentChunk);
+          currentChunk = '';
+        }
+        currentChunk += (currentChunk ? ' ' : '') + sentence.trim();
+      }
+    } else {
+      currentChunk += (currentChunk ? '\n' : '') + paragraph;
+    }
+  }
+
+  if (currentChunk) {
+    addChunk(currentChunk);
+  }
+
+  return chunks;
 };

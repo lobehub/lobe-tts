@@ -48,7 +48,7 @@ export const useTTS = (
   }, [handleReset]);
 
   const { isLoading, error, mutate } = useSWR(
-    shouldFetch && textArray?.length > 0 ? [key, textArray?.[index]] : null,
+    shouldFetch && textArray?.length > 0 ? [key, textArray?.[index]].join('-') : null,
     async () => await fetchTTS(textArray[index]),
     {
       onError: (err, ...rest) => {
@@ -81,6 +81,7 @@ export const useTTS = (
 
   useEffect(() => {
     const texts = splitTextIntoSegments(text);
+
     handleReset(texts);
     return () => {
       handleReset();
