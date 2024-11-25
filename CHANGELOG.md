@@ -2,6 +2,32 @@
 
 # Changelog
 
+### [Version 1.25.8-beta.2](https://github.com/lobehub/lobe-tts/compare/v1.25.8-beta.1...v1.25.8-beta.2)
+
+<sup>Released on **2024-11-25**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix build, Fix build.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix build ([b6ae2a1](https://github.com/lobehub/lobe-tts/commit/b6ae2a1))
+- **misc**: Fix build ([820b4bc](https://github.com/lobehub/lobe-tts/commit/820b4bc))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.25.8-beta.1](https://github.com/lobehub/lobe-tts/compare/v1.25.7...v1.25.8-beta.1)
 
 <sup>Released on **2024-11-25**</sup>
