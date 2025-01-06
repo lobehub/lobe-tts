@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 1.26.0](https://github.com/lobehub/lobe-tts/compare/v1.25.8...v1.26.0)
+
+<sup>Released on **2025-01-06**</sup>
+
+#### ✨ Features
+
+- **misc**: Support React 19.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Support React 19 ([9184e3d](https://github.com/lobehub/lobe-tts/commit/9184e3d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.25.8](https://github.com/lobehub/lobe-tts/compare/v1.25.7...v1.25.8)
 
 <sup>Released on **2024-11-25**</sup>
