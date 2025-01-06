@@ -12,7 +12,7 @@ export interface StreamAudioPlayerResponse extends AudioProps {
 }
 
 export const useStreamAudioPlayer = (): StreamAudioPlayerResponse => {
-  const audioRef = useRef<HTMLAudioElement>();
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [arrayBuffers, setArrayBuffers] = useState<ArrayBuffer[]>([]);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);

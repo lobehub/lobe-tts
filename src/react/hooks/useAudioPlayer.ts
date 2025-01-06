@@ -21,7 +21,7 @@ export const useAudioPlayer = ({
   src,
   type = 'audio/mp3',
 }: AudioPlayerOptions = {}): AudioPlayerResponse => {
-  const audioRef = useRef<HTMLAudioElement>();
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [arrayBuffers, setArrayBuffers] = useState<ArrayBuffer[]>([]);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
