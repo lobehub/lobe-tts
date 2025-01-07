@@ -1,7 +1,6 @@
-import { Icon } from '@lobehub/ui';
+import { ErrorBoundary, Icon } from '@lobehub/ui';
 import { Loader2 } from 'lucide-react';
 import { CSSProperties, RefObject, memo } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
 import { Flexbox } from 'react-layout-kit';
 
 import Visualizer, { VisualizerProps } from './Visualizer';
