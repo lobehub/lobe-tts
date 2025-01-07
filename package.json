@@ -69,20 +69,31 @@
     ]
   },
   "dependencies": {
+    "@lobehub/ui": "^1.161.0",
+    "antd-style": "^3.7.1",
+    "lodash-es": "^4.17.21",
+    "lucide-react": "^0.469.0",
     "markdown-to-txt": "^2.0.1",
+    "openai": "^4.77.3",
+    "query-string": "^9.1.1",
     "react-error-boundary": "^4.1.2",
+    "react-layout-kit": "^1.9.1",
     "remark-gfm": "^3.0.1",
     "remark-parse": "^10.0.2",
+    "swr": "^2.3.0",
     "unified": "^11.0.5",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "url-join": "^5.0.0",
+    "uuid": "^11.0.4"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.26.0",
     "@commitlint/cli": "^19.6.1",
     "@lobehub/i18n-cli": "^1.20.3",
     "@lobehub/lint": "^1.24.4",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^20.17.11",
-    "@types/react": "^19.0.2",
+    "@types/node": "^20.17.12",
+    "@types/react": "^19.0.3",
     "@types/react-dom": "^19.0.2",
     "@types/uuid": "^9.0.8",
     "@vercel/node": "^3.2.29",
@@ -93,7 +104,7 @@
     "concurrently": "^9.1.2",
     "dpdm": "^3.14.0",
     "dumi": "^2.4.17",
-    "dumi-theme-lobehub": "^1.11.0",
+    "dumi-theme-lobehub": "^1.12.0",
     "eslint": "^8.57.1",
     "father": "^4.5.1",
     "husky": "^9.1.7",
@@ -109,20 +120,9 @@
     "vitest": "~1.2.2"
   },
   "peerDependencies": {
-    "@babel/runtime": "^7.0.0",
-    "@lobehub/ui": "^1.160.0",
-    "antd": "^5.22.0",
-    "antd-style": "^3.7.0",
-    "lodash-es": "^4.0.0",
-    "lucide-react": "^0.469.0",
-    "openai": "^4.0.0",
-    "query-string": "^9.0.0",
+    "antd": "^5.23.0",
     "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0",
-    "react-layout-kit": "^1.0.0",
-    "swr": "^2.3.0",
-    "url-join": "^5.0.0",
-    "uuid": "^11.0.0"
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "publishConfig": {
     "access": "public",
