@@ -25,15 +25,5 @@
     }
   },
   "exclude": ["./react.d.ts", "./server.d.ts"],
-  "include": [
-    "src",
-    "docs",
-    "tests",
-    "api",
-    ".dumirc.ts",
-    ".fatherrc.ts",
-    "**/*.ts",
-    "**/*.d.ts",
-    "**/*.tsx"
-  ]
+  "include": ["src", "docs", "tests", ".dumirc.ts", ".fatherrc.ts"]
 }
