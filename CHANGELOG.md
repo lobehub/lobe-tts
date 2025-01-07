@@ -2,6 +2,40 @@
 
 # Changelog
 
+## [Version 1.27.0](https://github.com/lobehub/lobe-tts/compare/v1.26.0...v1.27.0)
+
+<sup>Released on **2025-01-07**</sup>
+
+#### ✨ Features
+
+- **misc**: Update antd.
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix release, Fix type.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update antd ([92f7a9d](https://github.com/lobehub/lobe-tts/commit/92f7a9d))
+
+#### What's fixed
+
+- **misc**: Fix release ([eb310d1](https://github.com/lobehub/lobe-tts/commit/eb310d1))
+- **misc**: Fix type ([3960e59](https://github.com/lobehub/lobe-tts/commit/3960e59))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 1.26.0](https://github.com/lobehub/lobe-tts/compare/v1.25.8...v1.26.0)
 
 <sup>Released on **2025-01-06**</sup>
