@@ -1,5 +1,6 @@
 import qs from 'query-string';
 import { v4 as uuidv4 } from 'uuid';
+import { createHash } from 'crypto';
 
 import { type SsmlOptions, genSSML } from '../utils/genSSML';
 import { genSendContent } from '../utils/genSendContent';
@@ -19,6 +20,8 @@ export interface EdgeSpeechPayload {
 const EDGE_SPEECH_URL =
   'wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1';
 const EDGE_API_TOKEN = '6A5AA1D4EAFF4E9FB37E23D68491D6F4';
+const EDGE_VERSION = '1-132.0.2957.140';
+const WINDOWS_FILE_TIME_EPOCH =  BigInt("11644473600");
 
 const configContent = JSON.stringify({
   context: {
@@ -50,6 +53,15 @@ const genHeader = (connectId: string) => {
   };
 };
 
+export function generateSecMsGecToken(){
+  const ticks = BigInt(Math.floor((Date.now() / 1000) + Number(WINDOWS_FILE_TIME_EPOCH))) * BigInt("10000000");
+  const roundedTicks = ticks - (ticks %  BigInt("3000000000"));
+  const strToHash = roundedTicks + EDGE_API_TOKEN;
+  const hash = createHash('sha256');
+  hash.update(strToHash, 'ascii');
+  return hash.digest('hex').toUpperCase();
+}
+
 export interface CreateEdgeSpeechCompletionOptions {
   payload: EdgeSpeechPayload;
 }
@@ -64,6 +76,8 @@ export const createEdgeSpeech = async (
   const url = qs.stringifyUrl({
     query: {
       ConnectionId: connectId,
+      'Sec-MS-GEC': token ? token : generateSecMsGecToken(),
+      'Sec-MS-GEC-Version': token ? token : EDGE_VERSION,
       TrustedClientToken: token ? token : EDGE_API_TOKEN,
     },
     url: proxyUrl ? proxyUrl : EDGE_SPEECH_URL,
