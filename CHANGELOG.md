@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 1.28.3](https://github.com/lobehub/lobe-tts/compare/v1.28.2...v1.28.3)
+
+<sup>Released on **2025-03-05**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix EdgeTTS 403 in Chinese mainland.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix EdgeTTS 403 in Chinese mainland, closes [#47](https://github.com/lobehub/lobe-tts/issues/47) ([7550a66](https://github.com/lobehub/lobe-tts/commit/7550a66))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.28.2](https://github.com/lobehub/lobe-tts/compare/v1.28.1...v1.28.2)
 
 <sup>Released on **2025-03-03**</sup>
