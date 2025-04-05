@@ -71,7 +71,7 @@ export class OpenaiSTT {
   static safeRecordMineType = getRecordMineType;
 
   fetch = async (payload: OpenAISTTPayload) => {
-    const url = urlJoin(this.OPENAI_BASE_URL, 'audio/speech');
+    const url = urlJoin(this.OPENAI_BASE_URL, 'audio/transcriptions');
     return this.serviceUrl
       ? fetch(this.serviceUrl, {
           body: genServiceSTTBody(payload),
