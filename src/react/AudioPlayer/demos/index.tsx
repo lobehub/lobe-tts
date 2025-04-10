@@ -1,5 +1,5 @@
 import { AudioPlayer, useAudioPlayer } from '@lobehub/tts/react';
-import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 
 export default () => {
   const store = useCreateStore();

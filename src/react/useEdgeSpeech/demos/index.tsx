@@ -1,6 +1,7 @@
 import { EdgeSpeechTTS } from '@lobehub/tts';
 import { AudioPlayer, useEdgeSpeech } from '@lobehub/tts/react';
-import { Icon, StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { Icon } from '@lobehub/ui';
+import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
 import { Flexbox } from 'react-layout-kit';

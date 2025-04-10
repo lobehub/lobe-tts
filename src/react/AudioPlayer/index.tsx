@@ -125,7 +125,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
             icon={isPlaying ? (allowPause ? PauseCircle : StopCircle) : Play}
             loading={isLoading}
             onClick={isPlaying ? (allowPause ? handlePause : handleStop) : handlePlay}
-            size={buttonSize || { blockSize: 32, fontSize: 16 }}
+            size={buttonSize || { blockSize: 32, size: 16 }}
             style={buttonStyle}
             title={title}
           />
@@ -158,7 +158,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
           <ActionIcon
             icon={Download}
             onClick={download}
-            size={buttonSize || { blockSize: 32, fontSize: 16 }}
+            size={buttonSize || { blockSize: 32, size: 16 }}
             style={buttonStyle}
           />
         )}
