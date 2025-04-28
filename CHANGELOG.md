@@ -2,6 +2,35 @@
 
 # Changelog
 
+## [Version 1.29.0](https://github.com/lobehub/lobe-tts/compare/v1.28.4...v1.29.0)
+
+<sup>Released on **2025-04-28**</sup>
+
+#### ✨ Features
+
+- **misc**: Migrate to @lobehub/ui v2 \[force major].
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Migrate to @lobehub/ui v2 \[force major] ([38c3c86](https://github.com/lobehub/lobe-tts/commit/38c3c86))
+
+</details>
+
+#### 💥 BREAKING CHANGES
+
+- **misc**: <https://github.com/lobehub/lobe-ui/pull/322>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 1.28.4](https://github.com/lobehub/lobe-tts/compare/v1.28.3...v1.28.4)
 
 <sup>Released on **2025-04-05**</sup>
