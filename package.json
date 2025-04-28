@@ -1,6 +1,6 @@
 {
   "name": "@lobehub/tts",
-  "version": "1.28.4",
+  "version": "2.0.0",
   "description": "A high-quality & reliable TTS React Hooks library",
   "homepage": "https://github.com/lobehub/lobe-tts",
   "bugs": {
@@ -72,7 +72,7 @@
     ]
   },
   "dependencies": {
-    "@lobehub/ui": "https://pkg.pr.new/lobehub/lobe-ui/@lobehub/ui@306e573",
+    "@lobehub/ui": "v2.0.0",
     "antd-style": "^3.7.1",
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.469.0",
@@ -105,7 +105,7 @@
     "concurrently": "^9.1.2",
     "dpdm": "^3.14.0",
     "dumi": "^2.4.20",
-    "dumi-theme-lobehub": "https://pkg.pr.new/lobehub/dumi-theme-lobehub@8546cf3",
+    "dumi-theme-lobehub": "v2.0.0",
     "eslint": "^8.57.1",
     "father": "^4.5.2",
     "husky": "^9.1.7",
@@ -125,8 +125,8 @@
   },
   "peerDependencies": {
     "antd": "^5.23.0",
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "publishConfig": {
     "access": "public",
