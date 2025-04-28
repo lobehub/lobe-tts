@@ -1,5 +1,5 @@
 import { AudioPlayer, AudioVisualizer, useAudioPlayer } from '@lobehub/tts/react';
-import { StoryBook, useControls, useCreateStore } from '@lobehub/ui';
+import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 import { Flexbox } from 'react-layout-kit';
 
 export default () => {
