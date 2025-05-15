@@ -1,5 +1,5 @@
-import { useOpenAISTTAutoStop } from './useOpenAISTTAutoStop';
-import { useOpenAISTTInteractive } from './useOpenAISTTInteractive';
+import { useOpenAISTTAutoStop as openAISTTAutoStop } from './useOpenAISTTAutoStop';
+import { useOpenAISTTInteractive as openAISTTInteractive } from './useOpenAISTTInteractive';
 import { OpenAISTTRecorderOptions } from './useOpenAISTTRecorder';
 
 export interface OpenAISTTOptions extends OpenAISTTRecorderOptions {
@@ -7,6 +7,6 @@ export interface OpenAISTTOptions extends OpenAISTTRecorderOptions {
 }
 
 export const useOpenAISTT = (locale: string, { autoStop, ...rest }: OpenAISTTOptions = {}) => {
-  const selectedHook = autoStop ? useOpenAISTTAutoStop : useOpenAISTTInteractive;
-  return selectedHook(locale, rest);
+  const useSelectedHook = autoStop ? openAISTTAutoStop : openAISTTInteractive;
+  return useSelectedHook(locale, rest);
 };
