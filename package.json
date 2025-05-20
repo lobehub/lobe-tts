@@ -72,7 +72,7 @@
     ]
   },
   "dependencies": {
-    "@lobehub/ui": "v2.0.0",
+    "@lobehub/ui": "^2.0.0",
     "antd-style": "^3.7.1",
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.469.0",
