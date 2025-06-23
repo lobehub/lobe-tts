@@ -2,8 +2,9 @@
 nav: Components
 group: TTS
 title: useMicrosoftSpeech
+atomId: react/useMicrosoftSpeech
 apiHeader:
-  pkg: '@lobehub/tts/react'
+  pkg: '@lobehub/tts'
 ---
 
 ## React Hooks
