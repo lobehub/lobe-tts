@@ -1,6 +1,5 @@
-import { Grid, Snippet } from '@lobehub/ui';
+import { Center, Flexbox, Grid, Snippet } from '@lobehub/ui';
 import { Card } from 'antd';
-import { Center, Flexbox } from 'react-layout-kit';
 
 import STT from './STT';
 import TTS from './TTS';

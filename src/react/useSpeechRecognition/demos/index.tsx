@@ -1,9 +1,8 @@
 import { useSpeechRecognition } from '@lobehub/tts/react';
-import { Icon } from '@lobehub/ui';
+import { Flexbox, Icon } from '@lobehub/ui';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 import { Button, Input } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
-import { Flexbox } from 'react-layout-kit';
 
 export default () => {
   const store = useCreateStore();

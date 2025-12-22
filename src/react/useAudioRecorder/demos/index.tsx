@@ -1,8 +1,7 @@
 import { useAudioRecorder } from '@lobehub/tts/react';
-import { Icon } from '@lobehub/ui';
+import { Flexbox, Icon } from '@lobehub/ui';
 import { Button } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
-import { Flexbox } from 'react-layout-kit';
 
 export default () => {
   const { isRecording, start, stop, url, formattedTime } = useAudioRecorder();

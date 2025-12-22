@@ -1,7 +1,6 @@
-import { Icon } from '@lobehub/ui';
+import { Flexbox, Icon } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
-import { Flexbox } from 'react-layout-kit';
 
 import { useSpeechRecognition } from '@/react';
 

@@ -1,7 +1,6 @@
-import { ErrorBoundary, Icon } from '@lobehub/ui';
+import { ErrorBoundary, Flexbox, Icon } from '@lobehub/ui';
 import { Loader2 } from 'lucide-react';
 import { CSSProperties, RefObject, memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
 
 import Visualizer, { VisualizerProps } from './Visualizer';
 
@@ -25,7 +24,7 @@ const AudioVisualizer = memo<AudioVisualizerProps>(
       ...style,
     };
     return (
-      <ErrorBoundary fallback={<div className={className} style={containerStyle}></div>}>
+      <ErrorBoundary fallback={<div className={className} style={containerStyle} />}>
         <Flexbox
           align={'center'}
           className={className}

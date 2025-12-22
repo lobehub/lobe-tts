@@ -1,8 +1,8 @@
 import { ActionIcon, type ActionIconProps, Tag } from '@lobehub/ui';
+import { Flexbox } from '@lobehub/ui';
 import { Slider } from 'antd';
 import { Download, PauseCircle, Play, StopCircle } from 'lucide-react';
 import { type CSSProperties, memo, useCallback, useMemo } from 'react';
-import { Flexbox } from 'react-layout-kit';
 
 import { secondsToMinutesAndSeconds } from '@/core/utils/secondsToMinutesAndSeconds';
 

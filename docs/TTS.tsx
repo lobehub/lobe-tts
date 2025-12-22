@@ -1,7 +1,6 @@
-import { Icon } from '@lobehub/ui';
+import { Flexbox, Icon } from '@lobehub/ui';
 import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
-import { Flexbox } from 'react-layout-kit';
 
 import { AudioPlayer, useEdgeSpeech } from '@/react';
 

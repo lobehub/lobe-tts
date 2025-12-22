@@ -1,10 +1,9 @@
 import { SpeechSynthesisTTS } from '@lobehub/tts';
 import { useSpeechSynthes } from '@lobehub/tts/react';
-import { Icon } from '@lobehub/ui';
+import { Flexbox, Icon } from '@lobehub/ui';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 import { Button, Input } from 'antd';
 import { StopCircle, Volume2 } from 'lucide-react';
-import { Flexbox } from 'react-layout-kit';
 
 import { genLevaOptions } from '../../_util/leva';
 
