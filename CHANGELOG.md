@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 3.0.1](https://github.com/lobehub/lobe-tts/compare/v3.0.0...v3.0.1)
+
+<sup>Released on **2025-12-22**</sup>
+
+#### 💄 Styles
+
+- **misc**: Remove layout kit.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Remove layout kit ([750ef3f](https://github.com/lobehub/lobe-tts/commit/750ef3f))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 3.0.0](https://github.com/lobehub/lobe-tts/compare/v2.0.1...v3.0.0)
 
 <sup>Released on **2025-12-20**</sup>
