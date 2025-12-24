@@ -1,4 +1,4 @@
-import { throttle } from 'lodash-es';
+import { throttle } from 'es-toolkit/compat';
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 export const useAudioVisualizer = (
