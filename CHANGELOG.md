@@ -2,6 +2,47 @@
 
 # Changelog
 
+## [Version 4.0.0](https://github.com/lobehub/lobe-tts/compare/v3.0.2...v4.0.0)
+
+<sup>Released on **2025-12-25**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Migrate from lodash-es to es-toolkit.
+
+#### ✨ Features
+
+- **misc**: Bump v4 \[force major].
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix build.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Migrate from lodash-es to es-toolkit, closes [#58](https://github.com/lobehub/lobe-tts/issues/58) ([d4dd3aa](https://github.com/lobehub/lobe-tts/commit/d4dd3aa))
+
+#### What's improved
+
+- **misc**: Bump v4 \[force major] ([cae0509](https://github.com/lobehub/lobe-tts/commit/cae0509))
+
+#### What's fixed
+
+- **misc**: Fix build ([85c2559](https://github.com/lobehub/lobe-tts/commit/85c2559))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 3.0.2](https://github.com/lobehub/lobe-tts/compare/v3.0.1...v3.0.2)
 
 <sup>Released on **2025-12-22**</sup>
