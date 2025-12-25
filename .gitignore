@@ -60,4 +60,5 @@ server/**
 core/**
 ./react.js
 ./react.d.ts
+./server.js
 ./server.d.ts
