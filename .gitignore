@@ -58,5 +58,7 @@ bun.lockb
 react/**
 server/**
 core/**
-react.d.ts
-server.d.ts
+./react.js
+./react.d.ts
+./server.js
+./server.d.ts

@@ -1,5 +1,5 @@
 import { SelectProps } from 'antd';
-import { flatten } from 'lodash-es';
+import { flatten } from 'es-toolkit/compat';
 
 import voiceList from '@/core/data/voiceList';
 

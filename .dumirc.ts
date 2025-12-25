@@ -68,12 +68,11 @@ export default defineConfig({
   define: {
     'process.env': process.env,
   },
-  // exportStatic: {},
   extraBabelPlugins: ['antd-style'],
   favicons: ['https://lobehub.com/favicon.ico'],
   jsMinifier: 'swc',
   locales: [{ id: 'en-US', name: 'English' }],
-  mako: isWin || isProduction ? false : {},
+  mfsu: isWin ? false : {},
   npmClient: 'pnpm',
   publicPath: '/',
   resolve: {
