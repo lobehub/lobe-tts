@@ -28,10 +28,10 @@ const themeConfig: SiteThemeConfig = {
     },
   },
   apiHeader: {
-    docUrl: `{github}/tree/master/src/{atomId}/index.md`,
+    docUrl: `{github}/tree/master/src/{atomId}`,
     match: ['/components'],
     pkg: name,
-    sourceUrl: `{github}/tree/master/src/{atomId}/index.tsx`,
+    sourceUrl: `{github}/tree/master/src/{atomId}`,
   },
   description,
   giscus: {
