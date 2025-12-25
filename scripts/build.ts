@@ -1,11 +1,14 @@
-import { copyFileSync } from 'node:fs';
+import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+
+import { packages } from '../.dumirc';
 
 const root = resolve(__dirname, '..');
 
 const build = async (filename: string) => {
-  copyFileSync(filename, filename.replace('.js', '.d.ts'));
+  const content = `export * from './es/${filename}';`;
+  writeFileSync(resolve(root, filename + '.js'), content, 'utf8');
+  writeFileSync(resolve(root, filename + '.d.ts'), content, 'utf8');
 };
 
-build(resolve(root, 'react.js'));
-build(resolve(root, 'server.js'));
+for (const pkg of packages) build(pkg);

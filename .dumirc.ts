@@ -1,11 +1,13 @@
 import { defineConfig } from 'dumi';
 import { SiteThemeConfig } from 'dumi-theme-lobehub';
-import path from 'node:path';
+import { resolve } from 'node:path';
 
 import { description, homepage, name } from './package.json';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isWin = process.platform === 'win32';
+
+export const packages = ['react', 'server'];
 
 const themeConfig: SiteThemeConfig = {
   actions: [
@@ -58,11 +60,11 @@ const themeConfig: SiteThemeConfig = {
   title: 'Lobe TTS',
 };
 
+const alias: Record<string, string> = {};
+for (const pkg of packages) alias[`@lobehub/tts/${pkg}`] = resolve(__dirname, `./src/${pkg}`);
+
 export default defineConfig({
-  alias: {
-    '@lobehub/tts/react': path.join(__dirname, './src/react'),
-    '@lobehub/tts/server': path.join(__dirname, './src/server'),
-  },
+  alias,
   apiParser: isProduction ? {} : false,
   base: '/',
   define: {
