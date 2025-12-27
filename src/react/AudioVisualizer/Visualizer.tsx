@@ -1,4 +1,4 @@
-import { useTheme } from 'antd-style';
+import { cssVar } from 'antd-style';
 import { RefObject, memo } from 'react';
 
 import { useAudioVisualizer } from '../hooks/useAudioVisualizer';
@@ -18,14 +18,13 @@ const Visualizer = memo<VisualizerProps & { audioRef: RefObject<HTMLAudioElement
     const maxHeight = barStyle?.maxHeight || width * 3;
     const minHeight = barStyle?.minHeight || width;
     const borderRadius = barStyle?.borderRadius || width / 2;
-    const theme = useTheme();
     const bars = useAudioVisualizer(audioRef, { count });
 
     return bars.map((bar, index) => (
       <div
         key={index}
         style={{
-          background: color || theme.colorPrimary,
+          background: color || cssVar.colorPrimary,
           borderRadius,
           height: minHeight + (bar / 255) * (maxHeight - minHeight),
           transition: 'height 50ms cubic-bezier(.2,-0.5,.8,1.5)',
