@@ -72,7 +72,7 @@
     ]
   },
   "dependencies": {
-    "antd-style": "^4.0.1",
+    "antd-style": "^4.1.0",
     "es-toolkit": "^1.43.0",
     "lucide-react": "^0.469.0",
     "markdown-to-txt": "^2.0.1",
