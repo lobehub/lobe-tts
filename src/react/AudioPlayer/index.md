@@ -2,8 +2,9 @@
 nav: Components
 group: UI
 title: AudioPlayer
+atomId: react/AudioPlayer
 apiHeader:
-  pkg: '@lobehub/tts/react'
+  pkg: '@lobehub/tts'
 ---
 
 ## Default

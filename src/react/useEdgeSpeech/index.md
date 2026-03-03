@@ -2,8 +2,9 @@
 nav: Components
 group: TTS
 title: useEdgeSpeech
+atomId: react/useEdgeSpeech
 apiHeader:
-  pkg: '@lobehub/tts/react'
+  pkg: '@lobehub/tts'
 ---
 
 ## React Hooks
