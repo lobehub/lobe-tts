@@ -99,7 +99,10 @@ export const createEdgeSpeech = async (
         switch (headers['Path']) {
           case 'turn.end': {
             ws.close();
-            if (!audioData.byteLength) return;
+            if (!audioData.byteLength) {
+              reject(new Error('No audio data received.'));
+              return;
+            }
             const res = new Response(audioData);
             resolve(res);
             break;
