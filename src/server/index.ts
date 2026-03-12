@@ -1,4 +1,8 @@
 export {
+  createCambAIAudioSpeech,
+  type CreateCambAIAudioSpeechOptions,
+} from './createCambAIAudioSpeech';
+export {
   createOpenaiAudioSpeech,
   type CreateOpenaiAudioSpeechCompletionOptions,
 } from './createOpenaiAudioSpeech';

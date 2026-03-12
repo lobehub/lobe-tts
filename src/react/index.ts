@@ -5,6 +5,7 @@ export { useAudioVisualizer } from './hooks/useAudioVisualizer';
 export { useBlobUrl } from './hooks/useBlobUrl';
 export { useStreamAudioPlayer } from './hooks/useStreamAudioPlayer';
 export { useAudioRecorder } from './useAudioRecorder';
+export { type CambAITTSOptions, useCambAITTS } from './useCambAITTS';
 export { type EdgeSpeechOptions, useEdgeSpeech } from './useEdgeSpeech';
 export { type MicrosoftSpeechOptions, useMicrosoftSpeech } from './useMicrosoftSpeech';
 export { type OpenAISTTOptions, useOpenAISTT } from './useOpenAISTT';
