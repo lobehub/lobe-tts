@@ -1,3 +1,10 @@
+export {
+  type CambAIOutputFormat,
+  type CambAISpeechModel,
+  CambAITTS,
+  type CambAITTSAPI,
+  type CambAITTSPayload,
+} from '@/core/CambAITTS';
 export { type EdgeSpeechAPI, type EdgeSpeechPayload, EdgeSpeechTTS } from '@/core/EdgeSpeechTTS';
 export {
   type MicrosoftSpeechAPI,
