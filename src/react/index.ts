@@ -7,6 +7,7 @@ export { useStreamAudioPlayer } from './hooks/useStreamAudioPlayer';
 export { useAudioRecorder } from './useAudioRecorder';
 export { type EdgeSpeechOptions, useEdgeSpeech } from './useEdgeSpeech';
 export { type MicrosoftSpeechOptions, useMicrosoftSpeech } from './useMicrosoftSpeech';
+export { type MiniMaxTTSOptions, useMiniMaxTTS } from './useMiniMaxTTS';
 export { type OpenAISTTOptions, useOpenAISTT } from './useOpenAISTT';
 export { type OpenAITTSOptions, useOpenAITTS } from './useOpenAITTS';
 export { type SpeechRecognitionOptions, useSpeechRecognition } from './useSpeechRecognition';

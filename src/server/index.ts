@@ -1,4 +1,8 @@
 export {
+  createMiniMaxAudioSpeech,
+  type CreateMiniMaxAudioSpeechOptions,
+} from './createMiniMaxAudioSpeech';
+export {
   createOpenaiAudioSpeech,
   type CreateOpenaiAudioSpeechCompletionOptions,
 } from './createOpenaiAudioSpeech';

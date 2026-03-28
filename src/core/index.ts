@@ -4,6 +4,12 @@ export {
   type MicrosoftSpeechPayload,
   MicrosoftSpeechTTS,
 } from '@/core/MicrosoftSpeechTTS';
+export {
+  MiniMaxTTS,
+  type MiniMaxTTSAPI,
+  type MiniMaxTTSPayload,
+  type MiniMaxVoice,
+} from '@/core/MiniMaxTTS';
 export { OpenaiSTT, type OpenAISTTAPI, type OpenAISTTPayload } from '@/core/OpenAISTT';
 export {
   OpenAITTS,
