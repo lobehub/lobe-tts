@@ -1,6 +1,5 @@
-import { ActionIcon, type ActionIconProps, Tag } from '@lobehub/ui';
 import { Flexbox } from '@lobehub/ui';
-import { Slider } from 'antd';
+import { ActionIcon, type ActionIconProps, Slider, Tag } from '@lobehub/ui/base-ui';
 import { Download, PauseCircle, Play, StopCircle } from 'lucide-react';
 import { type CSSProperties, memo, useCallback, useMemo } from 'react';
 
@@ -135,10 +134,9 @@ const AudioPlayer = memo<AudioPlayerProps>(
             disabled={duration === 0 || isLoading}
             max={duration}
             min={0}
-            onChange={(e) => setTime(e)}
+            onChange={setTime}
             step={0.01}
             style={{ flex: 1 }}
-            tooltip={{ formatter: secondsToMinutesAndSeconds as any }}
             value={currentTime}
           />
         )}
