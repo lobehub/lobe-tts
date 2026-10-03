@@ -1,7 +1,7 @@
 import { useOpenAISTT } from '@lobehub/tts/react';
 import { Flexbox, Icon } from '@lobehub/ui';
+import { Button, TextArea } from '@lobehub/ui/base-ui';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { Button, Input } from 'antd';
 import { Mic, StopCircle } from 'lucide-react';
 
 import { OPENAI_BASE_URL } from '@/core/const/api';
@@ -50,7 +50,7 @@ export default () => {
             Recognition
           </Button>
         )}
-        <Input.TextArea placeholder={'Recognition result...'} value={text} />
+        <TextArea placeholder={'Recognition result...'} value={text} />
         {url && <audio controls src={url} />}
       </Flexbox>
     </StoryBook>

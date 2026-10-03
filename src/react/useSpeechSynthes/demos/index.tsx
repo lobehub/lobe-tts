@@ -1,8 +1,8 @@
 import { SpeechSynthesisTTS } from '@lobehub/tts';
 import { useSpeechSynthes } from '@lobehub/tts/react';
 import { Flexbox, Icon } from '@lobehub/ui';
+import { Button, TextArea } from '@lobehub/ui/base-ui';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { Button, Input } from 'antd';
 import { StopCircle, Volume2 } from 'lucide-react';
 
 import { genLevaOptions } from '../../_util/leva';
@@ -45,7 +45,7 @@ export default () => {
             Speak
           </Button>
         )}
-        <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
+        <TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
       </Flexbox>
     </StoryBook>
   );

@@ -1,6 +1,6 @@
 import { useAudioRecorder } from '@lobehub/tts/react';
 import { Flexbox, Icon } from '@lobehub/ui';
-import { Button } from 'antd';
+import { Button } from '@lobehub/ui/base-ui';
 import { Mic, StopCircle } from 'lucide-react';
 
 export default () => {

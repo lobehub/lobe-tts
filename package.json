@@ -81,7 +81,6 @@
     ]
   },
   "dependencies": {
-    "@lobehub/ui": "^5.0.0",
     "antd-style": "^4.1.0",
     "es-toolkit": "^1.43.0",
     "lucide-react": "^0.469.0",
@@ -100,6 +99,7 @@
     "@commitlint/cli": "^19.8.1",
     "@lobehub/i18n-cli": "^1.25.1",
     "@lobehub/lint": "^1.26.3",
+    "@lobehub/ui": "^5.54.0",
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -132,6 +132,7 @@
     "vitest": "~1.2.2"
   },
   "peerDependencies": {
+    "@lobehub/ui": "^5.54.0",
     "antd": "^6.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
