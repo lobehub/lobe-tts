@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 5.2.0](https://github.com/lobehub/lobe-tts/compare/v5.1.2...v5.2.0)
+
+<sup>Released on **2026-10-03**</sup>
+
+#### ✨ Features
+
+- **misc**: Migrate to @lobehub/ui/base-ui components.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Migrate to @lobehub/ui/base-ui components, closes [#67](https://github.com/lobehub/lobe-tts/issues/67) ([59ad53e](https://github.com/lobehub/lobe-tts/commit/59ad53e))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 5.1.2](https://github.com/lobehub/lobe-tts/compare/v5.1.1...v5.1.2)
 
 <sup>Released on **2026-03-02**</sup>
