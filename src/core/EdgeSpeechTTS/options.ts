@@ -1,4 +1,4 @@
-import { SelectProps } from 'antd';
+import type { SelectProps } from '@lobehub/ui/base-ui';
 import { flatten } from 'es-toolkit/compat';
 
 import voiceList from '@/core/data/voiceList';

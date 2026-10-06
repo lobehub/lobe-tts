@@ -1,5 +1,4 @@
-import { Center, Flexbox, Grid, Snippet } from '@lobehub/ui';
-import { Card } from 'antd';
+import { Block, Center, Flexbox, Grid, Snippet } from '@lobehub/ui';
 
 import STT from './STT';
 import TTS from './TTS';
@@ -12,12 +11,14 @@ export default () => {
         <Snippet language={'bash'}>{'$ bun add @lobehub/tts'}</Snippet>
       </Center>
       <Grid rows={2}>
-        <Card key={'STT'} title={'Speech Recognition'}>
+        <Block gap={16} key={'STT'} padding={24} variant={'outlined'}>
+          <h3 style={{ fontSize: 16, margin: 0 }}>Speech Recognition</h3>
           <STT />
-        </Card>
-        <Card title={'Text to Speech'}>
+        </Block>
+        <Block gap={16} padding={24} variant={'outlined'}>
+          <h3 style={{ fontSize: 16, margin: 0 }}>Text to Speech</h3>
           <TTS />
-        </Card>
+        </Block>
       </Grid>
     </Flexbox>
   );

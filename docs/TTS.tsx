@@ -1,5 +1,5 @@
 import { Flexbox, Icon } from '@lobehub/ui';
-import { Button, Input } from 'antd';
+import { Button, TextArea } from '@lobehub/ui/base-ui';
 import { Volume2 } from 'lucide-react';
 
 import { AudioPlayer, useEdgeSpeech } from '@/react';
@@ -23,9 +23,10 @@ export default () => {
           Speak
         </Button>
       )}
-      <Input.TextArea
+      <TextArea
         defaultValue={'Edge Speech Example'}
         onChange={(e) => setText(e.target.value)}
+        resize
       />
       <AudioPlayer audio={audio} isLoading={isGlobalLoading} onLoadingStop={stop} />
     </Flexbox>
