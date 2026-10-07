@@ -2,6 +2,31 @@
 
 # Changelog
 
+### [Version 5.2.1](https://github.com/lobehub/lobe-tts/compare/v5.2.0...v5.2.1)
+
+<sup>Released on **2026-10-07**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Drop direct antd component and type imports in favor of @lobehub/ui/base-ui.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Drop direct antd component and type imports in favor of @lobehub/ui/base-ui, closes [#68](https://github.com/lobehub/lobe-tts/issues/68) ([2dc8758](https://github.com/lobehub/lobe-tts/commit/2dc8758))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 5.2.0](https://github.com/lobehub/lobe-tts/compare/v5.1.2...v5.2.0)
 
 <sup>Released on **2026-10-03**</sup>
