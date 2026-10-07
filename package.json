@@ -81,7 +81,6 @@
     ]
   },
   "dependencies": {
-    "antd-style": "^4.1.0",
     "es-toolkit": "^1.43.0",
     "lucide-react": "^0.469.0",
     "markdown-to-txt": "^2.0.1",
@@ -106,8 +105,6 @@
     "@types/uuid": "^11.0.0",
     "@vercel/node": "^5.5.16",
     "@vitest/coverage-v8": "~1.2.2",
-    "antd": "^6.1.2",
-    "babel-plugin-antd-style": "^1.0.4",
     "clean-package": "^2.2.0",
     "commitlint": "^19.8.1",
     "concurrently": "^9.2.1",
@@ -133,7 +130,6 @@
   },
   "peerDependencies": {
     "@lobehub/ui": "^5.56.0",
-    "antd": "^6.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
