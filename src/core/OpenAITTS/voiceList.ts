@@ -1,6 +1,17 @@
-import type { SelectProps } from 'antd';
+import type { SelectProps } from '@lobehub/ui/base-ui';
 
-const voiceList = ['alloy', 'ash', 'ballad', 'coral', 'echo', 'fable', 'onyx', 'nova', 'sage', 'shimmer'] as const;
+const voiceList = [
+  'alloy',
+  'ash',
+  'ballad',
+  'coral',
+  'echo',
+  'fable',
+  'onyx',
+  'nova',
+  'sage',
+  'shimmer',
+] as const;
 export default voiceList;
 
 export const getOpenaiVoiceOptions = (): SelectProps['options'] => {
