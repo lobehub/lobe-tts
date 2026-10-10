@@ -70,7 +70,6 @@ export default defineConfig({
   define: {
     'process.env': process.env,
   },
-  extraBabelPlugins: ['antd-style'],
   favicons: ['https://lobehub.com/favicon.ico'],
   jsMinifier: 'swc',
   locales: [{ id: 'en-US', name: 'English' }],

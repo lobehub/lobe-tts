@@ -1,5 +1,4 @@
-import { Flexbox } from '@lobehub/ui';
-import { ActionIcon, type ActionIconProps, Slider, Tag } from '@lobehub/ui/base-ui';
+import { ActionIcon, type ActionIconProps, Flexbox, Slider, Tag } from '@lobehub/ui';
 import { Download, PauseCircle, Play, StopCircle } from 'lucide-react';
 import { type CSSProperties, memo, useCallback, useMemo } from 'react';
 

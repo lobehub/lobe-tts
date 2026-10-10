@@ -1,6 +1,5 @@
 import { useSpeechRecognition } from '@lobehub/tts/react';
-import { Flexbox, Icon } from '@lobehub/ui';
-import { Button, TextArea } from '@lobehub/ui/base-ui';
+import { Button, Flexbox, Icon, TextArea } from '@lobehub/ui';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
 import { Mic, StopCircle } from 'lucide-react';
 
