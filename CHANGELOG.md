@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 6.0.0-beta.1](https://github.com/lobehub/lobe-tts/compare/v5.2.1...v6.0.0-beta.1)
+
+<sup>Released on **2026-10-10**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Migrate to @lobehub/ui next major (drop antd-style).
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Migrate to @lobehub/ui next major (drop antd-style) ([5bfad19](https://github.com/lobehub/lobe-tts/commit/5bfad19))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 5.2.1](https://github.com/lobehub/lobe-tts/compare/v5.2.0...v5.2.1)
 
 <sup>Released on **2026-10-07**</sup>
