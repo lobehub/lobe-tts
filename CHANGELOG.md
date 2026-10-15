@@ -2,6 +2,31 @@
 
 # Changelog
 
+## [Version 6.0.0](https://github.com/lobehub/lobe-tts/compare/v5.2.1...v6.0.0)
+
+<sup>Released on **2026-10-15**</sup>
+
+#### ✨ Features
+
+- **misc**: Adopt lobe-ui 6 and drop antd \[force major].
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Adopt lobe-ui 6 and drop antd \[force major], closes [#69](https://github.com/lobehub/lobe-tts/issues/69) ([a9781d2](https://github.com/lobehub/lobe-tts/commit/a9781d2))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 5.2.1](https://github.com/lobehub/lobe-tts/compare/v5.2.0...v5.2.1)
 
 <sup>Released on **2026-10-07**</sup>
