@@ -1,3 +1,4 @@
 {
+  "ignoreCommand": "git diff HEAD^ HEAD --quiet ./package.json ./src ./docs ./api ./docs.config.ts ./vercel.json",
   "installCommand": "/bun1/bun install"
 }
