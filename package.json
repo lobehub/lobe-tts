@@ -96,12 +96,12 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
-    "@lobehub/docs-kit": "^5.27.7-beta.2",
+    "@lobehub/docs-kit": "^6.0.0",
     "@lobehub/fluent-emoji": "^5.0.0-beta.1",
     "@lobehub/i18n-cli": "^1.25.1",
     "@lobehub/icons": "^6.0.0-beta.1",
     "@lobehub/lint": "^1.26.3",
-    "@lobehub/ui": "^6.0.0-beta.10",
+    "@lobehub/ui": "^6.0.0",
     "@react-router/dev": "8.2.0",
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.7",
@@ -133,7 +133,7 @@
     "vitest": "~1.2.2"
   },
   "peerDependencies": {
-    "@lobehub/ui": "^6.0.0-beta.1",
+    "@lobehub/ui": "^6.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
