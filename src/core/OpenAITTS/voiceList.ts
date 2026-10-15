@@ -1,4 +1,4 @@
-import type { SelectProps } from '@lobehub/ui/base-ui';
+import type { SelectProps } from '@lobehub/ui';
 
 const voiceList = [
   'alloy',

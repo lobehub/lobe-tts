@@ -1,8 +1,7 @@
 ---
-group: API Reference
 title: OpenAITTS
-apiHeader:
-  pkg: '@lobehub/tts'
+description: 基于 OpenAI 语音接口的文本转语音类。
+category: API Reference
 ---
 
 ## 介绍

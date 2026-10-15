@@ -7,10 +7,10 @@ module.exports = {
     entry: ['docs/**/**'],
     entryLocale: 'zh-CN',
     entryExtension: '.zh-CN.md',
-    exclude: ['changelog.md'],
+    exclude: ['changelog.mdx'],
     outputLocales: ['en-US'],
     outputExtensions: (locale, { getDefaultExtension }) => {
-      if (locale === 'en-US') return '.md';
+      if (locale === 'en-US') return '.mdx';
       return getDefaultExtension(locale);
     },
   },

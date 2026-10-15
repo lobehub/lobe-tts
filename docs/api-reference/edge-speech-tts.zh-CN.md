@@ -1,8 +1,7 @@
 ---
-group: API Reference
 title: EdgeSpeechTTS
-apiHeader:
-  pkg: '@lobehub/tts'
+description: 基于 Microsoft Edge 朗读服务的文本转语音类。
+category: API Reference
 ---
 
 ## 介绍

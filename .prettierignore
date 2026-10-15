@@ -37,11 +37,8 @@ dist
 es
 logs
 
-# umi
-.umi
-.umi-production
-.umi-test
-.dumi/tmp*
+# docs
+.react-router
 
 # ignore files
 .*ignore
