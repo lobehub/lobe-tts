@@ -1,8 +1,7 @@
 ---
-group: API Reference
 title: MicrosoftSpeechTTS
-apiHeader:
-  pkg: '@lobehub/tts'
+description: 基于 Microsoft Speech 的文本转语音类。
+category: API Reference
 ---
 
 ## 介绍

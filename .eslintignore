@@ -14,12 +14,8 @@ _test_
 __test__
 *.test.ts
 
-# umi
-.umi
-.umi-production
-.umi-test
-.dumi/tmp*
-!.dumirc.ts
+# docs
+.react-router
 
 # production
 dist

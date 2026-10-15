@@ -14,7 +14,6 @@
     "target": "es6",
     "types": ["vitest/globals"],
     "paths": {
-      "@@/*": [".dumi/tmp/*"],
       "@/*": ["./src/*"],
       "@lobehub/tts": ["./src"],
       "@lobehub/tts/*": ["src/*"],
@@ -24,6 +23,6 @@
       "@lobehub/tts/server/*": ["./src/server/*"]
     }
   },
-  "exclude": [],
-  "include": ["src", "docs", "tests", ".dumirc.ts", "tsdown.config.ts"]
+  "exclude": [".react-router"],
+  "include": ["src", "docs", "tests", "docs.config.ts", "tsdown.config.ts"]
 }

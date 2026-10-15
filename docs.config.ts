@@ -1,0 +1,71 @@
+import { defineDocsConfig } from '@lobehub/docs-kit/src/config';
+
+export default defineDocsConfig({
+  alias: {
+    '@': 'src',
+    '@lobehub/tts': 'src',
+  },
+  atomDirs: [{ dir: 'src/react', subType: 'components', type: 'component' }],
+  description: 'A high-quality & reliable TTS React Hooks library',
+  favicons: {
+    icon: 'https://lobehub.com/favicon.ico',
+  },
+  homePage: './docs/index.tsx',
+  navSections: {},
+  publicDocs: [
+    'docs/api-reference/index.mdx',
+    'docs/api-reference/edge-speech-tts.mdx',
+    'docs/api-reference/microsoft-speech-tts.mdx',
+    'docs/api-reference/openai-tts.mdx',
+  ],
+  siteUrl: 'https://tts.lobehub.com',
+  themeConfig: {
+    analytics: {
+      plausible: {
+        domain: 'tts.lobehub.com',
+        source: 'https://plausible.lobehub-inc.cn/js/script.js',
+      },
+    },
+    apiHeader: {
+      docUrl: '{github}/edit/master/{atomId}',
+      github: 'https://github.com/lobehub/lobe-tts',
+      match: ['/components/'],
+      packageName: '@lobehub/tts',
+      packageNames: { components: '@lobehub/tts/react' },
+      sourceUrl: '{github}/tree/master/{atomId}',
+    },
+    giscus: {
+      category: 'Q&A',
+      categoryId: 'DIC_kwDOKoaTlM4Cin-0',
+      repo: 'lobehub/lobe-tts',
+      repoId: 'R_kgDOKoaTlA',
+    },
+    metadata: {
+      openGraph: {
+        image:
+          'https://repository-images.githubusercontent.com/713462676/32967e56-249e-4593-bb18-b3ed34e69669',
+      },
+    },
+    navItems: [
+      { external: true, href: 'https://ui.lobehub.com', label: 'UI' },
+      { external: true, href: 'https://icons.lobehub.com', label: 'Icons' },
+      { href: '/api-reference', icon: 'book-open', label: 'API Reference' },
+      { href: '/changelog', label: 'Changelog' },
+    ],
+    prefersColor: 'dark',
+    socialLinks: [
+      {
+        href: 'https://github.com/lobehub/lobe-tts',
+        icon: 'github',
+        label: 'GitHub',
+      },
+      { href: 'https://discord.gg/AYFPHvv2jT', icon: 'discord', label: 'Discord' },
+      {
+        href: 'https://www.npmjs.com/package/@lobehub/tts',
+        icon: 'npm',
+        label: 'NPM',
+      },
+    ],
+  },
+  title: 'Lobe TTS',
+});
