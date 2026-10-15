@@ -2,8 +2,9 @@
 nav: Components
 group: STT
 title: useSpeechRecognition
+atomId: react/useSpeechRecognition
 apiHeader:
-  pkg: '@lobehub/tts/react'
+  pkg: '@lobehub/tts'
 ---
 
 ## React Hooks

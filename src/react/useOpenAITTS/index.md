@@ -2,8 +2,9 @@
 nav: Components
 group: TTS
 title: useOpenAITTS
+atomId: react/useOpenAITTS
 apiHeader:
-  pkg: '@lobehub/tts/react'
+  pkg: '@lobehub/tts'
 ---
 
 ## React Hooks

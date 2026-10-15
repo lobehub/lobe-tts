@@ -2,8 +2,9 @@
 nav: Components
 group: STT
 title: useAudioRecorder
+atomId: react/useAudioRecorder
 apiHeader:
-  pkg: '@lobehub/tts/react'
+  pkg: '@lobehub/tts'
 ---
 
 ## React Hooks
