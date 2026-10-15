@@ -4,10 +4,10 @@
     "declaration": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
+    "module": "es2022",
     "jsx": "react-jsx",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
@@ -24,6 +24,6 @@
       "@lobehub/tts/server/*": ["./src/server/*"]
     }
   },
-  "exclude": ["./react.d.ts", "./server.d.ts"],
-  "include": ["src", "docs", "tests", ".dumirc.ts", ".fatherrc.ts"]
+  "exclude": [],
+  "include": ["src", "docs", "tests", ".dumirc.ts", "tsdown.config.ts"]
 }

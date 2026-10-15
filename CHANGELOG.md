@@ -2,6 +2,324 @@
 
 # Changelog
 
+### [Version 5.2.1](https://github.com/lobehub/lobe-tts/compare/v5.2.0...v5.2.1)
+
+<sup>Released on **2026-10-07**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Drop direct antd component and type imports in favor of @lobehub/ui/base-ui.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Drop direct antd component and type imports in favor of @lobehub/ui/base-ui, closes [#68](https://github.com/lobehub/lobe-tts/issues/68) ([2dc8758](https://github.com/lobehub/lobe-tts/commit/2dc8758))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 5.2.0](https://github.com/lobehub/lobe-tts/compare/v5.1.2...v5.2.0)
+
+<sup>Released on **2026-10-03**</sup>
+
+#### ✨ Features
+
+- **misc**: Migrate to @lobehub/ui/base-ui components.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Migrate to @lobehub/ui/base-ui components, closes [#67](https://github.com/lobehub/lobe-tts/issues/67) ([59ad53e](https://github.com/lobehub/lobe-tts/commit/59ad53e))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 5.1.2](https://github.com/lobehub/lobe-tts/compare/v5.1.1...v5.1.2)
+
+<sup>Released on **2026-03-02**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Correct package exports to match tsdown output (.mjs, .d.mts).
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Correct package exports to match tsdown output (.mjs, .d.mts) ([efcb00d](https://github.com/lobehub/lobe-tts/commit/efcb00d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 5.1.1](https://github.com/lobehub/lobe-tts/compare/v5.1.0...v5.1.1)
+
+<sup>Released on **2026-03-02**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Update @lobehub/ui to version 5.0.0 in package.json, update tsdown.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Update @lobehub/ui to version 5.0.0 in package.json ([fe4b0c6](https://github.com/lobehub/lobe-tts/commit/fe4b0c6))
+- **misc**: Update tsdown ([5dee831](https://github.com/lobehub/lobe-tts/commit/5dee831))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 5.1.0](https://github.com/lobehub/lobe-tts/compare/v5.0.0...v5.1.0)
+
+<sup>Released on **2026-03-02**</sup>
+
+#### ✨ Features
+
+- **misc**: Bump \[force patch].
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Bump \[force patch] ([9b4aea7](https://github.com/lobehub/lobe-tts/commit/9b4aea7))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 5.0.0](https://github.com/lobehub/lobe-tts/compare/v4.0.2...v5.0.0)
+
+<sup>Released on **2026-03-02**</sup>
+
+#### ✨ Features
+
+- **misc**: Bump \[force major], Bump \[force major].
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Bump \[force major] ([a106bde](https://github.com/lobehub/lobe-tts/commit/a106bde))
+- **misc**: Bump \[force major] ([feec124](https://github.com/lobehub/lobe-tts/commit/feec124))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 4.0.2](https://github.com/lobehub/lobe-tts/compare/v4.0.1...v4.0.2)
+
+<sup>Released on **2025-12-27**</sup>
+
+#### 💄 Styles
+
+- **misc**: Update deps.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Update deps ([29dfcb2](https://github.com/lobehub/lobe-tts/commit/29dfcb2))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 4.0.1](https://github.com/lobehub/lobe-tts/compare/v4.0.0...v4.0.1)
+
+<sup>Released on **2025-12-27**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Refactor static style.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Refactor static style ([93023e1](https://github.com/lobehub/lobe-tts/commit/93023e1))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 4.0.0](https://github.com/lobehub/lobe-tts/compare/v3.0.2...v4.0.0)
+
+<sup>Released on **2025-12-25**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Migrate from lodash-es to es-toolkit.
+
+#### ✨ Features
+
+- **misc**: Bump v4 \[force major].
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix build.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Migrate from lodash-es to es-toolkit, closes [#58](https://github.com/lobehub/lobe-tts/issues/58) ([d4dd3aa](https://github.com/lobehub/lobe-tts/commit/d4dd3aa))
+
+#### What's improved
+
+- **misc**: Bump v4 \[force major] ([cae0509](https://github.com/lobehub/lobe-tts/commit/cae0509))
+
+#### What's fixed
+
+- **misc**: Fix build ([85c2559](https://github.com/lobehub/lobe-tts/commit/85c2559))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 3.0.2](https://github.com/lobehub/lobe-tts/compare/v3.0.1...v3.0.2)
+
+<sup>Released on **2025-12-22**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix deps.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix deps ([62bebd9](https://github.com/lobehub/lobe-tts/commit/62bebd9))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+### [Version 3.0.1](https://github.com/lobehub/lobe-tts/compare/v3.0.0...v3.0.1)
+
+<sup>Released on **2025-12-22**</sup>
+
+#### 💄 Styles
+
+- **misc**: Remove layout kit.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Styles
+
+- **misc**: Remove layout kit ([750ef3f](https://github.com/lobehub/lobe-tts/commit/750ef3f))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 3.0.0](https://github.com/lobehub/lobe-tts/compare/v2.0.1...v3.0.0)
+
+<sup>Released on **2025-12-20**</sup>
+
+#### ✨ Features
+
+- **misc**: Bump v3 \[force major].
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Bump v3 \[force major] ([6ee37ba](https://github.com/lobehub/lobe-tts/commit/6ee37ba))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ### [Version 2.0.1](https://github.com/lobehub/lobe-tts/compare/v2.0.0...v2.0.1)
 
 <sup>Released on **2025-05-15**</sup>

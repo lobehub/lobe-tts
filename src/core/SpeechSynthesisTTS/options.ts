@@ -1,5 +1,5 @@
-import { SelectProps } from 'antd';
-import { flatten } from 'lodash-es';
+import type { SelectProps } from '@lobehub/ui/base-ui';
+import { flatten } from 'es-toolkit/compat';
 
 import { SpeechSynthesis } from '@/core/const/polyfill';
 import voiceLocale from '@/core/data/locales';

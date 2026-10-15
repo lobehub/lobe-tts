@@ -1,4 +1,4 @@
-import { throttle } from 'lodash-es';
+import { throttle } from 'es-toolkit/compat';
 import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 export const useAudioVisualizer = (
@@ -22,7 +22,7 @@ export const useAudioVisualizer = (
   const renderFrame = throttle(() => {
     animationFrameIdRef.current = requestAnimationFrame(renderFrame);
     if (analyserRef.current && dataArrayRef.current) {
-      analyserRef.current.getByteFrequencyData(dataArrayRef.current);
+      analyserRef.current.getByteFrequencyData(dataArrayRef.current as any);
       const step = Math.floor(dataArrayRef.current.length / barsSet.length);
       const newBars = barsSet.map((_, i) => {
         return dataArrayRef.current?.[i * step] || 0;

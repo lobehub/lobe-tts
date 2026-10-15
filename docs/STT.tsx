@@ -1,7 +1,6 @@
-import { Icon } from '@lobehub/ui';
-import { Button, Input } from 'antd';
+import { Flexbox, Icon } from '@lobehub/ui';
+import { Button, TextArea } from '@lobehub/ui/base-ui';
 import { Mic, StopCircle } from 'lucide-react';
-import { Flexbox } from 'react-layout-kit';
 
 import { useSpeechRecognition } from '@/react';
 
@@ -18,7 +17,7 @@ export default () => {
           Recognition
         </Button>
       )}
-      <Input.TextArea placeholder={'Recognition result...'} value={text} />
+      <TextArea placeholder={'Recognition result...'} resize value={text} />
       {url && <audio controls src={url} />}
     </Flexbox>
   );

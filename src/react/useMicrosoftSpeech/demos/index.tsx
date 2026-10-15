@@ -1,10 +1,9 @@
 import { MicrosoftSpeechTTS } from '@lobehub/tts';
 import { AudioPlayer, useMicrosoftSpeech } from '@lobehub/tts/react';
-import { Icon } from '@lobehub/ui';
+import { Flexbox, Icon } from '@lobehub/ui';
+import { Button, TextArea } from '@lobehub/ui/base-ui';
 import { StoryBook, useControls, useCreateStore } from '@lobehub/ui/storybook';
-import { Button, Input } from 'antd';
 import { Volume2 } from 'lucide-react';
-import { Flexbox } from 'react-layout-kit';
 
 import { MICROSOFT_SPEECH_BACKEND_URL } from '../../_util/api';
 import { genLevaOptions } from '../../_util/leva';
@@ -60,7 +59,7 @@ export default () => {
             Speak
           </Button>
         )}
-        <Input.TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
+        <TextArea defaultValue={defaultText} onChange={(e) => setText(e.target.value)} />
         <AudioPlayer audio={audio} isLoading={isGlobalLoading} onLoadingStop={stop} />
       </Flexbox>
     </StoryBook>
