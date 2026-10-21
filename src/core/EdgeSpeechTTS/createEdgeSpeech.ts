@@ -1,7 +1,8 @@
 import qs from 'query-string';
 import { v4 as uuidv4 } from 'uuid';
-import { type SsmlOptions, genSSML } from '../utils/genSSML';
+
 import { genSendContent } from '../utils/genSendContent';
+import { genSSML, type SsmlOptions } from '../utils/genSSML';
 import { getHeadersAndData } from '../utils/getHeadersAndData';
 
 export interface EdgeSpeechPayload {
@@ -19,7 +20,7 @@ const EDGE_SPEECH_URL =
   'wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1';
 const EDGE_API_TOKEN = '6A5AA1D4EAFF4E9FB37E23D68491D6F4';
 const EDGE_VERSION = '1-132.0.2957.140';
-const WINDOWS_FILE_TIME_EPOCH =  BigInt("11644473600");
+const WINDOWS_FILE_TIME_EPOCH = BigInt('11644473600');
 
 const configContent = JSON.stringify({
   context: {
@@ -55,9 +56,10 @@ export interface CreateEdgeSpeechCompletionOptions {
   payload: EdgeSpeechPayload;
 }
 
-export async function generateSecMsGecToken(){
-  const ticks = BigInt(Math.floor((Date.now() / 1000) + Number(WINDOWS_FILE_TIME_EPOCH))) * BigInt("10000000");
-  const roundedTicks = ticks - (ticks %  BigInt("3000000000"));
+export async function generateSecMsGecToken() {
+  const ticks =
+    BigInt(Math.floor(Date.now() / 1000 + Number(WINDOWS_FILE_TIME_EPOCH))) * BigInt('10000000');
+  const roundedTicks = ticks - (ticks % BigInt('3000000000'));
   const strToHash = roundedTicks + EDGE_API_TOKEN;
   const crypto = await import('../utils/getSHA256');
   const hash = crypto.hash(strToHash);
@@ -73,10 +75,10 @@ export const createEdgeSpeech = async (
   const connectId = uuidv4().replaceAll('-', '');
   const url = qs.stringifyUrl({
     query: {
-      ConnectionId: connectId,
+      'ConnectionId': connectId,
       'Sec-MS-GEC': token ? token : await generateSecMsGecToken(),
       'Sec-MS-GEC-Version': token ? token : EDGE_VERSION,
-      TrustedClientToken: token ? token : EDGE_API_TOKEN,
+      'TrustedClientToken': token ? token : EDGE_API_TOKEN,
     },
     url: proxyUrl ? proxyUrl : EDGE_SPEECH_URL,
   });

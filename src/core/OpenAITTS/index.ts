@@ -25,9 +25,9 @@ export interface OpenAITTSPayload {
 }
 
 export interface OpenAITTSAPI {
+  headers?: Headers;
   OPENAI_API_KEY?: string;
   OPENAI_PROXY_URL?: string;
-  headers?: Headers;
   serviceUrl?: string;
 }
 

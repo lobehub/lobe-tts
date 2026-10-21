@@ -1,8 +1,10 @@
 import { ErrorBoundary, Flexbox, Icon } from '@lobehub/ui';
 import { Loader2 } from 'lucide-react';
-import { CSSProperties, RefObject, memo } from 'react';
+import type { CSSProperties, RefObject } from 'react';
+import { memo } from 'react';
 
-import Visualizer, { VisualizerProps } from './Visualizer';
+import type { VisualizerProps } from './Visualizer';
+import Visualizer from './Visualizer';
 
 export interface AudioVisualizerProps {
   audioRef: RefObject<HTMLAudioElement>;
@@ -26,15 +28,15 @@ const AudioVisualizer = memo<AudioVisualizerProps>(
     return (
       <ErrorBoundary fallback={<div className={className} style={containerStyle} />}>
         <Flexbox
+          horizontal
           align={'center'}
           className={className}
           gap={gap}
-          horizontal
           justify={'center'}
           style={containerStyle}
         >
           {isLoading ? (
-            <Icon icon={Loader2} spin />
+            <Icon spin icon={Loader2} />
           ) : (
             <Visualizer audioRef={audioRef} {...barStyle} />
           )}

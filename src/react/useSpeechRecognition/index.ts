@@ -1,7 +1,5 @@
-import {
-  SpeechRecognitionRecorderOptions,
-  useSpeechRecognitionAutoStop as speechRecognitionAutoStop,
-} from './useSpeechRecognitionAutoStop';
+import type { SpeechRecognitionRecorderOptions } from './useSpeechRecognitionAutoStop';
+import { useSpeechRecognitionAutoStop as speechRecognitionAutoStop } from './useSpeechRecognitionAutoStop';
 import { useSpeechRecognitionInteractive as speechRecognitionInteractive } from './useSpeechRecognitionInteractive';
 
 export interface SpeechRecognitionOptions extends SpeechRecognitionRecorderOptions {

@@ -1,5 +1,6 @@
 import cors from '../lib/cors';
-import { EdgeSpeechPayload, createEdgeSpeech } from '../src/core/EdgeSpeechTTS/createEdgeSpeech';
+import type { EdgeSpeechPayload } from '../src/core/EdgeSpeechTTS/createEdgeSpeech';
+import { createEdgeSpeech } from '../src/core/EdgeSpeechTTS/createEdgeSpeech';
 
 export const config = {
   runtime: 'edge',

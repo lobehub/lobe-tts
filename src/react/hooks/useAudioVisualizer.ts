@@ -1,5 +1,6 @@
 import { throttle } from 'es-toolkit/compat';
-import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import type { RefObject } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const useAudioVisualizer = (
   audioRef: RefObject<HTMLAudioElement>,

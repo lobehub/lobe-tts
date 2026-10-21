@@ -1,6 +1,6 @@
 import useSWR, { type SWRConfiguration } from 'swr';
 
-import { type OpenAISTTAPI, type OpenAISTTPayload, OpenaiSTT } from '@/core/OpenAISTT';
+import { OpenaiSTT, type OpenAISTTAPI, type OpenAISTTPayload } from '@/core/OpenAISTT';
 
 export interface OpenAISTTCoreOptions extends OpenAISTTPayload, SWRConfiguration {
   api?: OpenAISTTAPI;

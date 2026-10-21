@@ -111,21 +111,21 @@ const AudioPlayer = memo<AudioPlayerProps>(
 
     return (
       <Flexbox
+        horizontal
         align={'center'}
         className={className}
         gap={8}
-        horizontal
         style={{ width: '100%', ...style }}
       >
-        <div onClick={handleStopLoading} style={{ flex: 'none' }}>
+        <div style={{ flex: 'none' }} onClick={handleStopLoading}>
           <ActionIcon
             active={buttonActive}
             icon={isPlaying ? (allowPause ? PauseCircle : StopCircle) : Play}
             loading={isLoading}
-            onClick={isPlaying ? (allowPause ? handlePause : handleStop) : handlePlay}
             size={buttonSize || { blockSize: 32, size: 16 }}
             style={buttonStyle}
             title={title}
+            onClick={isPlaying ? (allowPause ? handlePause : handleStop) : handlePlay}
           />
         </div>
         {showSlider && (
@@ -133,10 +133,10 @@ const AudioPlayer = memo<AudioPlayerProps>(
             disabled={duration === 0 || isLoading}
             max={duration}
             min={0}
-            onChange={setTime}
             step={0.01}
             style={{ flex: 1 }}
             value={currentTime}
+            onChange={setTime}
           />
         )}
         {showTime && (
@@ -154,9 +154,9 @@ const AudioPlayer = memo<AudioPlayerProps>(
         {!isLoading && showDonload && (
           <ActionIcon
             icon={Download}
-            onClick={download}
             size={buttonSize || { blockSize: 32, size: 16 }}
             style={buttonStyle}
+            onClick={download}
           />
         )}
       </Flexbox>

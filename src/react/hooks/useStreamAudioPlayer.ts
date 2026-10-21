@@ -1,6 +1,7 @@
-import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import type { RefObject } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { AudioProps } from '@/react/AudioPlayer';
+import type { AudioProps } from '@/react/AudioPlayer';
 
 export interface StreamAudioPlayerResponse extends AudioProps {
   arrayBuffers: ArrayBuffer[];

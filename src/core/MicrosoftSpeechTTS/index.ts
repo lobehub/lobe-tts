@@ -3,7 +3,7 @@ import voiceName from '@/core/data/voiceList';
 import { arrayBufferConvert } from '@/core/utils/arrayBufferConvert';
 import { getVoiceLocaleOptions } from '@/core/utils/getVoiceList';
 
-import { type MicrosoftSpeechPayload, createMicrosoftSpeech } from './createMicrosoftSpeech';
+import { createMicrosoftSpeech, type MicrosoftSpeechPayload } from './createMicrosoftSpeech';
 import azureVoiceList, { getAzureVoiceOptions } from './voiceList';
 
 export type { MicrosoftSpeechPayload } from './createMicrosoftSpeech';

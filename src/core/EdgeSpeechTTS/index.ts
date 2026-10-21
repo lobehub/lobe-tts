@@ -1,9 +1,9 @@
-import edgeVoiceList from '@/core/EdgeSpeechTTS/edgeVoiceList';
 import voiceName from '@/core/data/voiceList';
+import edgeVoiceList from '@/core/EdgeSpeechTTS/edgeVoiceList';
 import { arrayBufferConvert } from '@/core/utils/arrayBufferConvert';
 import { getVoiceLocaleOptions } from '@/core/utils/getVoiceList';
 
-import { type EdgeSpeechPayload, createEdgeSpeech } from './createEdgeSpeech';
+import { createEdgeSpeech, type EdgeSpeechPayload } from './createEdgeSpeech';
 import { getEdgeVoiceOptions } from './options';
 
 export type { EdgeSpeechPayload } from './createEdgeSpeech';

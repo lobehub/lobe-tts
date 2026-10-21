@@ -21,7 +21,7 @@ export const useAudioRecorder = (onBlobAvailable?: (blob: Blob) => void) => {
 
   const _stopTimer = useCallback(() => {
     // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+
     timerInterval !== undefined && clearInterval(timerInterval);
     // @ts-ignore
     setTimerInterval();

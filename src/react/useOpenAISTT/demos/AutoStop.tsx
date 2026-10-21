@@ -45,7 +45,7 @@ export default () => {
             Recognition...
           </Button>
         ) : (
-          <Button block icon={<Icon icon={Mic} />} onClick={start} type={'primary'}>
+          <Button block icon={<Icon icon={Mic} />} type={'primary'} onClick={start}>
             Recognition
           </Button>
         )}

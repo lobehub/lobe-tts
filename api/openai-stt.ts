@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 
-import { OpenAISTTPayload } from '@/core';
+import type { OpenAISTTPayload } from '@/core';
 
 import cors from '../lib/cors';
 import { createOpenaiAudioTranscriptions } from '../src/server/createOpenaiAudioTranscriptions';

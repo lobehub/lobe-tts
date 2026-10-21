@@ -54,7 +54,7 @@ export default () => {
             Generating...
           </Button>
         ) : (
-          <Button block icon={<Icon icon={Volume2} />} onClick={start} type={'primary'}>
+          <Button block icon={<Icon icon={Volume2} />} type={'primary'} onClick={start}>
             Speak
           </Button>
         )}

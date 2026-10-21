@@ -1,5 +1,6 @@
 import { cssVar } from '@lobehub/ui';
-import { RefObject, memo } from 'react';
+import type { RefObject } from 'react';
+import { memo } from 'react';
 
 import { useAudioVisualizer } from '../hooks/useAudioVisualizer';
 

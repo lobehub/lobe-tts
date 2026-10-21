@@ -93,7 +93,7 @@ export const useSpeechRecognitionCore = (
   }, [recognition]);
 
   return {
-    isLoading: isLoading,
+    isLoading,
     start: handleStart,
     stop: handleStop,
     text,

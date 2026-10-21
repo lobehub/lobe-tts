@@ -1,7 +1,8 @@
-import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import type { RefObject } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 
-import { AudioProps } from '@/react/AudioPlayer';
+import type { AudioProps } from '@/react/AudioPlayer';
 
 export interface AudioPlayerResponse extends AudioProps {
   arrayBuffers: ArrayBuffer[];
@@ -34,7 +35,7 @@ export const useAudioPlayer = ({
     const data = await fetch(src);
     const arrayBuffer = await data.arrayBuffer();
     setArrayBuffers([arrayBuffer]);
-    const newBlob = new Blob([arrayBuffer], { type: type });
+    const newBlob = new Blob([arrayBuffer], { type });
     if (!audioRef.current) audioRef.current = new Audio();
     audioRef.current.pause();
     audioRef.current.currentTime = 0;
@@ -129,7 +130,7 @@ export const useAudioPlayer = ({
   }, []);
 
   return {
-    arrayBuffers: arrayBuffers,
+    arrayBuffers,
     currentTime,
     download: handleDownload,
     duration,

@@ -1,7 +1,8 @@
 import urlJoin from 'url-join';
 
 import { OPENAI_BASE_URL } from '@/core/const/api';
-import { RecordMineType, getRecordMineType } from '@/core/utils/getRecordMineType';
+import type { RecordMineType } from '@/core/utils/getRecordMineType';
+import { getRecordMineType } from '@/core/utils/getRecordMineType';
 
 export interface OpenAISTTPayload {
   options: {
@@ -25,9 +26,9 @@ export interface OpenAISTTPayload {
 }
 
 export interface OpenAISTTAPI {
+  headers?: Headers;
   OPENAI_API_KEY?: string;
   OPENAI_PROXY_URL?: string;
-  headers?: Headers;
   serviceUrl?: string;
 }
 

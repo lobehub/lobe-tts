@@ -1,8 +1,6 @@
 import cors from '../lib/cors';
-import {
-  MicrosoftSpeechPayload,
-  createMicrosoftSpeech,
-} from '../src/core/MicrosoftSpeechTTS/createMicrosoftSpeech';
+import type { MicrosoftSpeechPayload } from '../src/core/MicrosoftSpeechTTS/createMicrosoftSpeech';
+import { createMicrosoftSpeech } from '../src/core/MicrosoftSpeechTTS/createMicrosoftSpeech';
 
 export const config = {
   runtime: 'edge',
