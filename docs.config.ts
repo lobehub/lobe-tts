@@ -6,11 +6,12 @@ export default defineDocsConfig({
     '@lobehub/tts': 'src',
   },
   atomDirs: [{ dir: 'src/react', subType: 'components', type: 'component' }],
-  description: 'A high-quality & reliable TTS React Hooks library',
+  description:
+    'Text-to-speech and speech-to-text for server and browser, with React hooks and audio components.',
   favicons: {
     icon: 'https://lobehub.com/favicon.ico',
   },
-  homePage: './docs/index.tsx',
+  homePage: './docs/home/home.tsx',
   navSections: {},
   publicDocs: [
     'docs/api-reference/index.mdx',
@@ -52,7 +53,7 @@ export default defineDocsConfig({
       { href: '/api-reference', icon: 'book-open', label: 'API Reference' },
       { href: '/changelog', label: 'Changelog' },
     ],
-    prefersColor: 'dark',
+    prefersColor: 'auto',
     socialLinks: [
       {
         href: 'https://github.com/lobehub/lobe-tts',

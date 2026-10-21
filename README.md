@@ -6,7 +6,9 @@
 
 <h1>Lobe TTS</h1>
 
-A high-quality & reliable TTS/STT library for Server and Browser
+<h3>Give your app a voice, and ears.</h3>
+
+Text-to-speech and speech-to-text for server and browser, with React hooks and audio components.
 
 [![][npm-release-shield]][npm-release-link]
 [![][github-releasedate-shield]][github-releasedate-link]
@@ -30,134 +32,122 @@ A high-quality & reliable TTS/STT library for Server and Browser
 
 #### TOC
 
-- [📖 Introduction](#-introduction)
-- [📦 Usage](#-usage)
-  - [Generate Speech on server](#generate-speech-on-server)
-  - [Use the React Component](#use-the-react-component)
-- [📦 Installation](#-installation)
-  - [Compile with Next.js](#compile-with-nextjs)
+- [✨ Why Lobe TTS?](#-why-lobe-tts)
+- [🚀 Getting Started](#-getting-started)
+  - [Generate speech on the server](#generate-speech-on-the-server)
+  - [Play speech in React](#play-speech-in-react)
+- [🤖 AI-Powered Development](#-ai-powered-development)
+- [📦 Packages](#-packages)
+- [📖 Documentation](#-documentation)
 - [⌨️ Local Development](#️-local-development)
 - [🤝 Contributing](#-contributing)
 - [🩷 Sponsor](#-sponsor)
 - [🔗 Links](#-links)
-  - [More Products](#more-products)
-  - [Design Resources](#design-resources)
-  - [Development Resources](#development-resources)
 
 ####
 
 </details>
 
-## 📖 Introduction
+## ✨ Why Lobe TTS?
 
-[🤖 Lobe Chat](https://github.com/lobehub/lobe-chat) supports Text-to-Speech (TTS) and Speech-to-Text (STT) technologies, enabling our application to convert text messages into clear voice outputs,
-allowing users to interact with our conversational agent as if they were talking to a real person. Users can choose from a variety of voices to pair with the agent.
+Lobe TTS (`@lobehub/tts`) lets you add natural-sounding speech output and voice input to your app, on the server or in the browser, in a few lines of TypeScript. It powers the voice features of [🤯 LobeHub](https://github.com/lobehub/lobehub).
 
-In the process of implementing this feature, we found that there was no satisfactory TTS (Text-to-Speech) frontend library available on the market.
-As a result, we invested a lot of effort, including data conversion, audio progress management, and speech visualization, among other tasks.
+- **Speak and listen** — turn text into speech and speech into text with one library
+- **Pick your voice provider** — Microsoft Edge, Microsoft Speech, OpenAI or the browser's built-in speech, behind the same simple API
+- **Server or browser** — generate audio files in Node.js / Bun, or speak directly in the user's browser
+- **React-ready** — drop-in hooks and an audio player with progress, pause and download, so you don't build playback yourself
+- **Smooth long-form playback** — long text starts playing quickly instead of waiting for the whole audio
+- **AI-native** — [`skills.md`][skills-md-link] and [`llms.txt`][llms-txt-link] let your coding agent use the real API instead of guessing
 
-> \[!NOTE]
->
-> Therefore, we decided to refine our implementation and make it open source, hoping to assist developers who wish to implement TTS.
-> [@lobehub/tts][npm-release-link] is a high-quality TTS toolkit developed in TypeScript, which supports usage both on the server-side and in the browser.
->
-> - **Server-side:** With just 15 lines of code, you can achieve high-quality voice generation capabilities comparable to OpenAI's TTS service. It currently supports EdgeSpeechTTS, MicrosoftTTS, OpenAITTS, and OpenAISTT.
-> - **Browser-side:** It provides high-quality React Hooks and visual audio components, supporting common functions such as loading, playing, pausing, and dragging the timeline. Additionally, it offers a very rich set of capabilities for adjusting the audio track styles.
-
-## 📦 Usage
-
-### Generate Speech on server
-
-run the script below use Bun: `bun index.js`
-
-```js
-// index.js
-import { EdgeSpeechTTS } from '@lobehub/tts';
-import { Buffer } from 'buffer';
-import fs from 'fs';
-import path from 'path';
-
-// Instantiate EdgeSpeechTTS
-const tts = new EdgeSpeechTTS({ locale: 'en-US' });
-
-// Create speech synthesis request payload
-const payload = {
-  input: 'This is a speech demonstration',
-  options: {
-    voice: 'en-US-GuyNeural',
-  },
-};
-
-// Call create method to synthesize speech
-const response = await tts.create(payload);
-
-// generate speech file
-const mp3Buffer = Buffer.from(await response.arrayBuffer());
-const speechFile = path.resolve('./speech.mp3');
-
-fs.writeFileSync(speechFile, mp3Buffer);
-```
-
-<https://github.com/lobehub/lobe-tts/assets/28616219/3ab68c5a-2745-442e-8d66-ca410192ace1>
-
-> \[!IMPORTANT]\
-> **Run on Node.js**
->
-> As the Node.js environment lacks the `WebSocket` instance, we need to polyfill WebSocket. This can be done by importing the ws package.
-
-```js
-// import at the top of the file
-import WebSocket from 'ws';
-
-global.WebSocket = WebSocket;
-```
-
-### Use the React Component
-
-```tsx
-import { AudioPlayer, AudioVisualizer, useAudioPlayer } from '@lobehub/tts/react';
-
-export default () => {
-  const { ref, isLoading, ...audio } = useAudioPlayer(url);
-
-  return (
-    <Flexbox align={'center'} gap={8}>
-      <AudioPlayer audio={audio} isLoading={isLoading} style={{ width: '100%' }} />
-      <AudioVisualizer audioRef={ref} isLoading={isLoading} />
-    </Flexbox>
-  );
-};
-```
-
-<https://github.com/lobehub/lobe-tts/assets/28616219/c2638383-314f-44c3-b358-8fbbd3028d61>
-
-## 📦 Installation
+## 🚀 Getting Started
 
 > \[!IMPORTANT]\
 > This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
-
-To install `@lobehub/tts`, run the following command:
 
 ```bash
 $ pnpm i @lobehub/tts
 ```
 
-[![][bun-shield]][bun-link]
+The React entry `@lobehub/tts/react` also needs the peer dependencies `@lobehub/ui@^6`, `react@^19` and `react-dom@^19`.
 
-```bash
-$ bun add @lobehub/tts
-```
-
-### Compile with Next.js
-
-> \[!NOTE]\
-> By work correct with Next.js SSR, add `transpilePackages: ['@lobehub/tts']` to `next.config.js`. For example:
+### Generate speech on the server
 
 ```js
-const nextConfig = {
-  transpilePackages: ['@lobehub/tts'],
+// index.js — run with `bun index.js`
+import { EdgeSpeechTTS } from '@lobehub/tts';
+import fs from 'node:fs';
+
+const tts = new EdgeSpeechTTS({ locale: 'en-US' });
+
+const response = await tts.create({
+  input: 'This is a speech demonstration',
+  options: { voice: 'en-US-GuyNeural' },
+});
+
+fs.writeFileSync('./speech.mp3', Buffer.from(await response.arrayBuffer()));
+```
+
+> \[!NOTE]\
+> Edge Speech needs a global `WebSocket`. It is built into Bun and Node.js 22+; on older Node.js versions, set `global.WebSocket` from the `ws` package.
+
+### Play speech in React
+
+```tsx
+import { AudioPlayer, useEdgeSpeech } from '@lobehub/tts/react';
+import { Button, Flexbox } from '@lobehub/ui';
+
+export default () => {
+  const { isGlobalLoading, start, stop, audio } = useEdgeSpeech('Hello from Lobe TTS', {
+    options: { voice: 'en-US-GuyNeural' },
+  });
+
+  return (
+    <Flexbox gap={8}>
+      <Button loading={isGlobalLoading} onClick={isGlobalLoading ? stop : start}>
+        Speak
+      </Button>
+      <AudioPlayer audio={audio} isLoading={isGlobalLoading} onLoadingStop={stop} />
+    </Flexbox>
+  );
 };
 ```
+
+Using Next.js? Add `transpilePackages: ['@lobehub/tts']` to `next.config.js`. For other providers, speech-to-text and more examples, see the [documentation](https://tts.lobehub.com).
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## 🤖 AI-Powered Development
+
+Lobe TTS publishes agent-friendly docs, so your AI assistant can write code against the documented API.
+
+| Resource         | What it does                                                                                                    |
+| ---------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Agent Skills** | [`tts.lobehub.com/skills.md`][skills-md-link] — skill entry point with setup, workflow and an index of the docs |
+| **llms.txt**     | [`tts.lobehub.com/llms.txt`][llms-txt-link] — an [llms.txt](https://llmstxt.org) index of every docs page       |
+
+Paste this into Cursor, Claude Code, Codex or any agent that can fetch URLs:
+
+```text
+Read https://tts.lobehub.com/skills.md, then use @lobehub/tts to add a "read aloud" button to my React app.
+```
+
+Works with **Cursor**, **Claude Code**, **Windsurf**, **GitHub Copilot** and other tools that read `skills.md` or `llms.txt`.
+
+## 📦 Packages
+
+| Entry                 | Use it for                                                    |
+| --------------------- | ------------------------------------------------------------- |
+| `@lobehub/tts`        | Generate speech or transcribe audio, on the server or browser |
+| `@lobehub/tts/server` | Proxy OpenAI speech and transcription from your own API route |
+| `@lobehub/tts/react`  | React hooks and audio player components                       |
+
+## 📖 Documentation
+
+Visit [tts.lobehub.com](https://tts.lobehub.com) for guides, API reference and live demos. See the [Changelog](./CHANGELOG.md) for release notes.
 
 <div align="right">
 
@@ -177,7 +167,7 @@ Or clone it for local development:
 $ git clone https://github.com/lobehub/lobe-tts.git
 $ cd lobe-tts
 $ bun install
-$ bun dev
+$ bun run docs:dev
 ```
 
 <div align="right">
@@ -219,24 +209,13 @@ Every bit counts and your one-time donation sparkles in our galaxy of support! Y
 
 ## 🔗 Links
 
-### More Products
-
-- **[🤯 LobeHub](https://github.com/lobehub/lobe-chat)** - An open-source, extensible (Function Calling), high-performance chatbot framework. It supports one-click free deployment of your private ChatGPT/LLM web application.
-- **[🅰️ Lobe Theme](https://github.com/lobehub/sd-webui-lobe-theme)** - The modern theme for stable diffusion webui, exquisite interface design, highly customizable UI, and efficiency boosting features.
-- **[🧸 Lobe Vidol](https://github.com/lobehub/lobe-vidol)** - Experience the magic of virtual idol creation with Lobe Vidol, enjoy the elegance of our Exquisite UI Design, dance along using MMD Dance Support, and engage in Smooth Conversations.
-
-### Design Resources
-
-- **[🍭 Lobe UI](https://ui.lobehub.com)** - An open-source UI component library for building AIGC web apps.
-- **[🥨 Lobe Icons](https://lobehub.com/icons)** - Popular AI / LLM Model Brand SVG Logo and Icon Collection.
-- **[📊 Lobe Charts](https://charts.lobehub.com)** - React modern charts components built on recharts
-
-### Development Resources
-
-- **[🎤 Lobe TTS](https://tts.lobehub.com)** - A high-quality & reliable TTS/STT library for Server and Browser
-- **[🌏 Lobe i18n](https://github.com/lobehub/lobe-cli-toolbox/blob/master/packages/lobe-i18n)** - Automation ai tool for the i18n (internationalization) translation process.
-
-[More Resources](https://lobehub.com/resources)
+- **[🤯 Lobe UI][lobe-ui-link]** - React component library for AI applications
+- **[🌈 Lobe Icons][lobe-icons-link]** - AI / LLM brand logos and icon library
+- **[📊 Lobe Charts][lobe-charts-link]** - React chart component library
+- **[✒️ Lobe Editor][lobe-editor-link]** - Lexical-based rich text editor for React, with Markdown, plugins and a chat composer
+- **[🗣️ Lobe TTS][lobe-tts-link]** - TTS / STT speech library
+- **[📐 Lobe Lint][lobe-lint-link]** - ESLint, Prettier, Stylelint, Commitlint and more lint configs
+- **[😊 Fluent Emoji][fluent-emoji-link]** - Fluent Emoji asset library
 
 <div align="right">
 
@@ -252,8 +231,7 @@ Copyright © 2023 [LobeHub][profile-link]. <br />
 This project is [MIT](./LICENSE) licensed.
 
 [back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-black?style=flat-square
-[bun-link]: https://bun.sh
-[bun-shield]: https://img.shields.io/badge/-speedup%20with%20bun-black?logo=bun&style=for-the-badge
+[fluent-emoji-link]: https://github.com/lobehub/fluent-emoji
 [github-action-release-link]: https://github.com/lobehub/lobe-tts/actions/workflows/release.yml
 [github-action-release-shield]: https://img.shields.io/github/actions/workflow/status/lobehub/lobe-tts/release.yml?label=release&labelColor=black&logo=githubactions&logoColor=white&style=flat-square
 [github-action-test-link]: https://github.com/lobehub/lobe-tts/actions/workflows/test.yml
@@ -268,16 +246,24 @@ This project is [MIT](./LICENSE) licensed.
 [github-forks-shield]: https://img.shields.io/github/forks/lobehub/lobe-tts?color=8ae8ff&labelColor=black&style=flat-square
 [github-issues-link]: https://github.com/lobehub/lobe-tts/issues
 [github-issues-shield]: https://img.shields.io/github/issues/lobehub/lobe-tts?color=ff80eb&labelColor=black&style=flat-square
-[github-license-link]: https://github.com/lobehub/lobe-tts/blob/main/LICENSE
+[github-license-link]: https://github.com/lobehub/lobe-tts/blob/master/LICENSE
 [github-license-shield]: https://img.shields.io/github/license/lobehub/lobe-tts?color=white&labelColor=black&style=flat-square
 [github-releasedate-link]: https://github.com/lobehub/lobe-tts/releases
 [github-releasedate-shield]: https://img.shields.io/github/release-date/lobehub/lobe-tts?labelColor=black&style=flat-square
 [github-stars-link]: https://github.com/lobehub/lobe-tts/network/stargazers
 [github-stars-shield]: https://img.shields.io/github/stars/lobehub/lobe-tts?color=ffcb47&labelColor=black&style=flat-square
+[llms-txt-link]: https://tts.lobehub.com/llms.txt
+[lobe-charts-link]: https://github.com/lobehub/lobe-charts
+[lobe-editor-link]: https://github.com/lobehub/lobe-editor
+[lobe-icons-link]: https://github.com/lobehub/lobe-icons
+[lobe-lint-link]: https://github.com/lobehub/lobe-lint
+[lobe-tts-link]: https://github.com/lobehub/lobe-tts
+[lobe-ui-link]: https://github.com/lobehub/lobe-ui
 [npm-release-link]: https://www.npmjs.com/package/@lobehub/tts
 [npm-release-shield]: https://img.shields.io/npm/v/@lobehub/tts?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [pr-welcome-link]: https://github.com/lobehub/lobe-tts/pulls
 [pr-welcome-shield]: https://img.shields.io/badge/%F0%9F%A4%AF%20PR%20WELCOME-%E2%86%92-ffcb47?labelColor=black&style=for-the-badge
 [profile-link]: https://github.com/lobehub
+[skills-md-link]: https://tts.lobehub.com/skills.md
 [sponsor-link]: https://opencollective.com/lobehub 'Become 🩷 LobeHub Sponsor'
 [sponsor-shield]: https://img.shields.io/badge/-Sponsor%20LobeHub-f04f88?logo=opencollective&logoColor=white&style=flat-square
