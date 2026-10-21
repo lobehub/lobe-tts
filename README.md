@@ -1,8 +1,6 @@
 <div align="center"><a name="readme-top"></a>
 
-<img height="120" src="https://raw.githubusercontent.com/lobehub/lobe-assets/master/packages/assets-logo/assets/logo-3d.webp">
-<img height="120" src="https://raw.githubusercontent.com/lobehub/lobe-assets/master/packages/assets-logo/assets/split.svg">
-<img height="120" src="https://raw.githubusercontent.com/lobehub/lobe-assets/master/packages/assets-emoji/assets/microphone.webp">
+![](https://github.com/user-attachments/assets/bcb810b4-8e51-461d-9038-cb91786c7213)
 
 <h1>Lobe TTS</h1>
 
@@ -22,8 +20,6 @@ Text-to-speech and speech-to-text for server and browser, with React hooks and a
 [![][sponsor-shield]][sponsor-link]
 
 [Documents](https://tts.lobehub.com) · [Changelog](./CHANGELOG.md) · [Report Bug][github-issues-link] · [Request Feature][github-issues-link]
-
-![](https://github-production-user-asset-6210df.s3.amazonaws.com/17870709/284077909-854cc09a-b3c7-4fc4-9ea7-f7137abba351.png)
 
 </div>
 
