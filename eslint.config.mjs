@@ -40,4 +40,12 @@ export default defineConfig(
       'react-refresh/only-export-components': 'off',
     },
   },
+  {
+    // CommonJS on purpose (.releaserc.cjs / .changelogrc.cjs, see those files): require() is the
+    // only way to load the config there. Workaround for @lobehub/lint 2.1.6 flagging them.
+    files: ['**/*.cjs'],
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
 );
