@@ -205,13 +205,13 @@ Every bit counts and your one-time donation sparkles in our galaxy of support! Y
 
 ## 🔗 Links
 
-- **[🤯 Lobe UI][lobe-ui-link]** - React component library for AI applications
-- **[🌈 Lobe Icons][lobe-icons-link]** - AI / LLM brand logos and icon library
+- **[🍭 Lobe UI][lobe-ui-link]** - React component library for AI applications
+- **[🥨 Lobe Icons][lobe-icons-link]** - AI / LLM brand logos and icon library
 - **[📊 Lobe Charts][lobe-charts-link]** - React chart component library
 - **[✒️ Lobe Editor][lobe-editor-link]** - Lexical-based rich text editor for React, with Markdown, plugins and a chat composer
-- **[🗣️ Lobe TTS][lobe-tts-link]** - TTS / STT speech library
+- **[🎤 Lobe TTS][lobe-tts-link]** - TTS / STT speech library
 - **[📐 Lobe Lint][lobe-lint-link]** - ESLint, Prettier, Stylelint, Commitlint and more lint configs
-- **[😊 Fluent Emoji][fluent-emoji-link]** - Fluent Emoji asset library
+- **[😀 Fluent Emoji][fluent-emoji-link]** - Fluent Emoji asset library
 
 <div align="right">
 
