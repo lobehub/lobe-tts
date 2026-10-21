@@ -2,6 +2,23 @@
 
 # Changelog
 
+## [6.0.1](https://github.com/lobehub/lobe-tts/compare/v6.0.0...v6.0.1) (2026-10-21)
+
+### 🎫 Chores
+
+- **deps**: Upgrade @lobehub/lint to v2 ([681a31e](https://github.com/lobehub/lobe-tts/commit/681a31e))
+- **lint**: Do not fail on warnings ([9b97307](https://github.com/lobehub/lobe-tts/commit/9b97307))
+
+### 💄 Styles
+
+- Apply @lobehub/lint v2 fixes ([cd0c1e4](https://github.com/lobehub/lobe-tts/commit/cd0c1e4))
+
+### 📝 Documentation
+
+- Align library emojis with GitHub descriptions ([6339993](https://github.com/lobehub/lobe-tts/commit/6339993))
+- Refresh README, add AGENTS.md and agent skills, redesign docs home ([dad59af](https://github.com/lobehub/lobe-tts/commit/dad59af))
+- Update og image ([3961a82](https://github.com/lobehub/lobe-tts/commit/3961a82))
+
 ## [Version 6.0.0](https://github.com/lobehub/lobe-tts/compare/v5.2.1...v6.0.0)
 
 <sup>Released on **2026-10-15**</sup>
