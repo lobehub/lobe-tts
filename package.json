@@ -55,7 +55,7 @@
     "test": "vitest --passWithNoTests",
     "test:coverage": "vitest run --coverage  --passWithNoTests",
     "test:update": "vitest -u",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsrs --noEmit"
   },
   "lint-staged": {
     "*.{md,mdx}": [
@@ -125,6 +125,7 @@
     "semantic-release": "^21.1.2",
     "stylelint": "^16.26.1",
     "tsdown": "^0.21.0-beta.2",
+    "tsrs": "0.18.0-ts7.1.0-dev.20260929",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vercel": "^50.1.3",

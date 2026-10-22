@@ -1,14 +1,20 @@
-import { useState } from 'react';
+import { type Dispatch, type SetStateAction, useState } from 'react';
 
 import { type EdgeSpeechAPI, type EdgeSpeechPayload, EdgeSpeechTTS } from '@/core/EdgeSpeechTTS';
-import { type TTSOptions, useTTS } from '@/react/useTTS';
+import { type TTSOptions, type TTSResponse, useTTS } from '@/react/useTTS';
 
 export interface EdgeSpeechOptions extends Pick<EdgeSpeechPayload, 'options'>, TTSOptions {
   api?: EdgeSpeechAPI;
   locale?: string;
 }
 
-export const useEdgeSpeech = (defaultText: string, init: EdgeSpeechOptions) => {
+export const useEdgeSpeech = (
+  defaultText: string,
+  init: EdgeSpeechOptions,
+): TTSResponse & {
+  response: Response | undefined;
+  setText: Dispatch<SetStateAction<string>>;
+} => {
   const [text, setText] = useState<string>(defaultText);
   const { options, api, locale, ...swrConfig } = init;
   const [response, setResponse] = useState<Response>();

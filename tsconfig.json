@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "declaration": true,
-    "downlevelIteration": true,
     "esModuleInterop": true,
     "module": "es2022",
     "jsx": "react-jsx",
@@ -16,7 +14,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@lobehub/tts": ["./src"],
-      "@lobehub/tts/*": ["src/*"],
+      "@lobehub/tts/*": ["./src/*"],
       "@lobehub/tts/react": ["./src/react"],
       "@lobehub/tts/react/*": ["./src/react/*"],
       "@lobehub/tts/server": ["./src/server"],

@@ -1,13 +1,19 @@
-import { useState } from 'react';
+import { type Dispatch, type SetStateAction, useState } from 'react';
 
 import { OpenAITTS, type OpenAITTSAPI, type OpenAITTSPayload } from '@/core/OpenAITTS';
-import { type TTSOptions, useTTS } from '@/react/useTTS';
+import { type TTSOptions, type TTSResponse, useTTS } from '@/react/useTTS';
 
 export interface OpenAITTSOptions extends Pick<OpenAITTSPayload, 'options'>, TTSOptions {
   api?: OpenAITTSAPI;
 }
 
-export const useOpenAITTS = (defaultText: string, init: OpenAITTSOptions) => {
+export const useOpenAITTS = (
+  defaultText: string,
+  init: OpenAITTSOptions,
+): TTSResponse & {
+  response: Response | undefined;
+  setText: Dispatch<SetStateAction<string>>;
+} => {
   const [text, setText] = useState<string>(defaultText);
   const { options, api, ...swrConfig } = init;
   const [response, setResponse] = useState<Response>();
