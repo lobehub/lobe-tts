@@ -205,13 +205,15 @@ Every bit counts and your one-time donation sparkles in our galaxy of support! Y
 
 ## 🔗 Links
 
-- **[🍭 Lobe UI][lobe-ui-link]** - React component library for AI applications
-- **[🥨 Lobe Icons][lobe-icons-link]** - AI / LLM brand logos and icon library
-- **[📊 Lobe Charts][lobe-charts-link]** - React chart component library
+- **[🍭 Lobe UI][lobe-ui-link]** - React component library for AI apps
+- **[🥨 Lobe Icons][lobe-icons-link]** - AI / LLM brand logos and icons
+- **[📊 Lobe Charts][lobe-charts-link]** - React chart components
 - **[✒️ Lobe Editor][lobe-editor-link]** - Lexical-based rich text editor for React, with Markdown, plugins and a chat composer
 - **[🎤 Lobe TTS][lobe-tts-link]** - TTS / STT speech library
 - **[📐 Lobe Lint][lobe-lint-link]** - ESLint, Prettier, Stylelint, Commitlint and more lint configs
-- **[😀 Fluent Emoji][fluent-emoji-link]** - Fluent Emoji asset library
+- **[😀 Fluent Emoji][fluent-emoji-link]** - Fluent Emoji assets
+- **[📖 Docs Kit][docs-kit-link]** - Reusable documentation toolkit and lobedocs CLI for LobeHub component libraries
+- **[🌊 Streamdown][streamdown-link]** - Headless streaming markdown engine for React
 
 <div align="right">
 
@@ -227,6 +229,7 @@ Copyright © 2023 [LobeHub][profile-link]. <br />
 This project is [MIT](./LICENSE) licensed.
 
 [back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-black?style=flat-square
+[docs-kit-link]: https://github.com/lobehub/docs-kit
 [fluent-emoji-link]: https://github.com/lobehub/fluent-emoji
 [github-action-release-link]: https://github.com/lobehub/lobe-tts/actions/workflows/release.yml
 [github-action-release-shield]: https://img.shields.io/github/actions/workflow/status/lobehub/lobe-tts/release.yml?label=release&labelColor=black&logo=githubactions&logoColor=white&style=flat-square
@@ -263,3 +266,4 @@ This project is [MIT](./LICENSE) licensed.
 [skills-md-link]: https://tts.lobehub.com/skills.md
 [sponsor-link]: https://opencollective.com/lobehub 'Become 🩷 LobeHub Sponsor'
 [sponsor-shield]: https://img.shields.io/badge/-Sponsor%20LobeHub-f04f88?logo=opencollective&logoColor=white&style=flat-square
+[streamdown-link]: https://github.com/lobehub/streamdown
