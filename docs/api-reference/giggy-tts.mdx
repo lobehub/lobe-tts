@@ -1,0 +1,47 @@
+---
+title: GiggyTTS
+description: Text-to-speech class backed by the Giggy Speech API.
+category: API Reference
+---
+
+## Introduction
+
+`GiggyTTS` adapts Lobe TTS payloads to Giggy's native text-to-speech API. It requests completed MP3 audio using the Fast mode by default or Batch mode when selected. Batch generation has separate queue and rate limits.
+
+The package payload uses `input` and `options.voice`; the request sent to Giggy uses `text`, `voice_id`, `mode`, `model_id`, and `output_format`. `model_id` is included for API compatibility and does not change inference. Fast and Batch return MP3. Giggy Streaming returns PCM and is not exposed by this class because Lobe TTS currently decodes complete audio responses.
+
+## Server usage
+
+```ts
+import { GiggyTTS } from '@lobehub/tts';
+import { Buffer } from 'node:buffer';
+import { writeFile } from 'node:fs/promises';
+
+const tts = new GiggyTTS({ apiKey: process.env.GIGGY_API_KEY });
+const response = await tts.create({
+  input: 'Hello from Lobe TTS',
+  options: { mode: 'fast', voice: 'your-giggy-voice-uuid' },
+});
+
+if (!response.ok) throw new Error(`Giggy TTS failed: ${response.status}`);
+await writeFile('./speech.mp3', Buffer.from(await response.arrayBuffer()));
+```
+
+Never expose `apiKey` in a browser bundle. Browser applications should use `serviceUrl` to call an application server that attaches the API key and forwards the native Giggy request. `serviceUrl` receives JSON with `text`, `voice_id`, `mode`, `output_format`, and any selected speed or language.
+
+## Options
+
+- `apiKey`: Giggy REST API key. Use only in server code.
+- `serviceUrl`: Server endpoint to receive the mapped native Giggy request.
+- `headers`: Additional request headers.
+- `options.voice`: Giggy voice UUID.
+- `options.mode`: `fast` (default) or `batch`.
+- `options.speed`: Optional speech speed from `0.25` to `4`.
+- `options.languageCode`: Optional language code matching the selected voice.
+
+The API key is sent only to the fixed Giggy API origin. `apiKey` cannot be combined with `serviceUrl`, which prevents forwarding the credential to a proxy; the proxy should authenticate on the server. The React hook does not accept `apiKey` at all.
+
+## Methods
+
+- `create(payload)`: Returns the raw `Response` so callers can inspect request metadata and handle errors.
+- `createAudio(payload)`: Returns an `AudioBuffer` and rejects non-successful API responses with the HTTP status and error body.

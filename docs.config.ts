@@ -16,6 +16,7 @@ export default defineDocsConfig({
   publicDocs: [
     'docs/api-reference/index.mdx',
     'docs/api-reference/edge-speech-tts.mdx',
+    'docs/api-reference/giggy-tts.mdx',
     'docs/api-reference/microsoft-speech-tts.mdx',
     'docs/api-reference/openai-tts.mdx',
   ],
