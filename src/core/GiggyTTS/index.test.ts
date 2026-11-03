@@ -21,6 +21,7 @@ describe('GiggyTTS', () => {
     const [url, request] = fetchMock.mock.calls[0];
     expect(url).toBe('https://api.giggy.ai/v1/text-to-speech');
     expect(request.method).toBe('POST');
+    expect(request.redirect).toBe('error');
     expect(new Headers(request.headers).get('xi-api-key')).toBe('secret-test-key');
     expect(new Headers(request.headers).get('Content-Type')).toBe('application/json');
     expect(JSON.parse(request.body)).toEqual({
@@ -52,6 +53,7 @@ describe('GiggyTTS', () => {
 
     const [url, request] = fetchMock.mock.calls[0];
     expect(url).toBe('https://app.example.com/api/giggy-tts');
+    expect(request.redirect).toBe('error');
     expect(new Headers(request.headers).get('x-request-source')).toBe('lobe-tts');
     expect(new Headers(request.headers).has('xi-api-key')).toBe(false);
     expect(JSON.parse(request.body)).toEqual({

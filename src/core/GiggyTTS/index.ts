@@ -62,6 +62,7 @@ export class GiggyTTS {
       body: JSON.stringify(body),
       headers,
       method: 'POST',
+      redirect: 'error',
       signal,
     });
   };
