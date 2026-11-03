@@ -1,6 +1,4 @@
-import { arrayBufferConvert } from '../utils/arrayBufferConvert';
-
-export type GiggyTTSMode = 'batch' | 'fast';
+export type GiggyTTSMode = 'streaming';
 
 export interface GiggyTTSPayload {
   input: string;
@@ -27,9 +25,7 @@ export class GiggyTTS {
 
   constructor({ apiKey, headers, serviceUrl }: GiggyTTSAPI = {}) {
     if (apiKey && serviceUrl) {
-      throw new Error(
-        'Do not provide apiKey with serviceUrl; authenticate in your server proxy.',
-      );
+      throw new Error('Do not provide apiKey with serviceUrl; authenticate in your server proxy.');
     }
 
     this.apiKey = apiKey;
@@ -37,12 +33,10 @@ export class GiggyTTS {
     this.serviceUrl = serviceUrl;
   }
 
-  fetch = async ({ input, options }: GiggyTTSPayload): Promise<Response> => {
+  fetch = async ({ input, options }: GiggyTTSPayload, signal?: AbortSignal): Promise<Response> => {
     if (
       options.speed !== undefined &&
-      (!Number.isFinite(options.speed) ||
-        options.speed < 0.25 ||
-        options.speed > 4)
+      (!Number.isFinite(options.speed) || options.speed < 0.25 || options.speed > 4)
     ) {
       throw new Error('Giggy TTS speed must be between 0.25 and 4.');
     }
@@ -50,16 +44,17 @@ export class GiggyTTS {
     const headers = new Headers(this.headers);
     headers.set('Content-Type', 'application/json');
     if (this.apiKey) headers.set('xi-api-key', this.apiKey);
+    if (options.mode !== undefined && options.mode !== 'streaming') {
+      throw new Error('Giggy TTS only supports Streaming mode.');
+    }
 
     const body = {
       text: input,
       voice_id: options.voice,
-      mode: options.mode || 'fast',
+      mode: 'streaming',
       model_id: 'giggyspeech',
-      output_format: 'mp3_24000_160',
-      ...(options.speed === undefined
-        ? {}
-        : { voice_settings: { speed: options.speed } }),
+      output_format: 'pcm_24000',
+      ...(options.speed === undefined ? {} : { voice_settings: { speed: options.speed } }),
       ...(options.languageCode ? { language_code: options.languageCode } : {}),
     };
 
@@ -67,21 +62,15 @@ export class GiggyTTS {
       body: JSON.stringify(body),
       headers,
       method: 'POST',
+      signal,
     });
   };
 
-  create = async (payload: GiggyTTSPayload): Promise<Response> =>
-    this.fetch(payload);
+  create = async (payload: GiggyTTSPayload, signal?: AbortSignal): Promise<Response> =>
+    this.fetch(payload, signal);
 
   createAudio = async (payload: GiggyTTSPayload): Promise<AudioBuffer> => {
-    const response = await this.create(payload);
-    if (!response.ok) {
-      const message = await response.text();
-      throw new Error(
-        `Giggy TTS request failed (${response.status}): ${message}`,
-      );
-    }
-
-    return arrayBufferConvert(await response.arrayBuffer());
+    void payload;
+    throw new Error('Giggy Streaming returns raw PCM; consume create() response.body as a stream.');
   };
 }

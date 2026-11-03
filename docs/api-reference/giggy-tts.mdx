@@ -6,9 +6,9 @@ category: API Reference
 
 ## Introduction
 
-`GiggyTTS` adapts Lobe TTS payloads to Giggy's native text-to-speech API. It requests completed MP3 audio using the Fast mode by default or Batch mode when selected. Batch generation has separate queue and rate limits.
+`GiggyTTS` adapts Lobe TTS payloads to Giggy's native text-to-speech API. `GiggyTTS` always uses Giggy Streaming and returns raw PCM16LE, mono, 24 kHz audio chunks.
 
-The package payload uses `input` and `options.voice`; the request sent to Giggy uses `text`, `voice_id`, `mode`, `model_id`, and `output_format`. `model_id` is included for API compatibility and does not change inference. Fast and Batch return MP3. Giggy Streaming returns PCM and is not exposed by this class because Lobe TTS currently decodes complete audio responses.
+The package payload uses `input` and `options.voice`; the request sent to Giggy uses `text`, `voice_id`, `mode`, `model_id`, and `output_format`. The integration fixes `mode` to `streaming` and `output_format` to `pcm_24000`. `Response.body` is a raw PCM16LE, mono, 24 kHz stream; consume its chunks progressively.
 
 ## Server usage
 
@@ -20,11 +20,14 @@ import { writeFile } from 'node:fs/promises';
 const tts = new GiggyTTS({ apiKey: process.env.GIGGY_API_KEY });
 const response = await tts.create({
   input: 'Hello from Lobe TTS',
-  options: { mode: 'fast', voice: 'your-giggy-voice-uuid' },
+  options: { voice: 'your-giggy-voice-uuid' },
 });
 
-if (!response.ok) throw new Error(`Giggy TTS failed: ${response.status}`);
-await writeFile('./speech.mp3', Buffer.from(await response.arrayBuffer()));
+if (!response.ok || !response.body) throw new Error(`Giggy TTS failed: ${response.status}`);
+await writeFile('./speech.pcm', new Uint8Array());
+for await (const chunk of response.body) {
+  await writeFile('./speech.pcm', Buffer.from(chunk), { flag: 'a' });
+}
 ```
 
 Never expose `apiKey` in a browser bundle. Browser applications should use `serviceUrl` to call an application server that attaches the API key and forwards the native Giggy request. `serviceUrl` receives JSON with `text`, `voice_id`, `mode`, `output_format`, and any selected speed or language.
@@ -35,7 +38,7 @@ Never expose `apiKey` in a browser bundle. Browser applications should use `serv
 - `serviceUrl`: Server endpoint to receive the mapped native Giggy request.
 - `headers`: Additional request headers.
 - `options.voice`: Giggy voice UUID.
-- `options.mode`: `fast` (default) or `batch`.
+- `options.mode`: `streaming` only. The request defaults to Streaming and rejects Fast or Batch mode.
 - `options.speed`: Optional speech speed from `0.25` to `4`.
 - `options.languageCode`: Optional language code matching the selected voice.
 
@@ -44,4 +47,4 @@ The API key is sent only to the fixed Giggy API origin. `apiKey` cannot be combi
 ## Methods
 
 - `create(payload)`: Returns the raw `Response` so callers can inspect request metadata and handle errors.
-- `createAudio(payload)`: Returns an `AudioBuffer` and rejects non-successful API responses with the HTTP status and error body.
+- `createAudio(payload)`: Not available for raw PCM Streaming. Use `create(payload)` and consume `Response.body` progressively.

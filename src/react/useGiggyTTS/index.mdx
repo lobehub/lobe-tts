@@ -6,18 +6,15 @@ category: TTS
 
 ## React Hooks
 
-`useGiggyTTS` uses Giggy's Fast mode by default and returns completed MP3 audio through the shared TTS playback controls. Set `options.mode` to `batch` to use Giggy Batch generation, which has separate queue and rate limits. The hook supports MP3 output; Giggy's Streaming mode returns PCM audio and is not supported by this hook.
+`useGiggyTTS` always uses Giggy Streaming. It buffers incoming bytes into playable 20 ms PCM16LE, mono, 24 kHz frames and schedules them for playback as they arrive. Fast and Batch modes are not supported.
 
 The React hook does not accept an API key. For browser apps, set `api.serviceUrl` to your server endpoint and have that endpoint attach the Giggy API key before forwarding the request to `https://api.giggy.ai/v1/text-to-speech`.
 
 ```tsx
 import { useGiggyTTS } from '@lobehub/tts/react';
 
-const { audio, start, stop, setText, isGlobalLoading } = useGiggyTTS(
-  'Hello from Giggy',
-  {
-    api: { serviceUrl: '/api/giggy-tts' },
-    options: { mode: 'fast', voice: 'your-giggy-voice-uuid' },
-  },
-);
+const { audio, start, stop, setText, isGlobalLoading } = useGiggyTTS('Hello from Giggy', {
+  api: { serviceUrl: '/api/giggy-tts' },
+  options: { voice: 'your-giggy-voice-uuid' },
+});
 ```

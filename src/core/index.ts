@@ -1,7 +1,7 @@
 export { type EdgeSpeechAPI, type EdgeSpeechPayload, EdgeSpeechTTS } from '@/core/EdgeSpeechTTS';
 export {
-  type GiggyTTSAPI,
   GiggyTTS,
+  type GiggyTTSAPI,
   type GiggyTTSMode,
   type GiggyTTSPayload,
 } from '@/core/GiggyTTS';
