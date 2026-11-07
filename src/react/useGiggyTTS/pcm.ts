@@ -36,3 +36,46 @@ export const readPcmFrames = async function* (
     reader.releaseLock();
   }
 };
+
+/**
+ * Keep only a short horizon of decoded PCM scheduled ahead of playback.
+ * Waiting here applies backpressure to the response reader; abort wakes the
+ * wait immediately and readPcmFrames cancels its underlying response reader.
+ */
+export const consumePcmFramesWithBackpressure = async (
+  stream: ReadableStream<Uint8Array>,
+  currentTime: () => number,
+  scheduledUntil: () => number,
+  scheduleFrame: (frame: Uint8Array) => void,
+  signal: AbortSignal,
+  maxAheadSeconds = 0.5,
+): Promise<boolean> => {
+  if (!Number.isFinite(maxAheadSeconds) || maxAheadSeconds < 0) {
+    throw new Error('PCM playback horizon must be a finite non-negative number.');
+  }
+
+  for await (const frame of readPcmFrames(stream, signal)) {
+    while (scheduledUntil() - currentTime() > maxAheadSeconds) {
+      if (signal.aborted) return false;
+
+      await new Promise<void>((resolve) => {
+        let settled = false;
+        const finish = () => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          signal.removeEventListener('abort', finish);
+          resolve();
+        };
+        const timer = setTimeout(finish, 20);
+        signal.addEventListener('abort', finish, { once: true });
+        if (signal.aborted) finish();
+      });
+    }
+
+    if (signal.aborted) return false;
+    scheduleFrame(frame);
+  }
+
+  return !signal.aborted;
+};
