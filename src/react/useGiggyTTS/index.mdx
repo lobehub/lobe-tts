@@ -1,0 +1,20 @@
+---
+title: useGiggyTTS
+description: Text-to-speech React hook backed by the Giggy Speech API.
+category: TTS
+---
+
+## React Hooks
+
+`useGiggyTTS` always uses Giggy Streaming. It buffers incoming bytes into playable 20 ms PCM16LE, mono, 24 kHz frames and schedules them for playback as they arrive. Fast and Batch modes are not supported.
+
+The React hook does not accept an API key. For browser apps, set `api.serviceUrl` to your server endpoint and have that endpoint attach the Giggy API key before forwarding the request to `https://api.giggy.ai/v1/text-to-speech`.
+
+```tsx
+import { useGiggyTTS } from '@lobehub/tts/react';
+
+const { audio, start, stop, setText, isGlobalLoading } = useGiggyTTS('Hello from Giggy', {
+  api: { serviceUrl: '/api/giggy-tts' },
+  options: { voice: 'your-giggy-voice-uuid' },
+});
+```

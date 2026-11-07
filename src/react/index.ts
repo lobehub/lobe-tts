@@ -6,6 +6,7 @@ export { useBlobUrl } from './hooks/useBlobUrl';
 export { useStreamAudioPlayer } from './hooks/useStreamAudioPlayer';
 export { useAudioRecorder } from './useAudioRecorder';
 export { type EdgeSpeechOptions, useEdgeSpeech } from './useEdgeSpeech';
+export { type GiggyTTSOptions, useGiggyTTS } from './useGiggyTTS';
 export { type MicrosoftSpeechOptions, useMicrosoftSpeech } from './useMicrosoftSpeech';
 export { type OpenAISTTOptions, useOpenAISTT } from './useOpenAISTT';
 export { type OpenAITTSOptions, useOpenAITTS } from './useOpenAITTS';

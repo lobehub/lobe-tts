@@ -1,0 +1,50 @@
+---
+title: GiggyTTS
+description: Text-to-speech class backed by the Giggy Speech API.
+category: API Reference
+---
+
+## Introduction
+
+`GiggyTTS` adapts Lobe TTS payloads to Giggy's native text-to-speech API. `GiggyTTS` always uses Giggy Streaming and returns raw PCM16LE, mono, 24 kHz audio chunks.
+
+The package payload uses `input` and `options.voice`; the request sent to Giggy uses `text`, `voice_id`, `mode`, `model_id`, and `output_format`. The integration fixes `mode` to `streaming` and `output_format` to `pcm_24000`. `Response.body` is a raw PCM16LE, mono, 24 kHz stream; consume its chunks progressively.
+
+## Server usage
+
+```ts
+import { GiggyTTS } from '@lobehub/tts';
+import { Buffer } from 'node:buffer';
+import { writeFile } from 'node:fs/promises';
+
+const tts = new GiggyTTS({ apiKey: process.env.GIGGY_API_KEY });
+const response = await tts.create({
+  input: 'Hello from Lobe TTS',
+  options: { voice: 'your-giggy-voice-uuid' },
+});
+
+if (!response.ok || !response.body) throw new Error(`Giggy TTS failed: ${response.status}`);
+await writeFile('./speech.pcm', new Uint8Array());
+for await (const chunk of response.body) {
+  await writeFile('./speech.pcm', Buffer.from(chunk), { flag: 'a' });
+}
+```
+
+Never expose `apiKey` in a browser bundle. Browser applications should use `serviceUrl` to call an application server that attaches the API key and forwards the native Giggy request. `serviceUrl` receives JSON with `text`, `voice_id`, `mode`, `output_format`, and any selected speed or language.
+
+## Options
+
+- `apiKey`: Giggy REST API key. Use only in server code.
+- `serviceUrl`: Server endpoint to receive the mapped native Giggy request.
+- `headers`: Additional request headers.
+- `options.voice`: Giggy voice UUID.
+- `options.mode`: `streaming` only. The request defaults to Streaming and rejects Fast or Batch mode.
+- `options.speed`: Optional speech speed from `0.25` to `4`.
+- `options.languageCode`: Optional language code matching the selected voice.
+
+The API key is sent only to the fixed Giggy API origin. `apiKey` cannot be combined with `serviceUrl`, which prevents forwarding the credential to a proxy; the proxy should authenticate on the server. The React hook does not accept `apiKey` at all.
+
+## Methods
+
+- `create(payload)`: Returns the raw `Response` so callers can inspect request metadata and handle errors.
+- `createAudio(payload)`: Not available for raw PCM Streaming. Use `create(payload)` and consume `Response.body` progressively.

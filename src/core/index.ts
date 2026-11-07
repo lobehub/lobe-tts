@@ -1,5 +1,11 @@
 export { type EdgeSpeechAPI, type EdgeSpeechPayload, EdgeSpeechTTS } from '@/core/EdgeSpeechTTS';
 export {
+  GiggyTTS,
+  type GiggyTTSAPI,
+  type GiggyTTSMode,
+  type GiggyTTSPayload,
+} from '@/core/GiggyTTS';
+export {
   type MicrosoftSpeechAPI,
   type MicrosoftSpeechPayload,
   MicrosoftSpeechTTS,
