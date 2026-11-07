@@ -10,7 +10,7 @@ import {
 import { GiggyTTS, type GiggyTTSAPI, type GiggyTTSPayload } from '@/core/GiggyTTS';
 import { type TTSOptions, type TTSResponse, useTTS } from '@/react/useTTS';
 
-import { readPcmFrames } from './pcm';
+import { consumePcmFramesWithBackpressure } from './pcm';
 
 export interface GiggyTTSOptions extends Pick<GiggyTTSPayload, 'options'>, TTSOptions {
   api?: Omit<GiggyTTSAPI, 'apiKey'>;
@@ -83,30 +83,37 @@ export const useGiggyTTS = (
         const message = await res.text();
         throw new Error(`Giggy TTS request failed (${res.status}): ${message}`);
       }
-      const frames = readPcmFrames(res.body, controller.signal);
       let started = false;
-      for await (const frame of frames) {
-        const samples = new DataView(frame.buffer, frame.byteOffset, frame.byteLength);
-        const audio = context.createBuffer(1, frame.byteLength / 2, 24000);
-        const channel = audio.getChannelData(0);
-        for (let i = 0; i < channel.length; i++) channel[i] = samples.getInt16(i * 2, true) / 32768;
-        const source = context.createBufferSource();
-        source.buffer = audio;
-        source.connect(context.destination);
-        const when = Math.max(context.currentTime + 0.04, scheduleRef.current);
-        if (!started) {
-          startedAtRef.current = when;
-          started = true;
-        }
-        source.start(when);
-        setIsPlaying(true);
-        scheduleRef.current = when + audio.duration;
-        sourcesRef.current.push(source);
-        source.onended = () => {
-          sourcesRef.current = sourcesRef.current.filter((active) => active !== source);
-        };
-        setDuration((current) => current + audio.duration);
-      }
+      await consumePcmFramesWithBackpressure(
+        res.body,
+        () => context.currentTime,
+        () => scheduleRef.current,
+        (frame) => {
+          const samples = new DataView(frame.buffer, frame.byteOffset, frame.byteLength);
+          const audio = context.createBuffer(1, frame.byteLength / 2, 24000);
+          const channel = audio.getChannelData(0);
+          for (let i = 0; i < channel.length; i++) {
+            channel[i] = samples.getInt16(i * 2, true) / 32768;
+          }
+          const source = context.createBufferSource();
+          source.buffer = audio;
+          source.connect(context.destination);
+          const when = Math.max(context.currentTime + 0.04, scheduleRef.current);
+          if (!started) {
+            startedAtRef.current = when;
+            started = true;
+          }
+          source.start(when);
+          setIsPlaying(true);
+          scheduleRef.current = when + audio.duration;
+          sourcesRef.current.push(source);
+          source.onended = () => {
+            sourcesRef.current = sourcesRef.current.filter((active) => active !== source);
+          };
+          setDuration((current) => current + audio.duration);
+        },
+        controller.signal,
+      );
       if (controller.signal.aborted) return;
       setStreamLoading(false);
       const tick = () => {
