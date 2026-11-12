@@ -2,6 +2,39 @@
 
 # Changelog
 
+## [Version&nbsp;6.1.0](https://github.com/lobehub/lobe-tts/compare/v6.0.1...v6.1.0)
+
+<sup>Released on **2026-11-12**</sup>
+
+#### ✨ Features
+
+- **audio-player**: Stream remote files and surface load errors.
+
+#### 🐛 Bug Fixes
+
+- **audio-player**: Release streams on unmount and keep controls after blocked play.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **audio-player**: Stream remote files and surface load errors ([cc7d56b](https://github.com/lobehub/lobe-tts/commit/cc7d56b))
+
+#### What's fixed
+
+- **audio-player**: Release streams on unmount and keep controls after blocked play ([367670d](https://github.com/lobehub/lobe-tts/commit/367670d))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [6.0.1](https://github.com/lobehub/lobe-tts/compare/v6.0.0...v6.0.1) (2026-10-21)
 
 ### 🎫 Chores
