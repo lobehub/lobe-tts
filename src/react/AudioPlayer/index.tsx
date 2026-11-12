@@ -8,6 +8,10 @@ export interface AudioProps {
   currentTime: number;
   download: () => void;
   duration: number;
+  /**
+   * Load or playback error; the controls are disabled while it is set.
+   */
+  error?: Error;
   isPlaying: boolean;
   pause: () => void;
   play: () => void;
@@ -29,7 +33,14 @@ export interface AudioPlayerProps {
   onPause?: () => void;
   onPlay?: () => void;
   onStop?: () => void;
+  /**
+   * @deprecated Use `showDownload` instead.
+   */
   showDonload?: boolean;
+  /**
+   * @default true
+   */
+  showDownload?: boolean;
   showSlider?: boolean;
   showTime?: boolean;
   style?: CSSProperties;
@@ -59,7 +70,8 @@ const AudioPlayer = memo<AudioPlayerProps>(
       stop: () => {},
     },
     allowPause = true,
-    showDonload = true,
+    showDonload,
+    showDownload = showDonload ?? true,
     buttonActive,
     timeType = 'left',
     showSlider = true,
@@ -72,7 +84,8 @@ const AudioPlayer = memo<AudioPlayerProps>(
     buttonStyle,
     onPlay,
   }) => {
-    const { isPlaying, play, stop, pause, duration, setTime, currentTime, download } = audio;
+    const { isPlaying, play, stop, pause, duration, setTime, currentTime, download, error } = audio;
+    const hasError = !!error;
 
     const formattedLeftTime = secondsToMinutesAndSeconds(duration - currentTime);
     const formattedCurrentTime = secondsToMinutesAndSeconds(currentTime);
@@ -90,24 +103,24 @@ const AudioPlayer = memo<AudioPlayerProps>(
         play?.();
         onPlay?.();
       }
-    }, [play, duration]);
+    }, [play, duration, isLoading, onInitPlay, onPlay]);
 
     const handlePause = useCallback(() => {
       pause?.();
       onPause?.();
-    }, [pause]);
+    }, [pause, onPause]);
 
     const handleStop = useCallback(() => {
       stop?.();
       onStop?.();
-    }, [stop]);
+    }, [stop, onStop]);
 
     const handleStopLoading = useCallback(() => {
       if (!isLoading) return;
       onLoadingStop?.();
       stop?.();
       onStop?.();
-    }, [stop, isLoading]);
+    }, [stop, isLoading, onLoadingStop, onStop]);
 
     return (
       <Flexbox
@@ -120,6 +133,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
         <div style={{ flex: 'none' }} onClick={handleStopLoading}>
           <ActionIcon
             active={buttonActive}
+            disabled={hasError}
             icon={isPlaying ? (allowPause ? PauseCircle : StopCircle) : Play}
             loading={isLoading}
             size={buttonSize || { blockSize: 32, size: 16 }}
@@ -130,7 +144,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
         </div>
         {showSlider && (
           <Slider
-            disabled={duration === 0 || isLoading}
+            disabled={duration === 0 || isLoading || hasError}
             max={duration}
             min={0}
             step={0.01}
@@ -151,7 +165,7 @@ const AudioPlayer = memo<AudioPlayerProps>(
             )}
           </Time>
         )}
-        {!isLoading && showDonload && (
+        {!isLoading && showDownload && (
           <ActionIcon
             icon={Download}
             size={buttonSize || { blockSize: 32, size: 16 }}

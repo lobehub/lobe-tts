@@ -5,7 +5,14 @@ category: UI
 ---
 
 import DemoIndex from './demos/index.tsx?demo';
+import DemoStreaming from './demos/Streaming.tsx?demo';
 
 ## Default
 
 <Demo of={DemoIndex} layout="bare" />
+
+## Streaming a file
+
+Pass `streaming: true` to play a remote file the way a file preview needs it: the `<audio>` element loads the URL itself, so playback starts before the download finishes and a cross-origin URL without CORS headers still plays. Load and playback failures arrive as `error`; passing it to `AudioPlayer` disables the controls. `filename` names the file that `download()` saves.
+
+<Demo of={DemoStreaming} layout="bare" />
