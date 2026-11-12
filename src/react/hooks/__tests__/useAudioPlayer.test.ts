@@ -56,6 +56,15 @@ describe('useAudioPlayer', () => {
       expect(result.current.duration).toBe(12.5);
     });
 
+    it('releases the source on unmount', () => {
+      const { result, unmount } = renderHook(() => useAudioPlayer({ src: SRC, streaming: true }));
+      const audio = result.current.ref.current!;
+
+      unmount();
+
+      expect(audio.getAttribute('src')).toBeNull();
+    });
+
     it('resets the playback state when the source changes', () => {
       const { result, rerender } = renderHook(
         ({ src }) => useAudioPlayer({ src, streaming: true }),
@@ -93,13 +102,27 @@ describe('useAudioPlayer', () => {
     });
 
     it('rolls back isPlaying and exposes the error when play() rejects', async () => {
-      playSpy.mockImplementation(() => Promise.reject(new Error('NotAllowedError')));
+      const failure = Object.assign(new Error('no supported source'), {
+        name: 'NotSupportedError',
+      });
+      playSpy.mockImplementation(() => Promise.reject(failure));
       const { result } = renderHook(() => useAudioPlayer({ src: SRC, streaming: true }));
 
       act(() => result.current.play());
 
       await waitFor(() => expect(result.current.isPlaying).toBe(false));
-      expect(result.current.error?.message).toBe('NotAllowedError');
+      expect(result.current.error?.message).toBe('no supported source');
+    });
+
+    it('keeps the controls usable when autoplay is blocked', async () => {
+      const blocked = Object.assign(new Error('blocked'), { name: 'NotAllowedError' });
+      playSpy.mockImplementation(() => Promise.reject(blocked));
+      const { result } = renderHook(() => useAudioPlayer({ src: SRC, streaming: true }));
+
+      act(() => result.current.play());
+
+      await waitFor(() => expect(result.current.isPlaying).toBe(false));
+      expect(result.current.error).toBeUndefined();
     });
 
     it('does not treat an interrupted play() as an error', async () => {
@@ -119,6 +142,7 @@ describe('useAudioPlayer', () => {
 
       await waitFor(() => expect(result.current.error?.message).toContain('403'));
       expect(result.current.isLoading).toBe(false);
+      expect(fetch).toHaveBeenCalledTimes(1);
     });
   });
 

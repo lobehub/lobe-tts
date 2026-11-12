@@ -94,6 +94,9 @@ export const useAudioPlayer = ({
         setIsGlobalLoading(false);
       },
       revalidateOnFocus: false,
+      // A failed audio fetch (403, expired signature) is not transient; retrying flips
+      // the state between loading and error.
+      shouldRetryOnError: false,
     },
   );
 
@@ -118,6 +121,13 @@ export const useAudioPlayer = ({
     audio.preload = 'metadata';
     audio.src = src;
     audio.load();
+
+    return () => {
+      // Abort the pending request and drop the buffer once the source goes away.
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
+    };
   }, [streaming, src, getAudio]);
 
   useEffect(() => {
@@ -177,8 +187,10 @@ export const useAudioPlayer = ({
     if (result && typeof result.catch === 'function') {
       result.catch((playError: unknown) => {
         setIsPlaying(false);
-        // An interrupted play (pause/load during start) is not a failure.
-        if ((playError as Error)?.name === 'AbortError') return;
+        // An interrupted play (pause/load during start) or a blocked autoplay is not a
+        // broken source; keep the controls usable so the user can press play again.
+        const name = (playError as Error)?.name;
+        if (name === 'AbortError' || name === 'NotAllowedError') return;
         setError(toError(playError, 'Failed to play audio'));
       });
     }
